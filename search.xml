@@ -10,6 +10,10 @@
 </ul>
 <a id="more"></a>
 <h1>配置编译环境</h1>
+<h2 id="配置-Windows-Terminal-默认打开目录为"><a class="header-anchor" href="#配置-Windows-Terminal-默认打开目录为">¶</a>配置 Windows Terminal 默认打开目录为<code>~</code></h2>
+<p>打开<code>Windows Terminal——设置</code>，在 WSL 对应的区域加入一行</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&quot;startingDirectory&quot;: &quot;&#x2F;&#x2F;wsl$&#x2F;&lt;name&gt;&#x2F;home&#x2F;&lt;username&gt;&quot;</span><br></pre></td></tr></table></figure>
+<p>其中，<code>&lt;name&gt;</code>是上方显示的 WSL 的名称，<code>username</code>是当前 windows 账户用户名的名称。</p>
 <h2 id="更换阿里云的源"><a class="header-anchor" href="#更换阿里云的源">¶</a>更换阿里云的源</h2>
 <p>完成WSL初始设置后：</p>
 <p>备份原来的源。</p>
@@ -44,7 +48,7 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim /etc/wsl.conf</span><br></pre></td></tr></table></figure>
 <p>打开后输入：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[interop]</span><br><span class="line">appendWindowsPath = <span class="literal">false</span></span><br></pre></td></tr></table></figure>
-<p>保存退出即可。</p>
+<p>保存退出后<strong>重启</strong>即可。</p>
 <h2 id="安装编译依赖"><a class="header-anchor" href="#安装编译依赖">¶</a>安装编译依赖</h2>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get -y install build-essential asciidoc binutils bzip2 gawk gettext git libncurses5-dev libz-dev patch python3 python2.7 unzip zlib1g-dev lib32gcc1 libc6-dev-i386 subversion flex uglifyjs git-core gcc-multilib p7zip p7zip-full msmtp libssl-dev texinfo libglib2.0-dev xmlto qemu-utils upx libelf-dev autoconf automake libtool autopoint device-tree-compiler g++-multilib antlr3 gperf wget curl swig rsync</span><br></pre></td></tr></table></figure>
 <p>然后就可以开始编译了。</p>
