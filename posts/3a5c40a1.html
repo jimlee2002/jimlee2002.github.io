@@ -22,15 +22,15 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"jimlee2002.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"manual"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"jimlee2002.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"manual"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="安装WSL  从 Microsoft Store 安装 WSL：略 使用 LxRunOffline 安装 WSL：参考 LxRunOffline 和 @P3TERX 的博客《WSL 自定义安装目录、备份转移、设置默认用户 - LxRunOffline 使用教程》。">
+  <meta name="description" content="安装 WSL  从 Microsoft Store 安装 WSL：略 使用 LxRunOffline 安装 WSL：参考 LxRunOffline 和 @P3TERX 的博客《WSL 自定义安装目录、备份转移、设置默认用户 - LxRunOffline 使用教程》。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="在 WSL2 上进行 OpenWrt 的编译">
 <meta property="og:url" content="https://jimlee2002.github.io/posts/3a5c40a1.html">
 <meta property="og:site_name" content="Jim&#39;s Blog">
-<meta property="og:description" content="安装WSL  从 Microsoft Store 安装 WSL：略 使用 LxRunOffline 安装 WSL：参考 LxRunOffline 和 @P3TERX 的博客《WSL 自定义安装目录、备份转移、设置默认用户 - LxRunOffline 使用教程》。">
+<meta property="og:description" content="安装 WSL  从 Microsoft Store 安装 WSL：略 使用 LxRunOffline 安装 WSL：参考 LxRunOffline 和 @P3TERX 的博客《WSL 自定义安装目录、备份转移、设置默认用户 - LxRunOffline 使用教程》。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-10-03T10:09:01.000Z">
 <meta property="article:modified_time" content="2020-10-08T16:25:31.219Z">
@@ -83,6 +83,7 @@
   </style>
 </noscript>
 
+<link rel="alternate" href="/atom.xml" title="Jim's Blog" type="application/atom+xml">
 <style>mjx-container[jax="SVG"] {
   direction: ltr;
 }
@@ -200,8 +201,7 @@ mjx-container {
 mjx-container + br {
   display: none;
 }
-</style><link rel="alternate" href="/atom.xml" title="Jim's Blog" type="application/atom+xml">
-</head>
+</style></head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
   <div class="container use-motion">
@@ -370,7 +370,7 @@ mjx-container + br {
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>3.1k</span>
+              <span>2.7k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -389,63 +389,63 @@ mjx-container + br {
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1>安装WSL</h1>
+        <h1>安装 WSL</h1>
 <ul>
 <li>从 Microsoft Store 安装 WSL：略</li>
 <li>使用 LxRunOffline 安装 WSL：参考 <a href="https://p3terx.com/archives/manage-wsl-with-lxrunoffline.html" target="_blank" rel="noopener">LxRunOffline</a> 和 @P3TERX 的博客<a href="https://p3terx.com/archives/manage-wsl-with-lxrunoffline.html" target="_blank" rel="noopener">《WSL 自定义安装目录、备份转移、设置默认用户 - LxRunOffline 使用教程》</a>。</li>
 </ul>
 <a id="more"></a>
 <h1>配置编译环境</h1>
-<h2 id="配置-Windows-Terminal-默认打开目录为"><a class="header-anchor" href="#配置-Windows-Terminal-默认打开目录为">¶</a>配置 Windows Terminal 默认打开目录为<code>~</code></h2>
-<p>打开<code>Windows Terminal——设置</code>，在 WSL 对应的区域加入一行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;startingDirectory&quot;: &quot;&#x2F;&#x2F;wsl$&#x2F;&lt;name&gt;&#x2F;home&#x2F;&lt;username&gt;&quot;</span><br></pre></td></tr></table></figure>
-<p>其中，<code>&lt;name&gt;</code>是上方显示的 WSL 的名称，<code>username</code>是当前 windows 账户用户名的名称。</p>
-<h2 id="更换阿里云的源"><a class="header-anchor" href="#更换阿里云的源">¶</a>更换阿里云的源</h2>
-<p>完成WSL初始设置后：</p>
+<h2 id="配置-Windows-Terminal-默认打开目录为"><a class="header-anchor" href="#配置-Windows-Terminal-默认打开目录为">¶</a> 配置 Windows Terminal 默认打开目录为 <code>~</code></h2>
+<p>打开 <code>Windows Terminal——设置</code>，在 WSL 对应的区域加入一行</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">"startingDirectory": "//wsl$/&lt;name&gt;/home/&lt;username&gt;"</span><br></pre></td></tr></tbody></table></figure>
+<p>其中，<code>&lt;name&gt;</code> 是上方显示的 WSL 的名称，<code>username</code> 是当前 windows 账户用户名的名称。</p>
+<h2 id="更换阿里云的源"><a class="header-anchor" href="#更换阿里云的源">¶</a> 更换阿里云的源</h2>
+<p>完成 WSL 初始设置后：</p>
 <p>备份原来的源。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp -ra /etc/apt/sources.list /etc/apt/sources.list.bak</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp -ra /etc/apt/sources.list /etc/apt/sources.list.bak</span><br></pre></td></tr></tbody></table></figure>
 <p>修改</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/apt/sources.list</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/apt/sources.list</span><br></pre></td></tr></tbody></table></figure>
 <p>将其中的东西替换成：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">deb http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;ubuntu&#x2F; focal main restricted universe multiverse</span><br><span class="line">deb-src http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;ubuntu&#x2F; focal main restricted universe multiverse</span><br><span class="line"></span><br><span class="line">deb http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;ubuntu&#x2F; focal-security main restricted universe multiverse</span><br><span class="line">deb-src http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;ubuntu&#x2F; focal-security main restricted universe multiverse</span><br><span class="line"></span><br><span class="line">deb http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;ubuntu&#x2F; focal-updates main restricted universe multiverse</span><br><span class="line">deb-src http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;ubuntu&#x2F; focal-updates main restricted universe multiverse</span><br><span class="line"></span><br><span class="line">deb http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;ubuntu&#x2F; focal-proposed main restricted universe multiverse</span><br><span class="line">deb-src http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;ubuntu&#x2F; focal-proposed main restricted universe multiverse</span><br><span class="line"></span><br><span class="line">deb http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;ubuntu&#x2F; focal-backports main restricted universe multiverse</span><br><span class="line">deb-src http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;ubuntu&#x2F; focal-backports main restricted universe multiverse</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">deb http://mirrors.aliyun.com/ubuntu/ focal main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ focal main restricted universe multiverse</span><br><span class="line"></span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ focal-security main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ focal-security main restricted universe multiverse</span><br><span class="line"></span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ focal-updates main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ focal-updates main restricted universe multiverse</span><br><span class="line"></span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ focal-proposed main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ focal-proposed main restricted universe multiverse</span><br><span class="line"></span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ focal-backports main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ focal-backports main restricted universe multiverse</span><br></pre></td></tr></tbody></table></figure>
 <p>保存，退出，然后更新缓存与升级。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get upgrade</span><br></pre></td></tr></table></figure>
-<h2 id="设置代理（以-Clash-为例）"><a class="header-anchor" href="#设置代理（以-Clash-为例）">¶</a>设置代理（以 Clash 为例）</h2>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get upgrade</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="设置代理（以-Clash-为例）"><a class="header-anchor" href="#设置代理（以-Clash-为例）">¶</a> 设置代理（以 Clash 为例）</h2>
 <p>为了加速编译所需文件的下载，需要给 WSL 挂代理进行网络加速。</p>
 <p>WSL 不走主机端的代理，需要进行一番设置：</p>
-<p>主机开好 Clash，开启<code>Allow LAN</code>的选项，</p>
-<p>WSL 回到<code>/home</code>：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~</span><br></pre></td></tr></table></figure>
-<p>修改<code>~/.bashrc</code>，自定义代理启动命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim ~/.bashrc</span><br></pre></td></tr></table></figure>
+<p>主机开好 Clash，开启 <code>Allow LAN</code> 的选项，</p>
+<p>WSL 回到 <code>/home</code>：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~</span><br></pre></td></tr></tbody></table></figure>
+<p>修改 <code>~/.bashrc</code>，自定义代理启动命令：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim ~/.bashrc</span><br></pre></td></tr></tbody></table></figure>
 <p>在末尾加入以下代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">alias proxy&#x3D;&#39;export https_proxy&#x3D;&quot;http:&#x2F;&#x2F;127.0.0.1:7890&quot;;export http_proxy&#x3D;&quot;http:&#x2F;&#x2F;127.0.0.1:7890&quot;;export all_proxy&#x3D;&quot;socks5:&#x2F;&#x2F;127.0.0.1:7891&quot;;curl ip.sb;&#39;</span><br><span class="line">alias unproxy&#x3D;&#39;unset https_proxy;unset http_proxy;unset all_proxy;curl ip.sb;&#39;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">alias proxy='export https_proxy="http://127.0.0.1:7890";export http_proxy="http://127.0.0.1:7890";export all_proxy="socks5://127.0.0.1:7891";curl ip.sb;'</span><br><span class="line">alias unproxy='unset https_proxy;unset http_proxy;unset all_proxy;curl ip.sb;'</span><br></pre></td></tr></tbody></table></figure>
 <blockquote>
-<p>**注意：**其中<code>7890</code>是 Clash 的代理端口号，请根据自己的配置进行修改。<code>all_proxy</code>一行的 socks5 端口号为 Clash 的 http 端口号 +1</p>
+<p>** 注意：** 其中 <code>7890</code> 是 Clash 的代理端口号，请根据自己的配置进行修改。<code>all_proxy</code> 一行的 socks5 端口号为 Clash 的 http 端口号 +1</p>
 </blockquote>
 <p>保存退出，在主机端 Clash 开启的情况下输入：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxy</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxy</span><br></pre></td></tr></tbody></table></figure>
 <p>即可开启代理。</p>
 <p>输入：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unproxy</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unproxy</span><br></pre></td></tr></tbody></table></figure>
 <p>关闭代理。</p>
-<h2 id="设置-WSL-中不加载-Windows-的-PATH-内容"><a class="header-anchor" href="#设置-WSL-中不加载-Windows-的-PATH-内容">¶</a>设置 WSL 中不加载 Windows 的 PATH 内容</h2>
+<h2 id="设置-WSL-中不加载-Windows-的-PATH-内容"><a class="header-anchor" href="#设置-WSL-中不加载-Windows-的-PATH-内容">¶</a> 设置 WSL 中不加载 Windows 的 PATH 内容</h2>
 <p><strong>！！在 WSL 中，不进行此项设置会导致编译出错！！</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/wsl.conf</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/wsl.conf</span><br></pre></td></tr></tbody></table></figure>
 <p>打开后输入：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[interop]</span><br><span class="line">appendWindowsPath = <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[interop]</span><br><span class="line">appendWindowsPath = <span class="literal">false</span></span><br></pre></td></tr></tbody></table></figure>
 <p>保存退出后<strong>重启</strong>即可。</p>
-<h2 id="安装编译依赖"><a class="header-anchor" href="#安装编译依赖">¶</a>安装编译依赖</h2>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get -y install build-essential asciidoc binutils bzip2 gawk gettext git libncurses5-dev libz-dev patch python3 python2.7 unzip zlib1g-dev lib32gcc1 libc6-dev-i386 subversion flex uglifyjs git-core gcc-multilib p7zip p7zip-full msmtp libssl-dev texinfo libglib2.0-dev xmlto qemu-utils upx libelf-dev autoconf automake libtool autopoint device-tree-compiler g++-multilib antlr3 gperf wget curl swig rsync</span><br></pre></td></tr></table></figure>
+<h2 id="安装编译依赖"><a class="header-anchor" href="#安装编译依赖">¶</a> 安装编译依赖</h2>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get -y install build-essential asciidoc binutils bzip2 gawk gettext git libncurses5-dev libz-dev patch python3 python2.7 unzip zlib1g-dev lib32gcc1 libc6-dev-i386 subversion flex uglifyjs git-core gcc-multilib p7zip p7zip-full msmtp libssl-dev texinfo libglib2.0-dev xmlto qemu-utils upx libelf-dev autoconf automake libtool autopoint device-tree-compiler g++-multilib antlr3 gperf wget curl swig rsync</span><br></pre></td></tr></tbody></table></figure>
 <p>然后就可以开始编译了。</p>
 <h1>编译</h1>
-<p>参见<a href="">OpenWrt/LEDE 的编译与 Mentohust 软件包的添加——以斐讯K2为例</a></p>
-<p>OpenWrt/Lede 源码请务必<code>Clone</code>到 <code>~</code>下再进行操作</p>
-<h2 id="获取编译的固件"><a class="header-anchor" href="#获取编译的固件">¶</a>获取编译的固件</h2>
+<p>参见 <a href="">OpenWrt/LEDE 的编译与 Mentohust 软件包的添加 —— 以斐讯 K2 为例</a></p>
+<p>OpenWrt/Lede 源码请务必 <code>Clone</code> 到 <code>~</code> 下再进行操作</p>
+<h2 id="获取编译的固件"><a class="header-anchor" href="#获取编译的固件">¶</a> 获取编译的固件</h2>
 <p>在资源管理器地址栏输入 <code>\\wsl$</code> 即可访问 WSL 下的文件。以 x86_64 平台为例子，固件所在路径为：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\\wsl$\WSL名称\home\用户名\lede\bin\targets\x86\64</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\\wsl$\WSL名称\home\用户名\lede\bin\targets\x86\64</span><br></pre></td></tr></tbody></table></figure>
 <h1>致谢</h1>
-<p>感谢<a href="https://p3terx.com/" target="_blank" rel="noopener">@P3TERX</a>，博客里的文章对我有很大帮助，本文自他的博客总结而来，亦有很大一部分文字直接复制自它的博客。</p>
+<p>感谢 <a href="https://p3terx.com/" target="_blank" rel="noopener">@P3TERX</a>，博客里的文章对我有很大帮助，本文自他的博客总结而来，亦有很大一部分文字直接复制自它的博客。</p>
 <h1>参考链接</h1>
 <blockquote>
 <p><a href="https://openwrt.org/docs/guide-developer/build-system/wsl" target="_blank" rel="noopener">https://openwrt.org/docs/guide-developer/build-system/wsl</a></p>
@@ -559,7 +559,7 @@ mjx-container + br {
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text">安装WSL</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">2.</span> <span class="nav-text">配置编译环境</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#配置-Windows-Terminal-默认打开目录为"><span class="nav-number">2.1.</span> <span class="nav-text">配置 Windows Terminal 默认打开目录为~</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更换阿里云的源"><span class="nav-number">2.2.</span> <span class="nav-text">更换阿里云的源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置代理（以-Clash-为例）"><span class="nav-number">2.3.</span> <span class="nav-text">设置代理（以 Clash 为例）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置-WSL-中不加载-Windows-的-PATH-内容"><span class="nav-number">2.4.</span> <span class="nav-text">设置 WSL 中不加载 Windows 的 PATH 内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装编译依赖"><span class="nav-number">2.5.</span> <span class="nav-text">安装编译依赖</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">3.</span> <span class="nav-text">编译</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#获取编译的固件"><span class="nav-number">3.1.</span> <span class="nav-text">获取编译的固件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">4.</span> <span class="nav-text">致谢</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">5.</span> <span class="nav-text">参考链接</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text">安装 WSL</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">2.</span> <span class="nav-text">配置编译环境</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#配置-Windows-Terminal-默认打开目录为"><span class="nav-number">2.1.</span> <span class="nav-text"> 配置 Windows Terminal 默认打开目录为 ~</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更换阿里云的源"><span class="nav-number">2.2.</span> <span class="nav-text"> 更换阿里云的源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置代理（以-Clash-为例）"><span class="nav-number">2.3.</span> <span class="nav-text"> 设置代理（以 Clash 为例）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置-WSL-中不加载-Windows-的-PATH-内容"><span class="nav-number">2.4.</span> <span class="nav-text"> 设置 WSL 中不加载 Windows 的 PATH 内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装编译依赖"><span class="nav-number">2.5.</span> <span class="nav-text"> 安装编译依赖</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">3.</span> <span class="nav-text">编译</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#获取编译的固件"><span class="nav-number">3.1.</span> <span class="nav-text"> 获取编译的固件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">4.</span> <span class="nav-text">致谢</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">5.</span> <span class="nav-text">参考链接</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -635,7 +635,7 @@ mjx-container + br {
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">35k</span>
+    <span title="站点总字数">34k</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
@@ -745,6 +745,7 @@ mjx-container + br {
   <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
   <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
   <script src="/undefined/velocity/velocity.min.js"></script>
   <script src="/undefined/velocity/velocity.ui.min.js"></script>
 

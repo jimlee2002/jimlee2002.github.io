@@ -22,15 +22,15 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"jimlee2002.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"manual"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"jimlee2002.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"manual"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="¶标题 两种语法，分别为类 Setext 和类 atx 形式。 ¶类 Setext 式 利用&#x3D;和-： 标题 &#x3D;&#x3D;&#x3D;&#x3D;&#x3D; 标题 -----  ¶类 atx 式 在行首插入 1 到 6 个#,对应到标题 1 到 6 阶。 # 标题 ## 标题 ### 标题 #### 标题 ##### 标题 ###### 标题  也可以 # 标题 # ## 标题 ## ### 标题 ###     注意： 不要忘记#与">
+  <meta name="description" content="¶ 标题 两种语法，分别为类 Setext 和类 atx 形式。 ¶ 类 Setext 式 利用 &#x3D; 和 -： 标题 &#x3D;&#x3D;&#x3D;&#x3D;&#x3D; 标题 -----  ¶ 类 atx 式 在行首插入 1 到 6 个#, 对应到标题 1 到 6 阶。 # 标题 ## 标题 ### 标题 #### 标题 ##### 标题 ###### 标题  也可以 # 标题 # ## 标题 ## ### 标题 ###     注意：">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Markdown语法学习笔记①">
+<meta property="og:title" content="Markdown 语法学习笔记①">
 <meta property="og:url" content="https://jimlee2002.github.io/posts/6c2e314d.html">
 <meta property="og:site_name" content="Jim&#39;s Blog">
-<meta property="og:description" content="¶标题 两种语法，分别为类 Setext 和类 atx 形式。 ¶类 Setext 式 利用&#x3D;和-： 标题 &#x3D;&#x3D;&#x3D;&#x3D;&#x3D; 标题 -----  ¶类 atx 式 在行首插入 1 到 6 个#,对应到标题 1 到 6 阶。 # 标题 ## 标题 ### 标题 #### 标题 ##### 标题 ###### 标题  也可以 # 标题 # ## 标题 ## ### 标题 ###     注意： 不要忘记#与">
+<meta property="og:description" content="¶ 标题 两种语法，分别为类 Setext 和类 atx 形式。 ¶ 类 Setext 式 利用 &#x3D; 和 -： 标题 &#x3D;&#x3D;&#x3D;&#x3D;&#x3D; 标题 -----  ¶ 类 atx 式 在行首插入 1 到 6 个#, 对应到标题 1 到 6 阶。 # 标题 ## 标题 ### 标题 #### 标题 ##### 标题 ###### 标题  也可以 # 标题 # ## 标题 ## ### 标题 ###     注意：">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://jimlee2002.github.io/assets/Img/test.jpg">
 <meta property="article:published_time" content="2018-01-07T07:10:39.000Z">
@@ -53,7 +53,7 @@
   };
 </script>
 
-  <title>Markdown语法学习笔记① | Jim's Blog</title>
+  <title>Markdown 语法学习笔记① | Jim's Blog</title>
   
 
 
@@ -84,6 +84,7 @@
   </style>
 </noscript>
 
+<link rel="alternate" href="/atom.xml" title="Jim's Blog" type="application/atom+xml">
 <style>mjx-container[jax="SVG"] {
   direction: ltr;
 }
@@ -201,8 +202,7 @@ mjx-container {
 mjx-container + br {
   display: none;
 }
-</style><link rel="alternate" href="/atom.xml" title="Jim's Blog" type="application/atom+xml">
-</head>
+</style></head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
   <div class="container use-motion">
@@ -329,7 +329,7 @@ mjx-container + br {
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Markdown语法学习笔记①
+          Markdown 语法学习笔记①
         </h1>
 
         <div class="post-meta">
@@ -359,7 +359,7 @@ mjx-container + br {
             </span>
 
           
-            <span id="/posts/6c2e314d.html" class="post-meta-item leancloud_visitors" data-flag-title="Markdown语法学习笔记①" title="阅读次数">
+            <span id="/posts/6c2e314d.html" class="post-meta-item leancloud_visitors" data-flag-title="Markdown 语法学习笔记①" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -371,7 +371,7 @@ mjx-container + br {
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>3.7k</span>
+              <span>3.5k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -390,17 +390,17 @@ mjx-container + br {
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="标题"><a class="header-anchor" href="#标题">¶</a>标题</h2>
+        <h2 id="标题"><a class="header-anchor" href="#标题">¶</a> 标题</h2>
 <p>两种语法，分别为类 Setext 和类 atx 形式。</p>
-<h3 id="类-Setext-式"><a class="header-anchor" href="#类-Setext-式">¶</a>类 Setext 式</h3>
-<p>利用<code>=</code>和<code>-</code>：</p>
+<h3 id="类-Setext-式"><a class="header-anchor" href="#类-Setext-式">¶</a> 类 Setext 式</h3>
+<p>利用 <code>=</code> 和 <code>-</code>：</p>
 <pre><code>标题
 =====
 标题
 -----
 </code></pre>
-<h3 id="类-atx-式"><a class="header-anchor" href="#类-atx-式">¶</a>类 atx 式</h3>
-<p>在行首插入 1 到 6 个<code>#</code>,对应到标题 1 到 6 阶。</p>
+<h3 id="类-atx-式"><a class="header-anchor" href="#类-atx-式">¶</a> 类 atx 式</h3>
+<p>在行首插入 1 到 6 个<code>#</code>, 对应到标题 1 到 6 阶。</p>
 <pre><code># 标题
 ## 标题
 ### 标题
@@ -418,16 +418,16 @@ mjx-container + br {
 错误示范：<code>##标题</code></p>
 </blockquote>
 <a id="more"></a>
-<h2 id="区块引用"><a class="header-anchor" href="#区块引用">¶</a>区块引用</h2>
-<p>使用<code>&gt;</code></p>
+<h2 id="区块引用"><a class="header-anchor" href="#区块引用">¶</a> 区块引用</h2>
+<p>使用 <code>&gt;</code></p>
 <pre><code>&gt; 一些文字
 </code></pre>
 <p>只需在每段第一行加上即可<br>
-还可以嵌套，只要根据层次加上不同数量的<code>&gt;</code></p>
+还可以嵌套，只要根据层次加上不同数量的 <code>&gt;</code></p>
 <pre><code>&gt; 一些文字
 &gt;&gt; 一些一些文字
 </code></pre>
-<p>引用区域内可以使用其他Markdown语法：</p>
+<p>引用区域内可以使用其他 Markdown 语法：</p>
 <pre><code>&gt; ## 这是一个标题。
 &gt; 
 &gt; 1.   这是第一行列表项。
@@ -435,9 +435,9 @@ mjx-container + br {
 &gt; 
 &gt; 给出一些例子代码：
 &gt; 
-&gt;     return shell_exec(&quot;echo $input | $markdown_script&quot;);
+&gt;     return shell_exec("echo $input | $markdown_script");
 </code></pre>
-<h2 id="列表"><a class="header-anchor" href="#列表">¶</a>列表</h2>
+<h2 id="列表"><a class="header-anchor" href="#列表">¶</a> 列表</h2>
 <p>分为有序列表与无序列表。<br>
 如果列表项目间用空行分开，那么中间内容将不会被列表项包括在内。</p>
 <pre><code>* 列表项
@@ -452,14 +452,14 @@ mjx-container + br {
 <pre><code>* 列表项
         &lt;codehere&gt;
 </code></pre>
-<h3 id="有序列表"><a class="header-anchor" href="#有序列表">¶</a>有序列表</h3>
-<p>使用<code>*</code>,<code>+</code>和<code>-</code>标记</p>
+<h3 id="有序列表"><a class="header-anchor" href="#有序列表">¶</a> 有序列表</h3>
+<p>使用 <code>*</code>,<code>+</code> 和 <code>-</code> 标记</p>
 <pre><code>* 列表项
 + 列表项
 - 列表项
 </code></pre>
-<h3 id="无序列表"><a class="header-anchor" href="#无序列表">¶</a>无序列表</h3>
-<p>使用<strong>数字加英文句点<code>.</code>的方式</strong></p>
+<h3 id="无序列表"><a class="header-anchor" href="#无序列表">¶</a> 无序列表</h3>
+<p>使用<strong>数字加英文句点<code>.</code> 的方式</strong></p>
 <pre><code>1. 列表项
 2. 列表项
 3. 列表项
@@ -469,19 +469,19 @@ mjx-container + br {
 <ol>
 <li>在列表标记上使用的数字<strong>并不会影响</strong>输出的顺序<br>
 <s><em>简直智障福音啊</em></s></li>
-<li>文字出现数字-句点-空白而要避免列表项出现，可以在句点前加上<strong>反斜杠</strong><code>\</code><br>
+<li>文字出现数字 - 句点 - 空白而要避免列表项出现，可以在句点前加上<strong>反斜杠</strong><code>\</code><br>
 eg:<code>1986\. What a great season.</code></li>
 </ol>
 </blockquote>
-<h2 id="代码区块"><a class="header-anchor" href="#代码区块">¶</a>代码区块</h2>
+<h2 id="代码区块"><a class="header-anchor" href="#代码区块">¶</a> 代码区块</h2>
 <p>只需简单地缩进一格（或四个空格）即可</p>
 <p>这是文字</p>
 <pre><code>这是代码
 </code></pre>
 <p>一个代码区块会一直持续到没有缩进的那一行（或是文件结尾）。</p>
 <p>同时，在代码区块中，一般的 Markdown 语法不会被转换。</p>
-<h2 id="分隔线"><a class="header-anchor" href="#分隔线">¶</a>分隔线</h2>
-<p>使用三个以上的<code>*</code>、<code>-</code>、<code>_</code>来建立一个分隔线，可以在星号或是减号中间插入空格，但注意行内不能有其他东西</p>
+<h2 id="分隔线"><a class="header-anchor" href="#分隔线">¶</a> 分隔线</h2>
+<p>使用三个以上的 <code>*</code>、<code>-</code>、<code>_</code>来建立一个分隔线，可以在星号或是减号中间插入空格，但注意行内不能有其他东西</p>
 <pre><code>文字
 ***
 
@@ -497,17 +497,17 @@ ___
 文字
 * * *
 </code></pre>
-<h2 id="链接插入"><a class="header-anchor" href="#链接插入">¶</a>链接插入</h2>
+<h2 id="链接插入"><a class="header-anchor" href="#链接插入">¶</a> 链接插入</h2>
 <p>Markdown 支持两种形式的链接语法： 行内式和参考式两种形式。<br>
-不管是哪一种，链接文字都是用<code>[]</code>来标记。</p>
-<h3 id="行内式"><a class="header-anchor" href="#行内式">¶</a>行内式</h3>
-<p>使用方括号<code>[]</code>括住所需加链接的文字，并在后面以圆括号<code>()</code>形式插入链接（可以是相对路径）。<br>
-如需加入链接描述(链接的 title 文字)只需在圆括号中的链接后以<code>&quot;&quot;</code>包起文字即可。</p>
+不管是哪一种，链接文字都是用 <code>[]</code> 来标记。</p>
+<h3 id="行内式"><a class="header-anchor" href="#行内式">¶</a> 行内式</h3>
+<p>使用方括号 <code>[]</code> 括住所需加链接的文字，并在后面以圆括号 <code>()</code> 形式插入链接（可以是相对路径）。<br>
+如需加入链接描述 (链接的 title 文字) 只需在圆括号中的链接后以 <code>""</code> 包起文字即可。</p>
 <pre><code>这是一个[链接](https://xsllen.tk)
-这是一个有名字的[链接](https://xsllen.tk &quot;Jim's Blog&quot;)
+这是一个有名字的[链接](https://xsllen.tk "Jim's Blog")
 </code></pre>
-<h3 id="参考式"><a class="header-anchor" href="#参考式">¶</a>参考式</h3>
-<p>使用方括号<code>[]</code>括住所需加链接的文字,并在后面再接上一个方括号<code>[]</code>进行用于辨识链接的标记。<br>
+<h3 id="参考式"><a class="header-anchor" href="#参考式">¶</a> 参考式</h3>
+<p>使用方括号 <code>[]</code> 括住所需加链接的文字，并在后面再接上一个方括号 <code>[]</code> 进行用于辨识链接的标记。<br>
 你也可以选择性地在两个方括号中间加上一个空格。</p>
 <pre><code>这是一个[链接][1]
 这是一个[链接] [1]
@@ -515,25 +515,25 @@ ___
 <p>接着，在文件的任意处把标记的文章内容定义出来。<br>
 链接网址还可以使用尖括号包起。<br>
 网址之后可以选择接着网址描述（title）内容，可以用单引号、双引号或是括弧包着。<br>
-网址描述（title）内容可以放到下一行，也可以加缩进,好看就行。<s>（说得我闲得蛋疼一样）</s></p>
+网址描述（title）内容可以放到下一行，也可以加缩进，好看就行。<s>（说得我闲得蛋疼一样）</s></p>
 <pre><code>[1]: https://xsllen.tk
 [1]: &lt;https://xsllen.tk&gt;
-[1]: https://xsllen.tk &quot;My blog&quot;
+[1]: https://xsllen.tk "My blog"
 [1]: https://xsllen.tk 'My blog'
 [1]: https://xsllen.tk (My blog)
 
 [1]: https://xsllen.tk 
-&quot;My blog&quot;
+"My blog"
 </code></pre>
 <blockquote>
 <p><strong>注意：</strong><br>
-1.链接辨别标签可以有字母、数字、空白和标点符号，但是**并不区分大小写!**因此以下两个链接是相同的。</p>
+1. 链接辨别标签可以有字母、数字、空白和标点符号，但是 ** 并不区分大小写！** 因此以下两个链接是相同的。</p>
 </blockquote>
 <pre><code>[link text][a]
 [link text][A]
 </code></pre>
 <blockquote>
-<p>2.标记方括号内的内容可以省略（即后一个方括号为空），此时链接标记会视为等同于链接文字。</p>
+<p>2. 标记方括号内的内容可以省略（即后一个方括号为空），此时链接标记会视为等同于链接文字。</p>
 <p>[link][]<br>
 相当于<br>
 [link][link]</p>
@@ -541,48 +541,48 @@ ___
 <p>参考式整体实例：</p>
 <pre><code>I get 10 times more traffic from [Google] [1] than from[Yahoo] [2] or [MSN] [3].
 
-[1]: http://google.com/        &quot;Google&quot;
-[2]: http://search.yahoo.com/  &quot;Yahoo Search&quot;
-[3]: http://search.msn.com/    &quot;MSN Search&quot;
+[1]: http://google.com/        "Google"
+[2]: http://search.yahoo.com/  "Yahoo Search"
+[3]: http://search.msn.com/    "MSN Search"
 </code></pre>
 <p>如果改成用链接名称的方式写：</p>
 <pre><code>I get 10 times more traffic from [Google][] than from[Yahoo][] or [MSN][].
 
-[google]: http://google.com/        &quot;Google&quot;
-[yahoo]:  http://search.yahoo.com/  &quot;Yahoo Search&quot;
-[msn]:    http://search.msn.com/    &quot;MSN Search&quot;
+[google]: http://google.com/        "Google"
+[yahoo]:  http://search.yahoo.com/  "Yahoo Search"
+[msn]:    http://search.msn.com/    "MSN Search"
 </code></pre>
-<h2 id="文字处理"><a class="header-anchor" href="#文字处理">¶</a>文字处理</h2>
-<h3 id="斜体"><a class="header-anchor" href="#斜体">¶</a>斜体</h3>
-<p>使用一个<code>*</code>或<code>_</code>符号将文字包围起来。</p>
+<h2 id="文字处理"><a class="header-anchor" href="#文字处理">¶</a> 文字处理</h2>
+<h3 id="斜体"><a class="header-anchor" href="#斜体">¶</a> 斜体</h3>
+<p>使用一个 <code>*</code> 或<code>_</code>符号将文字包围起来。</p>
 <pre><code>*斜体文字*
 _斜体文字_
 </code></pre>
-<h3 id="加粗"><a class="header-anchor" href="#加粗">¶</a>加粗</h3>
-<p>使用两个<code>*</code>或<code>_</code>符号将文字包围起来。</p>
+<h3 id="加粗"><a class="header-anchor" href="#加粗">¶</a> 加粗</h3>
+<p>使用两个 <code>*</code> 或<code>_</code>符号将文字包围起来。</p>
 <pre><code>**加粗文字**
 __加粗文字__
 </code></pre>
-<h3 id="粗斜体"><a class="header-anchor" href="#粗斜体">¶</a>粗斜体</h3>
-<p>使用三个<code>*</code>或<code>_</code>符号将文字包围起来。</p>
+<h3 id="粗斜体"><a class="header-anchor" href="#粗斜体">¶</a> 粗斜体</h3>
+<p>使用三个 <code>*</code> 或<code>_</code>符号将文字包围起来。</p>
 <pre><code>***粗斜体文字***
 </code></pre>
-<h3 id="删除线"><a class="header-anchor" href="#删除线">¶</a>删除线</h3>
-<p>使用两个<code>~</code>符号将文字包围起来。<br>
+<h3 id="删除线"><a class="header-anchor" href="#删除线">¶</a> 删除线</h3>
+<p>使用两个 <code>~</code> 符号将文字包围起来。<br>
 <s>带删除线的文字</s></p>
-<h3 id="注脚"><a class="header-anchor" href="#注脚">¶</a>注脚</h3>
-<p>使用<code>[^keyword]</code>表示注脚，并在文本的任意地方对该注脚定义（类似与参考式）<br>
+<h3 id="注脚"><a class="header-anchor" href="#注脚">¶</a> 注脚</h3>
+<p>使用 <code>[^keyword]</code> 表示注脚，并在文本的任意地方对该注脚定义（类似与参考式）<br>
 示例：</p>
 <pre><code>这里有一个注脚[^footnote]。
 [^footnote]: 这是那个*注脚*的**文本**。
 </code></pre>
 <p>效果：</p>
-<p>这里有一个注脚<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup>。</p>
+<p>这里有一个注脚 <sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup>。</p>
 <blockquote>
 <p><strong>注意：</strong> 使用什么符号开启标签，就要用什么符号结束。</p>
 </blockquote>
-<h3 id="代码标记"><a class="header-anchor" href="#代码标记">¶</a>代码标记</h3>
-<p>使用反引号<code>`</code>将代码文字包起.</p>
+<h3 id="代码标记"><a class="header-anchor" href="#代码标记">¶</a> 代码标记</h3>
+<p>使用反引号 <code>`</code> 将代码文字包起.</p>
 <pre><code>`&lt;code&gt;code here!&lt;/code&gt;`
 </code></pre>
 <blockquote>
@@ -602,31 +602,31 @@ __加粗文字__
 <li>在代码区段内，&amp; 和方括号都会被<strong>自动地转成 HTML 实体</strong>。</li>
 </ul>
 </blockquote>
-<h2 id="图片插入"><a class="header-anchor" href="#图片插入">¶</a>图片插入</h2>
+<h2 id="图片插入"><a class="header-anchor" href="#图片插入">¶</a> 图片插入</h2>
 <p>与链接插入类似，同样包括两种方式： 行内式与参考式。</p>
-<h3 id="行内式-v2"><a class="header-anchor" href="#行内式-v2">¶</a>行内式</h3>
-<p>使用<code>![alt text](图片网址)</code><br>
+<h3 id="行内式-v2"><a class="header-anchor" href="#行内式-v2">¶</a> 行内式</h3>
+<p>使用 <code>![alt text](图片网址)</code><br>
 还可以加上图片描述（title 文字）<br>
-<code>![alt text](图片网址 &quot;描述文字&quot;)</code><br>
+<code>![alt text](图片网址 "描述文字")</code><br>
 示例：</p>
-<pre><code>![alt text](/assets/Img/test.jpg &quot;墨镜滑稽&quot;)
+<pre><code>![alt text](/assets/Img/test.jpg "墨镜滑稽")
 </code></pre>
 <p>效果：<img data-src="/assets/Img/test.jpg" alt="alt text" title="墨镜滑稽"></p>
-<h3 id="参考式-v2"><a class="header-anchor" href="#参考式-v2">¶</a>参考式</h3>
-<p>使用<code>![alt text][id]</code><br>
+<h3 id="参考式-v2"><a class="header-anchor" href="#参考式-v2">¶</a> 参考式</h3>
+<p>使用 <code>![alt text][id]</code><br>
 「id」是图片参考的名称，图片参考的定义方式则和连结参考一样：</p>
-<pre><code>[id]: 图片路径 &quot;描述文字&quot;
+<pre><code>[id]: 图片路径 "描述文字"
 </code></pre>
 <blockquote>
 <p><strong>注意：</strong> 到目前为止， Markdown 还没有办法指定图片的宽高，需要的话可使用普通的 <strong><code>&lt;img&gt;</code></strong> 标签</p>
 </blockquote>
-<h2 id="内容目录（TOC）-（emmmmmm，对于hexo来说没什么卵用……）"><a class="header-anchor" href="#内容目录（TOC）-（emmmmmm，对于hexo来说没什么卵用……）">¶</a>内容目录（TOC） （emmmmmm，对于hexo来说没什么卵用……）</h2>
+<h2 id="内容目录（TOC）-（emmmmmm，对于hexo来说没什么卵用……）"><a class="header-anchor" href="#内容目录（TOC）-（emmmmmm，对于hexo来说没什么卵用……）">¶</a> 内容目录（TOC） （emmmmmm，对于 hexo 来说没什么卵用……）</h2>
 <p>在段落中填写 <code>[TOC]</code> 以显示全文内容的目录结构。</p>
 <p>效果：<br>
 [TOC]</p>
-<h2 id="表格"><a class="header-anchor" href="#表格">¶</a>表格</h2>
+<h2 id="表格"><a class="header-anchor" href="#表格">¶</a> 表格</h2>
 <p>示例：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">| 项目        | 价格   |  数量  |</span><br><span class="line">| --------   | -----:  | :----:  |</span><br><span class="line">| 计算机     | \$1600 |   5     |</span><br><span class="line">| 手机        |   \$12   |   12   |</span><br><span class="line">| 管线        |    \$1    |  234  |</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">| 项目        | 价格   |  数量  |</span><br><span class="line">| --------   | -----:  | :----:  |</span><br><span class="line">| 计算机     | \$1600 |   5     |</span><br><span class="line">| 手机        |   \$12   |   12   |</span><br><span class="line">| 管线        |    \$1    |  234  |</span><br></pre></td></tr></tbody></table></figure>
 <p>效果：</p>
 <table>
 <thead>
@@ -639,23 +639,23 @@ __加粗文字__
 <tbody>
 <tr>
 <td>计算机</td>
-<td style="text-align:right">$1600</td>
+<td style="text-align:right"> $1600</td>
 <td style="text-align:center">5</td>
 </tr>
 <tr>
-<td>手机</td>
-<td style="text-align:right">$12</td>
+<td> 手机</td>
+<td style="text-align:right"> $12</td>
 <td style="text-align:center">12</td>
 </tr>
 <tr>
-<td>管线</td>
-<td style="text-align:right">$1</td>
+<td> 管线</td>
+<td style="text-align:right"> $1</td>
 <td style="text-align:center">234</td>
 </tr>
 </tbody>
 </table>
-<h2 id="待办事项及TODO列表"><a class="header-anchor" href="#待办事项及TODO列表">¶</a>待办事项及TODO列表</h2>
-<p>使用带有 <code>- [ ]</code>（未完成） 或 <code>- [x]</code>（已完成）项的列表语法撰写一个待办事宜列表，并且支持子列表嵌套以及混用Markdown语法。<br>
+<h2 id="待办事项及TODO列表"><a class="header-anchor" href="#待办事项及TODO列表">¶</a> 待办事项及 TODO 列表</h2>
+<p>使用带有 <code>- [ ]</code>（未完成） 或 <code>- [x]</code>（已完成）项的列表语法撰写一个待办事宜列表，并且支持子列表嵌套以及混用 Markdown 语法。<br>
 示例：</p>
 <pre><code>- [ ] 写一个个人主页
 - [x] 写一个Maekdown学习笔记$$
@@ -663,17 +663,17 @@ __加粗文字__
 <p>效果：</p>
 <ul>
 <li><input type="checkbox" id="checkbox0"><label for="checkbox0">写一个个人主页</label></li>
-<li><input type="checkbox" id="checkbox1" checked="true"><label for="checkbox1">写一个Maekdown学习笔记</label></li>
+<li><input type="checkbox" id="checkbox1" checked="true"><label for="checkbox1">写一个 Maekdown 学习笔记 </label></li>
 </ul>
-<h2 id="自动链接"><a class="header-anchor" href="#自动链接">¶</a>自动链接</h2>
-<p>Markdown 支持以比较简短的自动链接形式来处理网址和电子邮件信箱,只需用方括号括起即可,Markdown 就会自动把它转成链接。</p>
+<h2 id="自动链接"><a class="header-anchor" href="#自动链接">¶</a> 自动链接</h2>
+<p>Markdown 支持以比较简短的自动链接形式来处理网址和电子邮件信箱，只需用方括号括起即可，Markdown 就会自动把它转成链接。</p>
 <pre><code>&lt;http://example.com/&gt;
 &lt;address@example.com&gt;
 </code></pre>
 <p>效果：<br>
 <a href="http://example.com/" target="_blank" rel="noopener">http://example.com/</a><br>
 <a href="mailto:address@example.com">address@example.com</a></p>
-<h2 id="反斜杠用法"><a class="header-anchor" href="#反斜杠用法">¶</a>反斜杠用法</h2>
+<h2 id="反斜杠用法"><a class="header-anchor" href="#反斜杠用法">¶</a> 反斜杠用法</h2>
 <p>Markdown 可以利用反斜杠来插入一些在语法中有其它意义的符号，例如：如果你想要用星号加在文字旁边的方式来做出强调效果（但不用 <code>&lt;em&gt;</code> 标签），你可以在星号的前面加上反斜杠：</p>
 <pre><code>\*literal asterisks\*
 </code></pre>
@@ -691,16 +691,16 @@ _   底线
 .   英文句点
 !   惊叹号
 </code></pre>
-<h2 id="HTML兼容性"><a class="header-anchor" href="#HTML兼容性">¶</a>HTML兼容性</h2>
+<h2 id="HTML兼容性"><a class="header-anchor" href="#HTML兼容性">¶</a>HTML 兼容性</h2>
 <ol>
-<li>Markdown文档内可任意使用html语句。<br>
-（你想在Markdown文档里码HTML也没问题的233）</li>
-<li>Markdown文档会对特殊字符自动转换，如<code>&lt;</code>和<code>&amp;</code>。</li>
+<li>Markdown 文档内可任意使用 html 语句。<br>
+（你想在 Markdown 文档里码 HTML 也没问题的 233）</li>
+<li>Markdown 文档会对特殊字符自动转换，如 <code>&lt;</code> 和 <code>&amp;</code>。</li>
 </ol>
-<h2 id="文章过长折叠-（hexo用）"><a class="header-anchor" href="#文章过长折叠-（hexo用）">¶</a>文章过长折叠 （hexo用）</h2>
-<p>使用<code>&lt;!--more--&gt;</code></p>
+<h2 id="文章过长折叠-（hexo用）"><a class="header-anchor" href="#文章过长折叠-（hexo用）">¶</a> 文章过长折叠 （hexo 用）</h2>
+<p>使用 <code>&lt;!--more--&gt;</code></p>
 <blockquote>
-<p><strong>注意：</strong> <em>hexo-renderer-markdown-it</em>不支持</p>
+<p><strong>注意：</strong> <em>hexo-renderer-markdown-it</em> 不支持</p>
 </blockquote>
 <hr class="footnotes-sep">
 <section class="footnotes">
@@ -726,7 +726,7 @@ _   底线
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://jimlee2002.github.io/posts/6c2e314d.html" title="Markdown语法学习笔记①">https://jimlee2002.github.io/posts/6c2e314d.html</a>
+    <a href="https://jimlee2002.github.io/posts/6c2e314d.html" title="Markdown 语法学习笔记①">https://jimlee2002.github.io/posts/6c2e314d.html</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -748,8 +748,8 @@ _   底线
     <div class="post-nav">
       <div class="post-nav-item"></div>
       <div class="post-nav-item">
-    <a href="/posts/c54c0f26.html" rel="next" title="博客折腾笔记①-hexo部署与自定义">
-      博客折腾笔记①-hexo部署与自定义 <i class="fa fa-chevron-right"></i>
+    <a href="/posts/c54c0f26.html" rel="next" title="博客折腾笔记①-hexo 部署与自定义">
+      博客折腾笔记①-hexo 部署与自定义 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -809,7 +809,7 @@ _   底线
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#标题"><span class="nav-number">1.</span> <span class="nav-text">标题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#类-Setext-式"><span class="nav-number">1.1.</span> <span class="nav-text">类 Setext 式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类-atx-式"><span class="nav-number">1.2.</span> <span class="nav-text">类 atx 式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#区块引用"><span class="nav-number">2.</span> <span class="nav-text">区块引用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#列表"><span class="nav-number">3.</span> <span class="nav-text">列表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#有序列表"><span class="nav-number">3.1.</span> <span class="nav-text">有序列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#无序列表"><span class="nav-number">3.2.</span> <span class="nav-text">无序列表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码区块"><span class="nav-number">4.</span> <span class="nav-text">代码区块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分隔线"><span class="nav-number">5.</span> <span class="nav-text">分隔线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#链接插入"><span class="nav-number">6.</span> <span class="nav-text">链接插入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#行内式"><span class="nav-number">6.1.</span> <span class="nav-text">行内式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考式"><span class="nav-number">6.2.</span> <span class="nav-text">参考式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文字处理"><span class="nav-number">7.</span> <span class="nav-text">文字处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#斜体"><span class="nav-number">7.1.</span> <span class="nav-text">斜体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#加粗"><span class="nav-number">7.2.</span> <span class="nav-text">加粗</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#粗斜体"><span class="nav-number">7.3.</span> <span class="nav-text">粗斜体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除线"><span class="nav-number">7.4.</span> <span class="nav-text">删除线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注脚"><span class="nav-number">7.5.</span> <span class="nav-text">注脚</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码标记"><span class="nav-number">7.6.</span> <span class="nav-text">代码标记</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图片插入"><span class="nav-number">8.</span> <span class="nav-text">图片插入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#行内式-v2"><span class="nav-number">8.1.</span> <span class="nav-text">行内式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考式-v2"><span class="nav-number">8.2.</span> <span class="nav-text">参考式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内容目录（TOC）-（emmmmmm，对于hexo来说没什么卵用……）"><span class="nav-number">9.</span> <span class="nav-text">内容目录（TOC） （emmmmmm，对于hexo来说没什么卵用……）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#表格"><span class="nav-number">10.</span> <span class="nav-text">表格</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#待办事项及TODO列表"><span class="nav-number">11.</span> <span class="nav-text">待办事项及TODO列表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自动链接"><span class="nav-number">12.</span> <span class="nav-text">自动链接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#反斜杠用法"><span class="nav-number">13.</span> <span class="nav-text">反斜杠用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML兼容性"><span class="nav-number">14.</span> <span class="nav-text">HTML兼容性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文章过长折叠-（hexo用）"><span class="nav-number">15.</span> <span class="nav-text">文章过长折叠 （hexo用）</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#标题"><span class="nav-number">1.</span> <span class="nav-text"> 标题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#类-Setext-式"><span class="nav-number">1.1.</span> <span class="nav-text"> 类 Setext 式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类-atx-式"><span class="nav-number">1.2.</span> <span class="nav-text"> 类 atx 式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#区块引用"><span class="nav-number">2.</span> <span class="nav-text"> 区块引用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#列表"><span class="nav-number">3.</span> <span class="nav-text"> 列表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#有序列表"><span class="nav-number">3.1.</span> <span class="nav-text"> 有序列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#无序列表"><span class="nav-number">3.2.</span> <span class="nav-text"> 无序列表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码区块"><span class="nav-number">4.</span> <span class="nav-text"> 代码区块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分隔线"><span class="nav-number">5.</span> <span class="nav-text"> 分隔线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#链接插入"><span class="nav-number">6.</span> <span class="nav-text"> 链接插入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#行内式"><span class="nav-number">6.1.</span> <span class="nav-text"> 行内式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考式"><span class="nav-number">6.2.</span> <span class="nav-text"> 参考式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文字处理"><span class="nav-number">7.</span> <span class="nav-text"> 文字处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#斜体"><span class="nav-number">7.1.</span> <span class="nav-text"> 斜体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#加粗"><span class="nav-number">7.2.</span> <span class="nav-text"> 加粗</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#粗斜体"><span class="nav-number">7.3.</span> <span class="nav-text"> 粗斜体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除线"><span class="nav-number">7.4.</span> <span class="nav-text"> 删除线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注脚"><span class="nav-number">7.5.</span> <span class="nav-text"> 注脚</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码标记"><span class="nav-number">7.6.</span> <span class="nav-text"> 代码标记</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图片插入"><span class="nav-number">8.</span> <span class="nav-text"> 图片插入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#行内式-v2"><span class="nav-number">8.1.</span> <span class="nav-text"> 行内式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考式-v2"><span class="nav-number">8.2.</span> <span class="nav-text"> 参考式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内容目录（TOC）-（emmmmmm，对于hexo来说没什么卵用……）"><span class="nav-number">9.</span> <span class="nav-text"> 内容目录（TOC） （emmmmmm，对于 hexo 来说没什么卵用……）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#表格"><span class="nav-number">10.</span> <span class="nav-text"> 表格</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#待办事项及TODO列表"><span class="nav-number">11.</span> <span class="nav-text"> 待办事项及 TODO 列表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自动链接"><span class="nav-number">12.</span> <span class="nav-text"> 自动链接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#反斜杠用法"><span class="nav-number">13.</span> <span class="nav-text"> 反斜杠用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML兼容性"><span class="nav-number">14.</span> <span class="nav-text">HTML 兼容性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文章过长折叠-（hexo用）"><span class="nav-number">15.</span> <span class="nav-text"> 文章过长折叠 （hexo 用）</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -885,7 +885,7 @@ _   底线
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">35k</span>
+    <span title="站点总字数">34k</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
@@ -995,6 +995,7 @@ _   底线
   <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
   <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
   <script src="/undefined/velocity/velocity.min.js"></script>
   <script src="/undefined/velocity/velocity.ui.min.js"></script>
 

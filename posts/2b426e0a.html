@@ -22,15 +22,15 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"jimlee2002.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"manual"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"jimlee2002.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"manual"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="今天在少数派上看到一篇搭建类似微博的个人动态页面的指南，我非常感高兴：出于对实现私密树洞分享心情的需要以及言论审查的苦恼，我想在博客上实现这样的功能很久了。感谢原作者为不懂技术的脚本小子我造好了轮子，接下来只需简单配置即可实现所需功能了。 以下是我的配置过程：  参考文章：保卫表达：用后端 BaaS 快速搭建专属无点赞评论版微博——b言b语">
+  <meta name="description" content="今天在少数派上看到一篇搭建类似微博的个人动态页面的指南，我非常感高兴：出于对实现私密树洞分享心情的需要以及言论审查的苦恼，我想在博客上实现这样的功能很久了。感谢原作者为不懂技术的脚本小子我造好了轮子，接下来只需简单配置即可实现所需功能了。 以下是我的配置过程：  参考文章：保卫表达：用后端 BaaS 快速搭建专属无点赞评论版微博 ——b 言 b 语">
 <meta property="og:type" content="article">
-<meta property="og:title" content="博客折腾笔记③-搭建个人动态页面 iM">
+<meta property="og:title" content="博客折腾笔记③- 搭建个人动态页面 iM">
 <meta property="og:url" content="https://jimlee2002.github.io/posts/2b426e0a.html">
 <meta property="og:site_name" content="Jim&#39;s Blog">
-<meta property="og:description" content="今天在少数派上看到一篇搭建类似微博的个人动态页面的指南，我非常感高兴：出于对实现私密树洞分享心情的需要以及言论审查的苦恼，我想在博客上实现这样的功能很久了。感谢原作者为不懂技术的脚本小子我造好了轮子，接下来只需简单配置即可实现所需功能了。 以下是我的配置过程：  参考文章：保卫表达：用后端 BaaS 快速搭建专属无点赞评论版微博——b言b语">
+<meta property="og:description" content="今天在少数派上看到一篇搭建类似微博的个人动态页面的指南，我非常感高兴：出于对实现私密树洞分享心情的需要以及言论审查的苦恼，我想在博客上实现这样的功能很久了。感谢原作者为不懂技术的脚本小子我造好了轮子，接下来只需简单配置即可实现所需功能了。 以下是我的配置过程：  参考文章：保卫表达：用后端 BaaS 快速搭建专属无点赞评论版微博 ——b 言 b 语">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://i.loli.net/2020/04/20/cgBW2ryuwPd1iXf.png">
 <meta property="og:image" content="https://i.loli.net/2020/04/20/vLmAcuBIGPUZK4x.png">
@@ -57,7 +57,7 @@
   };
 </script>
 
-  <title>博客折腾笔记③-搭建个人动态页面 iM | Jim's Blog</title>
+  <title>博客折腾笔记③- 搭建个人动态页面 iM | Jim's Blog</title>
   
 
 
@@ -88,6 +88,7 @@
   </style>
 </noscript>
 
+<link rel="alternate" href="/atom.xml" title="Jim's Blog" type="application/atom+xml">
 <style>mjx-container[jax="SVG"] {
   direction: ltr;
 }
@@ -205,8 +206,7 @@ mjx-container {
 mjx-container + br {
   display: none;
 }
-</style><link rel="alternate" href="/atom.xml" title="Jim's Blog" type="application/atom+xml">
-</head>
+</style></head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
   <div class="container use-motion">
@@ -333,7 +333,7 @@ mjx-container + br {
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          博客折腾笔记③-搭建个人动态页面 iM
+          博客折腾笔记③- 搭建个人动态页面 iM
         </h1>
 
         <div class="post-meta">
@@ -363,7 +363,7 @@ mjx-container + br {
             </span>
 
           
-            <span id="/posts/2b426e0a.html" class="post-meta-item leancloud_visitors" data-flag-title="博客折腾笔记③-搭建个人动态页面 iM" title="阅读次数">
+            <span id="/posts/2b426e0a.html" class="post-meta-item leancloud_visitors" data-flag-title="博客折腾笔记③- 搭建个人动态页面 iM" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -397,46 +397,46 @@ mjx-container + br {
         <p>今天在少数派上看到一篇搭建类似微博的个人动态页面的指南，我非常感高兴：出于对实现私密树洞分享心情的需要以及言论审查的苦恼，我想在博客上实现这样的功能很久了。感谢原作者为不懂技术的脚本小子我造好了轮子，接下来只需简单配置即可实现所需功能了。</p>
 <p>以下是我的配置过程：</p>
 <blockquote>
-<p>参考文章：<a href="https://sspai.com/post/60024" target="_blank" rel="noopener">保卫表达：用后端 BaaS 快速搭建专属无点赞评论版微博——b言b语</a></p>
+<p>参考文章：<a href="https://sspai.com/post/60024" target="_blank" rel="noopener">保卫表达：用后端 BaaS 快速搭建专属无点赞评论版微博 ——b 言 b 语</a></p>
 </blockquote>
 <a id="more"></a>
-<h1>配置后端BaaS</h1>
-<p>这里使用 <a href="https://leancloud.app/" target="_blank" rel="noopener">LeanCloud国际版</a></p>
+<h1>配置后端 BaaS</h1>
+<p>这里使用 <a href="https://leancloud.app/" target="_blank" rel="noopener">LeanCloud 国际版</a></p>
 <p>登入后创建应用并命名</p>
 <p>进入新建好的应用，点击<code>新建Class</code>，将新建的 Class 命名为 content</p>
-<p>同时设置下方 create 、delete 、update 三项权限为”指定用户“，其他权限默认即可</p>
+<p>同时设置下方 create 、delete 、update 三项权限为” 指定用户 “，其他权限默认即可</p>
 <p><img data-src="https://i.loli.net/2020/04/20/cgBW2ryuwPd1iXf.png" alt=""></p>
 <p>点击刚创建的 content Class</p>
 <p>点击 添加列 并创建名称为 content 的「列」，类型为 String</p>
 <p><img data-src="https://i.loli.net/2020/04/20/vLmAcuBIGPUZK4x.png" alt=""></p>
 <p><img data-src="https://i.loli.net/2020/04/20/czwJRK4F75DsPbA.png" alt=""></p>
-<p>完成后点击左侧<code>设置</code>-<code>应用 Keys</code>，记录三组Keys备用</p>
+<p>完成后点击左侧<code>设置</code> - <code>应用 Keys</code>，记录三组 Keys 备用</p>
 <p><img data-src="https://i.loli.net/2020/04/20/Kaxt5GOo3LRgMmy.png" alt=""></p>
 <h1>配置客户端发送工具</h1>
-<h2 id="Winodws：使用Quicker"><a class="header-anchor" href="#Winodws：使用Quicker">¶</a>Winodws：使用<a href="https://www.getquicker.net/" target="_blank" rel="noopener">Quicker</a></h2>
-<p>Quicker模板地址：<a href="https://getquicker.net/sharedaction?code=eeb80278-5f53-4b0d-d333-08d7e0dd26a9" target="_blank" rel="noopener">点击安装</a></p>
+<h2 id="Winodws：使用Quicker"><a class="header-anchor" href="#Winodws：使用Quicker">¶</a>Winodws：使用 <a href="https://www.getquicker.net/" target="_blank" rel="noopener">Quicker</a></h2>
+<p>Quicker 模板地址：<a href="https://getquicker.net/sharedaction?code=eeb80278-5f53-4b0d-d333-08d7e0dd26a9" target="_blank" rel="noopener">点击安装</a></p>
 <p>安装模板后右键编辑模板，修改变量定义和其他内容</p>
 <p><img data-src="https://i.loli.net/2020/04/20/QAK8tCqRg79GyNL.png" alt=""></p>
 <p>尝试发送一次请求，如果配置正确，在 LeanCloud 的后台刷新就能看到一条记录了。<strong>此后的删除、修改，都需要通过该后台进行。</strong></p>
 <h2 id="Android"><a class="header-anchor" href="#Android">¶</a>Android</h2>
 <p>请参考我的<a href="https://jimlee2002.github.io/posts/4394c3fa.html">另一篇文章</a></p>
 <h1>在博客上添加界面</h1>
-<p>在博客<code>/source</code>下新建文件夹<code>iM</code></p>
+<p>在博客 <code>/source</code> 下新建文件夹 <code>iM</code></p>
 <p>下载作者提供的<a href="https://github.com/daibor/nonsense.fun" target="_blank" rel="noopener">页面文件</a></p>
-<p>将其复制到<code>/source/iM</code>下，打开编辑器自行修改其中内容</p>
-<p>请注意填写53-54行的<code>appId</code>和<code>appKey</code></p>
-<p>修改后打开博客根目录<code>_config.yml</code>，在<code>skip_render</code>添加新建好的<code>iM</code>文件夹</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">skip_render:</span> </span><br><span class="line">  <span class="bullet">-</span> <span class="string">"404.html"</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">"iM/**"</span></span><br></pre></td></tr></table></figure>
-<p>保存后打开所用主题文件夹下的<code>_config.yml</code>，向菜单栏添加iM的入口</p>
-<p>这里以主题NeXT为例：编辑<code>menu</code>下面的内容,添加<code> iM: /iM/ || user</code></p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Usage: `Key: /link/ || icon`</span></span><br><span class="line"><span class="comment"># Key is the name of menu item. If the translation for this item is available, the translated text will be loaded, otherwise the Key name will be used. Key is case-senstive.</span></span><br><span class="line"><span class="comment"># Value before `||` delimiter is the target link, value after `||` delimiter is the name of Font Awesome icon.</span></span><br><span class="line"><span class="comment"># When running the site in a subdirectory (e.g. yoursite.com/blog), remove the leading slash from link value (/archives -&gt; archives).</span></span><br><span class="line"><span class="comment"># External url should start with http:// or https://</span></span><br><span class="line"><span class="attr">menu:</span></span><br><span class="line">  <span class="attr">home:</span> <span class="string">/</span> <span class="string">||</span> <span class="string">home</span></span><br><span class="line">  <span class="attr">categories:</span> <span class="string">/categories/</span> <span class="string">||</span> <span class="string">th</span></span><br><span class="line">  <span class="attr">tags:</span> <span class="string">/tags/</span> <span class="string">||</span> <span class="string">tags</span></span><br><span class="line">  <span class="attr">archives:</span> <span class="string">/archives/</span> <span class="string">||</span> <span class="string">archive</span></span><br><span class="line">  <span class="attr">iM:</span> <span class="string">/iM/</span> <span class="string">||</span> <span class="string">user</span></span><br></pre></td></tr></table></figure>
+<p>将其复制到 <code>/source/iM</code> 下，打开编辑器自行修改其中内容</p>
+<p>请注意填写 53-54 行的 <code>appId</code> 和 <code>appKey</code></p>
+<p>修改后打开博客根目录<code>_config.yml</code>，在 <code>skip_render</code> 添加新建好的 <code>iM</code> 文件夹</p>
+<figure class="highlight yaml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">skip_render:</span> </span><br><span class="line">  <span class="bullet">-</span> <span class="string">"404.html"</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">"iM/**"</span></span><br></pre></td></tr></tbody></table></figure>
+<p>保存后打开所用主题文件夹下的<code>_config.yml</code>，向菜单栏添加 iM 的入口</p>
+<p>这里以主题 NeXT 为例：编辑 <code>menu</code> 下面的内容，添加<code> iM: /iM/ || user</code></p>
+<figure class="highlight yaml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Usage: `Key: /link/ || icon`</span></span><br><span class="line"><span class="comment"># Key is the name of menu item. If the translation for this item is available, the translated text will be loaded, otherwise the Key name will be used. Key is case-senstive.</span></span><br><span class="line"><span class="comment"># Value before `||` delimiter is the target link, value after `||` delimiter is the name of Font Awesome icon.</span></span><br><span class="line"><span class="comment"># When running the site in a subdirectory (e.g. yoursite.com/blog), remove the leading slash from link value (/archives -&gt; archives).</span></span><br><span class="line"><span class="comment"># External url should start with http:// or https://</span></span><br><span class="line"><span class="attr">menu:</span></span><br><span class="line">  <span class="attr">home:</span> <span class="string">/</span> <span class="string">||</span> <span class="string">home</span></span><br><span class="line">  <span class="attr">categories:</span> <span class="string">/categories/</span> <span class="string">||</span> <span class="string">th</span></span><br><span class="line">  <span class="attr">tags:</span> <span class="string">/tags/</span> <span class="string">||</span> <span class="string">tags</span></span><br><span class="line">  <span class="attr">archives:</span> <span class="string">/archives/</span> <span class="string">||</span> <span class="string">archive</span></span><br><span class="line">  <span class="attr">iM:</span> <span class="string">/iM/</span> <span class="string">||</span> <span class="string">user</span></span><br></pre></td></tr></tbody></table></figure>
 <p>完成后终端依次输入</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g</span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g</span><br><span class="line">hexo s</span><br></pre></td></tr></tbody></table></figure>
 <p>打开 localhost:4000 查看效果</p>
 <h1>To-Do</h1>
 <ul>
 <li><input type="checkbox" id="checkbox0"><label for="checkbox0">修改美化 iM 的页面文件</label><code>index.md</code>，参考 Cytus2 里的界面魔改？</li>
-<li><input type="checkbox" id="checkbox1"><label for="checkbox1">尝试用</label><code>hexo-blog-encrypt</code>加密页面？</li>
+<li><input type="checkbox" id="checkbox1"><label for="checkbox1">尝试用</label><code>hexo-blog-encrypt</code> 加密页面？</li>
 <li><input type="checkbox" id="checkbox2"><label for="checkbox2">直接在页面处添加一个在线输入框方便输入？</label></li>
 </ul>
 
@@ -449,16 +449,16 @@ mjx-container + br {
   <div class="popular-posts-header">相关文章</div>
   <ul class="popular-posts">
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\posts\c54c0f26.html" rel="bookmark">博客折腾笔记①-hexo部署与自定义</a></div>
+      <div class="popular-posts-title"><a href="\posts\c54c0f26.html" rel="bookmark">博客折腾笔记①-hexo 部署与自定义</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\posts\3a4e373e.html" rel="bookmark">博客折腾笔记②-hexo的优化</a></div>
+      <div class="popular-posts-title"><a href="\posts\3a4e373e.html" rel="bookmark">博客折腾笔记②-hexo 的优化</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\posts\4394c3fa.html" rel="bookmark">博客折腾笔记④- 使用 Tasker 在 Android 上实现个人动态的发送</a></div>
     </li>
     <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="\posts\39aaddee.html" rel="bookmark">配置 Typora & PicGo 写 Hexo 博客</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\posts\4394c3fa.html" rel="bookmark">博客折腾笔记④-使用 Tasker 在 Android 上实现个人动态的发送</a></div>
     </li>
   </ul>
 
@@ -471,7 +471,7 @@ mjx-container + br {
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://jimlee2002.github.io/posts/2b426e0a.html" title="博客折腾笔记③-搭建个人动态页面 iM">https://jimlee2002.github.io/posts/2b426e0a.html</a>
+    <a href="https://jimlee2002.github.io/posts/2b426e0a.html" title="博客折腾笔记③- 搭建个人动态页面 iM">https://jimlee2002.github.io/posts/2b426e0a.html</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -492,12 +492,12 @@ mjx-container + br {
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/posts/3a4e373e.html" rel="prev" title="博客折腾笔记②-hexo的优化">
-      <i class="fa fa-chevron-left"></i> 博客折腾笔记②-hexo的优化
+    <a href="/posts/3a4e373e.html" rel="prev" title="博客折腾笔记②-hexo 的优化">
+      <i class="fa fa-chevron-left"></i> 博客折腾笔记②-hexo 的优化
     </a></div>
       <div class="post-nav-item">
-    <a href="/posts/4394c3fa.html" rel="next" title="博客折腾笔记④-使用 Tasker 在 Android 上实现个人动态的发送">
-      博客折腾笔记④-使用 Tasker 在 Android 上实现个人动态的发送 <i class="fa fa-chevron-right"></i>
+    <a href="/posts/4394c3fa.html" rel="next" title="博客折腾笔记④- 使用 Tasker 在 Android 上实现个人动态的发送">
+      博客折腾笔记④- 使用 Tasker 在 Android 上实现个人动态的发送 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -557,7 +557,7 @@ mjx-container + br {
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text">配置后端BaaS</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">2.</span> <span class="nav-text">配置客户端发送工具</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Winodws：使用Quicker"><span class="nav-number">2.1.</span> <span class="nav-text">Winodws：使用Quicker</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Android"><span class="nav-number">2.2.</span> <span class="nav-text">Android</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">3.</span> <span class="nav-text">在博客上添加界面</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">4.</span> <span class="nav-text">To-Do</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text">配置后端 BaaS</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">2.</span> <span class="nav-text">配置客户端发送工具</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Winodws：使用Quicker"><span class="nav-number">2.1.</span> <span class="nav-text">Winodws：使用 Quicker</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Android"><span class="nav-number">2.2.</span> <span class="nav-text">Android</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">3.</span> <span class="nav-text">在博客上添加界面</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">4.</span> <span class="nav-text">To-Do</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -633,7 +633,7 @@ mjx-container + br {
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">35k</span>
+    <span title="站点总字数">34k</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
@@ -743,6 +743,7 @@ mjx-container + br {
   <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
   <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
   <script src="/undefined/velocity/velocity.min.js"></script>
   <script src="/undefined/velocity/velocity.ui.min.js"></script>
 

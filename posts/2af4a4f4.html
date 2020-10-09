@@ -22,15 +22,15 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"jimlee2002.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"manual"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"jimlee2002.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"manual"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="写在前面：本文大量复制和借鉴了无忧启动论坛@ddsony的教程内容，没有他的帖子就没有我的这篇折腾笔记，十分感谢他帖子的详细指引！  手上有一块闲置SSD（建兴T9，128G），想将它利用上来做一块多合一移动系统盘方便随身应急使用。 上网冲浪偶然发现还有系统All in One移动硬盘的玩法，于是打算折腾一下">
+  <meta name="description" content="写在前面：本文大量复制和借鉴了无忧启动论坛 @ddsony 的教程内容，没有他的帖子就没有我的这篇折腾笔记，十分感谢他帖子的详细指引！  手上有一块闲置 SSD（建兴 T9，128G），想将它利用上来做一块多合一移动系统盘方便随身应急使用。 上网冲浪偶然发现还有系统 All in One 移动硬盘的玩法，于是打算折腾一下">
 <meta property="og:type" content="article">
 <meta property="og:title" content="利用闲置 SSD 打造 WTG + Linux + PE 多合一移动系统硬盘">
 <meta property="og:url" content="https://jimlee2002.github.io/posts/2af4a4f4.html">
 <meta property="og:site_name" content="Jim&#39;s Blog">
-<meta property="og:description" content="写在前面：本文大量复制和借鉴了无忧启动论坛@ddsony的教程内容，没有他的帖子就没有我的这篇折腾笔记，十分感谢他帖子的详细指引！  手上有一块闲置SSD（建兴T9，128G），想将它利用上来做一块多合一移动系统盘方便随身应急使用。 上网冲浪偶然发现还有系统All in One移动硬盘的玩法，于是打算折腾一下">
+<meta property="og:description" content="写在前面：本文大量复制和借鉴了无忧启动论坛 @ddsony 的教程内容，没有他的帖子就没有我的这篇折腾笔记，十分感谢他帖子的详细指引！  手上有一块闲置 SSD（建兴 T9，128G），想将它利用上来做一块多合一移动系统盘方便随身应急使用。 上网冲浪偶然发现还有系统 All in One 移动硬盘的玩法，于是打算折腾一下">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://i.loli.net/2020/03/22/HnZ7LIJ2zmXqlkG.jpg">
 <meta property="og:image" content="https://i.loli.net/2020/03/22/isE1Y6TbAjS52WF.jpg">
@@ -138,6 +138,7 @@
   </style>
 </noscript>
 
+<link rel="alternate" href="/atom.xml" title="Jim's Blog" type="application/atom+xml">
 <style>mjx-container[jax="SVG"] {
   direction: ltr;
 }
@@ -255,8 +256,7 @@ mjx-container {
 mjx-container + br {
   display: none;
 }
-</style><link rel="alternate" href="/atom.xml" title="Jim's Blog" type="application/atom+xml">
-</head>
+</style></head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
   <div class="container use-motion">
@@ -425,7 +425,7 @@ mjx-container + br {
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>5.1k</span>
+              <span>5k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -445,100 +445,100 @@ mjx-container + br {
 
       
         <blockquote>
-<p><strong>写在前面</strong>：本文大量复制和借鉴了<a href="http://bbs.wuyou.net/forum.php?mod=viewthread&amp;tid=410612&amp;extra=page%3D1" target="_blank" rel="noopener">无忧启动论坛@ddsony的教程内容</a>，没有他的帖子就没有我的这篇折腾笔记，十分感谢他帖子的详细指引！</p>
+<p><strong>写在前面</strong>：本文大量复制和借鉴了<a href="http://bbs.wuyou.net/forum.php?mod=viewthread&amp;tid=410612&amp;extra=page%3D1" target="_blank" rel="noopener">无忧启动论坛 @ddsony 的教程内容</a>，没有他的帖子就没有我的这篇折腾笔记，十分感谢他帖子的详细指引！</p>
 </blockquote>
-<p>手上有一块闲置SSD（建兴T9，128G），想将它利用上来做一块多合一移动系统盘方便随身应急使用。</p>
-<p>上网冲浪偶然发现还有系统All in One移动硬盘的玩法，于是打算折腾一下</p>
+<p>手上有一块闲置 SSD（建兴 T9，128G），想将它利用上来做一块多合一移动系统盘方便随身应急使用。</p>
+<p>上网冲浪偶然发现还有系统 All in One 移动硬盘的玩法，于是打算折腾一下</p>
 <a id="more"></a>
 <h1>实现目标</h1>
 <ol>
-<li>同时兼容UEFI和Legacy启动</li>
+<li>同时兼容 UEFI 和 Legacy 启动</li>
 <li>隐藏系统分区和启动分区，可以当作普通移动硬盘使用</li>
-<li>WTG</li>
-<li>Linux（这里使用Ubuntu）</li>
-<li>WIN PE（这里使用<a href="http://bbs.wuyou.net/forum.php?mod=viewthread&amp;tid=349965&amp;extra=page%3D1" target="_blank" rel="noopener">chiannet 制作的 USBOS V3</a>）</li>
+<li> WTG</li>
+<li>Linux（这里使用 Ubuntu）</li>
+<li>WIN PE（这里使用 <a href="http://bbs.wuyou.net/forum.php?mod=viewthread&amp;tid=349965&amp;extra=page%3D1" target="_blank" rel="noopener">chiannet 制作的 USBOS V3</a>）</li>
 </ol>
 <h1>制作过程</h1>
-<h2 id="准备资料"><a class="header-anchor" href="#准备资料">¶</a>准备资料</h2>
-<p>一个移动硬盘/U盘（固态U盘或者WTG认证U盘），用来安装</p>
-<p>另一个空白U盘，大小最好4G以上，用作装Linux的启动盘</p>
+<h2 id="准备资料"><a class="header-anchor" href="#准备资料">¶</a> 准备资料</h2>
+<p>一个移动硬盘 / U 盘（固态 U 盘或者 WTG 认证 U 盘），用来安装</p>
+<p>另一个空白 U 盘，大小最好 4G 以上，用作装 Linux 的启动盘</p>
 <p>我整理的<a href="http://www.filedropper.com/200326wtg" target="_blank" rel="noopener">资料包</a></p>
 <p><strong>镜像</strong>：</p>
 <p>Ubuntu</p>
-<p>Win10使用官方1909</p>
+<p>Win10 使用官方 1909</p>
 <p><a href="http://bbs.wuyou.net/forum.php?mod=viewthread&amp;tid=349965&amp;extra=page%3D1" target="_blank" rel="noopener">chiannet 制作的 USBOS V3</a></p>
 <p><strong>软件</strong>：</p>
 <p><a href="http://bbs.wuyou.net/forum.php?mod=viewthread&amp;tid=330493&amp;extra=page%3D1" target="_blank" rel="noopener">MBROSTool</a> 本文主要工具</p>
-<p><a href="https://msfn.org/board/topic/149612-winntsetup-v40/" target="_blank" rel="noopener">WinNTSetup</a> 安装WTG用</p>
-<p><a href="https://china.paragon-software.com/home-windows/extfs-for-windows-download" target="_blank" rel="noopener">ExtFS for Windows</a> 在windows下读写ext4的分区，10天免费试用，到期后限制向Ext4分区读写的性能。</p>
+<p><a href="https://msfn.org/board/topic/149612-winntsetup-v40/" target="_blank" rel="noopener">WinNTSetup</a> 安装 WTG 用</p>
+<p><a href="https://china.paragon-software.com/home-windows/extfs-for-windows-download" target="_blank" rel="noopener">ExtFS for Windows</a> 在 windows 下读写 ext4 的分区，10 天免费试用，到期后限制向 Ext4 分区读写的性能。</p>
 <h1>安装流程</h1>
-<h2 id="处理硬盘分区-安装PE"><a class="header-anchor" href="#处理硬盘分区-安装PE">¶</a>处理硬盘分区&amp;安装PE</h2>
+<h2 id="处理硬盘分区-安装PE"><a class="header-anchor" href="#处理硬盘分区-安装PE">¶</a> 处理硬盘分区 &amp; 安装 PE</h2>
 <ol>
-<li>连接移动硬盘，打开MBROSTool，在<code>选项</code>中把<code>显示所有磁盘</code>打勾</li>
+<li>连接移动硬盘，打开 MBROSTool，在<code>选项</code>中把<code>显示所有磁盘</code>打勾</li>
 </ol>
 <p><img data-src="https://i.loli.net/2020/03/22/HnZ7LIJ2zmXqlkG.jpg" alt=""></p>
 <p>然后在下方<strong>磁盘</strong>处选择要制作的移动硬盘</p>
 <p><img data-src="https://i.loli.net/2020/03/22/isE1Y6TbAjS52WF.jpg" alt=""></p>
-<p>打开<code>选项</code>-<code>格式化</code>，按如下设置</p>
+<p>打开<code>选项</code> - <code>格式化</code>，按如下设置</p>
 <p><img data-src="https://i.loli.net/2020/03/22/lkB3tf7AjQchY8M.jpg" alt=""></p>
-<p>右上角下拉栏选3个分区</p>
-<p>50G用作WTG的win10，选择<code>VHD</code>，暂时空着路径信息</p>
-<p>50G用作Linux，选择<code>VHD</code>，同样暂时空着路径信息</p>
+<p>右上角下拉栏选 3 个分区</p>
+<p>50G 用作 WTG 的 win10，选择 <code>VHD</code>，暂时空着路径信息</p>
+<p>50G 用作 Linux，选择 <code>VHD</code>，同样暂时空着路径信息</p>
 <blockquote>
-<p>下文步骤4Winntsetup安装结束后，由于是空分区，软件默认不在启动菜单里显示WTG菜单项标题，必须修改“多UDm菜单&quot;才能显示，修改方法见下文</p>
+<p>下文步骤 4Winntsetup 安装结束后，由于是空分区，软件默认不在启动菜单里显示 WTG 菜单项标题，必须修改 “多 UDm 菜单 " 才能显示，修改方法见下文</p>
 </blockquote>
-<p>直接拖入PE的镜像文件到分区3的路径输入处，选择“解开”，然后分区大小扩容到1G（1024M）用作PE</p>
+<p>直接拖入 PE 的镜像文件到分区 3 的路径输入处，选择 “解开”，然后分区大小扩容到 1G（1024M）用作 PE</p>
 <p>右下方<code>用户区</code>打勾，剩余的容量将作为普通的移动硬盘使用</p>
 <p>左下方<code>重建分区表</code>打勾</p>
 <p>其他设置默认，随后点击最下方<code>格式化</code></p>
-<p>在格式化完成的同时，PE也一并安装好了</p>
+<p>在格式化完成的同时，PE 也一并安装好了</p>
 <ol start="2">
-<li>回到主界面，点击<code>高级</code>-<code>备份到MOS</code>，备份U盘前8M到BACK.MOS，备份默认保存在MBROSTool软件目录下，这个东西留着备用</li>
+<li>回到主界面，点击<code>高级</code> - <code>备份到MOS</code>，备份 U 盘前 8M 到 BACK.MOS，备份默认保存在 MBROSTool 软件目录下，这个东西留着备用</li>
 </ol>
 <p><img data-src="https://i.loli.net/2020/03/26/K3G9DU7xYlLCIqs.png" alt="图片来自 无忧启动论坛@ddsony"></p>
 <ol start="3">
 <li>回到主界面去掉<code>只读</code>的勾选，列表框选择第二分区来挂写子盘</li>
 </ol>
 <p><img data-src="https://i.loli.net/2020/03/22/ngvmLEZDayrKMph.png" alt="图片来自 无忧启动论坛@ddsony"></p>
-<p>挂载后打开子盘<code>/udm/udmsmenu.sh</code>，找到如图所示位置，去掉#defudmmenu 1和#defudmmenu 2两行前面的<code>#</code>（去除注释），并且顺手改掉后面的<code>&quot;&quot;</code>里面的内容</p>
-<p>比如这里，前面格式化的时候把分区1作为WTG用的Win10盘，分区2作为Deepin用的盘，这里就改成了</p>
+<p>挂载后打开子盘 <code>/udm/udmsmenu.sh</code>，找到如图所示位置，去掉 #defudmmenu 1 和 #defudmmenu 2 两行前面的<code>#</code>（去除注释），并且顺手改掉后面的 <code>""</code> 里面的内容</p>
+<p>比如这里，前面格式化的时候把分区 1 作为 WTG 用的 Win10 盘，分区 2 作为 Deepin 用的盘，这里就改成了</p>
 <p><img data-src="https://i.loli.net/2020/03/22/m3vwcbkXaJjN81E.jpg" alt=""></p>
 <p>修改完后<strong>记得保存</strong></p>
-<p>同样的方法修改<code>/EFI/mbrosefis.cfg</code></p>
+<p>同样的方法修改 <code>/EFI/mbrosefis.cfg</code></p>
 <p><img data-src="https://i.loli.net/2020/03/22/H7mduOlVr8XBYRC.jpg" alt=""></p>
-<p>到这里硬盘就处理好了，下面我们来进行WTG的安装</p>
+<p>到这里硬盘就处理好了，下面我们来进行 WTG 的安装</p>
 <blockquote>
-<p>删掉子盘<code>/udm/pic/bubble.png</code>可以关闭掉MBR引导时菜单的泡泡动画</p>
+<p>删掉子盘 <code>/udm/pic/bubble.png</code> 可以关闭掉 MBR 引导时菜单的泡泡动画</p>
 </blockquote>
-<h2 id="WTG安装"><a class="header-anchor" href="#WTG安装">¶</a>WTG安装</h2>
+<h2 id="WTG安装"><a class="header-anchor" href="#WTG安装">¶</a>WTG 安装</h2>
 <ol>
-<li>回到主界面，打开<code>高级</code>-<code>BootICE</code>按下图操作</li>
+<li>回到主界面，打开<code>高级</code> -<code>BootICE</code> 按下图操作</li>
 </ol>
 <p><img data-src="http://bbs.wuyou.net/forum.php?mod=attachment&amp;aid=NDAzMTk5fGY5Zjg5OGY0fDE1ODQ4NzUyODJ8MHw0MTA2MTI%3D.jpg" alt="图片来自 无忧启动论坛@ddsony"></p>
 <ol start="2">
-<li>回到主界面，点击<code>常用</code>-<code>加载</code>，选择刚才分出的50G的VHD分区，点<code>高级</code>再点击<code>分区表加载</code></li>
+<li>回到主界面，点击<code>常用</code> - <code>加载</code>，选择刚才分出的 50G 的 VHD 分区，点<code>高级</code>再点击<code>分区表加载</code></li>
 </ol>
 <p><img data-src="https://i.loli.net/2020/03/22/BN63XmOeJEu1CIK.jpg" alt=""></p>
 <p><img data-src="https://i.loli.net/2020/03/23/r18XKPVSNne6FlT.jpg" alt="批注 2020-03-23 000143"></p>
 <ol start="3">
-<li>点击’高级’-‘分区管理’，去掉用户区MBSuDATA的激活状态，同时激活安装分区；</li>
+<li>点击’高级’-‘分区管理’，去掉用户区 MBSuDATA 的激活状态，同时激活安装分区；</li>
 </ol>
 <p><img data-src="https://i.loli.net/2020/03/22/5PkG6nXdWiFLSzc.jpg" alt=""></p>
-<p>如图，<strong>如果安装分区类型不是0x07的话，选中后点 <code>修改</code>，把分区类型改为0x07。如果以后又卸载再重新挂载的，仍旧要改</strong></p>
+<p>如图，<strong>如果安装分区类型不是 0x07 的话，选中后点 <code>修改</code>，把分区类型改为 0x07。如果以后又卸载再重新挂载的，仍旧要改</strong></p>
 <p><img data-src="https://i.loli.net/2020/03/22/317z8pCDfvBFP6A.jpg" alt=""></p>
 <ol start="4">
-<li>打开WinNTSetup，填好安装源路径和其他信息，<strong>引导驱动器和安装磁盘的位置是同一个，即上面分区表加载的要安装WTG的分区</strong>，先点<code>F</code>格式化一遍，再点<code>开始安装</code>，弹出的窗口选择默认的<code>使用bootsect.exe更新启动代码</code>，然后点确认</li>
+<li>打开 WinNTSetup，填好安装源路径和其他信息，<strong>引导驱动器和安装磁盘的位置是同一个，即上面分区表加载的要安装 WTG 的分区</strong>，先点 <code>F</code> 格式化一遍，再点<code>开始安装</code>，弹出的窗口选择默认的<code>使用bootsect.exe更新启动代码</code>，然后点确认</li>
 </ol>
 <p><img data-src="https://i.loli.net/2020/03/22/5qYdNFrJgHBK6tk.png" alt=""></p>
-<p>WinNtSetup安装完成后，提示系统重启时以BIOS方式重启；</p>
+<p>WinNtSetup 安装完成后，提示系统重启时以 BIOS 方式重启；</p>
 <ol start="5">
 <li>
-<p>安装完成后，提示系统重启。重启时再引导界面选择移动硬盘引导，重启到到“多UDm菜单”，点击WTG启动菜单项。</p>
-<p>等待WTG系统配置好设备信息，还有一次重启，同样重启到“多UDm菜单”，点击WTG启动菜单项，一直到WTG安装完毕进入桌面；</p>
+<p>安装完成后，提示系统重启。重启时再引导界面选择移动硬盘引导，重启到到 “多 UDm 菜单”，点击 WTG 启动菜单项。</p>
+<p>等待 WTG 系统配置好设备信息，还有一次重启，同样重启到 “多 UDm 菜单”，点击 WTG 启动菜单项，一直到 WTG 安装完毕进入桌面；</p>
 <p>进入桌面后进行系统激活，然后重启回到本机系统</p>
 </li>
 <li>
-<p>**（可选，非必要）**打开MBROSTool工具文件夹下的ghost32w.exe进行GHOST备份</p>
+<p>**（可选，非必要）** 打开 MBROSTool 工具文件夹下的 ghost32w.exe 进行 GHOST 备份</p>
 </li>
 </ol>
 <p><img data-src="https://i.loli.net/2020/03/22/WtZibO4v8eh6xVB.jpg" alt="打开程序"></p>
@@ -548,170 +548,170 @@ mjx-container + br {
 <p><img data-src="https://i.loli.net/2020/03/22/ReQ3kVxFyKvb1H2.jpg" alt="是否压缩备份文件以及压缩的级别"></p>
 <p><img data-src="https://i.loli.net/2020/03/22/vGLAyWmXrdx3c4S.jpg" alt="选Yes"></p>
 <p><img data-src="https://i.loli.net/2020/03/22/nVgryOEWjHKcCvF.jpg" alt="选 Force lock"></p>
-<p>以后WTG的系统如果坏了，就可以再用工具<code>分区表加载</code>同一个分区，用GHOST恢复文件到安装分区后再进行以下的步骤就能轻松修复。</p>
+<p>以后 WTG 的系统如果坏了，就可以再用工具<code>分区表加载</code>同一个分区，用 GHOST 恢复文件到安装分区后再进行以下的步骤就能轻松修复。</p>
 <ol start="7">
-<li>打开MBROStool，先参照准备工作中的步骤1切换<code>磁盘</code>到当前的移动硬盘，然后参照下图深度卸载掉WTG的安装分区，这样就隐藏好安装分区了</li>
+<li>打开 MBROStool，先参照准备工作中的步骤 1 切换<code>磁盘</code>到当前的移动硬盘，然后参照下图深度卸载掉 WTG 的安装分区，这样就隐藏好安装分区了</li>
 </ol>
 <p><img data-src="https://i.loli.net/2020/03/22/i4hkVUXy92Trd5l.jpg" alt=""></p>
 <p><img data-src="https://i.loli.net/2020/03/22/qNVopv2tZI85Uji.jpg" alt=""></p>
 <ol start="8">
-<li>如图所示恢复一开始备份的MOS</li>
+<li>如图所示恢复一开始备份的 MOS</li>
 </ol>
 <p><img data-src="https://i.loli.net/2020/03/22/XEc8UQGbLwivfjd.jpg" alt=""></p>
 <p><img data-src="https://i.loli.net/2020/03/22/M4PUgAHlTz9LnDu.jpg" alt=""></p>
-<p>然后点<code>高级</code>-<code>分区管理</code>，恢复原来用户区MBSuDATA的激活状态（有些古怪电脑用户区不激活就无法启动）；<br>
-9. 软件右上角去掉只读，点旁边UDm下拉列表框选择挂载WTG的安装分区；<br>
-挂载后软件界面右键该分区，菜单选择<code>快启处理</code>。生成完毕后，WTG就算装好了。</p>
+<p>然后点<code>高级</code> - <code>分区管理</code>，恢复原来用户区 MBSuDATA 的激活状态（有些古怪电脑用户区不激活就无法启动）；<br>
+9. 软件右上角去掉只读，点旁边 UDm 下拉列表框选择挂载 WTG 的安装分区；<br>
+挂载后软件界面右键该分区，菜单选择<code>快启处理</code>。生成完毕后，WTG 就算装好了。</p>
 <p><img data-src="https://i.loli.net/2020/03/22/7siFg6tXCfV3hWR.jpg" alt=""></p>
 <p><img data-src="https://i.loli.net/2020/03/22/TWyQAiCR69jhakY.jpg" alt=""></p>
-<h2 id="Linux的安装（Ubuntu、Deepin等Debian系发行版）"><a class="header-anchor" href="#Linux的安装（Ubuntu、Deepin等Debian系发行版）">¶</a>Linux的安装（Ubuntu、Deepin等Debian系发行版）</h2>
-<h3 id="安装系统镜像（以Deepin为例）"><a class="header-anchor" href="#安装系统镜像（以Deepin为例）">¶</a>安装系统镜像（以Deepin为例）</h3>
+<h2 id="Linux的安装（Ubuntu、Deepin等Debian系发行版）"><a class="header-anchor" href="#Linux的安装（Ubuntu、Deepin等Debian系发行版）">¶</a>Linux 的安装（Ubuntu、Deepin 等 Debian 系发行版）</h2>
+<h3 id="安装系统镜像（以Deepin为例）"><a class="header-anchor" href="#安装系统镜像（以Deepin为例）">¶</a> 安装系统镜像（以 Deepin 为例）</h3>
 <ol>
 <li>
-<p>保险起见，再备份一次MOS</p>
+<p>保险起见，再备份一次 MOS</p>
 <p><img data-src="https://i.loli.net/2020/03/26/K3G9DU7xYlLCIqs.png" alt="图片来自 无忧启动论坛@ddsony"></p>
 </li>
 <li>
-<p>挂载Linux的安装分区</p>
+<p>挂载 Linux 的安装分区</p>
 <p><img data-src="https://i.loli.net/2020/03/22/BN63XmOeJEu1CIK.jpg" alt=""></p>
 <p><img data-src="https://i.loli.net/2020/03/22/mZuNJdMtTYX67BF.jpg" alt=""></p>
 </li>
 <li>
-<p>拿出另一个U盘，用Easy2Boot制作ISO启动盘。如图：</p>
+<p>拿出另一个 U 盘，用 Easy2Boot 制作 ISO 启动盘。如图：</p>
 <p><img data-src="https://i.loli.net/2020/03/23/iZlh23pbjLTED4N.png" alt="图片来自 无忧启动论坛@ddsony"></p>
-<p>制作完成后，在_ISO\Linux\目录下拷入Deepin 的镜像文件：</p>
+<p>制作完成后，在_ISO\Linux\ 目录下拷入 Deepin 的镜像文件：</p>
 <p><img data-src="https://i.loli.net/2020/03/23/Wm6YpdiDvHRGSNZ.png" alt="图片来自 无忧启动论坛@ddsony"></p>
-<p>关机，重启引导进入U盘，选<code>Linux</code>菜单项进入，再选择你的镜像启动ISO：</p>
+<p>关机，重启引导进入 U 盘，选 <code>Linux</code> 菜单项进入，再选择你的镜像启动 ISO：</p>
 <p><img data-src="https://i.loli.net/2020/03/23/m39xOZRjiQ8yLgo.png" alt="图片来自 无忧启动论坛@ddsony"></p>
 <p><img data-src="https://i.loli.net/2020/03/23/Z1OEqGyldkAWiC3.png" alt="图片来自 无忧启动论坛@ddsony"></p>
 <p><img data-src="https://i.loli.net/2020/03/23/ltfHSXCrbL3RkuN.png" alt="图片来自 无忧启动论坛@ddsony"></p>
 <p><img data-src="https://i.loli.net/2020/03/23/35GVbgo4fTwRhxD.png" alt="图片来自 无忧启动论坛@ddsony"></p>
 <p>进入安装界面，跟着安装流程走就好。</p>
-<p>需要注意的是，在选择安装位置的页面，我们需要选择选择<code>高级安装</code>，找到上文事先分挂载好的安装分区，点击设定其文件系统为<code>ext4</code>、挂载点为<code>\</code>。</p>
+<p>需要注意的是，在选择安装位置的页面，我们需要选择选择<code>高级安装</code>，找到上文事先分挂载好的安装分区，点击设定其文件系统为 <code>ext4</code>、挂载点为 <code>\</code>。</p>
 <p>我们还需要点击左下角<code>修改引导器</code>，把引导器也同样设为这个分区，之后就可以点击<code>安装</code>了。</p>
 <p>选择界面如图所示</p>
 <p><img data-src="https://i.loli.net/2020/03/23/4zNLJWTtBo6kFwx.png" alt="以Deepin为例"></p>
 </li>
 <li>
 <p>安装完成后，系统将会自动重启。我们回到本机系统。</p>
-<p>如果你已经装好<a href="https://china.paragon-software.com/home-windows/extfs-for-windows-download" target="_blank" rel="noopener">ExtFS for Windows</a>的话，我们应该就能看到刚安装完deepin的分区了</p>
+<p>如果你已经装好 <a href="https://china.paragon-software.com/home-windows/extfs-for-windows-download" target="_blank" rel="noopener">ExtFS for Windows</a> 的话，我们应该就能看到刚安装完 deepin 的分区了</p>
 <blockquote>
-<p>如果你不想安装这个软件，你还可以在刚才用来装Linux镜像的LU盘里操作（进试用）</p>
+<p>如果你不想安装这个软件，你还可以在刚才用来装 Linux 镜像的 LU 盘里操作（进试用）</p>
 </blockquote>
-<p>我们打开这个分区，复制<code>Ubuntu-UDm深隐资料包</code>里的<code>grldr</code>文件和<code>/efi</code> 文件夹到根目录。</p>
-<p>然后打开<code>/boot/grub</code> ，将下面的<code>/grub.cfg</code>复制到 根目录的<code>/efi</code>下，并更名为<code>mbrosefi_qk.menu.cfg</code></p>
+<p>我们打开这个分区，复制 <code>Ubuntu-UDm深隐资料包</code>里的 <code>grldr</code> 文件和 <code>/efi</code> 文件夹到根目录。</p>
+<p>然后打开 <code>/boot/grub</code> ，将下面的 <code>/grub.cfg</code> 复制到 根目录的 <code>/efi</code> 下，并更名为 <code>mbrosefi_qk.menu.cfg</code></p>
 <blockquote>
-<p>需要注意的是，工具内原有提供的<code>grldr</code>、<code>/efi/boot/bootia32</code>和<code>/efi/boot/bootia32</code>存在问题，我这里使用工具提供的文件无法正常启动Linux。</p>
-<p>我已经在自行打包的<code>Ubuntu-UDm深潜资料包</code>中提供了我个人使用后成功安装Ubuntu的替换文件。其他发行版可以自行尝试使用。</p>
+<p>需要注意的是，工具内原有提供的 <code>grldr</code>、<code>/efi/boot/bootia32</code> 和 <code>/efi/boot/bootia32</code> 存在问题，我这里使用工具提供的文件无法正常启动 Linux。</p>
+<p>我已经在自行打包的 <code>Ubuntu-UDm深潜资料包</code>中提供了我个人使用后成功安装 Ubuntu 的替换文件。其他发行版可以自行尝试使用。</p>
 </blockquote>
 </li>
 <li>
-<p>我们打开更名好的<code>mbrosefi_qk.menu.cfg</code>，按照以下规则对其进行修改</p>
+<p>我们打开更名好的 <code>mbrosefi_qk.menu.cfg</code>，按照以下规则对其进行修改</p>
 <ul>
-<li>在所有 <code>set root='hdX,msdosY' </code>（X,Y代表数字）类似的行 的前面加上#注释掉，或者直接删掉该行</li>
+<li>在所有 <code>set root='hdX,msdosY' </code>（X,Y 代表数字）类似的行 的前面加上 #注释掉，或者直接删掉该行</li>
 </ul>
 <p><img data-src="https://i.loli.net/2020/03/23/Fn7q9IKsLkCVJzR.jpg" alt=""></p>
 <ul>
-<li>所有以<code>linux</code> 开始的行，须在该行代码末尾添加<code>空格 + $udmboot</code>。</li>
+<li>所有以 <code>linux</code> 开始的行，须在该行代码末尾添加<code>空格 + $udmboot</code>。</li>
 </ul>
 <p><img data-src="https://i.loli.net/2020/03/23/c4Ga8btdr1AFWKU.jpg" alt=""></p>
 <p><img data-src="https://i.loli.net/2020/03/23/aG1Z6qCvtjh5PcR.jpg" alt=""></p>
 <ul>
-<li><code>linux  /boot/vmlinuz-...</code>、<code>initrd  /boot/initrd....</code>和 <code>loadfont /boot/...</code> 等开始的行，需要在<code>/boot</code>字段前加入<code> ($rooti)</code>字段。</li>
+<li><code>linux  /boot/vmlinuz-...</code>、<code>initrd  /boot/initrd....</code> 和 <code>loadfont /boot/...</code> 等开始的行，需要在 <code>/boot</code> 字段前加入<code> ($rooti)</code> 字段。</li>
 </ul>
 <p><img data-src="https://i.loli.net/2020/03/23/4YpeKjR2yOntQk5.jpg" alt=""></p>
    <center>↓↓↓↓↓↓↓↓↓↓↓↓</center>
 <p><img data-src="https://i.loli.net/2020/03/23/DPIyh4dCwKmFUta.jpg" alt=""></p>
 </li>
 <li>
-<p>打开资料包中的<code>menu.lst</code>和<code>menu0.lst</code>，对照着刚刚修改的<code>/efi/mbrosefi_qk.menu.cfg</code>里的信息对<code>menu.lst</code>和<code>menu0.lst</code>进行以下修改</p>
+<p>打开资料包中的 <code>menu.lst</code> 和 <code>menu0.lst</code>，对照着刚刚修改的 <code>/efi/mbrosefi_qk.menu.cfg</code> 里的信息对 <code>menu.lst</code> 和 <code>menu0.lst</code> 进行以下修改</p>
 <ul>
 <li>
-<p>把<code>menu.lst</code>和<code>menu0.lst</code>里所有的``–set=root <code>后面的一大串数字（UUID）全部修改为</code>/efi/mbrosefi_qk.menu.cfg<code>里</code>root=UUID=`后面的一大串数字</p>
+<p>把 <code>menu.lst</code> 和 <code>menu0.lst</code> 里所有的 ``–set=root <code>后面的一大串数字（UUID）全部修改为</code> /efi/mbrosefi_qk.menu.cfg <code>里</code> root=UUID=` 后面的一大串数字</p>
 <p><img data-src="https://i.loli.net/2020/03/23/nd9U5ItyMCrNZk3.jpg" alt="这样的一串数字"></p>
 <p>然后，修改以下内容：</p>
 </li>
 <li>
-<p>修改<code>menu.lst</code>和<code>menu0.lst</code>里所有的内核版本号数字为<code>/efi/mbrosefi_qk.menu.cfg</code>里的内核版本号数字</p>
+<p>修改 <code>menu.lst</code> 和 <code>menu0.lst</code> 里所有的内核版本号数字为 <code>/efi/mbrosefi_qk.menu.cfg</code> 里的内核版本号数字</p>
 <p><img data-src="https://i.loli.net/2020/03/25/FYjGlzPWL3I1bwT.png" alt="/efi/mbrosefi_qk.menu.cfg 里的内核版本号数字"></p>
 <p><img data-src="https://i.loli.net/2020/03/25/sgKUm7TQ9V8W4lB.png" alt="要修改的 menu.lst 和 menu0.lst 里的内核版本号"></p>
-<p>完成后保存并复制到Linux的安装分区根目录<code>/</code></p>
+<p>完成后保存并复制到 Linux 的安装分区根目录 <code>/</code></p>
 </li>
 </ul>
 </li>
 </ol>
-<h3 id="设置深度隐藏"><a class="header-anchor" href="#设置深度隐藏">¶</a>设置深度隐藏</h3>
+<h3 id="设置深度隐藏"><a class="header-anchor" href="#设置深度隐藏">¶</a> 设置深度隐藏</h3>
 <ol>
 <li>
-<p>重启电脑，用MBR或UEFI 引导移动硬盘进入UDm菜单，然后尝试进入安装好的Linux。</p>
+<p>重启电脑，用 MBR 或 UEFI 引导移动硬盘进入 UDm 菜单，然后尝试进入安装好的 Linux。</p>
 </li>
 <li>
-<p>如果Linux能正常启动，在简单配置Linux后重启回到主机系统，把<code>udm</code>和<code>UDm-hook.sh</code>复制到 移动硬盘普通储存区或另一个U盘 ,然后重启到Linux按步骤进行以下修改：</p>
+<p>如果 Linux 能正常启动，在简单配置 Linux 后重启回到主机系统，把 <code>udm</code> 和 <code>UDm-hook.sh</code> 复制到 移动硬盘普通储存区或另一个 U 盘，然后重启到 Linux 按步骤进行以下修改：</p>
 <ol>
-<li>复制<code>udm</code>到<code>/usr/bin</code></li>
-<li>在<code>/etc/initramfs-tools/hooks</code>下新建脚本<code>UDm-hook.sh</code>（名字可随意），代码如下：</li>
+<li>复制 <code>udm</code> 到 <code>/usr/bin</code></li>
+<li>在 <code>/etc/initramfs-tools/hooks</code> 下新建脚本 <code>UDm-hook.sh</code>（名字可随意），代码如下：</li>
 </ol>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"></span><br><span class="line">  PREREQ=<span class="string">""</span></span><br><span class="line"></span><br><span class="line">  prereqs()</span><br><span class="line">  &#123;</span><br><span class="line">          <span class="built_in">echo</span> <span class="string">"<span class="variable">$PREREQ</span>"</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">case</span> <span class="variable">$1</span> <span class="keyword">in</span></span><br><span class="line">  <span class="comment"># get pre-requisites</span></span><br><span class="line">  prereqs)</span><br><span class="line">          prereqs</span><br><span class="line">          <span class="built_in">exit</span> 0</span><br><span class="line">          ;;</span><br><span class="line">  <span class="keyword">esac</span></span><br><span class="line"></span><br><span class="line">. /usr/share/initramfs-tools/hook-functions</span><br><span class="line"></span><br><span class="line">copy_exec /usr/bin/udm /bin</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"></span><br><span class="line">  PREREQ=<span class="string">""</span></span><br><span class="line"></span><br><span class="line">  prereqs()</span><br><span class="line">  {</span><br><span class="line">          <span class="built_in">echo</span> <span class="string">"<span class="variable">$PREREQ</span>"</span></span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="keyword">case</span> <span class="variable">$1</span> <span class="keyword">in</span></span><br><span class="line">  <span class="comment"># get pre-requisites</span></span><br><span class="line">  prereqs)</span><br><span class="line">          prereqs</span><br><span class="line">          <span class="built_in">exit</span> 0</span><br><span class="line">          ;;</span><br><span class="line">  <span class="keyword">esac</span></span><br><span class="line"></span><br><span class="line">. /usr/share/initramfs-tools/hook-functions</span><br><span class="line"></span><br><span class="line">copy_exec /usr/bin/udm /bin</span><br></pre></td></tr></tbody></table></figure>
 <blockquote>
 <p>如果你找不到 <code>/etc/initramfs-tools</code>，请先安装工具</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install initramfs-tools</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install initramfs-tools</span><br></pre></td></tr></tbody></table></figure>
 </blockquote>
 <ol start="3">
-<li>编辑<code>/usr/initramfas-tools/init</code>，</li>
+<li>编辑 <code>/usr/initramfas-tools/init</code>，</li>
 </ol>
-<p>在打开的文档中寻找<code>run_scripts /scripts/init-top </code>一行，并在该行代码下新增两条代码</p>
- <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">udmboot=`udm 2&gt;/dev/null`; udmdev=`<span class="built_in">echo</span> <span class="variable">$udmboot</span> | cut -d<span class="string">" "</span> -f1`; udmroot=`<span class="built_in">echo</span> <span class="variable">$udmboot</span> | cut -d<span class="string">" "</span> -f2`</span><br><span class="line"><span class="keyword">if</span> [ -n <span class="string">"<span class="variable">$&#123;udmdev&#125;</span>"</span> ]; <span class="keyword">then</span> ROOT=<span class="variable">$&#123;udmdev&#125;</span>; umount <span class="variable">$&#123;udmdev&#125;</span> 2&gt;/dev/null;<span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+<p>在打开的文档中寻找 <code>run_scripts /scripts/init-top </code>一行，并在该行代码下新增两条代码</p>
+ <figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">udmboot=`udm 2&gt;/dev/null`; udmdev=`<span class="built_in">echo</span> <span class="variable">$udmboot</span> | cut -d<span class="string">" "</span> -f1`; udmroot=`<span class="built_in">echo</span> <span class="variable">$udmboot</span> | cut -d<span class="string">" "</span> -f2`</span><br><span class="line"><span class="keyword">if</span> [ -n <span class="string">"<span class="variable">${udmdev}</span>"</span> ]; <span class="keyword">then</span> ROOT=<span class="variable">${udmdev}</span>; umount <span class="variable">${udmdev}</span> 2&gt;/dev/null;<span class="keyword">fi</span></span><br></pre></td></tr></tbody></table></figure>
 <p>然后保存。</p>
 <ol start="4">
 <li>
 <p>打开终端，运行</p>
 <p>完成后重启回本机系统</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo update-initramfs -u</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo update-initramfs -u</span><br></pre></td></tr></tbody></table></figure>
 </li>
 <li>
-<p>打开<code>MBMBROSTool</code>工具，跟刚才一样深度卸载掉Linux的安装分区</p>
+<p>打开 <code>MBMBROSTool</code> 工具，跟刚才一样深度卸载掉 Linux 的安装分区</p>
 <p><img data-src="https://i.loli.net/2020/03/22/i4hkVUXy92Trd5l.jpg" alt=""></p>
 <p><img data-src="https://i.loli.net/2020/03/22/qNVopv2tZI85Uji.jpg" alt=""></p>
 </li>
 </ol>
 </li>
 </ol>
-<p><strong>注意：不用再恢复MOS！！！</strong></p>
+<p><strong>注意：不用再恢复 MOS！！！</strong></p>
 <blockquote>
 <ul>
-<li>总结下Linux深度隐藏的操作
+<li>总结下 Linux 深度隐藏的操作
 <ol>
-<li>添加<code>udm</code>到<code>/boot/initrd.img-xxx</code>的<code>/bin</code>里</li>
-<li>修改<code>/boot/initrd.img-xxx</code>里的<code>init</code>，加入脚本</li>
-<li>在<code>MBROSTool</code>上把Linux安装分区深度卸载</li>
+<li>添加 <code>udm</code> 到 <code>/boot/initrd.img-xxx</code> 的 <code>/bin</code> 里</li>
+<li>修改 <code>/boot/initrd.img-xxx</code> 里的 <code>init</code>，加入脚本</li>
+<li>在 <code>MBROSTool</code> 上把 Linux 安装分区深度卸载</li>
 </ol>
 </li>
-<li>该方法仅在Ubuntu 19.10上测试成功，其他Debian系请自行测试，非Debian系可以参考一下上面的总结和资料包里的<code>UDM对linux的支持.txt</code>。Arch系发行版可以参考下<a href="https://wiki.archlinux.org/index.php/Mkinitcpio_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)" target="_blank" rel="noopener">这篇文档</a>来修改</li>
+<li>该方法仅在 Ubuntu 19.10 上测试成功，其他 Debian 系请自行测试，非 Debian 系可以参考一下上面的总结和资料包里的 <code>UDM对linux的支持.txt</code>。Arch 系发行版可以参考下<a href="https://wiki.archlinux.org/index.php/Mkinitcpio_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)" target="_blank" rel="noopener">这篇文档</a>来修改</li>
 </ul>
 </blockquote>
 <h1>后记</h1>
-<h2 id="升级Ubuntu内核后的操作"><a class="header-anchor" href="#升级Ubuntu内核后的操作">¶</a>升级Ubuntu内核后的操作</h2>
+<h2 id="升级Ubuntu内核后的操作"><a class="header-anchor" href="#升级Ubuntu内核后的操作">¶</a> 升级 Ubuntu 内核后的操作</h2>
 <p>先进行升级</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo upgrade</span><br></pre></td></tr></table></figure>
-<p>提示linux的内核有更新，可以在更新的时候记一下新内核的版本号</p>
-<p>升级后用root打开文件管理器</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nautilus</span><br></pre></td></tr></table></figure>
-<p>更新内核时如果没有留意版本号，可以打开<code>/boot/grub/grub.cfg</code>参照安装时的步骤找找</p>
-<p>知道新内核版本号后打开根目录下的<code>menu.lst</code>、<code>menu0.lst</code>以及<code>/efi/mbrosefi_qk.menu.cfg</code>，把里面旧的版本号全部查找替换为新的版本号</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo upgrade</span><br></pre></td></tr></tbody></table></figure>
+<p>提示 linux 的内核有更新，可以在更新的时候记一下新内核的版本号</p>
+<p>升级后用 root 打开文件管理器</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nautilus</span><br></pre></td></tr></tbody></table></figure>
+<p>更新内核时如果没有留意版本号，可以打开 <code>/boot/grub/grub.cfg</code> 参照安装时的步骤找找</p>
+<p>知道新内核版本号后打开根目录下的 <code>menu.lst</code>、<code>menu0.lst</code> 以及 <code>/efi/mbrosefi_qk.menu.cfg</code>，把里面旧的版本号全部查找替换为新的版本号</p>
 <p>保存，重启查看效果</p>
-<h2 id="美化启动项"><a class="header-anchor" href="#美化启动项">¶</a>美化启动项</h2>
+<h2 id="美化启动项"><a class="header-anchor" href="#美化启动项">¶</a> 美化启动项</h2>
 <p>先读写挂载子盘（参考 安装流程 - 处理硬盘分区）</p>
 <p>这里只展示一些我作的修改，详细的美化指南请看工具内的补充帮助</p>
 <ul>
 <li>
-<p>删掉<code>/udm/pic/bubble.png</code>可以关闭MBR启动菜单里的泡泡动画</p>
+<p>删掉 <code>/udm/pic/bubble.png</code> 可以关闭 MBR 启动菜单里的泡泡动画</p>
 </li>
 <li>
-<p><code>/efi/theme</code>修改EFI启动下引导菜单的主题，加载的是grub的主题，但是主题的加载效果有些奇怪，同时要注意子盘大小限制</p>
-<p>这里我使用的是自行魔改了的<a href="https://www.gnome-look.org/p/1200710/" target="_blank" rel="noopener">Atomic GRUB Theme</a>，加入了原主题没有的<code>udm.png</code>，修改<code>reastar.png</code>为<code>reboot.png</code>来让它奇怪的grub能够识别。资料包里会提供我自用的魔改主题</p>
+<p><code>/efi/theme</code> 修改 EFI 启动下引导菜单的主题，加载的是 grub 的主题，但是主题的加载效果有些奇怪，同时要注意子盘大小限制</p>
+<p>这里我使用的是自行魔改了的 <a href="https://www.gnome-look.org/p/1200710/" target="_blank" rel="noopener">Atomic GRUB Theme</a>，加入了原主题没有的 <code>udm.png</code>，修改 <code>reastar.png</code> 为 <code>reboot.png</code> 来让它奇怪的 grub 能够识别。资料包里会提供我自用的魔改主题</p>
 </li>
 </ul>
-<h2 id="VMWare加载"><a class="header-anchor" href="#VMWare加载">¶</a>VMWare加载</h2>
+<h2 id="VMWare加载"><a class="header-anchor" href="#VMWare加载">¶</a>VMWare 加载</h2>
 <p><img data-src="https://i.loli.net/2020/03/26/aolm1Cr4jXwuyLh.png" alt=""></p>
 <p><img data-src="https://i.loli.net/2020/03/26/oqPdYNwQBDk6iWT.png" alt=""></p>
 <p><img data-src="https://i.loli.net/2020/03/26/yfeMnH9LXIgp5rB.png" alt=""></p>
@@ -772,8 +772,8 @@ mjx-container + br {
       <i class="fa fa-chevron-left"></i> 配置 Typora & PicGo 写 Hexo 博客
     </a></div>
       <div class="post-nav-item">
-    <a href="/posts/3a4e373e.html" rel="next" title="博客折腾笔记②-hexo的优化">
-      博客折腾笔记②-hexo的优化 <i class="fa fa-chevron-right"></i>
+    <a href="/posts/3a4e373e.html" rel="next" title="博客折腾笔记②-hexo 的优化">
+      博客折腾笔记②-hexo 的优化 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -833,7 +833,7 @@ mjx-container + br {
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text">实现目标</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">2.</span> <span class="nav-text">制作过程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#准备资料"><span class="nav-number">2.1.</span> <span class="nav-text">准备资料</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">3.</span> <span class="nav-text">安装流程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#处理硬盘分区-安装PE"><span class="nav-number">3.1.</span> <span class="nav-text">处理硬盘分区&amp;安装PE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WTG安装"><span class="nav-number">3.2.</span> <span class="nav-text">WTG安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux的安装（Ubuntu、Deepin等Debian系发行版）"><span class="nav-number">3.3.</span> <span class="nav-text">Linux的安装（Ubuntu、Deepin等Debian系发行版）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装系统镜像（以Deepin为例）"><span class="nav-number">3.3.1.</span> <span class="nav-text">安装系统镜像（以Deepin为例）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置深度隐藏"><span class="nav-number">3.3.2.</span> <span class="nav-text">设置深度隐藏</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">4.</span> <span class="nav-text">后记</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#升级Ubuntu内核后的操作"><span class="nav-number">4.1.</span> <span class="nav-text">升级Ubuntu内核后的操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#美化启动项"><span class="nav-number">4.2.</span> <span class="nav-text">美化启动项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VMWare加载"><span class="nav-number">4.3.</span> <span class="nav-text">VMWare加载</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text">实现目标</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">2.</span> <span class="nav-text">制作过程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#准备资料"><span class="nav-number">2.1.</span> <span class="nav-text"> 准备资料</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">3.</span> <span class="nav-text">安装流程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#处理硬盘分区-安装PE"><span class="nav-number">3.1.</span> <span class="nav-text"> 处理硬盘分区 &amp; 安装 PE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WTG安装"><span class="nav-number">3.2.</span> <span class="nav-text">WTG 安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux的安装（Ubuntu、Deepin等Debian系发行版）"><span class="nav-number">3.3.</span> <span class="nav-text">Linux 的安装（Ubuntu、Deepin 等 Debian 系发行版）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装系统镜像（以Deepin为例）"><span class="nav-number">3.3.1.</span> <span class="nav-text"> 安装系统镜像（以 Deepin 为例）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置深度隐藏"><span class="nav-number">3.3.2.</span> <span class="nav-text"> 设置深度隐藏</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">4.</span> <span class="nav-text">后记</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#升级Ubuntu内核后的操作"><span class="nav-number">4.1.</span> <span class="nav-text"> 升级 Ubuntu 内核后的操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#美化启动项"><span class="nav-number">4.2.</span> <span class="nav-text"> 美化启动项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VMWare加载"><span class="nav-number">4.3.</span> <span class="nav-text">VMWare 加载</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -909,7 +909,7 @@ mjx-container + br {
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">35k</span>
+    <span title="站点总字数">34k</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
@@ -1019,6 +1019,7 @@ mjx-container + br {
   <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
   <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
   <script src="/undefined/velocity/velocity.min.js"></script>
   <script src="/undefined/velocity/velocity.ui.min.js"></script>
 
