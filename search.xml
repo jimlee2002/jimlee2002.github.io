@@ -1,12 +1,554 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>博客折腾笔记②-hexo 的优化</title>
+    <url>/posts/3a4e373e.html</url>
+    <content><![CDATA[<h1>文章永久链接唯一化</h1>
+<p>为解决 hexo 默认设置下改变源文件名或使用中文标题带来的文章链接问题，这里使用 <code>hexo-abbrlink</code> 插件来解决问题</p>
+<figure class="highlight nginx"><table><tbody><tr><td class="code"><pre><span class="line"><span class="attribute">npm</span> install hexo-abbrlink --save</span><br></pre></td></tr></tbody></table></figure>
+<a id="more"></a>
+<p>然后更改博客配置文件<code>_config.yml</code>, 这里我改成</p>
+<figure class="highlight yaml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="attr">permalink:</span> <span class="string">:posts/:year/:abbrlink/</span></span><br></pre></td></tr></tbody></table></figure>
+<p>还可以设置永久链接的生成算法，在博客配置文件中加入</p>
+<figure class="highlight yaml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="attr">abbrlink:</span></span><br><span class="line">  <span class="attr">alg:</span> <span class="string">crc32</span>  <span class="comment"># support crc16(default) and crc32</span></span><br><span class="line">  <span class="attr">rep:</span> <span class="string">hex</span>    <span class="comment"># support dec(default) and hex</span></span><br></pre></td></tr></tbody></table></figure>
+<p>不同算法的生成效果：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="code"><pre><span class="line">crc16 &amp; hex</span><br><span class="line">https://post.zz173.com/posts/66c8.html</span><br><span class="line">crc16 &amp; dec</span><br><span class="line">https://post.zz173.com/posts/65535.html</span><br><span class="line">crc32 &amp; hex</span><br><span class="line">https://post.zz173.com/posts/8ddf18fb.html</span><br><span class="line">crc32 &amp; dec</span><br><span class="line">https://post.zz173.com/posts/1690090958.html</span><br></pre></td></tr></tbody></table></figure>
+<p>一些知识补充：</p>
+<blockquote>
+<blockquote>
+<p>百度蜘蛛抓取网页的规则：对于蜘蛛说网页权重越高、信用度越高抓取越频繁，例如网站的首页和内页。蜘蛛先抓取网站的首页，因为首页权重更高，并且大部分的链接都是指向首页。然后通过首页抓取网站的内页，并不是所有内页蜘蛛都会去抓取。</p>
+</blockquote>
+<p>搜索引擎认为对于一般的中小型站点，3 层足够承受所有的内容了，所以蜘蛛经常抓取的内容是前三层，而超过三层的内容蜘蛛认为那些内容并不重要，所以不经常爬取。出于这个原因所以 permalink 后面跟着的最好不要超过 2 个斜杠。[^]</p>
+</blockquote>
+<h1>新设备上恢复博客备份的问题解决</h1>
+<h2 id="sudo-npm-install-失败"><a class="header-anchor" href="#sudo-npm-install-失败">¶</a><code>sudo npm install </code>失败</h2>
+<p>解决方案：不要用 <code>sudo</code>, 直接 <code>npm install</code> 就好</p>
+<h2 id="hexo-b报错"><a class="header-anchor" href="#hexo-b报错">¶</a><code>hexo b</code> 报错</h2>
+<p>在新装的 UTG 上恢复 Blog，最后执行 <code>hexo b</code> 的时候报错了</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">fatal: <span class="string">'github'</span> does not appear to be a git repository</span><br><span class="line">fatal: 无法读取远程仓库。</span><br><span class="line"></span><br><span class="line">请确认您有正确的访问权限并且仓库存在。</span><br></pre></td></tr></tbody></table></figure>
+<p>翻了翻插件的 issuse，看到了相似的问题<a href="https://github.com/coneycode/hexo-git-backup/issues/20">#20</a></p>
+<p>参考里面的内容，修改<strong>博客配置文件</strong>里插件的相关配置，把 <code>github</code> 换成 <code>origin</code></p>
+<figure class="highlight plain"><table><tbody><tr><td class="code"><pre><span class="line">backup:</span><br><span class="line">  type: git</span><br><span class="line">  repository:</span><br><span class="line">    origin: git@github:bx_reader/bx-reader-api.git,master</span><br></pre></td></tr></tbody></table></figure>
+<p>这里顺便把 git 的 https 连接改成了 git 连接，这样就不用每次都输入账号密码了</p>
+<p>再次尝试，问题解决</p>
+<h1>Hexo 文章加密</h1>
+<p>使用插件 <a href="https://github.com/MikeCoder/hexo-blog-encrypt">hexo-blog-encrypt</a></p>
+<h2 id="安装"><a class="header-anchor" href="#安装">¶</a> 安装</h2>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">npm install --save hexo-blog-encrypt</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="使用"><a class="header-anchor" href="#使用">¶</a> 使用</h2>
+<p>在文章信息头添加 <code>password</code> 字段</p>
+<figure class="highlight yaml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">Hello</span> <span class="string">World</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2016-03-30 21:18:02</span></span><br><span class="line"><span class="attr">password:</span> <span class="string">mikemessi</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></tbody></table></figure>
+<p>也可以在文章信息头单独自定义密码输入交互信息</p>
+<figure class="highlight yaml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">Hello</span> <span class="string">World</span></span><br><span class="line"><span class="attr">tags:</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">作为日记加密</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2016-03-30 21:12:21</span></span><br><span class="line"><span class="attr">password:</span> <span class="string">mikemessi</span></span><br><span class="line"><span class="attr">abstract:</span> <span class="string">有东西被加密了,</span> <span class="string">请输入密码查看.</span></span><br><span class="line"><span class="attr">message:</span> <span class="string">您好,</span> <span class="string">这里需要密码.</span></span><br><span class="line"><span class="attr">wrong_pass_message:</span> <span class="string">抱歉,</span> <span class="string">这个密码看着不太对,</span> <span class="string">请再试试.</span></span><br><span class="line"><span class="attr">wrong_hash_message:</span> <span class="string">抱歉,</span> <span class="string">这个文章不能被校验,</span> <span class="string">不过您还是能看看解密后的内容.</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></tbody></table></figure>
+<h2 id="进阶"><a class="header-anchor" href="#进阶">¶</a> 进阶</h2>
+<h3 id="全局配置"><a class="header-anchor" href="#全局配置">¶</a> 全局配置</h3>
+<p>在站点根目录下的<code>_config.yml</code> 里可以添加以下内容进行全局配置</p>
+<figure class="highlight yaml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># Security</span></span><br><span class="line"><span class="attr">encrypt:</span> <span class="comment"># hexo-blog-encrypt</span></span><br><span class="line">  <span class="attr">abstract:</span> <span class="string">有东西被加密了,</span> <span class="string">请输入密码查看.</span></span><br><span class="line">  <span class="attr">message:</span> <span class="string">您好,</span> <span class="string">这里需要密码.</span></span><br><span class="line">  <span class="attr">tags:</span></span><br><span class="line">  <span class="bullet">-</span> {<span class="attr">name:</span> <span class="string">tagName</span>, <span class="attr">password:</span> <span class="string">密码A</span>}</span><br><span class="line">  <span class="bullet">-</span> {<span class="attr">name:</span> <span class="string">tagName</span>, <span class="attr">password:</span> <span class="string">密码B</span>}</span><br><span class="line">  <span class="attr">template:</span> <span class="string">&lt;div</span> <span class="string">id="hexo-blog-encrypt"</span> <span class="string">data-wpm="{{hbeWrongPassMessage}}"</span> <span class="string">data-whm="{{hbeWrongHashMessage}}"&gt;&lt;div</span> <span class="string">class="hbe-input-container"&gt;&lt;input</span> <span class="string">type="password"</span> <span class="string">id="hbePass"</span> <span class="string">placeholder="{{hbeMessage}}"</span> <span class="string">/&gt;&lt;label&gt;{{hbeMessage}}&lt;/label&gt;&lt;div</span> <span class="string">class="bottom-line"&gt;&lt;/div&gt;&lt;/div&gt;&lt;script</span> <span class="string">id="hbeData"</span> <span class="string">type="hbeData"</span> <span class="string">data-hmacdigest="{{hbeHmacDigest}}"&gt;{{hbeEncryptedData}}&lt;/script&gt;&lt;/div&gt;</span></span><br><span class="line">  <span class="attr">wrong_pass_message:</span> <span class="string">抱歉,</span> <span class="string">这个密码看着不太对,</span> <span class="string">请再试试.</span></span><br><span class="line">  <span class="attr">wrong_hash_message:</span> <span class="string">抱歉,</span> <span class="string">这个文章不能被校验,</span> <span class="string">不过您还是能看看解密后的内容.</span></span><br></pre></td></tr></tbody></table></figure>
+<p>配置优先级是</p>
+<p><strong>文章信息头 &gt; <code>_config.yml</code> (站点根目录下的) &gt; 默认配置</strong></p>
+]]></content>
+      <categories>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>博客折腾笔记③- 搭建个人动态页面 iM</title>
+    <url>/posts/2b426e0a.html</url>
+    <content><![CDATA[<p>今天在少数派上看到一篇搭建类似微博的个人动态页面的指南，我非常感高兴：出于对实现私密树洞分享心情的需要以及言论审查的苦恼，我想在博客上实现这样的功能很久了。感谢原作者为不懂技术的脚本小子我造好了轮子，接下来只需简单配置即可实现所需功能了。</p>
+<p>以下是我的配置过程：</p>
+<blockquote>
+<p>参考文章：<a href="https://sspai.com/post/60024">保卫表达：用后端 BaaS 快速搭建专属无点赞评论版微博 ——b 言 b 语</a></p>
+</blockquote>
+<a id="more"></a>
+<h1>配置后端 BaaS</h1>
+<p>这里使用 <a href="https://leancloud.app/">LeanCloud 国际版</a></p>
+<p>登入后创建应用并命名</p>
+<p>进入新建好的应用，点击<code>新建Class</code>，将新建的 Class 命名为 content</p>
+<p>同时设置下方 create 、delete 、update 三项权限为” 指定用户 “，其他权限默认即可</p>
+<p><img data-src="https://i.loli.net/2020/04/20/cgBW2ryuwPd1iXf.png" alt=""></p>
+<p>点击刚创建的 content Class</p>
+<p>点击 添加列 并创建名称为 content 的「列」，类型为 String</p>
+<p><img data-src="https://i.loli.net/2020/04/20/vLmAcuBIGPUZK4x.png" alt=""></p>
+<p><img data-src="https://i.loli.net/2020/04/20/czwJRK4F75DsPbA.png" alt=""></p>
+<p>完成后点击左侧<code>设置</code> - <code>应用 Keys</code>，记录三组 Keys 备用</p>
+<p><img data-src="https://i.loli.net/2020/04/20/Kaxt5GOo3LRgMmy.png" alt=""></p>
+<h1>配置客户端发送工具</h1>
+<h2 id="Winodws：使用Quicker"><a class="header-anchor" href="#Winodws：使用Quicker">¶</a>Winodws：使用 <a href="https://www.getquicker.net/">Quicker</a></h2>
+<p>Quicker 模板地址：<a href="https://getquicker.net/sharedaction?code=eeb80278-5f53-4b0d-d333-08d7e0dd26a9">点击安装</a></p>
+<p>安装模板后右键编辑模板，修改变量定义和其他内容</p>
+<p><img data-src="https://i.loli.net/2020/04/20/QAK8tCqRg79GyNL.png" alt=""></p>
+<p>尝试发送一次请求，如果配置正确，在 LeanCloud 的后台刷新就能看到一条记录了。<strong>此后的删除、修改，都需要通过该后台进行。</strong></p>
+<h2 id="Android"><a class="header-anchor" href="#Android">¶</a>Android</h2>
+<p>请参考我的<a href="https://jimlee2002.github.io/posts/4394c3fa.html">另一篇文章</a></p>
+<h1>在博客上添加界面</h1>
+<p>在博客 <code>/source</code> 下新建文件夹 <code>iM</code></p>
+<p>下载作者提供的<a href="https://github.com/daibor/nonsense.fun">页面文件</a></p>
+<p>将其复制到 <code>/source/iM</code> 下，打开编辑器自行修改其中内容</p>
+<p>请注意填写 53-54 行的 <code>appId</code> 和 <code>appKey</code></p>
+<p>修改后打开博客根目录<code>_config.yml</code>，在 <code>skip_render</code> 添加新建好的 <code>iM</code> 文件夹</p>
+<figure class="highlight yaml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="attr">skip_render:</span> </span><br><span class="line">  <span class="bullet">-</span> <span class="string">"404.html"</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">"iM/**"</span></span><br></pre></td></tr></tbody></table></figure>
+<p>保存后打开所用主题文件夹下的<code>_config.yml</code>，向菜单栏添加 iM 的入口</p>
+<p>这里以主题 NeXT 为例：编辑 <code>menu</code> 下面的内容，添加<code> iM: /iM/ || user</code></p>
+<figure class="highlight yaml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># Usage: `Key: /link/ || icon`</span></span><br><span class="line"><span class="comment"># Key is the name of menu item. If the translation for this item is available, the translated text will be loaded, otherwise the Key name will be used. Key is case-senstive.</span></span><br><span class="line"><span class="comment"># Value before `||` delimiter is the target link, value after `||` delimiter is the name of Font Awesome icon.</span></span><br><span class="line"><span class="comment"># When running the site in a subdirectory (e.g. yoursite.com/blog), remove the leading slash from link value (/archives -&gt; archives).</span></span><br><span class="line"><span class="comment"># External url should start with http:// or https://</span></span><br><span class="line"><span class="attr">menu:</span></span><br><span class="line">  <span class="attr">home:</span> <span class="string">/</span> <span class="string">||</span> <span class="string">home</span></span><br><span class="line">  <span class="attr">categories:</span> <span class="string">/categories/</span> <span class="string">||</span> <span class="string">th</span></span><br><span class="line">  <span class="attr">tags:</span> <span class="string">/tags/</span> <span class="string">||</span> <span class="string">tags</span></span><br><span class="line">  <span class="attr">archives:</span> <span class="string">/archives/</span> <span class="string">||</span> <span class="string">archive</span></span><br><span class="line">  <span class="attr">iM:</span> <span class="string">/iM/</span> <span class="string">||</span> <span class="string">user</span> </span><br></pre></td></tr></tbody></table></figure>
+<p>完成后终端依次输入</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g</span><br><span class="line">hexo s</span><br></pre></td></tr></tbody></table></figure>
+<p>打开 localhost:4000 查看效果</p>
+<h1>To-Do</h1>
+<ul>
+<li><input type="checkbox" id="checkbox0"><label for="checkbox0">修改美化 iM 的页面文件</label><code>index.md</code>，参考 Cytus2 里的界面魔改？</li>
+<li><input type="checkbox" id="checkbox1"><label for="checkbox1">尝试用</label><code>hexo-blog-encrypt</code> 加密页面？</li>
+<li><input type="checkbox" id="checkbox2"><label for="checkbox2">直接在页面处添加一个在线输入框方便输入？</label></li>
+</ul>
+]]></content>
+      <categories>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Markdown 语法学习笔记①</title>
+    <url>/posts/6c2e314d.html</url>
+    <content><![CDATA[<h2 id="标题"><a class="header-anchor" href="#标题">¶</a> 标题</h2>
+<p>两种语法，分别为类 Setext 和类 atx 形式。</p>
+<h3 id="类-Setext-式"><a class="header-anchor" href="#类-Setext-式">¶</a> 类 Setext 式</h3>
+<p>利用 <code>=</code> 和 <code>-</code>：</p>
+<pre><code>标题
+=====
+标题
+-----
+</code></pre>
+<h3 id="类-atx-式"><a class="header-anchor" href="#类-atx-式">¶</a> 类 atx 式</h3>
+<p>在行首插入 1 到 6 个<code>#</code>, 对应到标题 1 到 6 阶。</p>
+<pre><code># 标题
+## 标题
+### 标题
+#### 标题
+##### 标题
+###### 标题
+</code></pre>
+<p>也可以</p>
+<pre><code># 标题 #
+## 标题 ##
+### 标题 ###  
+</code></pre>
+<blockquote>
+<p><strong>注意：</strong> 不要忘记<code>#</code>与标题文字间的空格<br>
+错误示范：<code>##标题</code></p>
+</blockquote>
+<a id="more"></a>
+<h2 id="区块引用"><a class="header-anchor" href="#区块引用">¶</a> 区块引用</h2>
+<p>使用 <code>&gt;</code></p>
+<pre><code>&gt; 一些文字
+</code></pre>
+<p>只需在每段第一行加上即可<br>
+还可以嵌套，只要根据层次加上不同数量的 <code>&gt;</code></p>
+<pre><code>&gt; 一些文字
+&gt;&gt; 一些一些文字
+</code></pre>
+<p>引用区域内可以使用其他 Markdown 语法：</p>
+<pre><code>&gt; ## 这是一个标题。
+&gt; 
+&gt; 1.   这是第一行列表项。
+&gt; 2.   这是第二行列表项。
+&gt; 
+&gt; 给出一些例子代码：
+&gt; 
+&gt;     return shell_exec("echo $input | $markdown_script");
+</code></pre>
+<h2 id="列表"><a class="header-anchor" href="#列表">¶</a> 列表</h2>
+<p>分为有序列表与无序列表。<br>
+如果列表项目间用空行分开，那么中间内容将不会被列表项包括在内。</p>
+<pre><code>* 列表项
+
+* 列表项
+</code></pre>
+<p>如果要在列表项目内放进引用，那 &gt; 就需要缩进</p>
+<pre><code>* 列表项
+    &gt; 引用
+</code></pre>
+<p>如果要放代码区块的话，该区块就需要缩进两次</p>
+<pre><code>* 列表项
+        &lt;codehere&gt;
+</code></pre>
+<h3 id="有序列表"><a class="header-anchor" href="#有序列表">¶</a> 有序列表</h3>
+<p>使用 <code>*</code>,<code>+</code> 和 <code>-</code> 标记</p>
+<pre><code>* 列表项
++ 列表项
+- 列表项
+</code></pre>
+<h3 id="无序列表"><a class="header-anchor" href="#无序列表">¶</a> 无序列表</h3>
+<p>使用<strong>数字加英文句点<code>.</code> 的方式</strong></p>
+<pre><code>1. 列表项
+2. 列表项
+3. 列表项
+</code></pre>
+<blockquote>
+<p><strong>注意</strong>：</p>
+<ol>
+<li>在列表标记上使用的数字<strong>并不会影响</strong>输出的顺序<br>
+<s><em>简直智障福音啊</em></s></li>
+<li>文字出现数字 - 句点 - 空白而要避免列表项出现，可以在句点前加上<strong>反斜杠</strong><code>\</code><br>
+eg:<code>1986\. What a great season.</code></li>
+</ol>
+</blockquote>
+<h2 id="代码区块"><a class="header-anchor" href="#代码区块">¶</a> 代码区块</h2>
+<p>只需简单地缩进一格（或四个空格）即可</p>
+<p>这是文字</p>
+<pre><code>这是代码
+</code></pre>
+<p>一个代码区块会一直持续到没有缩进的那一行（或是文件结尾）。</p>
+<p>同时，在代码区块中，一般的 Markdown 语法不会被转换。</p>
+<h2 id="分隔线"><a class="header-anchor" href="#分隔线">¶</a> 分隔线</h2>
+<p>使用三个以上的 <code>*</code>、<code>-</code>、<code>_</code>来建立一个分隔线，可以在星号或是减号中间插入空格，但注意行内不能有其他东西</p>
+<pre><code>文字
+***
+
+文字
+---
+
+文字
+___
+
+文字
+- - -
+
+文字
+* * *
+</code></pre>
+<h2 id="链接插入"><a class="header-anchor" href="#链接插入">¶</a> 链接插入</h2>
+<p>Markdown 支持两种形式的链接语法： 行内式和参考式两种形式。<br>
+不管是哪一种，链接文字都是用 <code>[]</code> 来标记。</p>
+<h3 id="行内式"><a class="header-anchor" href="#行内式">¶</a> 行内式</h3>
+<p>使用方括号 <code>[]</code> 括住所需加链接的文字，并在后面以圆括号 <code>()</code> 形式插入链接（可以是相对路径）。<br>
+如需加入链接描述 (链接的 title 文字) 只需在圆括号中的链接后以 <code>""</code> 包起文字即可。</p>
+<pre><code>这是一个[链接](https://xsllen.tk)
+这是一个有名字的[链接](https://xsllen.tk "Jim's Blog")
+</code></pre>
+<h3 id="参考式"><a class="header-anchor" href="#参考式">¶</a> 参考式</h3>
+<p>使用方括号 <code>[]</code> 括住所需加链接的文字，并在后面再接上一个方括号 <code>[]</code> 进行用于辨识链接的标记。<br>
+你也可以选择性地在两个方括号中间加上一个空格。</p>
+<pre><code>这是一个[链接][1]
+这是一个[链接] [1]
+</code></pre>
+<p>接着，在文件的任意处把标记的文章内容定义出来。<br>
+链接网址还可以使用尖括号包起。<br>
+网址之后可以选择接着网址描述（title）内容，可以用单引号、双引号或是括弧包着。<br>
+网址描述（title）内容可以放到下一行，也可以加缩进，好看就行。<s>（说得我闲得蛋疼一样）</s></p>
+<pre><code>[1]: https://xsllen.tk
+[1]: &lt;https://xsllen.tk&gt;
+[1]: https://xsllen.tk "My blog"
+[1]: https://xsllen.tk 'My blog'
+[1]: https://xsllen.tk (My blog)
+
+[1]: https://xsllen.tk 
+"My blog"
+</code></pre>
+<blockquote>
+<p><strong>注意：</strong><br>
+1. 链接辨别标签可以有字母、数字、空白和标点符号，但是 ** 并不区分大小写！** 因此以下两个链接是相同的。</p>
+</blockquote>
+<pre><code>[link text][a]
+[link text][A]
+</code></pre>
+<blockquote>
+<p>2. 标记方括号内的内容可以省略（即后一个方括号为空），此时链接标记会视为等同于链接文字。</p>
+<p>[link][]<br>
+相当于<br>
+[link][link]</p>
+</blockquote>
+<p>参考式整体实例：</p>
+<pre><code>I get 10 times more traffic from [Google] [1] than from[Yahoo] [2] or [MSN] [3].
+
+[1]: http://google.com/        "Google"
+[2]: http://search.yahoo.com/  "Yahoo Search"
+[3]: http://search.msn.com/    "MSN Search"
+</code></pre>
+<p>如果改成用链接名称的方式写：</p>
+<pre><code>I get 10 times more traffic from [Google][] than from[Yahoo][] or [MSN][].
+
+[google]: http://google.com/        "Google"
+[yahoo]:  http://search.yahoo.com/  "Yahoo Search"
+[msn]:    http://search.msn.com/    "MSN Search"
+</code></pre>
+<h2 id="文字处理"><a class="header-anchor" href="#文字处理">¶</a> 文字处理</h2>
+<h3 id="斜体"><a class="header-anchor" href="#斜体">¶</a> 斜体</h3>
+<p>使用一个 <code>*</code> 或<code>_</code>符号将文字包围起来。</p>
+<pre><code>*斜体文字*
+_斜体文字_
+</code></pre>
+<h3 id="加粗"><a class="header-anchor" href="#加粗">¶</a> 加粗</h3>
+<p>使用两个 <code>*</code> 或<code>_</code>符号将文字包围起来。</p>
+<pre><code>**加粗文字**
+__加粗文字__
+</code></pre>
+<h3 id="粗斜体"><a class="header-anchor" href="#粗斜体">¶</a> 粗斜体</h3>
+<p>使用三个 <code>*</code> 或<code>_</code>符号将文字包围起来。</p>
+<pre><code>***粗斜体文字***
+</code></pre>
+<h3 id="删除线"><a class="header-anchor" href="#删除线">¶</a> 删除线</h3>
+<p>使用两个 <code>~</code> 符号将文字包围起来。<br>
+<s>带删除线的文字</s></p>
+<h3 id="注脚"><a class="header-anchor" href="#注脚">¶</a> 注脚</h3>
+<p>使用 <code>[^keyword]</code> 表示注脚，并在文本的任意地方对该注脚定义（类似与参考式）<br>
+示例：</p>
+<pre><code>这里有一个注脚[^footnote]。
+[^footnote]: 这是那个*注脚*的**文本**。
+</code></pre>
+<p>效果：</p>
+<p>这里有一个注脚 <sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup>。</p>
+<blockquote>
+<p><strong>注意：</strong> 使用什么符号开启标签，就要用什么符号结束。</p>
+</blockquote>
+<h3 id="代码标记"><a class="header-anchor" href="#代码标记">¶</a> 代码标记</h3>
+<p>使用反引号 <code>`</code> 将代码文字包起.</p>
+<pre><code>`&lt;code&gt;code here!&lt;/code&gt;`
+</code></pre>
+<blockquote>
+<p><strong>注意：</strong></p>
+<ul>
+<li>
+<p>如果要在代码区段内插入反引号，应使用<strong>多个反引号</strong>来开启和结束代码区段。</p>
+<pre><code>``code`code``
+</code></pre>
+</li>
+</ul>
+<p>代码区段的起始和结束端都可以<strong>放入一个空白</strong>，起始端后面一个，结束端前面一个，这样你就可以在区段的一开始就插入反引号.</p>
+<pre><code>  `` ` ``
+  `` code`code ``
+</code></pre>
+<ul>
+<li>在代码区段内，&amp; 和方括号都会被<strong>自动地转成 HTML 实体</strong>。</li>
+</ul>
+</blockquote>
+<h2 id="图片插入"><a class="header-anchor" href="#图片插入">¶</a> 图片插入</h2>
+<p>与链接插入类似，同样包括两种方式： 行内式与参考式。</p>
+<h3 id="行内式-v2"><a class="header-anchor" href="#行内式-v2">¶</a> 行内式</h3>
+<p>使用 <code>![alt text](图片网址)</code><br>
+还可以加上图片描述（title 文字）<br>
+<code>![alt text](图片网址 "描述文字")</code><br>
+示例：</p>
+<pre><code>![alt text](/assets/Img/test.jpg "墨镜滑稽")
+</code></pre>
+<p>效果：<img data-src="/assets/Img/test.jpg" alt="alt text" title="墨镜滑稽"></p>
+<h3 id="参考式-v2"><a class="header-anchor" href="#参考式-v2">¶</a> 参考式</h3>
+<p>使用 <code>![alt text][id]</code><br>
+「id」是图片参考的名称，图片参考的定义方式则和连结参考一样：</p>
+<pre><code>[id]: 图片路径 "描述文字"
+</code></pre>
+<blockquote>
+<p><strong>注意：</strong> 到目前为止， Markdown 还没有办法指定图片的宽高，需要的话可使用普通的 <strong><code>&lt;img&gt;</code></strong> 标签</p>
+</blockquote>
+<h2 id="内容目录（TOC）-（emmmmmm，对于hexo来说没什么卵用……）"><a class="header-anchor" href="#内容目录（TOC）-（emmmmmm，对于hexo来说没什么卵用……）">¶</a> 内容目录（TOC） （emmmmmm，对于 hexo 来说没什么卵用……）</h2>
+<p>在段落中填写 <code>[TOC]</code> 以显示全文内容的目录结构。</p>
+<p>效果：<br>
+[TOC]</p>
+<h2 id="表格"><a class="header-anchor" href="#表格">¶</a> 表格</h2>
+<p>示例：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="code"><pre><span class="line">| 项目        | 价格   |  数量  |</span><br><span class="line">| --------   | -----:  | :----:  |</span><br><span class="line">| 计算机     | \$1600 |   5     |</span><br><span class="line">| 手机        |   \$12   |   12   |</span><br><span class="line">| 管线        |    \$1    |  234  |</span><br></pre></td></tr></tbody></table></figure>
+<p>效果：</p>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th style="text-align:right">价格</th>
+<th style="text-align:center">数量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>计算机</td>
+<td style="text-align:right"> $1600</td>
+<td style="text-align:center">5</td>
+</tr>
+<tr>
+<td> 手机</td>
+<td style="text-align:right"> $12</td>
+<td style="text-align:center">12</td>
+</tr>
+<tr>
+<td> 管线</td>
+<td style="text-align:right"> $1</td>
+<td style="text-align:center">234</td>
+</tr>
+</tbody>
+</table>
+<h2 id="待办事项及TODO列表"><a class="header-anchor" href="#待办事项及TODO列表">¶</a> 待办事项及 TODO 列表</h2>
+<p>使用带有 <code>- [ ]</code>（未完成） 或 <code>- [x]</code>（已完成）项的列表语法撰写一个待办事宜列表，并且支持子列表嵌套以及混用 Markdown 语法。<br>
+示例：</p>
+<pre><code>- [ ] 写一个个人主页
+- [x] 写一个Maekdown学习笔记$$
+</code></pre>
+<p>效果：</p>
+<ul>
+<li><input type="checkbox" id="checkbox0"><label for="checkbox0">写一个个人主页</label></li>
+<li><input type="checkbox" id="checkbox1" checked="true"><label for="checkbox1">写一个 Maekdown 学习笔记 </label></li>
+</ul>
+<h2 id="自动链接"><a class="header-anchor" href="#自动链接">¶</a> 自动链接</h2>
+<p>Markdown 支持以比较简短的自动链接形式来处理网址和电子邮件信箱，只需用方括号括起即可，Markdown 就会自动把它转成链接。</p>
+<pre><code>&lt;http://example.com/&gt;
+&lt;address@example.com&gt;
+</code></pre>
+<p>效果：<br>
+<a href="http://example.com/">http://example.com/</a><br>
+<a href="mailto:address@example.com">address@example.com</a></p>
+<h2 id="反斜杠用法"><a class="header-anchor" href="#反斜杠用法">¶</a> 反斜杠用法</h2>
+<p>Markdown 可以利用反斜杠来插入一些在语法中有其它意义的符号，例如：如果你想要用星号加在文字旁边的方式来做出强调效果（但不用 <code>&lt;em&gt;</code> 标签），你可以在星号的前面加上反斜杠：</p>
+<pre><code>\*literal asterisks\*
+</code></pre>
+<p>Markdown 支持以下这些符号前面加上反斜杠来帮助插入普通的符号：</p>
+<pre><code>\   反斜线
+`   反引号
+*   星号
+_   底线
+{}  花括号
+[]  方括号
+()  括弧
+#   井字号
++   加号
+-   减号
+.   英文句点
+!   惊叹号
+</code></pre>
+<h2 id="HTML兼容性"><a class="header-anchor" href="#HTML兼容性">¶</a>HTML 兼容性</h2>
+<ol>
+<li>Markdown 文档内可任意使用 html 语句。<br>
+（你想在 Markdown 文档里码 HTML 也没问题的 233）</li>
+<li>Markdown 文档会对特殊字符自动转换，如 <code>&lt;</code> 和 <code>&amp;</code>。</li>
+</ol>
+<h2 id="文章过长折叠-（hexo用）"><a class="header-anchor" href="#文章过长折叠-（hexo用）">¶</a> 文章过长折叠 （hexo 用）</h2>
+<p>使用 <code>&lt;!--more--&gt;</code></p>
+<blockquote>
+<p><strong>注意：</strong> <em>hexo-renderer-markdown-it</em> 不支持</p>
+</blockquote>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p>这是那个<em>注脚</em>的<strong>文本</strong>。 <a href="#fnref1" class="footnote-backref">↩︎</a></p>
+</li>
+</ol>
+</section>
+]]></content>
+      <categories>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>Markdown</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>博客折腾笔记④- 使用 Tasker 在 Android 上实现个人动态的发送</title>
+    <url>/posts/4394c3fa.html</url>
+    <content><![CDATA[<p><a href="https://jimlee2002.github.io/posts/2b426e0a.html">前情提要</a></p>
+<p>折腾了两天，我终于是实现在 Android 上使用 Tasker 向刚搭建好的个人动态系统发送内容了。</p>
+<h1>效果展示</h1>
+<p>这是一个在 Android 上向<a href="https://github.com/daibor/nonsense.fun">废话胶囊（b 言 b 语）</a>发送内容的简单 Tasker 工程。</p>
+<p>项目地址：<a href="https://github.com/jimlee2002/nonsense.fun_tasker">https://github.com/jimlee2002/nonsense.fun_tasker</a></p>
+<img data-src="https://i.loli.net/2020/04/22/Hy7kwJL8FDr6I5O.png" style="zoom: 50%;">
+<a id="more"></a>
+<h1>安装配置</h1>
+<h2 id="直接下载安装已经导出好的apk文件"><a class="header-anchor" href="#直接下载安装已经导出好的apk文件">¶</a> 直接下载安装已经导出好的 <a href="https://github.com/jimlee2002/nonsense.fun_tasker/releases">apk 文件</a></h2>
+<p>应用使用插件 <code>Tasker App Factory</code> 导出。</p>
+<p>注意，该应用<strong>需要 root 权限</strong>。</p>
+<h2 id="导入Tasker工程"><a class="header-anchor" href="#导入Tasker工程">¶</a> 导入 Tasker 工程</h2>
+<p><strong>注意：部分手机可能需要 Root 权限才能使用，该工程默认开启<code>使用Root运行</code>，可以自行到<code>场景/Main/发送/按下</code>的第 6 个和第 8 个任务里关掉该选项</strong>。</p>
+<p><img data-src="https://i.loli.net/2020/04/22/iaTO5gAQLjnufBZ.png" style="zoom: 50%;"><img data-src="https://i.loli.net/2020/04/22/SIJivZ5L4Na9Cu3.png" style="zoom: 50%;"></p>
+<p><img data-src="https://i.loli.net/2020/04/24/c1R3x9HEzyQiTpN.png" style="zoom:50%;"><img data-src="https://i.loli.net/2020/04/22/7BoIjaJL9h6ilf1.png" style="zoom: 50%;"></p>
+<hr>
+<ol>
+<li>
+<p><a href="https://github.com/jimlee2002/nonsense.fun_tasker/releases">下载</a><code>bb.prj.xml</code>，存入到手机任意你找得到的位置。</p>
+</li>
+<li>
+<p>下载安装 Tasker。</p>
+</li>
+<li>
+<p>进入主界面长按左下角的按钮，点击<code>导入项目</code>，在打开的界面中找到并打开刚才存入的 <code>bb.prj.xml。</code></p>
+<p><img data-src="https://i.loli.net/2020/04/22/mpwnk2ZWvMc6uSU.png" style="zoom: 50%;"><img data-src="https://i.loli.net/2020/04/22/3Zc2KIWVfBzhiDM.png" style="zoom: 50%;"></p>
+<blockquote>
+<p>提示：点击右下角的手机按钮可以快速回到内部储存空间目录</p>
+</blockquote>
+</li>
+<li>
+<p>完成后回到主界面，点击应用栏里图标长得和 Tasker 很像的 <code>Tasker Secondary</code>，打开界面。</p>
+<p><img data-src="https://i.loli.net/2020/04/22/Gju9BY64UsWlvTw.png" style="zoom: 50%;"><img data-src="https://i.loli.net/2020/04/22/Hy7kwJL8FDr6I5O.png" style="zoom: 50%;"></p>
+</li>
+<li>
+<p><strong>长按</strong>发送按钮，打开设置页面进行必要设置。</p>
+<img data-src="https://i.loli.net/2020/04/22/YM5CJ6vb4OIdemy.png" style="zoom: 50%;">
+<p><strong>Title：</strong> 这里是发送界面顶端的文字，请随意修改。</p>
+<p><strong>AppID、MasterKey：</strong> 网页打开 LeanCloud，在你的项目里点击<code>设置/应用Keys</code>，复制对应的密钥分别填入。</p>
+<p><img data-src="https://i.loli.net/2020/04/20/Kaxt5GOo3LRgMmy.png" alt=""></p>
+<p><strong>className：</strong> 一般是 <code>content</code>，只要你是按照<a href="https://sspai.com/post/60024">少数派的指南</a>来做的话。</p>
+<p><strong>–insecure：</strong> 是否在脚本命令末尾加上 <code>--insecue</code>。参数默认关闭，如果无法发送可以尝试打开这个选项试试。</p>
+<p><strong>完成后点击确认返回</strong>。</p>
+</li>
+</ol>
+<p>这样就配置完成了，请试试看吧！</p>
+<h1>Tasker 工程使用方法</h1>
+<h2 id="通过-Tasker-Secondary-打开"><a class="header-anchor" href="#通过-Tasker-Secondary-打开">¶</a> 通过 Tasker Secondary 打开</h2>
+<img data-src="https://i.loli.net/2020/04/22/Gju9BY64UsWlvTw.png" style="zoom: 50%;">
+<h2 id="通过桌面小工具创建快捷方式打开"><a class="header-anchor" href="#通过桌面小工具创建快捷方式打开">¶</a> 通过桌面小工具创建快捷方式打开</h2>
+<ol>
+<li>
+<p>打开 Tasker，然后<strong>点击返回键</strong>回到主界面。</p>
+</li>
+<li>
+<p>在桌面上新建 Tasker 的桌面小部件 "任务"，在打开的界面选择 <code>Show UI</code>,</p>
+<p>在界面下方选择图标，然后点击左上角返回桌面。</p>
+<p><img data-src="https://i.loli.net/2020/04/22/QWRPd7IKmV3oXYj.png" style="zoom: 50%;"><img data-src="https://i.loli.net/2020/04/22/t5dlHRyUgDM7aKX.png" style="zoom: 50%;"></p>
+<p>完成，现在你应该能看到快捷方式了。</p>
+</li>
+</ol>
+<h2 id="自行导出为APK安装"><a class="header-anchor" href="#自行导出为APK安装">¶</a> 自行导出为 APK 安装</h2>
+<p>** 注意：你必须拥有手机的 Root 权限，并勾选<code>场景/Main/发送/按下</code>的第 6 个和第 8 个任务中的<code>使用Root运行</code>选项 **</p>
+<ol>
+<li>
+<p>Google Play 安装 <code>Tasker App Factory</code>。</p>
+</li>
+<li>
+<p>打开 Tasker，主界面左下方长按选择已经导入的项目，然后选择<code>导出\作为应用。</code></p>
+<img data-src="https://i.loli.net/2020/04/22/peARXFgoinvOJzx.png" style="zoom: 50%;">
+<blockquote>
+<p>提示：你可以通过点击<code>更名</code>重命名工程名称来修改应用名。</p>
+</blockquote>
+<img data-src="https://i.loli.net/2020/04/22/TZzLONjeHJviCp5.png" style="zoom:50%;">
+</li>
+<li>
+<p>根据提示输入包名和版本号。</p>
+<img data-src="https://i.loli.net/2020/04/22/Q7nXMpqxhB5o8a3.png" style="zoom: 50%;">
+</li>
+<li>
+<p>点击左上角返回，Tasker 会将项目以 APK 格式导出到<code>内部储存/Tasker/factory/kids</code> 并安装。</p>
+</li>
+</ol>
+<h1>后记</h1>
+<p>界面如果有问题可以自行在 Tasker 的<code>场景</code>中修改。</p>
+<p>个人能力有限，做的比较粗糙，还请不吝赐教！</p>
+<h1>致谢</h1>
+<p>感谢 <a href="https://github.com/daibor">daibor</a> 制作了这么棒的<a href="https://github.com/daibor/nonsense.fun">项目。</a></p>
+<p>感谢少数派的 @SoSo 在评论下分享的方法启发了这个工程。</p>
+]]></content>
+      <categories>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>Tasker</tag>
+        <tag>Android</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>在 WSL2 上进行 OpenWrt 的编译</title>
     <url>/posts/3a5c40a1.html</url>
     <content><![CDATA[<h1>安装 WSL</h1>
 <ul>
 <li>从 Microsoft Store 安装 WSL：略</li>
-<li>使用 LxRunOffline 安装 WSL：参考 <a href="https://p3terx.com/archives/manage-wsl-with-lxrunoffline.html" target="_blank" rel="noopener">LxRunOffline</a> 和 @P3TERX 的博客<a href="https://p3terx.com/archives/manage-wsl-with-lxrunoffline.html" target="_blank" rel="noopener">《WSL 自定义安装目录、备份转移、设置默认用户 - LxRunOffline 使用教程》</a>。</li>
+<li>使用 LxRunOffline 安装 WSL：参考 <a href="https://p3terx.com/archives/manage-wsl-with-lxrunoffline.html">LxRunOffline</a> 和 @P3TERX 的博客<a href="https://p3terx.com/archives/manage-wsl-with-lxrunoffline.html">《WSL 自定义安装目录、备份转移、设置默认用户 - LxRunOffline 使用教程》</a>。</li>
 </ul>
 <a id="more"></a>
 <h1>配置编译环境</h1>
@@ -59,20 +601,74 @@
 <p>在资源管理器地址栏输入 <code>\\wsl$</code> 即可访问 WSL 下的文件。以 x86_64 平台为例子，固件所在路径为：</p>
 <figure class="highlight plain"><table><tbody><tr><td class="code"><pre><span class="line">\\wsl$\WSL名称\home\用户名\lede\bin\targets\x86\64</span><br></pre></td></tr></tbody></table></figure>
 <h1>致谢</h1>
-<p>感谢 <a href="https://p3terx.com/" target="_blank" rel="noopener">@P3TERX</a>，博客里的文章对我有很大帮助，本文自他的博客总结而来，亦有很大一部分文字直接复制自它的博客。</p>
+<p>感谢 <a href="https://p3terx.com/">@P3TERX</a>，博客里的文章对我有很大帮助，本文自他的博客总结而来，亦有很大一部分文字直接复制自它的博客。</p>
 <h1>参考链接</h1>
 <blockquote>
-<p><a href="https://openwrt.org/docs/guide-developer/build-system/wsl" target="_blank" rel="noopener">https://openwrt.org/docs/guide-developer/build-system/wsl</a></p>
-<p><a href="https://p3terx.com/archives/compiling-openwrt-with-wsl.html" target="_blank" rel="noopener">https://p3terx.com/archives/compiling-openwrt-with-wsl.html</a></p>
-<p><a href="https://blog.csdn.net/wangyijieonline/article/details/105360138" target="_blank" rel="noopener">https://blog.csdn.net/wangyijieonline/article/details/105360138</a></p>
+<p><a href="https://openwrt.org/docs/guide-developer/build-system/wsl">https://openwrt.org/docs/guide-developer/build-system/wsl</a></p>
+<p><a href="https://p3terx.com/archives/compiling-openwrt-with-wsl.html">https://p3terx.com/archives/compiling-openwrt-with-wsl.html</a></p>
+<p><a href="https://blog.csdn.net/wangyijieonline/article/details/105360138">https://blog.csdn.net/wangyijieonline/article/details/105360138</a></p>
 </blockquote>
 ]]></content>
       <categories>
         <category>笔记</category>
       </categories>
       <tags>
-        <tag>OpenWrt</tag>
         <tag>WSL</tag>
+        <tag>OpenWrt</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>配置 Typora &amp; PicGo 写 Hexo 博客</title>
+    <url>/posts/39aaddee.html</url>
+    <content><![CDATA[<h1>工具介绍</h1>
+<h2 id="优雅的Markdown编辑器-——-Typora"><a class="header-anchor" href="#优雅的Markdown编辑器-——-Typora">¶</a> 优雅的 Markdown 编辑器 —— Typora</h2>
+<p><a href="https://www.typora.io/">官网</a></p>
+<p>简约、舒适、优雅，这是我对它的第一眼评价。</p>
+<p>完善的功能、所见即所得、自定义主题、拓展语法支持、良好的图片插入管理、数学支持、专注模式、打字机模式……</p>
+<p>以及免费 —— 这些都是我毫不犹豫下载安装它的原因。</p>
+<p>展现在我面前的它果然没有让我失望，漂亮的界面让我觉得原来的 VS Code 瞬间就不香了。</p>
+<p>当然，它的实力，还仅不限于此……</p>
+<a id="more"></a>
+<h2 id="小巧的图片上传工具——PicGo"><a class="header-anchor" href="#小巧的图片上传工具——PicGo">¶</a> 小巧的图片上传工具 ——PicGo</h2>
+<p><a href="https://molunerfinn.com/PicGo/">官网</a></p>
+<p>这是一个开源的体积小巧，功能强大的图床工具。</p>
+<p>它支持自建图床和多个常用图床，可以方便地对上传了的进行管理，还能安装拓展插件，实现截图上传、加水印上传等功能。</p>
+<p>但更重要的是，Typora 支持通过它实现拖入到文章中的图片上传图床并替换掉文中图片地址</p>
+<p>Awsome！有了它，再也不用手动上传图床复制链接了！</p>
+<p>下面就来配置下二者的结合使用。</p>
+<h1>二者配置</h1>
+<h2 id="配置PicGo的上传设置"><a class="header-anchor" href="#配置PicGo的上传设置">¶</a> 配置 PicGo 的上传设置</h2>
+<p>此处以 sm.ms 的注册图床为例，其他图床请参考<a href="https://picgo.github.io/PicGo-Doc/zh/guide/getting-started.html">官方文档</a></p>
+<ol>
+<li>
+<p><a href="http://xn--sm-5p3dp06f.ms">登录 sm.ms</a>，获取 API token，复制备用</p>
+<p><img data-src="https://i.loli.net/2020/03/21/wnxrfcZzPtvJk58.png" alt=""></p>
+</li>
+</ol>
+<img data-src="https://i.loli.net/2020/03/21/TYJIjPBk2lAHXgr.png" style="zoom: 80%;">
+<ol start="2">
+<li>
+<p>打开 PicGo，插件设置中输入 smms-user 并安装对应插件，</p>
+<img data-src="https://i.loli.net/2020/03/21/lk4dTXfQF1syWir.png" style="zoom:80%;">
+<p>安装完成后在图床设置里新出现的 <strong>SM.MS - 登录用户</strong>中输入刚才获得的 token，点击确定和设为默认图床</p>
+<img data-src="https://i.loli.net/2020/03/21/n9kpCUiR62EtjOV.png" style="zoom:80%;">
+</li>
+</ol>
+<p>此处 PicGo 配置完成</p>
+<h2 id="配置Typora"><a class="header-anchor" href="#配置Typora">¶</a> 配置 Typora</h2>
+<p>快捷键 <code>ctrl+逗号</code>打开偏好设置，进入 ``图像` 选项进行如下设置：</p>
+<img data-src="https://i.loli.net/2020/03/21/JBxqTtkSZ59wL2y.png" style="zoom:80%;">
+<p>其中<code>上传服务设定</code>中 <code>PicGo路径</code>一栏请根据自身情况填写 PicGo 的安装路径。</p>
+<p>如果需要上传网络上复制的图片到自己的图床，请勾选<code>插入图片时…</code> 中的<code>对网络位置的图片应用上述规则</code>。</p>
+<p>设置完后点击<code>验证图片上传选项</code>进行测试，成功即设置完成。</p>
+<p>Typora 和 PicGo 里各自的功能就不再展示了，这里仅作二者结合使用的介绍，其他请自行探索！</p>
+]]></content>
+      <categories>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>图床</tag>
       </tags>
   </entry>
   <entry>
@@ -102,7 +698,7 @@
 <figure class="highlight plain"><table><tbody><tr><td class="code"><pre><span class="line">make menuconfig</span><br></pre></td></tr></tbody></table></figure>
 <p>选择好架构与型号，进入 <code>LuCI</code> 一栏选择插件</p>
 <p><code>*</code> 代表编入固件，<code>M</code> 表示编译成模块或者 IPK 包， 留空为不编译</p>
-<p>详细插件应用说明参见<a href="https://www.right.com.cn/forum/thread-344825-1-1.html" target="_blank" rel="noopener">这里</a></p>
+<p>详细插件应用说明参见<a href="https://www.right.com.cn/forum/thread-344825-1-1.html">这里</a></p>
 <blockquote>
 <p>添加 MentoHUST 需勾选以下位置：</p>
 <ul>
@@ -225,24 +821,24 @@
 <ul>
 <li>
 <p>使用 Github Action 进行云编译</p>
-<p><a href="https://github.com/P3TERX/Actions-OpenWrt" target="_blank" rel="noopener">Github</a></p>
-<p><a href="https://p3terx.com/archives/build-openwrt-with-github-actions.html" target="_blank" rel="noopener">中文教程</a></p>
+<p><a href="https://github.com/P3TERX/Actions-OpenWrt">Github</a></p>
+<p><a href="https://p3terx.com/archives/build-openwrt-with-github-actions.html">中文教程</a></p>
 </li>
 <li>
 <p>在 WSL 上进行编译</p>
 </li>
 </ul>
 <h1>致谢</h1>
-<p><a href="https://p3terx.com/" target="_blank" rel="noopener">@P3TERX</a>，博客里的文章对我有很大帮助，本文自他的博客总结而来，亦有很大一部分文字直接复制自它的博客。他亦是上文所提到的 Github Action 云编译 OpenWrt 模板的作者。</p>
-<p><a href="https://www.right.com.cn/forum" target="_blank" rel="noopener">恩山论坛</a>，我路由相关知识的启蒙点，感谢各路大神的经验分享。</p>
+<p><a href="https://p3terx.com/">@P3TERX</a>，博客里的文章对我有很大帮助，本文自他的博客总结而来，亦有很大一部分文字直接复制自它的博客。他亦是上文所提到的 Github Action 云编译 OpenWrt 模板的作者。</p>
+<p><a href="https://www.right.com.cn/forum">恩山论坛</a>，我路由相关知识的启蒙点，感谢各路大神的经验分享。</p>
 <h1>参考链接</h1>
 <blockquote>
-<p><a href="https://github.com/coolsnowwolf/lede" target="_blank" rel="noopener">https://github.com/coolsnowwolf/lede</a></p>
-<p><a href="https://p3terx.com/archives/openwrt-compilation-steps-and-commands.html" target="_blank" rel="noopener">https://p3terx.com/archives/openwrt-compilation-steps-and-commands.html</a></p>
-<p><a href="https://www.right.com.cn/forum/thread-344825-1-1.html" target="_blank" rel="noopener">https://www.right.com.cn/forum/thread-344825-1-1.html</a></p>
-<p><a href="https://www.right.com.cn/forum/thread-1237348-1-1.html" target="_blank" rel="noopener">https://www.right.com.cn/forum/thread-1237348-1-1.html</a></p>
-<p><a href="https://github.com/KyleRicardo/MentoHUST-OpenWrt-ipk" target="_blank" rel="noopener">https://github.com/KyleRicardo/MentoHUST-OpenWrt-ipk</a></p>
-<p><a href="https://github.com/BoringCat/luci-app-mentohust" target="_blank" rel="noopener">https://github.com/BoringCat/luci-app-mentohust</a></p>
+<p><a href="https://github.com/coolsnowwolf/lede">https://github.com/coolsnowwolf/lede</a></p>
+<p><a href="https://p3terx.com/archives/openwrt-compilation-steps-and-commands.html">https://p3terx.com/archives/openwrt-compilation-steps-and-commands.html</a></p>
+<p><a href="https://www.right.com.cn/forum/thread-344825-1-1.html">https://www.right.com.cn/forum/thread-344825-1-1.html</a></p>
+<p><a href="https://www.right.com.cn/forum/thread-1237348-1-1.html">https://www.right.com.cn/forum/thread-1237348-1-1.html</a></p>
+<p><a href="https://github.com/KyleRicardo/MentoHUST-OpenWrt-ipk">https://github.com/KyleRicardo/MentoHUST-OpenWrt-ipk</a></p>
+<p><a href="https://github.com/BoringCat/luci-app-mentohust">https://github.com/BoringCat/luci-app-mentohust</a></p>
 </blockquote>
 ]]></content>
       <categories>
@@ -250,569 +846,6 @@
       </categories>
       <tags>
         <tag>OpenWrt</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>博客折腾笔记④- 使用 Tasker 在 Android 上实现个人动态的发送</title>
-    <url>/posts/4394c3fa.html</url>
-    <content><![CDATA[<p><a href="https://jimlee2002.github.io/posts/2b426e0a.html">前情提要</a></p>
-<p>折腾了两天，我终于是实现在 Android 上使用 Tasker 向刚搭建好的个人动态系统发送内容了。</p>
-<h1>效果展示</h1>
-<p>这是一个在 Android 上向<a href="https://github.com/daibor/nonsense.fun" target="_blank" rel="noopener">废话胶囊（b 言 b 语）</a>发送内容的简单 Tasker 工程。</p>
-<p>项目地址：<a href="https://github.com/jimlee2002/nonsense.fun_tasker" target="_blank" rel="noopener">https://github.com/jimlee2002/nonsense.fun_tasker</a></p>
-<img data-src="https://i.loli.net/2020/04/22/Hy7kwJL8FDr6I5O.png" style="zoom: 50%;">
-<a id="more"></a>
-<h1>安装配置</h1>
-<h2 id="直接下载安装已经导出好的apk文件"><a class="header-anchor" href="#直接下载安装已经导出好的apk文件">¶</a> 直接下载安装已经导出好的 <a href="https://github.com/jimlee2002/nonsense.fun_tasker/releases" target="_blank" rel="noopener">apk 文件</a></h2>
-<p>应用使用插件 <code>Tasker App Factory</code> 导出。</p>
-<p>注意，该应用<strong>需要 root 权限</strong>。</p>
-<h2 id="导入Tasker工程"><a class="header-anchor" href="#导入Tasker工程">¶</a> 导入 Tasker 工程</h2>
-<p><strong>注意：部分手机可能需要 Root 权限才能使用，该工程默认开启<code>使用Root运行</code>，可以自行到<code>场景/Main/发送/按下</code>的第 6 个和第 8 个任务里关掉该选项</strong>。</p>
-<p><img data-src="https://i.loli.net/2020/04/22/iaTO5gAQLjnufBZ.png" style="zoom: 50%;"><img data-src="https://i.loli.net/2020/04/22/SIJivZ5L4Na9Cu3.png" style="zoom: 50%;"></p>
-<p><img data-src="https://i.loli.net/2020/04/24/c1R3x9HEzyQiTpN.png" style="zoom:50%;"><img data-src="https://i.loli.net/2020/04/22/7BoIjaJL9h6ilf1.png" style="zoom: 50%;"></p>
-<hr>
-<ol>
-<li>
-<p><a href="https://github.com/jimlee2002/nonsense.fun_tasker/releases" target="_blank" rel="noopener">下载</a><code>bb.prj.xml</code>，存入到手机任意你找得到的位置。</p>
-</li>
-<li>
-<p>下载安装 Tasker。</p>
-</li>
-<li>
-<p>进入主界面长按左下角的按钮，点击<code>导入项目</code>，在打开的界面中找到并打开刚才存入的 <code>bb.prj.xml。</code></p>
-<p><img data-src="https://i.loli.net/2020/04/22/mpwnk2ZWvMc6uSU.png" style="zoom: 50%;"><img data-src="https://i.loli.net/2020/04/22/3Zc2KIWVfBzhiDM.png" style="zoom: 50%;"></p>
-<blockquote>
-<p>提示：点击右下角的手机按钮可以快速回到内部储存空间目录</p>
-</blockquote>
-</li>
-<li>
-<p>完成后回到主界面，点击应用栏里图标长得和 Tasker 很像的 <code>Tasker Secondary</code>，打开界面。</p>
-<p><img data-src="https://i.loli.net/2020/04/22/Gju9BY64UsWlvTw.png" style="zoom: 50%;"><img data-src="https://i.loli.net/2020/04/22/Hy7kwJL8FDr6I5O.png" style="zoom: 50%;"></p>
-</li>
-<li>
-<p><strong>长按</strong>发送按钮，打开设置页面进行必要设置。</p>
-<img data-src="https://i.loli.net/2020/04/22/YM5CJ6vb4OIdemy.png" style="zoom: 50%;">
-<p><strong>Title：</strong> 这里是发送界面顶端的文字，请随意修改。</p>
-<p><strong>AppID、MasterKey：</strong> 网页打开 LeanCloud，在你的项目里点击<code>设置/应用Keys</code>，复制对应的密钥分别填入。</p>
-<p><img data-src="https://i.loli.net/2020/04/20/Kaxt5GOo3LRgMmy.png" alt=""></p>
-<p><strong>className：</strong> 一般是 <code>content</code>，只要你是按照<a href="https://sspai.com/post/60024" target="_blank" rel="noopener">少数派的指南</a>来做的话。</p>
-<p><strong>–insecure：</strong> 是否在脚本命令末尾加上 <code>--insecue</code>。参数默认关闭，如果无法发送可以尝试打开这个选项试试。</p>
-<p><strong>完成后点击确认返回</strong>。</p>
-</li>
-</ol>
-<p>这样就配置完成了，请试试看吧！</p>
-<h1>Tasker 工程使用方法</h1>
-<h2 id="通过-Tasker-Secondary-打开"><a class="header-anchor" href="#通过-Tasker-Secondary-打开">¶</a> 通过 Tasker Secondary 打开</h2>
-<img data-src="https://i.loli.net/2020/04/22/Gju9BY64UsWlvTw.png" style="zoom: 50%;">
-<h2 id="通过桌面小工具创建快捷方式打开"><a class="header-anchor" href="#通过桌面小工具创建快捷方式打开">¶</a> 通过桌面小工具创建快捷方式打开</h2>
-<ol>
-<li>
-<p>打开 Tasker，然后<strong>点击返回键</strong>回到主界面。</p>
-</li>
-<li>
-<p>在桌面上新建 Tasker 的桌面小部件 "任务"，在打开的界面选择 <code>Show UI</code>,</p>
-<p>在界面下方选择图标，然后点击左上角返回桌面。</p>
-<p><img data-src="https://i.loli.net/2020/04/22/QWRPd7IKmV3oXYj.png" style="zoom: 50%;"><img data-src="https://i.loli.net/2020/04/22/t5dlHRyUgDM7aKX.png" style="zoom: 50%;"></p>
-<p>完成，现在你应该能看到快捷方式了。</p>
-</li>
-</ol>
-<h2 id="自行导出为APK安装"><a class="header-anchor" href="#自行导出为APK安装">¶</a> 自行导出为 APK 安装</h2>
-<p>** 注意：你必须拥有手机的 Root 权限，并勾选<code>场景/Main/发送/按下</code>的第 6 个和第 8 个任务中的<code>使用Root运行</code>选项 **</p>
-<ol>
-<li>
-<p>Google Play 安装 <code>Tasker App Factory</code>。</p>
-</li>
-<li>
-<p>打开 Tasker，主界面左下方长按选择已经导入的项目，然后选择<code>导出\作为应用。</code></p>
-<img data-src="https://i.loli.net/2020/04/22/peARXFgoinvOJzx.png" style="zoom: 50%;">
-<blockquote>
-<p>提示：你可以通过点击<code>更名</code>重命名工程名称来修改应用名。</p>
-</blockquote>
-<img data-src="https://i.loli.net/2020/04/22/TZzLONjeHJviCp5.png" style="zoom:50%;">
-</li>
-<li>
-<p>根据提示输入包名和版本号。</p>
-<img data-src="https://i.loli.net/2020/04/22/Q7nXMpqxhB5o8a3.png" style="zoom: 50%;">
-</li>
-<li>
-<p>点击左上角返回，Tasker 会将项目以 APK 格式导出到<code>内部储存/Tasker/factory/kids</code> 并安装。</p>
-</li>
-</ol>
-<h1>后记</h1>
-<p>界面如果有问题可以自行在 Tasker 的<code>场景</code>中修改。</p>
-<p>个人能力有限，做的比较粗糙，还请不吝赐教！</p>
-<h1>致谢</h1>
-<p>感谢 <a href="https://github.com/daibor" target="_blank" rel="noopener">daibor</a> 制作了这么棒的<a href="https://github.com/daibor/nonsense.fun" target="_blank" rel="noopener">项目。</a></p>
-<p>感谢少数派的 @SoSo 在评论下分享的方法启发了这个工程。</p>
-<svg style="display: none" id="MJX-SVG-global-cache"><defs></defs></svg>]]></content>
-      <categories>
-        <category>笔记</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-        <tag>Tasker</tag>
-        <tag>Android</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>博客折腾笔记③- 搭建个人动态页面 iM</title>
-    <url>/posts/2b426e0a.html</url>
-    <content><![CDATA[<p>今天在少数派上看到一篇搭建类似微博的个人动态页面的指南，我非常感高兴：出于对实现私密树洞分享心情的需要以及言论审查的苦恼，我想在博客上实现这样的功能很久了。感谢原作者为不懂技术的脚本小子我造好了轮子，接下来只需简单配置即可实现所需功能了。</p>
-<p>以下是我的配置过程：</p>
-<blockquote>
-<p>参考文章：<a href="https://sspai.com/post/60024" target="_blank" rel="noopener">保卫表达：用后端 BaaS 快速搭建专属无点赞评论版微博 ——b 言 b 语</a></p>
-</blockquote>
-<a id="more"></a>
-<h1>配置后端 BaaS</h1>
-<p>这里使用 <a href="https://leancloud.app/" target="_blank" rel="noopener">LeanCloud 国际版</a></p>
-<p>登入后创建应用并命名</p>
-<p>进入新建好的应用，点击<code>新建Class</code>，将新建的 Class 命名为 content</p>
-<p>同时设置下方 create 、delete 、update 三项权限为” 指定用户 “，其他权限默认即可</p>
-<p><img data-src="https://i.loli.net/2020/04/20/cgBW2ryuwPd1iXf.png" alt=""></p>
-<p>点击刚创建的 content Class</p>
-<p>点击 添加列 并创建名称为 content 的「列」，类型为 String</p>
-<p><img data-src="https://i.loli.net/2020/04/20/vLmAcuBIGPUZK4x.png" alt=""></p>
-<p><img data-src="https://i.loli.net/2020/04/20/czwJRK4F75DsPbA.png" alt=""></p>
-<p>完成后点击左侧<code>设置</code> - <code>应用 Keys</code>，记录三组 Keys 备用</p>
-<p><img data-src="https://i.loli.net/2020/04/20/Kaxt5GOo3LRgMmy.png" alt=""></p>
-<h1>配置客户端发送工具</h1>
-<h2 id="Winodws：使用Quicker"><a class="header-anchor" href="#Winodws：使用Quicker">¶</a>Winodws：使用 <a href="https://www.getquicker.net/" target="_blank" rel="noopener">Quicker</a></h2>
-<p>Quicker 模板地址：<a href="https://getquicker.net/sharedaction?code=eeb80278-5f53-4b0d-d333-08d7e0dd26a9" target="_blank" rel="noopener">点击安装</a></p>
-<p>安装模板后右键编辑模板，修改变量定义和其他内容</p>
-<p><img data-src="https://i.loli.net/2020/04/20/QAK8tCqRg79GyNL.png" alt=""></p>
-<p>尝试发送一次请求，如果配置正确，在 LeanCloud 的后台刷新就能看到一条记录了。<strong>此后的删除、修改，都需要通过该后台进行。</strong></p>
-<h2 id="Android"><a class="header-anchor" href="#Android">¶</a>Android</h2>
-<p>请参考我的<a href="https://jimlee2002.github.io/posts/4394c3fa.html">另一篇文章</a></p>
-<h1>在博客上添加界面</h1>
-<p>在博客 <code>/source</code> 下新建文件夹 <code>iM</code></p>
-<p>下载作者提供的<a href="https://github.com/daibor/nonsense.fun" target="_blank" rel="noopener">页面文件</a></p>
-<p>将其复制到 <code>/source/iM</code> 下，打开编辑器自行修改其中内容</p>
-<p>请注意填写 53-54 行的 <code>appId</code> 和 <code>appKey</code></p>
-<p>修改后打开博客根目录<code>_config.yml</code>，在 <code>skip_render</code> 添加新建好的 <code>iM</code> 文件夹</p>
-<figure class="highlight yaml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="attr">skip_render:</span> </span><br><span class="line">  <span class="bullet">-</span> <span class="string">"404.html"</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">"iM/**"</span></span><br></pre></td></tr></tbody></table></figure>
-<p>保存后打开所用主题文件夹下的<code>_config.yml</code>，向菜单栏添加 iM 的入口</p>
-<p>这里以主题 NeXT 为例：编辑 <code>menu</code> 下面的内容，添加<code> iM: /iM/ || user</code></p>
-<figure class="highlight yaml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># Usage: `Key: /link/ || icon`</span></span><br><span class="line"><span class="comment"># Key is the name of menu item. If the translation for this item is available, the translated text will be loaded, otherwise the Key name will be used. Key is case-senstive.</span></span><br><span class="line"><span class="comment"># Value before `||` delimiter is the target link, value after `||` delimiter is the name of Font Awesome icon.</span></span><br><span class="line"><span class="comment"># When running the site in a subdirectory (e.g. yoursite.com/blog), remove the leading slash from link value (/archives -&gt; archives).</span></span><br><span class="line"><span class="comment"># External url should start with http:// or https://</span></span><br><span class="line"><span class="attr">menu:</span></span><br><span class="line">  <span class="attr">home:</span> <span class="string">/</span> <span class="string">||</span> <span class="string">home</span></span><br><span class="line">  <span class="attr">categories:</span> <span class="string">/categories/</span> <span class="string">||</span> <span class="string">th</span></span><br><span class="line">  <span class="attr">tags:</span> <span class="string">/tags/</span> <span class="string">||</span> <span class="string">tags</span></span><br><span class="line">  <span class="attr">archives:</span> <span class="string">/archives/</span> <span class="string">||</span> <span class="string">archive</span></span><br><span class="line">  <span class="attr">iM:</span> <span class="string">/iM/</span> <span class="string">||</span> <span class="string">user</span></span><br></pre></td></tr></tbody></table></figure>
-<p>完成后终端依次输入</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g</span><br><span class="line">hexo s</span><br></pre></td></tr></tbody></table></figure>
-<p>打开 localhost:4000 查看效果</p>
-<h1>To-Do</h1>
-<ul>
-<li><input type="checkbox" id="checkbox0"><label for="checkbox0">修改美化 iM 的页面文件</label><code>index.md</code>，参考 Cytus2 里的界面魔改？</li>
-<li><input type="checkbox" id="checkbox1"><label for="checkbox1">尝试用</label><code>hexo-blog-encrypt</code> 加密页面？</li>
-<li><input type="checkbox" id="checkbox2"><label for="checkbox2">直接在页面处添加一个在线输入框方便输入？</label></li>
-</ul>
-]]></content>
-      <categories>
-        <category>笔记</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>博客折腾笔记②-hexo 的优化</title>
-    <url>/posts/3a4e373e.html</url>
-    <content><![CDATA[<h1>文章永久链接唯一化</h1>
-<p>为解决 hexo 默认设置下改变源文件名或使用中文标题带来的文章链接问题，这里使用 <code>hexo-abbrlink</code> 插件来解决问题</p>
-<figure class="highlight nginx"><table><tbody><tr><td class="code"><pre><span class="line"><span class="attribute">npm</span> install hexo-abbrlink --save</span><br></pre></td></tr></tbody></table></figure>
-<a id="more"></a>
-<p>然后更改博客配置文件<code>_config.yml</code>, 这里我改成</p>
-<figure class="highlight yaml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="attr">permalink:</span> <span class="string">:posts/:year/:abbrlink/</span></span><br></pre></td></tr></tbody></table></figure>
-<p>还可以设置永久链接的生成算法，在博客配置文件中加入</p>
-<figure class="highlight yaml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="attr">abbrlink:</span></span><br><span class="line">  <span class="attr">alg:</span> <span class="string">crc32</span>  <span class="comment"># support crc16(default) and crc32</span></span><br><span class="line">  <span class="attr">rep:</span> <span class="string">hex</span>    <span class="comment"># support dec(default) and hex</span></span><br></pre></td></tr></tbody></table></figure>
-<p>不同算法的生成效果：</p>
-<figure class="highlight plain"><table><tbody><tr><td class="code"><pre><span class="line">crc16 &amp; hex</span><br><span class="line">https://post.zz173.com/posts/66c8.html</span><br><span class="line">crc16 &amp; dec</span><br><span class="line">https://post.zz173.com/posts/65535.html</span><br><span class="line">crc32 &amp; hex</span><br><span class="line">https://post.zz173.com/posts/8ddf18fb.html</span><br><span class="line">crc32 &amp; dec</span><br><span class="line">https://post.zz173.com/posts/1690090958.html</span><br></pre></td></tr></tbody></table></figure>
-<p>一些知识补充：</p>
-<blockquote>
-<blockquote>
-<p>百度蜘蛛抓取网页的规则：对于蜘蛛说网页权重越高、信用度越高抓取越频繁，例如网站的首页和内页。蜘蛛先抓取网站的首页，因为首页权重更高，并且大部分的链接都是指向首页。然后通过首页抓取网站的内页，并不是所有内页蜘蛛都会去抓取。</p>
-</blockquote>
-<p>搜索引擎认为对于一般的中小型站点，3 层足够承受所有的内容了，所以蜘蛛经常抓取的内容是前三层，而超过三层的内容蜘蛛认为那些内容并不重要，所以不经常爬取。出于这个原因所以 permalink 后面跟着的最好不要超过 2 个斜杠。[^]</p>
-</blockquote>
-<h1>新设备上恢复博客备份的问题解决</h1>
-<h2 id="sudo-npm-install-失败"><a class="header-anchor" href="#sudo-npm-install-失败">¶</a><code>sudo npm install </code>失败</h2>
-<p>解决方案：不要用 <code>sudo</code>, 直接 <code>npm install</code> 就好</p>
-<h2 id="hexo-b报错"><a class="header-anchor" href="#hexo-b报错">¶</a><code>hexo b</code> 报错</h2>
-<p>在新装的 UTG 上恢复 Blog，最后执行 <code>hexo b</code> 的时候报错了</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">fatal: <span class="string">'github'</span> does not appear to be a git repository</span><br><span class="line">fatal: 无法读取远程仓库。</span><br><span class="line"></span><br><span class="line">请确认您有正确的访问权限并且仓库存在。</span><br></pre></td></tr></tbody></table></figure>
-<p>翻了翻插件的 issuse，看到了相似的问题<a href="https://github.com/coneycode/hexo-git-backup/issues/20" target="_blank" rel="noopener">#20</a></p>
-<p>参考里面的内容，修改<strong>博客配置文件</strong>里插件的相关配置，把 <code>github</code> 换成 <code>origin</code></p>
-<figure class="highlight plain"><table><tbody><tr><td class="code"><pre><span class="line">backup:</span><br><span class="line">  type: git</span><br><span class="line">  repository:</span><br><span class="line">    origin: git@github:bx_reader/bx-reader-api.git,master</span><br></pre></td></tr></tbody></table></figure>
-<p>这里顺便把 git 的 https 连接改成了 git 连接，这样就不用每次都输入账号密码了</p>
-<p>再次尝试，问题解决</p>
-<h1>Hexo 文章加密</h1>
-<p>使用插件 <a href="https://github.com/MikeCoder/hexo-blog-encrypt" target="_blank" rel="noopener">hexo-blog-encrypt</a></p>
-<h2 id="安装"><a class="header-anchor" href="#安装">¶</a> 安装</h2>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">npm install --save hexo-blog-encrypt</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="使用"><a class="header-anchor" href="#使用">¶</a> 使用</h2>
-<p>在文章信息头添加 <code>password</code> 字段</p>
-<figure class="highlight yaml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">Hello</span> <span class="string">World</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2016</span><span class="number">-03</span><span class="number">-30</span> <span class="number">21</span><span class="string">:18:02</span></span><br><span class="line"><span class="attr">password:</span> <span class="string">mikemessi</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></tbody></table></figure>
-<p>也可以在文章信息头单独自定义密码输入交互信息</p>
-<figure class="highlight yaml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">Hello</span> <span class="string">World</span></span><br><span class="line"><span class="attr">tags:</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">作为日记加密</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2016</span><span class="number">-03</span><span class="number">-30</span> <span class="number">21</span><span class="string">:12:21</span></span><br><span class="line"><span class="attr">password:</span> <span class="string">mikemessi</span></span><br><span class="line"><span class="attr">abstract:</span> <span class="string">有东西被加密了,</span> <span class="string">请输入密码查看.</span></span><br><span class="line"><span class="attr">message:</span> <span class="string">您好,</span> <span class="string">这里需要密码.</span></span><br><span class="line"><span class="attr">wrong_pass_message:</span> <span class="string">抱歉,</span> <span class="string">这个密码看着不太对,</span> <span class="string">请再试试.</span></span><br><span class="line"><span class="attr">wrong_hash_message:</span> <span class="string">抱歉,</span> <span class="string">这个文章不能被校验,</span> <span class="string">不过您还是能看看解密后的内容.</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></tbody></table></figure>
-<h2 id="进阶"><a class="header-anchor" href="#进阶">¶</a> 进阶</h2>
-<h3 id="全局配置"><a class="header-anchor" href="#全局配置">¶</a> 全局配置</h3>
-<p>在站点根目录下的<code>_config.yml</code> 里可以添加以下内容进行全局配置</p>
-<figure class="highlight yaml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># Security</span></span><br><span class="line"><span class="attr">encrypt:</span> <span class="comment"># hexo-blog-encrypt</span></span><br><span class="line">  <span class="attr">abstract:</span> <span class="string">有东西被加密了,</span> <span class="string">请输入密码查看.</span></span><br><span class="line">  <span class="attr">message:</span> <span class="string">您好,</span> <span class="string">这里需要密码.</span></span><br><span class="line">  <span class="attr">tags:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">{name:</span> <span class="string">tagName,</span> <span class="attr">password:</span> <span class="string">密码A}</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">{name:</span> <span class="string">tagName,</span> <span class="attr">password:</span> <span class="string">密码B}</span></span><br><span class="line">  <span class="attr">template:</span> <span class="string">&lt;div</span> <span class="string">id="hexo-blog-encrypt"</span> <span class="string">data-wpm="{{hbeWrongPassMessage}}"</span> <span class="string">data-whm="{{hbeWrongHashMessage}}"&gt;&lt;div</span> <span class="string">class="hbe-input-container"&gt;&lt;input</span> <span class="string">type="password"</span> <span class="string">id="hbePass"</span> <span class="string">placeholder="{{hbeMessage}}"</span> <span class="string">/&gt;&lt;label&gt;{{hbeMessage}}&lt;/label&gt;&lt;div</span> <span class="string">class="bottom-line"&gt;&lt;/div&gt;&lt;/div&gt;&lt;script</span> <span class="string">id="hbeData"</span> <span class="string">type="hbeData"</span> <span class="string">data-hmacdigest="{{hbeHmacDigest}}"&gt;{{hbeEncryptedData}}&lt;/script&gt;&lt;/div&gt;</span></span><br><span class="line">  <span class="attr">wrong_pass_message:</span> <span class="string">抱歉,</span> <span class="string">这个密码看着不太对,</span> <span class="string">请再试试.</span></span><br><span class="line">  <span class="attr">wrong_hash_message:</span> <span class="string">抱歉,</span> <span class="string">这个文章不能被校验,</span> <span class="string">不过您还是能看看解密后的内容.</span></span><br></pre></td></tr></tbody></table></figure>
-<p>配置优先级是</p>
-<p><strong>文章信息头 &gt; <code>_config.yml</code> (站点根目录下的) &gt; 默认配置</strong></p>
-]]></content>
-      <categories>
-        <category>笔记</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>利用闲置 SSD 打造 WTG + Linux + PE 多合一移动系统硬盘</title>
-    <url>/posts/2af4a4f4.html</url>
-    <content><![CDATA[<blockquote>
-<p><strong>写在前面</strong>：本文大量复制和借鉴了<a href="http://bbs.wuyou.net/forum.php?mod=viewthread&amp;tid=410612&amp;extra=page%3D1" target="_blank" rel="noopener">无忧启动论坛 @ddsony 的教程内容</a>，没有他的帖子就没有我的这篇折腾笔记，十分感谢他帖子的详细指引！</p>
-</blockquote>
-<p>手上有一块闲置 SSD（建兴 T9，128G），想将它利用上来做一块多合一移动系统盘方便随身应急使用。</p>
-<p>上网冲浪偶然发现还有系统 All in One 移动硬盘的玩法，于是打算折腾一下</p>
-<a id="more"></a>
-<h1>实现目标</h1>
-<ol>
-<li>同时兼容 UEFI 和 Legacy 启动</li>
-<li>隐藏系统分区和启动分区，可以当作普通移动硬盘使用</li>
-<li> WTG</li>
-<li>Linux（这里使用 Ubuntu）</li>
-<li>WIN PE（这里使用 <a href="http://bbs.wuyou.net/forum.php?mod=viewthread&amp;tid=349965&amp;extra=page%3D1" target="_blank" rel="noopener">chiannet 制作的 USBOS V3</a>）</li>
-</ol>
-<h1>制作过程</h1>
-<h2 id="准备资料"><a class="header-anchor" href="#准备资料">¶</a> 准备资料</h2>
-<p>一个移动硬盘 / U 盘（固态 U 盘或者 WTG 认证 U 盘），用来安装</p>
-<p>另一个空白 U 盘，大小最好 4G 以上，用作装 Linux 的启动盘</p>
-<p>我整理的<a href="http://www.filedropper.com/200326wtg" target="_blank" rel="noopener">资料包</a></p>
-<p><strong>镜像</strong>：</p>
-<p>Ubuntu</p>
-<p>Win10 使用官方 1909</p>
-<p><a href="http://bbs.wuyou.net/forum.php?mod=viewthread&amp;tid=349965&amp;extra=page%3D1" target="_blank" rel="noopener">chiannet 制作的 USBOS V3</a></p>
-<p><strong>软件</strong>：</p>
-<p><a href="http://bbs.wuyou.net/forum.php?mod=viewthread&amp;tid=330493&amp;extra=page%3D1" target="_blank" rel="noopener">MBROSTool</a> 本文主要工具</p>
-<p><a href="https://msfn.org/board/topic/149612-winntsetup-v40/" target="_blank" rel="noopener">WinNTSetup</a> 安装 WTG 用</p>
-<p><a href="https://china.paragon-software.com/home-windows/extfs-for-windows-download" target="_blank" rel="noopener">ExtFS for Windows</a> 在 windows 下读写 ext4 的分区，10 天免费试用，到期后限制向 Ext4 分区读写的性能。</p>
-<h1>安装流程</h1>
-<h2 id="处理硬盘分区-安装PE"><a class="header-anchor" href="#处理硬盘分区-安装PE">¶</a> 处理硬盘分区 &amp; 安装 PE</h2>
-<ol>
-<li>连接移动硬盘，打开 MBROSTool，在<code>选项</code>中把<code>显示所有磁盘</code>打勾</li>
-</ol>
-<p><img data-src="https://i.loli.net/2020/03/22/HnZ7LIJ2zmXqlkG.jpg" alt=""></p>
-<p>然后在下方<strong>磁盘</strong>处选择要制作的移动硬盘</p>
-<p><img data-src="https://i.loli.net/2020/03/22/isE1Y6TbAjS52WF.jpg" alt=""></p>
-<p>打开<code>选项</code> - <code>格式化</code>，按如下设置</p>
-<p><img data-src="https://i.loli.net/2020/03/22/lkB3tf7AjQchY8M.jpg" alt=""></p>
-<p>右上角下拉栏选 3 个分区</p>
-<p>50G 用作 WTG 的 win10，选择 <code>VHD</code>，暂时空着路径信息</p>
-<p>50G 用作 Linux，选择 <code>VHD</code>，同样暂时空着路径信息</p>
-<blockquote>
-<p>下文步骤 4Winntsetup 安装结束后，由于是空分区，软件默认不在启动菜单里显示 WTG 菜单项标题，必须修改 “多 UDm 菜单 " 才能显示，修改方法见下文</p>
-</blockquote>
-<p>直接拖入 PE 的镜像文件到分区 3 的路径输入处，选择 “解开”，然后分区大小扩容到 1G（1024M）用作 PE</p>
-<p>右下方<code>用户区</code>打勾，剩余的容量将作为普通的移动硬盘使用</p>
-<p>左下方<code>重建分区表</code>打勾</p>
-<p>其他设置默认，随后点击最下方<code>格式化</code></p>
-<p>在格式化完成的同时，PE 也一并安装好了</p>
-<ol start="2">
-<li>回到主界面，点击<code>高级</code> - <code>备份到MOS</code>，备份 U 盘前 8M 到 BACK.MOS，备份默认保存在 MBROSTool 软件目录下，这个东西留着备用</li>
-</ol>
-<p><img data-src="https://i.loli.net/2020/03/26/K3G9DU7xYlLCIqs.png" alt="图片来自 无忧启动论坛@ddsony"></p>
-<ol start="3">
-<li>回到主界面去掉<code>只读</code>的勾选，列表框选择第二分区来挂写子盘</li>
-</ol>
-<p><img data-src="https://i.loli.net/2020/03/22/ngvmLEZDayrKMph.png" alt="图片来自 无忧启动论坛@ddsony"></p>
-<p>挂载后打开子盘 <code>/udm/udmsmenu.sh</code>，找到如图所示位置，去掉 #defudmmenu 1 和 #defudmmenu 2 两行前面的<code>#</code>（去除注释），并且顺手改掉后面的 <code>""</code> 里面的内容</p>
-<p>比如这里，前面格式化的时候把分区 1 作为 WTG 用的 Win10 盘，分区 2 作为 Deepin 用的盘，这里就改成了</p>
-<p><img data-src="https://i.loli.net/2020/03/22/m3vwcbkXaJjN81E.jpg" alt=""></p>
-<p>修改完后<strong>记得保存</strong></p>
-<p>同样的方法修改 <code>/EFI/mbrosefis.cfg</code></p>
-<p><img data-src="https://i.loli.net/2020/03/22/H7mduOlVr8XBYRC.jpg" alt=""></p>
-<p>到这里硬盘就处理好了，下面我们来进行 WTG 的安装</p>
-<blockquote>
-<p>删掉子盘 <code>/udm/pic/bubble.png</code> 可以关闭掉 MBR 引导时菜单的泡泡动画</p>
-</blockquote>
-<h2 id="WTG安装"><a class="header-anchor" href="#WTG安装">¶</a>WTG 安装</h2>
-<ol>
-<li>回到主界面，打开<code>高级</code> -<code>BootICE</code> 按下图操作</li>
-</ol>
-<p><img data-src="http://bbs.wuyou.net/forum.php?mod=attachment&amp;aid=NDAzMTk5fGY5Zjg5OGY0fDE1ODQ4NzUyODJ8MHw0MTA2MTI%3D.jpg" alt="图片来自 无忧启动论坛@ddsony"></p>
-<ol start="2">
-<li>回到主界面，点击<code>常用</code> - <code>加载</code>，选择刚才分出的 50G 的 VHD 分区，点<code>高级</code>再点击<code>分区表加载</code></li>
-</ol>
-<p><img data-src="https://i.loli.net/2020/03/22/BN63XmOeJEu1CIK.jpg" alt=""></p>
-<p><img data-src="https://i.loli.net/2020/03/23/r18XKPVSNne6FlT.jpg" alt="批注 2020-03-23 000143"></p>
-<ol start="3">
-<li>点击’高级’-‘分区管理’，去掉用户区 MBSuDATA 的激活状态，同时激活安装分区；</li>
-</ol>
-<p><img data-src="https://i.loli.net/2020/03/22/5PkG6nXdWiFLSzc.jpg" alt=""></p>
-<p>如图，<strong>如果安装分区类型不是 0x07 的话，选中后点 <code>修改</code>，把分区类型改为 0x07。如果以后又卸载再重新挂载的，仍旧要改</strong></p>
-<p><img data-src="https://i.loli.net/2020/03/22/317z8pCDfvBFP6A.jpg" alt=""></p>
-<ol start="4">
-<li>打开 WinNTSetup，填好安装源路径和其他信息，<strong>引导驱动器和安装磁盘的位置是同一个，即上面分区表加载的要安装 WTG 的分区</strong>，先点 <code>F</code> 格式化一遍，再点<code>开始安装</code>，弹出的窗口选择默认的<code>使用bootsect.exe更新启动代码</code>，然后点确认</li>
-</ol>
-<p><img data-src="https://i.loli.net/2020/03/22/5qYdNFrJgHBK6tk.png" alt=""></p>
-<p>WinNtSetup 安装完成后，提示系统重启时以 BIOS 方式重启；</p>
-<ol start="5">
-<li>
-<p>安装完成后，提示系统重启。重启时再引导界面选择移动硬盘引导，重启到到 “多 UDm 菜单”，点击 WTG 启动菜单项。</p>
-<p>等待 WTG 系统配置好设备信息，还有一次重启，同样重启到 “多 UDm 菜单”，点击 WTG 启动菜单项，一直到 WTG 安装完毕进入桌面；</p>
-<p>进入桌面后进行系统激活，然后重启回到本机系统</p>
-</li>
-<li>
-<p>**（可选，非必要）** 打开 MBROSTool 工具文件夹下的 ghost32w.exe 进行 GHOST 备份</p>
-</li>
-</ol>
-<p><img data-src="https://i.loli.net/2020/03/22/WtZibO4v8eh6xVB.jpg" alt="打开程序"></p>
-<p><img data-src="https://i.loli.net/2020/03/22/wYuzkZy9Wa1EtjD.jpg" alt="选择移动硬盘"></p>
-<p><img data-src="https://i.loli.net/2020/03/22/fdcOSHC2x3ojql1.jpg" alt="选择WTG的分区（这里是第一个）"></p>
-<p><img data-src="https://i.loli.net/2020/03/22/qnUDYMtmdL3Hfuv.jpg" alt="选择备份文件保存位置，路径最好不要有中文"></p>
-<p><img data-src="https://i.loli.net/2020/03/22/ReQ3kVxFyKvb1H2.jpg" alt="是否压缩备份文件以及压缩的级别"></p>
-<p><img data-src="https://i.loli.net/2020/03/22/vGLAyWmXrdx3c4S.jpg" alt="选Yes"></p>
-<p><img data-src="https://i.loli.net/2020/03/22/nVgryOEWjHKcCvF.jpg" alt="选 Force lock"></p>
-<p>以后 WTG 的系统如果坏了，就可以再用工具<code>分区表加载</code>同一个分区，用 GHOST 恢复文件到安装分区后再进行以下的步骤就能轻松修复。</p>
-<ol start="7">
-<li>打开 MBROStool，先参照准备工作中的步骤 1 切换<code>磁盘</code>到当前的移动硬盘，然后参照下图深度卸载掉 WTG 的安装分区，这样就隐藏好安装分区了</li>
-</ol>
-<p><img data-src="https://i.loli.net/2020/03/22/i4hkVUXy92Trd5l.jpg" alt=""></p>
-<p><img data-src="https://i.loli.net/2020/03/22/qNVopv2tZI85Uji.jpg" alt=""></p>
-<ol start="8">
-<li>如图所示恢复一开始备份的 MOS</li>
-</ol>
-<p><img data-src="https://i.loli.net/2020/03/22/XEc8UQGbLwivfjd.jpg" alt=""></p>
-<p><img data-src="https://i.loli.net/2020/03/22/M4PUgAHlTz9LnDu.jpg" alt=""></p>
-<p>然后点<code>高级</code> - <code>分区管理</code>，恢复原来用户区 MBSuDATA 的激活状态（有些古怪电脑用户区不激活就无法启动）；<br>
-9. 软件右上角去掉只读，点旁边 UDm 下拉列表框选择挂载 WTG 的安装分区；<br>
-挂载后软件界面右键该分区，菜单选择<code>快启处理</code>。生成完毕后，WTG 就算装好了。</p>
-<p><img data-src="https://i.loli.net/2020/03/22/7siFg6tXCfV3hWR.jpg" alt=""></p>
-<p><img data-src="https://i.loli.net/2020/03/22/TWyQAiCR69jhakY.jpg" alt=""></p>
-<h2 id="Linux的安装（Ubuntu、Deepin等Debian系发行版）"><a class="header-anchor" href="#Linux的安装（Ubuntu、Deepin等Debian系发行版）">¶</a>Linux 的安装（Ubuntu、Deepin 等 Debian 系发行版）</h2>
-<h3 id="安装系统镜像（以Deepin为例）"><a class="header-anchor" href="#安装系统镜像（以Deepin为例）">¶</a> 安装系统镜像（以 Deepin 为例）</h3>
-<ol>
-<li>
-<p>保险起见，再备份一次 MOS</p>
-<p><img data-src="https://i.loli.net/2020/03/26/K3G9DU7xYlLCIqs.png" alt="图片来自 无忧启动论坛@ddsony"></p>
-</li>
-<li>
-<p>挂载 Linux 的安装分区</p>
-<p><img data-src="https://i.loli.net/2020/03/22/BN63XmOeJEu1CIK.jpg" alt=""></p>
-<p><img data-src="https://i.loli.net/2020/03/22/mZuNJdMtTYX67BF.jpg" alt=""></p>
-</li>
-<li>
-<p>拿出另一个 U 盘，用 Easy2Boot 制作 ISO 启动盘。如图：</p>
-<p><img data-src="https://i.loli.net/2020/03/23/iZlh23pbjLTED4N.png" alt="图片来自 无忧启动论坛@ddsony"></p>
-<p>制作完成后，在_ISO\Linux\ 目录下拷入 Deepin 的镜像文件：</p>
-<p><img data-src="https://i.loli.net/2020/03/23/Wm6YpdiDvHRGSNZ.png" alt="图片来自 无忧启动论坛@ddsony"></p>
-<p>关机，重启引导进入 U 盘，选 <code>Linux</code> 菜单项进入，再选择你的镜像启动 ISO：</p>
-<p><img data-src="https://i.loli.net/2020/03/23/m39xOZRjiQ8yLgo.png" alt="图片来自 无忧启动论坛@ddsony"></p>
-<p><img data-src="https://i.loli.net/2020/03/23/Z1OEqGyldkAWiC3.png" alt="图片来自 无忧启动论坛@ddsony"></p>
-<p><img data-src="https://i.loli.net/2020/03/23/ltfHSXCrbL3RkuN.png" alt="图片来自 无忧启动论坛@ddsony"></p>
-<p><img data-src="https://i.loli.net/2020/03/23/35GVbgo4fTwRhxD.png" alt="图片来自 无忧启动论坛@ddsony"></p>
-<p>进入安装界面，跟着安装流程走就好。</p>
-<p>需要注意的是，在选择安装位置的页面，我们需要选择选择<code>高级安装</code>，找到上文事先分挂载好的安装分区，点击设定其文件系统为 <code>ext4</code>、挂载点为 <code>\</code>。</p>
-<p>我们还需要点击左下角<code>修改引导器</code>，把引导器也同样设为这个分区，之后就可以点击<code>安装</code>了。</p>
-<p>选择界面如图所示</p>
-<p><img data-src="https://i.loli.net/2020/03/23/4zNLJWTtBo6kFwx.png" alt="以Deepin为例"></p>
-</li>
-<li>
-<p>安装完成后，系统将会自动重启。我们回到本机系统。</p>
-<p>如果你已经装好 <a href="https://china.paragon-software.com/home-windows/extfs-for-windows-download" target="_blank" rel="noopener">ExtFS for Windows</a> 的话，我们应该就能看到刚安装完 deepin 的分区了</p>
-<blockquote>
-<p>如果你不想安装这个软件，你还可以在刚才用来装 Linux 镜像的 LU 盘里操作（进试用）</p>
-</blockquote>
-<p>我们打开这个分区，复制 <code>Ubuntu-UDm深隐资料包</code>里的 <code>grldr</code> 文件和 <code>/efi</code> 文件夹到根目录。</p>
-<p>然后打开 <code>/boot/grub</code> ，将下面的 <code>/grub.cfg</code> 复制到 根目录的 <code>/efi</code> 下，并更名为 <code>mbrosefi_qk.menu.cfg</code></p>
-<blockquote>
-<p>需要注意的是，工具内原有提供的 <code>grldr</code>、<code>/efi/boot/bootia32</code> 和 <code>/efi/boot/bootia32</code> 存在问题，我这里使用工具提供的文件无法正常启动 Linux。</p>
-<p>我已经在自行打包的 <code>Ubuntu-UDm深潜资料包</code>中提供了我个人使用后成功安装 Ubuntu 的替换文件。其他发行版可以自行尝试使用。</p>
-</blockquote>
-</li>
-<li>
-<p>我们打开更名好的 <code>mbrosefi_qk.menu.cfg</code>，按照以下规则对其进行修改</p>
-<ul>
-<li>在所有 <code>set root='hdX,msdosY' </code>（X,Y 代表数字）类似的行 的前面加上 #注释掉，或者直接删掉该行</li>
-</ul>
-<p><img data-src="https://i.loli.net/2020/03/23/Fn7q9IKsLkCVJzR.jpg" alt=""></p>
-<ul>
-<li>所有以 <code>linux</code> 开始的行，须在该行代码末尾添加<code>空格 + $udmboot</code>。</li>
-</ul>
-<p><img data-src="https://i.loli.net/2020/03/23/c4Ga8btdr1AFWKU.jpg" alt=""></p>
-<p><img data-src="https://i.loli.net/2020/03/23/aG1Z6qCvtjh5PcR.jpg" alt=""></p>
-<ul>
-<li><code>linux  /boot/vmlinuz-...</code>、<code>initrd  /boot/initrd....</code> 和 <code>loadfont /boot/...</code> 等开始的行，需要在 <code>/boot</code> 字段前加入<code> ($rooti)</code> 字段。</li>
-</ul>
-<p><img data-src="https://i.loli.net/2020/03/23/4YpeKjR2yOntQk5.jpg" alt=""></p>
-   <center>↓↓↓↓↓↓↓↓↓↓↓↓</center>
-<p><img data-src="https://i.loli.net/2020/03/23/DPIyh4dCwKmFUta.jpg" alt=""></p>
-</li>
-<li>
-<p>打开资料包中的 <code>menu.lst</code> 和 <code>menu0.lst</code>，对照着刚刚修改的 <code>/efi/mbrosefi_qk.menu.cfg</code> 里的信息对 <code>menu.lst</code> 和 <code>menu0.lst</code> 进行以下修改</p>
-<ul>
-<li>
-<p>把 <code>menu.lst</code> 和 <code>menu0.lst</code> 里所有的 ``–set=root <code>后面的一大串数字（UUID）全部修改为</code> /efi/mbrosefi_qk.menu.cfg <code>里</code> root=UUID=` 后面的一大串数字</p>
-<p><img data-src="https://i.loli.net/2020/03/23/nd9U5ItyMCrNZk3.jpg" alt="这样的一串数字"></p>
-<p>然后，修改以下内容：</p>
-</li>
-<li>
-<p>修改 <code>menu.lst</code> 和 <code>menu0.lst</code> 里所有的内核版本号数字为 <code>/efi/mbrosefi_qk.menu.cfg</code> 里的内核版本号数字</p>
-<p><img data-src="https://i.loli.net/2020/03/25/FYjGlzPWL3I1bwT.png" alt="/efi/mbrosefi_qk.menu.cfg 里的内核版本号数字"></p>
-<p><img data-src="https://i.loli.net/2020/03/25/sgKUm7TQ9V8W4lB.png" alt="要修改的 menu.lst 和 menu0.lst 里的内核版本号"></p>
-<p>完成后保存并复制到 Linux 的安装分区根目录 <code>/</code></p>
-</li>
-</ul>
-</li>
-</ol>
-<h3 id="设置深度隐藏"><a class="header-anchor" href="#设置深度隐藏">¶</a> 设置深度隐藏</h3>
-<ol>
-<li>
-<p>重启电脑，用 MBR 或 UEFI 引导移动硬盘进入 UDm 菜单，然后尝试进入安装好的 Linux。</p>
-</li>
-<li>
-<p>如果 Linux 能正常启动，在简单配置 Linux 后重启回到主机系统，把 <code>udm</code> 和 <code>UDm-hook.sh</code> 复制到 移动硬盘普通储存区或另一个 U 盘，然后重启到 Linux 按步骤进行以下修改：</p>
-<ol>
-<li>复制 <code>udm</code> 到 <code>/usr/bin</code></li>
-<li>在 <code>/etc/initramfs-tools/hooks</code> 下新建脚本 <code>UDm-hook.sh</code>（名字可随意），代码如下：</li>
-</ol>
-<figure class="highlight sh"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"></span><br><span class="line">  PREREQ=<span class="string">""</span></span><br><span class="line"></span><br><span class="line">  prereqs()</span><br><span class="line">  {</span><br><span class="line">          <span class="built_in">echo</span> <span class="string">"<span class="variable">$PREREQ</span>"</span></span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="keyword">case</span> <span class="variable">$1</span> <span class="keyword">in</span></span><br><span class="line">  <span class="comment"># get pre-requisites</span></span><br><span class="line">  prereqs)</span><br><span class="line">          prereqs</span><br><span class="line">          <span class="built_in">exit</span> 0</span><br><span class="line">          ;;</span><br><span class="line">  <span class="keyword">esac</span></span><br><span class="line"></span><br><span class="line">. /usr/share/initramfs-tools/hook-functions</span><br><span class="line"></span><br><span class="line">copy_exec /usr/bin/udm /bin</span><br></pre></td></tr></tbody></table></figure>
-<blockquote>
-<p>如果你找不到 <code>/etc/initramfs-tools</code>，请先安装工具</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">$ sudo apt-get install initramfs-tools</span><br></pre></td></tr></tbody></table></figure>
-</blockquote>
-<ol start="3">
-<li>编辑 <code>/usr/initramfas-tools/init</code>，</li>
-</ol>
-<p>在打开的文档中寻找 <code>run_scripts /scripts/init-top </code>一行，并在该行代码下新增两条代码</p>
- <figure class="highlight sh"><table><tbody><tr><td class="code"><pre><span class="line">udmboot=`udm 2&gt;/dev/null`; udmdev=`<span class="built_in">echo</span> <span class="variable">$udmboot</span> | cut -d<span class="string">" "</span> -f1`; udmroot=`<span class="built_in">echo</span> <span class="variable">$udmboot</span> | cut -d<span class="string">" "</span> -f2`</span><br><span class="line"><span class="keyword">if</span> [ -n <span class="string">"<span class="variable">${udmdev}</span>"</span> ]; <span class="keyword">then</span> ROOT=<span class="variable">${udmdev}</span>; umount <span class="variable">${udmdev}</span> 2&gt;/dev/null;<span class="keyword">fi</span></span><br></pre></td></tr></tbody></table></figure>
-<p>然后保存。</p>
-<ol start="4">
-<li>
-<p>打开终端，运行</p>
-<p>完成后重启回本机系统</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">$ sudo update-initramfs -u</span><br></pre></td></tr></tbody></table></figure>
-</li>
-<li>
-<p>打开 <code>MBMBROSTool</code> 工具，跟刚才一样深度卸载掉 Linux 的安装分区</p>
-<p><img data-src="https://i.loli.net/2020/03/22/i4hkVUXy92Trd5l.jpg" alt=""></p>
-<p><img data-src="https://i.loli.net/2020/03/22/qNVopv2tZI85Uji.jpg" alt=""></p>
-</li>
-</ol>
-</li>
-</ol>
-<p><strong>注意：不用再恢复 MOS！！！</strong></p>
-<blockquote>
-<ul>
-<li>总结下 Linux 深度隐藏的操作
-<ol>
-<li>添加 <code>udm</code> 到 <code>/boot/initrd.img-xxx</code> 的 <code>/bin</code> 里</li>
-<li>修改 <code>/boot/initrd.img-xxx</code> 里的 <code>init</code>，加入脚本</li>
-<li>在 <code>MBROSTool</code> 上把 Linux 安装分区深度卸载</li>
-</ol>
-</li>
-<li>该方法仅在 Ubuntu 19.10 上测试成功，其他 Debian 系请自行测试，非 Debian 系可以参考一下上面的总结和资料包里的 <code>UDM对linux的支持.txt</code>。Arch 系发行版可以参考下<a href="https://wiki.archlinux.org/index.php/Mkinitcpio_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)" target="_blank" rel="noopener">这篇文档</a>来修改</li>
-</ul>
-</blockquote>
-<h1>后记</h1>
-<h2 id="升级Ubuntu内核后的操作"><a class="header-anchor" href="#升级Ubuntu内核后的操作">¶</a> 升级 Ubuntu 内核后的操作</h2>
-<p>先进行升级</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo upgrade</span><br></pre></td></tr></tbody></table></figure>
-<p>提示 linux 的内核有更新，可以在更新的时候记一下新内核的版本号</p>
-<p>升级后用 root 打开文件管理器</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">sudo nautilus</span><br></pre></td></tr></tbody></table></figure>
-<p>更新内核时如果没有留意版本号，可以打开 <code>/boot/grub/grub.cfg</code> 参照安装时的步骤找找</p>
-<p>知道新内核版本号后打开根目录下的 <code>menu.lst</code>、<code>menu0.lst</code> 以及 <code>/efi/mbrosefi_qk.menu.cfg</code>，把里面旧的版本号全部查找替换为新的版本号</p>
-<p>保存，重启查看效果</p>
-<h2 id="美化启动项"><a class="header-anchor" href="#美化启动项">¶</a> 美化启动项</h2>
-<p>先读写挂载子盘（参考 安装流程 - 处理硬盘分区）</p>
-<p>这里只展示一些我作的修改，详细的美化指南请看工具内的补充帮助</p>
-<ul>
-<li>
-<p>删掉 <code>/udm/pic/bubble.png</code> 可以关闭 MBR 启动菜单里的泡泡动画</p>
-</li>
-<li>
-<p><code>/efi/theme</code> 修改 EFI 启动下引导菜单的主题，加载的是 grub 的主题，但是主题的加载效果有些奇怪，同时要注意子盘大小限制</p>
-<p>这里我使用的是自行魔改了的 <a href="https://www.gnome-look.org/p/1200710/" target="_blank" rel="noopener">Atomic GRUB Theme</a>，加入了原主题没有的 <code>udm.png</code>，修改 <code>reastar.png</code> 为 <code>reboot.png</code> 来让它奇怪的 grub 能够识别。资料包里会提供我自用的魔改主题</p>
-</li>
-</ul>
-<h2 id="VMWare加载"><a class="header-anchor" href="#VMWare加载">¶</a>VMWare 加载</h2>
-<p><img data-src="https://i.loli.net/2020/03/26/aolm1Cr4jXwuyLh.png" alt=""></p>
-<p><img data-src="https://i.loli.net/2020/03/26/oqPdYNwQBDk6iWT.png" alt=""></p>
-<p><img data-src="https://i.loli.net/2020/03/26/yfeMnH9LXIgp5rB.png" alt=""></p>
-<p><img data-src="https://i.loli.net/2020/03/26/cHVnr8gDEi7udGl.png" alt=""></p>
-<p><img data-src="https://i.loli.net/2020/03/26/eUMkCXApi1fHlI5.png" alt=""></p>
-<p><img data-src="https://i.loli.net/2020/03/26/pdk75AjSxPvOmTs.png" alt=""></p>
-<p><img data-src="https://i.loli.net/2020/03/26/eJShM6zIRfHb5FP.png" alt=""></p>
-<p><img data-src="https://i.loli.net/2020/03/26/FY4CQx75D9Nr3TU.png" alt=""></p>
-<p>其他默认或自行调整</p>
-<blockquote>
-<p>参考链接</p>
-<p><a href="http://bbs.wuyou.net/forum.php?mod=viewthread&amp;tid=410612&amp;extra=page%3D1" target="_blank" rel="noopener">http://bbs.wuyou.net/forum.php?mod=viewthread&amp;tid=410612&amp;extra=page%3D1</a></p>
-<p><a href="https://bbs.luobotou.org/thread-43549-1-1.html" target="_blank" rel="noopener">https://bbs.luobotou.org/thread-43549-1-1.html</a></p>
-<p><a href="https://bbs.luobotou.org/forum.php?mod=viewthread&amp;tid=44272&amp;extra=page%3D&amp;page=1" target="_blank" rel="noopener">https://bbs.luobotou.org/forum.php?mod=viewthread&amp;tid=44272&amp;extra=page%3D&amp;page=1</a></p>
-<p><a href="https://bbs.luobotou.org/thread-45230-1-1.html" target="_blank" rel="noopener">https://bbs.luobotou.org/thread-45230-1-1.html</a></p>
-<p><a href="http://manpages.ubuntu.com/manpages/bionic/en/man8/initramfs-tools.8.html" target="_blank" rel="noopener">http://manpages.ubuntu.com/manpages/bionic/en/man8/initramfs-tools.8.html</a></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>笔记</category>
-      </categories>
-      <tags>
-        <tag>WTG</tag>
-        <tag>移动硬盘</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>配置 Typora &amp; PicGo 写 Hexo 博客</title>
-    <url>/posts/39aaddee.html</url>
-    <content><![CDATA[<h1>工具介绍</h1>
-<h2 id="优雅的Markdown编辑器-——-Typora"><a class="header-anchor" href="#优雅的Markdown编辑器-——-Typora">¶</a> 优雅的 Markdown 编辑器 —— Typora</h2>
-<p><a href="https://www.typora.io/" target="_blank" rel="noopener">官网</a></p>
-<p>简约、舒适、优雅，这是我对它的第一眼评价。</p>
-<p>完善的功能、所见即所得、自定义主题、拓展语法支持、良好的图片插入管理、数学支持、专注模式、打字机模式……</p>
-<p>以及免费 —— 这些都是我毫不犹豫下载安装它的原因。</p>
-<p>展现在我面前的它果然没有让我失望，漂亮的界面让我觉得原来的 VS Code 瞬间就不香了。</p>
-<p>当然，它的实力，还仅不限于此……</p>
-<a id="more"></a>
-<h2 id="小巧的图片上传工具——PicGo"><a class="header-anchor" href="#小巧的图片上传工具——PicGo">¶</a> 小巧的图片上传工具 ——PicGo</h2>
-<p><a href="https://molunerfinn.com/PicGo/" target="_blank" rel="noopener">官网</a></p>
-<p>这是一个开源的体积小巧，功能强大的图床工具。</p>
-<p>它支持自建图床和多个常用图床，可以方便地对上传了的进行管理，还能安装拓展插件，实现截图上传、加水印上传等功能。</p>
-<p>但更重要的是，Typora 支持通过它实现拖入到文章中的图片上传图床并替换掉文中图片地址</p>
-<p>Awsome！有了它，再也不用手动上传图床复制链接了！</p>
-<p>下面就来配置下二者的结合使用。</p>
-<h1>二者配置</h1>
-<h2 id="配置PicGo的上传设置"><a class="header-anchor" href="#配置PicGo的上传设置">¶</a> 配置 PicGo 的上传设置</h2>
-<p>此处以 sm.ms 的注册图床为例，其他图床请参考<a href="https://picgo.github.io/PicGo-Doc/zh/guide/getting-started.html" target="_blank" rel="noopener">官方文档</a></p>
-<ol>
-<li>
-<p><a href="http://xn--sm-5p3dp06f.ms" target="_blank" rel="noopener">登录 sm.ms</a>，获取 API token，复制备用</p>
-<p><img data-src="https://i.loli.net/2020/03/21/wnxrfcZzPtvJk58.png" alt=""></p>
-</li>
-</ol>
-<img data-src="https://i.loli.net/2020/03/21/TYJIjPBk2lAHXgr.png" style="zoom: 80%;">
-<ol start="2">
-<li>
-<p>打开 PicGo，插件设置中输入 smms-user 并安装对应插件，</p>
-<img data-src="https://i.loli.net/2020/03/21/lk4dTXfQF1syWir.png" style="zoom:80%;">
-<p>安装完成后在图床设置里新出现的 <strong>SM.MS - 登录用户</strong>中输入刚才获得的 token，点击确定和设为默认图床</p>
-<img data-src="https://i.loli.net/2020/03/21/n9kpCUiR62EtjOV.png" style="zoom:80%;">
-</li>
-</ol>
-<p>此处 PicGo 配置完成</p>
-<h2 id="配置Typora"><a class="header-anchor" href="#配置Typora">¶</a> 配置 Typora</h2>
-<p>快捷键 <code>ctrl+逗号</code>打开偏好设置，进入 ``图像` 选项进行如下设置：</p>
-<img data-src="https://i.loli.net/2020/03/21/JBxqTtkSZ59wL2y.png" style="zoom:80%;">
-<p>其中<code>上传服务设定</code>中 <code>PicGo路径</code>一栏请根据自身情况填写 PicGo 的安装路径。</p>
-<p>如果需要上传网络上复制的图片到自己的图床，请勾选<code>插入图片时…</code> 中的<code>对网络位置的图片应用上述规则</code>。</p>
-<p>设置完后点击<code>验证图片上传选项</code>进行测试，成功即设置完成。</p>
-<p>Typora 和 PicGo 里各自的功能就不再展示了，这里仅作二者结合使用的介绍，其他请自行探索！</p>
-]]></content>
-      <categories>
-        <category>笔记</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-        <tag>图床</tag>
       </tags>
   </entry>
   <entry>
@@ -829,8 +862,8 @@
 <h1>准备工作</h1>
 <p>github 上建一个 xxxx.github.io 的公开仓库和一个私有库<br>
 其中 xxxx 是你的 github 用户名，xxxx.github.io 是博客域名</p>
-<p><a href="https://hexo.io/zh-cn/" target="_blank" rel="noopener">hexo 官网</a><br>
-下载安装 <a href="http://nodejs.org/" target="_blank" rel="noopener">Node.js</a>、<a href="http://git-scm.com/" target="_blank" rel="noopener">Git</a>  ，git 配置好信息<br>
+<p><a href="https://hexo.io/zh-cn/">hexo 官网</a><br>
+下载安装 <a href="http://nodejs.org/">Node.js</a>、<a href="http://git-scm.com/">Git</a>  ，git 配置好信息<br>
 然后 Cmd/Powershell 执行</p>
 <pre><code>npm install -g hexo-cli
 </code></pre>
@@ -844,7 +877,7 @@ npm install
 </code></pre>
 <p>然后修改文件下的_config.yml 参数</p>
 <blockquote>
-<p>参数详见 <a href="https://hexo.io/zh-cn/docs/configuration" target="_blank" rel="noopener">https://hexo.io/zh-cn/docs/configuration</a><br>
+<p>参数详见 <a href="https://hexo.io/zh-cn/docs/configuration">https://hexo.io/zh-cn/docs/configuration</a><br>
 记得修改域名</p>
 </blockquote>
 <p>修改_config.yml 的 deploy 部分</p>
@@ -889,7 +922,7 @@ repository:
 9、<code>public</code> 是 hexo g 生成的静态网页，不需要拷贝；<br>
 10、<code>.deploy_git</code> 同上，hexo g 也会生成，不需要拷贝；<br>
 11、<code>db.json</code> 文件，不需要拷贝。</p>
-<p>引用自：<a href="https://www.jianshu.com/p/baab042849023" target="_blank" rel="noopener">https://www.jianshu.com/p/baab042849023</a></p>
+<p>引用自：<a href="https://www.jianshu.com/p/baab042849023">https://www.jianshu.com/p/baab042849023</a></p>
 </blockquote>
 <h3 id="备份操作"><a class="header-anchor" href="#备份操作">¶</a> 备份操作</h3>
 <pre><code>hexo backup
@@ -931,7 +964,7 @@ Emitted 'error' event at:
 </code></pre>
 <p>的错误时可以尝试删掉主题文件夹中的.git 隐藏文件夹试试</p>
 <blockquote>
-<p>参考  <a href="https://github.com/coneycode/hexo-git-backup/issues/27" target="_blank" rel="noopener">备份报错 #27</a></p>
+<p>参考  <a href="https://github.com/coneycode/hexo-git-backup/issues/27">备份报错 #27</a></p>
 </blockquote>
 <h2 id="设置分类，建立模板"><a class="header-anchor" href="#设置分类，建立模板">¶</a> 设置分类，建立模板</h2>
 <p>略</p>
@@ -971,7 +1004,7 @@ plugins:
 <ul>
 <li><s>KateX</s>（存在显示 bug，已弃用，目前实现方式见后）</li>
 </ul>
-<p><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex" xmlns="http://www.w3.org/2000/svg" width="18.882ex" height="2.646ex" role="img" focusable="false" viewBox="0 -919.5 8345.9 1169.5" xmlns:xlink="http://www.w3.org/1999/xlink"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="msqrt"><g transform="translate(853, 0)"><g data-mml-node="mn"><use xlink:href="#MJX-TEX-N-33"></use></g><g data-mml-node="mi" transform="translate(500, 0)"><use xlink:href="#MJX-TEX-I-78"></use></g><g data-mml-node="mo" transform="translate(1294.2, 0)"><use xlink:href="#MJX-TEX-N-2212"></use></g><g data-mml-node="mn" transform="translate(2294.4, 0)"><use xlink:href="#MJX-TEX-N-31"></use></g></g><g data-mml-node="mo" transform="translate(0, 59.5)"><use xlink:href="#MJX-TEX-N-221A"></use></g><rect width="2794.4" height="60" x="853" y="799.5"></rect></g><g data-mml-node="mo" transform="translate(3869.7, 0)"><use xlink:href="#MJX-TEX-N-2B"></use></g><g data-mml-node="mo" transform="translate(4869.9, 0)"><use xlink:href="#MJX-TEX-N-28"></use></g><g data-mml-node="mn" transform="translate(5258.9, 0)"><use xlink:href="#MJX-TEX-N-31"></use></g><g data-mml-node="mo" transform="translate(5981.1, 0)"><use xlink:href="#MJX-TEX-N-2B"></use></g><g data-mml-node="mi" transform="translate(6981.3, 0)"><use xlink:href="#MJX-TEX-I-78"></use></g><g data-mml-node="msup" transform="translate(7553.3, 0)"><g data-mml-node="mo"><use xlink:href="#MJX-TEX-N-29"></use></g><g data-mml-node="mn" transform="translate(389, 363) scale(0.707)"><use xlink:href="#MJX-TEX-N-32"></use></g></g></g></g></svg></mjx-container></p>
+<p><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex" xmlns="http://www.w3.org/2000/svg" width="18.882ex" height="2.646ex" role="img" focusable="false" viewBox="0 -919.5 8345.9 1169.5"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="msqrt"><g transform="translate(853, 0)"><g data-mml-node="mn"><path data-c="33" d="M127 463Q100 463 85 480T69 524Q69 579 117 622T233 665Q268 665 277 664Q351 652 390 611T430 522Q430 470 396 421T302 350L299 348Q299 347 308 345T337 336T375 315Q457 262 457 175Q457 96 395 37T238 -22Q158 -22 100 21T42 130Q42 158 60 175T105 193Q133 193 151 175T169 130Q169 119 166 110T159 94T148 82T136 74T126 70T118 67L114 66Q165 21 238 21Q293 21 321 74Q338 107 338 175V195Q338 290 274 322Q259 328 213 329L171 330L168 332Q166 335 166 348Q166 366 174 366Q202 366 232 371Q266 376 294 413T322 525V533Q322 590 287 612Q265 626 240 626Q208 626 181 615T143 592T132 580H135Q138 579 143 578T153 573T165 566T175 555T183 540T186 520Q186 498 172 481T127 463Z"></path></g><g data-mml-node="mi" transform="translate(500, 0)"><path data-c="1D465" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path></g><g data-mml-node="mo" transform="translate(1294.2, 0)"><path data-c="2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"></path></g><g data-mml-node="mn" transform="translate(2294.4, 0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path></g></g><g data-mml-node="mo" transform="translate(0, 59.5)"><path data-c="221A" d="M95 178Q89 178 81 186T72 200T103 230T169 280T207 309Q209 311 212 311H213Q219 311 227 294T281 177Q300 134 312 108L397 -77Q398 -77 501 136T707 565T814 786Q820 800 834 800Q841 800 846 794T853 782V776L620 293L385 -193Q381 -200 366 -200Q357 -200 354 -197Q352 -195 256 15L160 225L144 214Q129 202 113 190T95 178Z"></path></g><rect width="2794.4" height="60" x="853" y="799.5"></rect></g><g data-mml-node="mo" transform="translate(3869.7, 0)"><path data-c="2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"></path></g><g data-mml-node="mo" transform="translate(4869.9, 0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="mn" transform="translate(5258.9, 0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path></g><g data-mml-node="mo" transform="translate(5981.1, 0)"><path data-c="2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"></path></g><g data-mml-node="mi" transform="translate(6981.3, 0)"><path data-c="1D465" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path></g><g data-mml-node="msup" transform="translate(7553.3, 0)"><g data-mml-node="mo"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g><g data-mml-node="mn" transform="translate(389, 363) scale(0.707)"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path></g></g></g></g></svg></mjx-container></p>
 <figure class="highlight plain"><table><tbody><tr><td class="code"><pre><span class="line">$\sqrt{3x-1}+(1+x)^2$</span><br></pre></td></tr></tbody></table></figure>
 <ul>
 <li>Checkbox 选框，TO-DO 用</li>
@@ -997,10 +1030,10 @@ H<sub>2</sub>O</li>
 </ul>
 <figure class="highlight plain"><table><tbody><tr><td class="code"><pre><span class="line">19^th^</span><br><span class="line">H~2~O</span><br></pre></td></tr></tbody></table></figure>
 <ul>
-<li><a href="https://markdown-it.github.io/" target="_blank" rel="noopener">以及其他……</a></li>
+<li><a href="https://markdown-it.github.io/">以及其他……</a></li>
 </ul>
 <h1>主题安装配置</h1>
-<p>这里主题选择的是 <a href="https://github.com/theme-next/hexo-theme-next" target="_blank" rel="noopener">next</a></p>
+<p>这里主题选择的是 <a href="https://github.com/theme-next/hexo-theme-next">next</a></p>
 <pre><code>$ cd hexo
 $ git clone https://github.com/theme-next/hexo-theme-next themes/next
 </code></pre>
@@ -1012,7 +1045,7 @@ theme: next
 </code></pre>
 <p>随后打开编辑 /themes/next/_config.yml 进行主题配置</p>
 <blockquote>
-<p>官方文档：<a href="https://theme-next.org/docs/" target="_blank" rel="noopener">https://theme-next.org/docs/</a></p>
+<p>官方文档：<a href="https://theme-next.org/docs/">https://theme-next.org/docs/</a></p>
 </blockquote>
 <h2 id="基本设置"><a class="header-anchor" href="#基本设置">¶</a> 基本设置</h2>
 <h3 id="切换风格"><a class="header-anchor" href="#切换风格">¶</a> 切换风格</h3>
@@ -1332,7 +1365,7 @@ android_chrome_color: "#222"
 custom_logo: #/uploads/custom-logo.jpg
 </code></pre>
 <h3 id="代码块的风格"><a class="header-anchor" href="#代码块的风格">¶</a> 代码块的风格</h3>
-<p>配色方案预览：<a href="https://github.com/chriskempson/tomorrow-theme" target="_blank" rel="noopener">https://github.com/chriskempson/tomorrow-theme</a></p>
+<p>配色方案预览：<a href="https://github.com/chriskempson/tomorrow-theme">https://github.com/chriskempson/tomorrow-theme</a></p>
 <pre><code>codeblock:
 # Code Highlight theme
 # Available values: normal | night | night eighties | night blue | night bright | solarized | solarized dark | galactic
@@ -1380,7 +1413,7 @@ permalink: https://github.com/yourname
 title: Follow me on GitHub
 </code></pre>
 <h3 id="字体设置"><a class="header-anchor" href="#字体设置">¶</a> 字体设置</h3>
-<p>详见 <a href="https://theme-next.org/docs/theme-settings/#Fonts-Customization" target="_blank" rel="noopener">https://theme-next.org/docs/theme-settings/#Fonts-Customization</a><br>
+<p>详见 <a href="https://theme-next.org/docs/theme-settings/#Fonts-Customization">https://theme-next.org/docs/theme-settings/#Fonts-Customization</a><br>
 这里用的是默认，只添加了中科大的源，其他的就不展示了</p>
 <pre><code># Uri of fonts host, e.g. https://fonts.googleapis.com (Default).
 host: //fonts.lug.ustc.edu.cn
@@ -1409,9 +1442,9 @@ icon: icon.png
 autodiscovery: true
 template:
 </code></pre>
-<p>参数参考文档：<a href="https://github.com/hexojs/hexo-generator-feed" target="_blank" rel="noopener">https://github.com/hexojs/hexo-generator-feed</a></p>
+<p>参数参考文档：<a href="https://github.com/hexojs/hexo-generator-feed">https://github.com/hexojs/hexo-generator-feed</a></p>
 <h3 id="MathJax-数学公式渲染"><a class="header-anchor" href="#MathJax-数学公式渲染">¶</a>MathJax 数学公式渲染</h3>
-<p>参考：<a href="https://github.com/stevenjoezhang/hexo-filter-mathjax" target="_blank" rel="noopener">https://github.com/stevenjoezhang/hexo-filter-mathjax</a></p>
+<p>参考：<a href="https://github.com/stevenjoezhang/hexo-filter-mathjax">https://github.com/stevenjoezhang/hexo-filter-mathjax</a></p>
 <pre><code>$ npm install hexo-filter-mathjax
 </code></pre>
 <p>博客配置文件加上</p>
@@ -1464,11 +1497,11 @@ lazyload: //cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js
 ...
 </code></pre>
 <h3 id="Pangu-Autospace-中英文自动空格分离-（未配置）"><a class="header-anchor" href="#Pangu-Autospace-中英文自动空格分离-（未配置）">¶</a>Pangu Autospace 中英文自动空格分离 （未配置）</h3>
-<p><a href="https://theme-next.org/docs/third-party-services/external-libraries#Pangu-Autospace" target="_blank" rel="noopener">https://theme-next.org/docs/third-party-services/external-libraries#Pangu-Autospace</a></p>
+<p><a href="https://theme-next.org/docs/third-party-services/external-libraries#Pangu-Autospace">https://theme-next.org/docs/third-party-services/external-libraries#Pangu-Autospace</a></p>
 <h3 id="Quicklink-（与pajx冲突，未配置）"><a class="header-anchor" href="#Quicklink-（与pajx冲突，未配置）">¶</a>Quicklink （与 pajx 冲突，未配置）</h3>
-<p><a href="https://theme-next.org/docs/third-party-services/external-libraries#Quicklink" target="_blank" rel="noopener">https://theme-next.org/docs/third-party-services/external-libraries#Quicklink</a></p>
+<p><a href="https://theme-next.org/docs/third-party-services/external-libraries#Quicklink">https://theme-next.org/docs/third-party-services/external-libraries#Quicklink</a></p>
 <h3 id="Animation-Effect-过度动画设置（未配置）"><a class="header-anchor" href="#Animation-Effect-过度动画设置（未配置）">¶</a>Animation Effect 过度动画设置（未配置）</h3>
-<p><a href="https://theme-next.org/docs/third-party-services/external-libraries#Animation-Effect" target="_blank" rel="noopener">https://theme-next.org/docs/third-party-services/external-libraries#Animation-Effect</a></p>
+<p><a href="https://theme-next.org/docs/third-party-services/external-libraries#Animation-Effect">https://theme-next.org/docs/third-party-services/external-libraries#Animation-Effect</a></p>
 <h3 id="Progress-Bar-网页加载进度条动画"><a class="header-anchor" href="#Progress-Bar-网页加载进度条动画">¶</a>Progress Bar 网页加载进度条动画</h3>
 <p>同上，先</p>
 <pre><code>pace:
@@ -1482,16 +1515,16 @@ pace_css: //cdn.jsdelivr.net/npm/pace-js@1/themes/black/pace-theme-minimal.css
 ...
 </code></pre>
 <p>上方<code> pace_css</code> 中可以设置颜色（修改 black）<br>
-可选效果一览：<a href="https://github.hubspot.com/pace/docs/welcome/" target="_blank" rel="noopener">https://github.hubspot.com/pace/docs/welcome/</a><br>
-可选颜色：<a href="https://www.jsdelivr.com/package/npm/pace-js?path=themes" target="_blank" rel="noopener">https://www.jsdelivr.com/package/npm/pace-js?path=themes</a></p>
+可选效果一览：<a href="https://github.hubspot.com/pace/docs/welcome/">https://github.hubspot.com/pace/docs/welcome/</a><br>
+可选颜色：<a href="https://www.jsdelivr.com/package/npm/pace-js?path=themes">https://www.jsdelivr.com/package/npm/pace-js?path=themes</a></p>
 <h3 id="Valine-评论系统"><a class="header-anchor" href="#Valine-评论系统">¶</a>Valine 评论系统</h3>
-<p>这里使用 <a href="https://valine.js.org/" target="_blank" rel="noopener">Valine</a><br>
-先注册登录 <a href="https://leancloud.app/" target="_blank" rel="noopener">Leanclub 国际站</a>（需要验证手机号），然后参考 https://theme-next.org/docs/third-party-services/comments#Valine-China</p>
+<p>这里使用 <a href="https://valine.js.org/">Valine</a><br>
+先注册登录 <a href="https://leancloud.app/">Leanclub 国际站</a>（需要验证手机号），然后参考 https://theme-next.org/docs/third-party-services/comments#Valine-China</p>
 <blockquote>
 <p><em><strong>注意：</strong></em> 中国站需要实名验证，且网站似乎还要已备案才能用</p>
 </blockquote>
 <h3 id="LeanCloud-访问数据统计"><a class="header-anchor" href="#LeanCloud-访问数据统计">¶</a>LeanCloud 访问数据统计</h3>
-<p><a href="https://github.com/theme-next/hexo-theme-next/blob/master/docs/zh-CN/LEANCLOUD-COUNTER-SECURITY.md" target="_blank" rel="noopener">https://github.com/theme-next/hexo-theme-next/blob/master/docs/zh-CN/LEANCLOUD-COUNTER-SECURITY.md</a></p>
+<p><a href="https://github.com/theme-next/hexo-theme-next/blob/master/docs/zh-CN/LEANCLOUD-COUNTER-SECURITY.md">https://github.com/theme-next/hexo-theme-next/blob/master/docs/zh-CN/LEANCLOUD-COUNTER-SECURITY.md</a></p>
 <blockquote>
 <p><em><strong>注意：</strong></em> 涉及域名，更换域名时注意修改！</p>
 </blockquote>
@@ -1521,39 +1554,55 @@ unescape: false
 preload: false
 </code></pre>
 <h3 id="特殊标签"><a class="header-anchor" href="#特殊标签">¶</a> 特殊标签</h3>
-<p>使用文档：<a href="https://hexo.io/zh-cn/docs/tag-plugins.html" target="_blank" rel="noopener">https://hexo.io/zh-cn/docs/tag-plugins.html</a><br>
+<p>使用文档：<a href="https://hexo.io/zh-cn/docs/tag-plugins.html">https://hexo.io/zh-cn/docs/tag-plugins.html</a><br>
 这里仅提供示例</p>
 <h4 id="引言"><a class="header-anchor" href="#引言">¶</a> 引言</h4>
 <blockquote class="blockquote-center">
-            <p>Elegant in code, simple in core</p>
+<p>Elegant in code, simple in core</p>
 
-          </blockquote>
+</blockquote>
 <blockquote><p>Every interaction is both precious and an opportunity to delight.</p>
-<footer><strong>Seth Godin</strong><cite><a href="http://sethgodin.typepad.com/seths_blog/2009/07/welcome-to-island-marketing.html" target="_blank" rel="noopener">Welcome to Island Marketing</a></cite></footer></blockquote>
+<footer><strong>Seth Godin</strong><cite><a href="http://sethgodin.typepad.com/seths_blog/2009/07/welcome-to-island-marketing.html">Welcome to Island Marketing</a></cite></footer></blockquote>
 <blockquote><p>Do not just seek happiness for yourself. Seek happiness for all. Through kindness. Through mercy.</p>
 <footer><strong>David Levithan</strong><cite>Wide Awake</cite></footer></blockquote>
 <h4 id="Note"><a class="header-anchor" href="#Note">¶</a>Note</h4>
-<p>文档：<a href="https://theme-next.org/docs/tag-plugins/note" target="_blank" rel="noopener">https://theme-next.org/docs/tag-plugins/note</a></p>
-<div class="note ">
-            <h4 id="Header"><a class="header-anchor" href="#Header">¶</a>Header</h4><p>(without define class style)</p>
-          </div>
-<div class="note primary">
-            <h4 id="Primary-Header"><a class="header-anchor" href="#Primary-Header">¶</a>Primary Header</h4><p><strong>Welcome</strong> to <a href="https://hexo.io" target="_blank" rel="noopener">Hexo!</a></p>
-          </div>
-<div class="note default">
-            <h4 id="Lists-in-note"><a class="header-anchor" href="#Lists-in-note">¶</a>Lists in note</h4><ul><li>ul</li><li>ul<ul><li>ul</li><li>ul</li></ul></li><li>ul</li></ul><ol><li>ol</li><li>ol</li><li>ol</li><li>ol</li><li>ol</li></ol>
-          </div>
+<p>文档：<a href="https://theme-next.org/docs/tag-plugins/note">https://theme-next.org/docs/tag-plugins/note</a></p>
+<div class="note "><h4 id="Header"><a class="header-anchor" href="#Header">¶</a>Header</h4>
+<p>(without define class style)</p>
+</div>
+<div class="note primary"><h4 id="Primary-Header"><a class="header-anchor" href="#Primary-Header">¶</a>Primary Header</h4>
+<p><strong>Welcome</strong> to <a href="https://hexo.io">Hexo!</a></p>
+</div>
+<div class="note default"><h4 id="Lists-in-note"><a class="header-anchor" href="#Lists-in-note">¶</a>Lists in note</h4>
+<ul>
+<li>ul</li>
+<li>ul
+<ul>
+<li>ul</li>
+<li>ul</li>
+</ul>
+</li>
+<li>ul</li>
+</ul>
+<ol>
+<li>ol</li>
+<li>ol</li>
+<li>ol</li>
+<li>ol</li>
+<li>ol</li>
+</ol>
+</div>
 <h4 id="Tabs"><a class="header-anchor" href="#Tabs">¶</a>Tabs</h4>
-<p>文档：<a href="https://theme-next.org/docs/tag-plugins/tabs" target="_blank" rel="noopener">https://theme-next.org/docs/tag-plugins/tabs</a><br>
+<p>文档：<a href="https://theme-next.org/docs/tag-plugins/tabs">https://theme-next.org/docs/tag-plugins/tabs</a><br>
 <s>我真的不懂啊</s></p>
 <div class="tabs" id="first-unique-name"><ul class="nav-tabs"><li class="tab active"><a href="#first-unique-name-1">First unique name 1</a></li><li class="tab"><a href="#first-unique-name-2">First unique name 2</a></li><li class="tab"><a href="#first-unique-name-3">First unique name 3</a></li></ul><div class="tab-content"><div class="tab-pane active" id="first-unique-name-1"><p><strong>This is Tab 1.</strong></p></div><div class="tab-pane" id="first-unique-name-2"><p><strong>This is Tab 2.</strong></p></div><div class="tab-pane" id="first-unique-name-3"><p><strong>This is Tab 3.</strong></p></div></div></div>
 <h4 id="PDF"><a class="header-anchor" href="#PDF">¶</a>PDF</h4>
-<p>文档：<a href="https://theme-next.org/docs/tag-plugins/pdf" target="_blank" rel="noopener">https://theme-next.org/docs/tag-plugins/pdf</a></p>
+<p>文档：<a href="https://theme-next.org/docs/tag-plugins/pdf">https://theme-next.org/docs/tag-plugins/pdf</a></p>
 <div class="pdfobject-container" data-target="/test.pdf" data-height="600px"></div>
 <h3 id="Mermaid-流程图"><a class="header-anchor" href="#Mermaid-流程图">¶</a>Mermaid 流程图</h3>
-<p>文档：<a href="https://theme-next.org/docs/tag-plugins/mermaid" target="_blank" rel="noopener">https://theme-next.org/docs/tag-plugins/mermaid</a></p>
+<p>文档：<a href="https://theme-next.org/docs/tag-plugins/mermaid">https://theme-next.org/docs/tag-plugins/mermaid</a></p>
 <p><s>其他官方文档有的就自己看去吧</s></p>
-<svg style="display: none" id="MJX-SVG-global-cache"><defs><path id="MJX-TEX-N-221A" d="M95 178Q89 178 81 186T72 200T103 230T169 280T207 309Q209 311 212 311H213Q219 311 227 294T281 177Q300 134 312 108L397 -77Q398 -77 501 136T707 565T814 786Q820 800 834 800Q841 800 846 794T853 782V776L620 293L385 -193Q381 -200 366 -200Q357 -200 354 -197Q352 -195 256 15L160 225L144 214Q129 202 113 190T95 178Z"></path><path id="MJX-TEX-N-33" d="M127 463Q100 463 85 480T69 524Q69 579 117 622T233 665Q268 665 277 664Q351 652 390 611T430 522Q430 470 396 421T302 350L299 348Q299 347 308 345T337 336T375 315Q457 262 457 175Q457 96 395 37T238 -22Q158 -22 100 21T42 130Q42 158 60 175T105 193Q133 193 151 175T169 130Q169 119 166 110T159 94T148 82T136 74T126 70T118 67L114 66Q165 21 238 21Q293 21 321 74Q338 107 338 175V195Q338 290 274 322Q259 328 213 329L171 330L168 332Q166 335 166 348Q166 366 174 366Q202 366 232 371Q266 376 294 413T322 525V533Q322 590 287 612Q265 626 240 626Q208 626 181 615T143 592T132 580H135Q138 579 143 578T153 573T165 566T175 555T183 540T186 520Q186 498 172 481T127 463Z"></path><path id="MJX-TEX-I-78" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path><path id="MJX-TEX-N-2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"></path><path id="MJX-TEX-N-31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path><path id="MJX-TEX-N-2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"></path><path id="MJX-TEX-N-28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path><path id="MJX-TEX-N-29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path><path id="MJX-TEX-N-32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path></defs></svg>]]></content>
+]]></content>
       <categories>
         <category>笔记</category>
       </categories>
@@ -1562,333 +1611,300 @@ preload: false
       </tags>
   </entry>
   <entry>
-    <title>Markdown 语法学习笔记①</title>
-    <url>/posts/6c2e314d.html</url>
-    <content><![CDATA[<h2 id="标题"><a class="header-anchor" href="#标题">¶</a> 标题</h2>
-<p>两种语法，分别为类 Setext 和类 atx 形式。</p>
-<h3 id="类-Setext-式"><a class="header-anchor" href="#类-Setext-式">¶</a> 类 Setext 式</h3>
-<p>利用 <code>=</code> 和 <code>-</code>：</p>
-<pre><code>标题
-=====
-标题
------
-</code></pre>
-<h3 id="类-atx-式"><a class="header-anchor" href="#类-atx-式">¶</a> 类 atx 式</h3>
-<p>在行首插入 1 到 6 个<code>#</code>, 对应到标题 1 到 6 阶。</p>
-<pre><code># 标题
-## 标题
-### 标题
-#### 标题
-##### 标题
-###### 标题
-</code></pre>
-<p>也可以</p>
-<pre><code># 标题 #
-## 标题 ##
-### 标题 ###  
-</code></pre>
-<blockquote>
-<p><strong>注意：</strong> 不要忘记<code>#</code>与标题文字间的空格<br>
-错误示范：<code>##标题</code></p>
+    <title>利用闲置 SSD 打造 WTG + Linux + PE 多合一移动系统硬盘</title>
+    <url>/posts/2af4a4f4.html</url>
+    <content><![CDATA[<blockquote>
+<p><strong>写在前面</strong>：本文大量复制和借鉴了<a href="http://bbs.wuyou.net/forum.php?mod=viewthread&amp;tid=410612&amp;extra=page%3D1">无忧启动论坛 @ddsony 的教程内容</a>，没有他的帖子就没有我的这篇折腾笔记，十分感谢他帖子的详细指引！</p>
 </blockquote>
+<p>手上有一块闲置 SSD（建兴 T9，128G），想将它利用上来做一块多合一移动系统盘方便随身应急使用。</p>
+<p>上网冲浪偶然发现还有系统 All in One 移动硬盘的玩法，于是打算折腾一下</p>
 <a id="more"></a>
-<h2 id="区块引用"><a class="header-anchor" href="#区块引用">¶</a> 区块引用</h2>
-<p>使用 <code>&gt;</code></p>
-<pre><code>&gt; 一些文字
-</code></pre>
-<p>只需在每段第一行加上即可<br>
-还可以嵌套，只要根据层次加上不同数量的 <code>&gt;</code></p>
-<pre><code>&gt; 一些文字
-&gt;&gt; 一些一些文字
-</code></pre>
-<p>引用区域内可以使用其他 Markdown 语法：</p>
-<pre><code>&gt; ## 这是一个标题。
-&gt; 
-&gt; 1.   这是第一行列表项。
-&gt; 2.   这是第二行列表项。
-&gt; 
-&gt; 给出一些例子代码：
-&gt; 
-&gt;     return shell_exec("echo $input | $markdown_script");
-</code></pre>
-<h2 id="列表"><a class="header-anchor" href="#列表">¶</a> 列表</h2>
-<p>分为有序列表与无序列表。<br>
-如果列表项目间用空行分开，那么中间内容将不会被列表项包括在内。</p>
-<pre><code>* 列表项
-
-* 列表项
-</code></pre>
-<p>如果要在列表项目内放进引用，那 &gt; 就需要缩进</p>
-<pre><code>* 列表项
-    &gt; 引用
-</code></pre>
-<p>如果要放代码区块的话，该区块就需要缩进两次</p>
-<pre><code>* 列表项
-        &lt;codehere&gt;
-</code></pre>
-<h3 id="有序列表"><a class="header-anchor" href="#有序列表">¶</a> 有序列表</h3>
-<p>使用 <code>*</code>,<code>+</code> 和 <code>-</code> 标记</p>
-<pre><code>* 列表项
-+ 列表项
-- 列表项
-</code></pre>
-<h3 id="无序列表"><a class="header-anchor" href="#无序列表">¶</a> 无序列表</h3>
-<p>使用<strong>数字加英文句点<code>.</code> 的方式</strong></p>
-<pre><code>1. 列表项
-2. 列表项
-3. 列表项
-</code></pre>
-<blockquote>
-<p><strong>注意</strong>：</p>
+<h1>实现目标</h1>
 <ol>
-<li>在列表标记上使用的数字<strong>并不会影响</strong>输出的顺序<br>
-<s><em>简直智障福音啊</em></s></li>
-<li>文字出现数字 - 句点 - 空白而要避免列表项出现，可以在句点前加上<strong>反斜杠</strong><code>\</code><br>
-eg:<code>1986\. What a great season.</code></li>
+<li>同时兼容 UEFI 和 Legacy 启动</li>
+<li>隐藏系统分区和启动分区，可以当作普通移动硬盘使用</li>
+<li> WTG</li>
+<li>Linux（这里使用 Ubuntu）</li>
+<li>WIN PE（这里使用 <a href="http://bbs.wuyou.net/forum.php?mod=viewthread&amp;tid=349965&amp;extra=page%3D1">chiannet 制作的 USBOS V3</a>）</li>
 </ol>
-</blockquote>
-<h2 id="代码区块"><a class="header-anchor" href="#代码区块">¶</a> 代码区块</h2>
-<p>只需简单地缩进一格（或四个空格）即可</p>
-<p>这是文字</p>
-<pre><code>这是代码
-</code></pre>
-<p>一个代码区块会一直持续到没有缩进的那一行（或是文件结尾）。</p>
-<p>同时，在代码区块中，一般的 Markdown 语法不会被转换。</p>
-<h2 id="分隔线"><a class="header-anchor" href="#分隔线">¶</a> 分隔线</h2>
-<p>使用三个以上的 <code>*</code>、<code>-</code>、<code>_</code>来建立一个分隔线，可以在星号或是减号中间插入空格，但注意行内不能有其他东西</p>
-<pre><code>文字
-***
-
-文字
----
-
-文字
-___
-
-文字
-- - -
-
-文字
-* * *
-</code></pre>
-<h2 id="链接插入"><a class="header-anchor" href="#链接插入">¶</a> 链接插入</h2>
-<p>Markdown 支持两种形式的链接语法： 行内式和参考式两种形式。<br>
-不管是哪一种，链接文字都是用 <code>[]</code> 来标记。</p>
-<h3 id="行内式"><a class="header-anchor" href="#行内式">¶</a> 行内式</h3>
-<p>使用方括号 <code>[]</code> 括住所需加链接的文字，并在后面以圆括号 <code>()</code> 形式插入链接（可以是相对路径）。<br>
-如需加入链接描述 (链接的 title 文字) 只需在圆括号中的链接后以 <code>""</code> 包起文字即可。</p>
-<pre><code>这是一个[链接](https://xsllen.tk)
-这是一个有名字的[链接](https://xsllen.tk "Jim's Blog")
-</code></pre>
-<h3 id="参考式"><a class="header-anchor" href="#参考式">¶</a> 参考式</h3>
-<p>使用方括号 <code>[]</code> 括住所需加链接的文字，并在后面再接上一个方括号 <code>[]</code> 进行用于辨识链接的标记。<br>
-你也可以选择性地在两个方括号中间加上一个空格。</p>
-<pre><code>这是一个[链接][1]
-这是一个[链接] [1]
-</code></pre>
-<p>接着，在文件的任意处把标记的文章内容定义出来。<br>
-链接网址还可以使用尖括号包起。<br>
-网址之后可以选择接着网址描述（title）内容，可以用单引号、双引号或是括弧包着。<br>
-网址描述（title）内容可以放到下一行，也可以加缩进，好看就行。<s>（说得我闲得蛋疼一样）</s></p>
-<pre><code>[1]: https://xsllen.tk
-[1]: &lt;https://xsllen.tk&gt;
-[1]: https://xsllen.tk "My blog"
-[1]: https://xsllen.tk 'My blog'
-[1]: https://xsllen.tk (My blog)
-
-[1]: https://xsllen.tk 
-"My blog"
-</code></pre>
+<h1>制作过程</h1>
+<h2 id="准备资料"><a class="header-anchor" href="#准备资料">¶</a> 准备资料</h2>
+<p>一个移动硬盘 / U 盘（固态 U 盘或者 WTG 认证 U 盘），用来安装</p>
+<p>另一个空白 U 盘，大小最好 4G 以上，用作装 Linux 的启动盘</p>
+<p>我整理的<a href="http://www.filedropper.com/200326wtg">资料包</a></p>
+<p><strong>镜像</strong>：</p>
+<p>Ubuntu</p>
+<p>Win10 使用官方 1909</p>
+<p><a href="http://bbs.wuyou.net/forum.php?mod=viewthread&amp;tid=349965&amp;extra=page%3D1">chiannet 制作的 USBOS V3</a></p>
+<p><strong>软件</strong>：</p>
+<p><a href="http://bbs.wuyou.net/forum.php?mod=viewthread&amp;tid=330493&amp;extra=page%3D1">MBROSTool</a> 本文主要工具</p>
+<p><a href="https://msfn.org/board/topic/149612-winntsetup-v40/">WinNTSetup</a> 安装 WTG 用</p>
+<p><a href="https://china.paragon-software.com/home-windows/extfs-for-windows-download">ExtFS for Windows</a> 在 windows 下读写 ext4 的分区，10 天免费试用，到期后限制向 Ext4 分区读写的性能。</p>
+<h1>安装流程</h1>
+<h2 id="处理硬盘分区-安装PE"><a class="header-anchor" href="#处理硬盘分区-安装PE">¶</a> 处理硬盘分区 &amp; 安装 PE</h2>
+<ol>
+<li>连接移动硬盘，打开 MBROSTool，在<code>选项</code>中把<code>显示所有磁盘</code>打勾</li>
+</ol>
+<p><img data-src="https://i.loli.net/2020/03/22/HnZ7LIJ2zmXqlkG.jpg" alt=""></p>
+<p>然后在下方<strong>磁盘</strong>处选择要制作的移动硬盘</p>
+<p><img data-src="https://i.loli.net/2020/03/22/isE1Y6TbAjS52WF.jpg" alt=""></p>
+<p>打开<code>选项</code> - <code>格式化</code>，按如下设置</p>
+<p><img data-src="https://i.loli.net/2020/03/22/lkB3tf7AjQchY8M.jpg" alt=""></p>
+<p>右上角下拉栏选 3 个分区</p>
+<p>50G 用作 WTG 的 win10，选择 <code>VHD</code>，暂时空着路径信息</p>
+<p>50G 用作 Linux，选择 <code>VHD</code>，同样暂时空着路径信息</p>
 <blockquote>
-<p><strong>注意：</strong><br>
-1. 链接辨别标签可以有字母、数字、空白和标点符号，但是 ** 并不区分大小写！** 因此以下两个链接是相同的。</p>
+<p>下文步骤 4Winntsetup 安装结束后，由于是空分区，软件默认不在启动菜单里显示 WTG 菜单项标题，必须修改 “多 UDm 菜单 " 才能显示，修改方法见下文</p>
 </blockquote>
-<pre><code>[link text][a]
-[link text][A]
-</code></pre>
+<p>直接拖入 PE 的镜像文件到分区 3 的路径输入处，选择 “解开”，然后分区大小扩容到 1G（1024M）用作 PE</p>
+<p>右下方<code>用户区</code>打勾，剩余的容量将作为普通的移动硬盘使用</p>
+<p>左下方<code>重建分区表</code>打勾</p>
+<p>其他设置默认，随后点击最下方<code>格式化</code></p>
+<p>在格式化完成的同时，PE 也一并安装好了</p>
+<ol start="2">
+<li>回到主界面，点击<code>高级</code> - <code>备份到MOS</code>，备份 U 盘前 8M 到 BACK.MOS，备份默认保存在 MBROSTool 软件目录下，这个东西留着备用</li>
+</ol>
+<p><img data-src="https://i.loli.net/2020/03/26/K3G9DU7xYlLCIqs.png" alt="图片来自 无忧启动论坛@ddsony"></p>
+<ol start="3">
+<li>回到主界面去掉<code>只读</code>的勾选，列表框选择第二分区来挂写子盘</li>
+</ol>
+<p><img data-src="https://i.loli.net/2020/03/22/ngvmLEZDayrKMph.png" alt="图片来自 无忧启动论坛@ddsony"></p>
+<p>挂载后打开子盘 <code>/udm/udmsmenu.sh</code>，找到如图所示位置，去掉 #defudmmenu 1 和 #defudmmenu 2 两行前面的<code>#</code>（去除注释），并且顺手改掉后面的 <code>""</code> 里面的内容</p>
+<p>比如这里，前面格式化的时候把分区 1 作为 WTG 用的 Win10 盘，分区 2 作为 Deepin 用的盘，这里就改成了</p>
+<p><img data-src="https://i.loli.net/2020/03/22/m3vwcbkXaJjN81E.jpg" alt=""></p>
+<p>修改完后<strong>记得保存</strong></p>
+<p>同样的方法修改 <code>/EFI/mbrosefis.cfg</code></p>
+<p><img data-src="https://i.loli.net/2020/03/22/H7mduOlVr8XBYRC.jpg" alt=""></p>
+<p>到这里硬盘就处理好了，下面我们来进行 WTG 的安装</p>
 <blockquote>
-<p>2. 标记方括号内的内容可以省略（即后一个方括号为空），此时链接标记会视为等同于链接文字。</p>
-<p>[link][]<br>
-相当于<br>
-[link][link]</p>
+<p>删掉子盘 <code>/udm/pic/bubble.png</code> 可以关闭掉 MBR 引导时菜单的泡泡动画</p>
 </blockquote>
-<p>参考式整体实例：</p>
-<pre><code>I get 10 times more traffic from [Google] [1] than from[Yahoo] [2] or [MSN] [3].
-
-[1]: http://google.com/        "Google"
-[2]: http://search.yahoo.com/  "Yahoo Search"
-[3]: http://search.msn.com/    "MSN Search"
-</code></pre>
-<p>如果改成用链接名称的方式写：</p>
-<pre><code>I get 10 times more traffic from [Google][] than from[Yahoo][] or [MSN][].
-
-[google]: http://google.com/        "Google"
-[yahoo]:  http://search.yahoo.com/  "Yahoo Search"
-[msn]:    http://search.msn.com/    "MSN Search"
-</code></pre>
-<h2 id="文字处理"><a class="header-anchor" href="#文字处理">¶</a> 文字处理</h2>
-<h3 id="斜体"><a class="header-anchor" href="#斜体">¶</a> 斜体</h3>
-<p>使用一个 <code>*</code> 或<code>_</code>符号将文字包围起来。</p>
-<pre><code>*斜体文字*
-_斜体文字_
-</code></pre>
-<h3 id="加粗"><a class="header-anchor" href="#加粗">¶</a> 加粗</h3>
-<p>使用两个 <code>*</code> 或<code>_</code>符号将文字包围起来。</p>
-<pre><code>**加粗文字**
-__加粗文字__
-</code></pre>
-<h3 id="粗斜体"><a class="header-anchor" href="#粗斜体">¶</a> 粗斜体</h3>
-<p>使用三个 <code>*</code> 或<code>_</code>符号将文字包围起来。</p>
-<pre><code>***粗斜体文字***
-</code></pre>
-<h3 id="删除线"><a class="header-anchor" href="#删除线">¶</a> 删除线</h3>
-<p>使用两个 <code>~</code> 符号将文字包围起来。<br>
-<s>带删除线的文字</s></p>
-<h3 id="注脚"><a class="header-anchor" href="#注脚">¶</a> 注脚</h3>
-<p>使用 <code>[^keyword]</code> 表示注脚，并在文本的任意地方对该注脚定义（类似与参考式）<br>
-示例：</p>
-<pre><code>这里有一个注脚[^footnote]。
-[^footnote]: 这是那个*注脚*的**文本**。
-</code></pre>
-<p>效果：</p>
-<p>这里有一个注脚 <sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup>。</p>
+<h2 id="WTG安装"><a class="header-anchor" href="#WTG安装">¶</a>WTG 安装</h2>
+<ol>
+<li>回到主界面，打开<code>高级</code> -<code>BootICE</code> 按下图操作</li>
+</ol>
+<p><img data-src="http://bbs.wuyou.net/forum.php?mod=attachment&amp;aid=NDAzMTk5fGY5Zjg5OGY0fDE1ODQ4NzUyODJ8MHw0MTA2MTI%3D.jpg" alt="图片来自 无忧启动论坛@ddsony"></p>
+<ol start="2">
+<li>回到主界面，点击<code>常用</code> - <code>加载</code>，选择刚才分出的 50G 的 VHD 分区，点<code>高级</code>再点击<code>分区表加载</code></li>
+</ol>
+<p><img data-src="https://i.loli.net/2020/03/22/BN63XmOeJEu1CIK.jpg" alt=""></p>
+<p><img data-src="https://i.loli.net/2020/03/23/r18XKPVSNne6FlT.jpg" alt="批注 2020-03-23 000143"></p>
+<ol start="3">
+<li>点击’高级’-‘分区管理’，去掉用户区 MBSuDATA 的激活状态，同时激活安装分区；</li>
+</ol>
+<p><img data-src="https://i.loli.net/2020/03/22/5PkG6nXdWiFLSzc.jpg" alt=""></p>
+<p>如图，<strong>如果安装分区类型不是 0x07 的话，选中后点 <code>修改</code>，把分区类型改为 0x07。如果以后又卸载再重新挂载的，仍旧要改</strong></p>
+<p><img data-src="https://i.loli.net/2020/03/22/317z8pCDfvBFP6A.jpg" alt=""></p>
+<ol start="4">
+<li>打开 WinNTSetup，填好安装源路径和其他信息，<strong>引导驱动器和安装磁盘的位置是同一个，即上面分区表加载的要安装 WTG 的分区</strong>，先点 <code>F</code> 格式化一遍，再点<code>开始安装</code>，弹出的窗口选择默认的<code>使用bootsect.exe更新启动代码</code>，然后点确认</li>
+</ol>
+<p><img data-src="https://i.loli.net/2020/03/22/5qYdNFrJgHBK6tk.png" alt=""></p>
+<p>WinNtSetup 安装完成后，提示系统重启时以 BIOS 方式重启；</p>
+<ol start="5">
+<li>
+<p>安装完成后，提示系统重启。重启时再引导界面选择移动硬盘引导，重启到到 “多 UDm 菜单”，点击 WTG 启动菜单项。</p>
+<p>等待 WTG 系统配置好设备信息，还有一次重启，同样重启到 “多 UDm 菜单”，点击 WTG 启动菜单项，一直到 WTG 安装完毕进入桌面；</p>
+<p>进入桌面后进行系统激活，然后重启回到本机系统</p>
+</li>
+<li>
+<p>**（可选，非必要）** 打开 MBROSTool 工具文件夹下的 ghost32w.exe 进行 GHOST 备份</p>
+</li>
+</ol>
+<p><img data-src="https://i.loli.net/2020/03/22/WtZibO4v8eh6xVB.jpg" alt="打开程序"></p>
+<p><img data-src="https://i.loli.net/2020/03/22/wYuzkZy9Wa1EtjD.jpg" alt="选择移动硬盘"></p>
+<p><img data-src="https://i.loli.net/2020/03/22/fdcOSHC2x3ojql1.jpg" alt="选择WTG的分区（这里是第一个）"></p>
+<p><img data-src="https://i.loli.net/2020/03/22/qnUDYMtmdL3Hfuv.jpg" alt="选择备份文件保存位置，路径最好不要有中文"></p>
+<p><img data-src="https://i.loli.net/2020/03/22/ReQ3kVxFyKvb1H2.jpg" alt="是否压缩备份文件以及压缩的级别"></p>
+<p><img data-src="https://i.loli.net/2020/03/22/vGLAyWmXrdx3c4S.jpg" alt="选Yes"></p>
+<p><img data-src="https://i.loli.net/2020/03/22/nVgryOEWjHKcCvF.jpg" alt="选 Force lock"></p>
+<p>以后 WTG 的系统如果坏了，就可以再用工具<code>分区表加载</code>同一个分区，用 GHOST 恢复文件到安装分区后再进行以下的步骤就能轻松修复。</p>
+<ol start="7">
+<li>打开 MBROStool，先参照准备工作中的步骤 1 切换<code>磁盘</code>到当前的移动硬盘，然后参照下图深度卸载掉 WTG 的安装分区，这样就隐藏好安装分区了</li>
+</ol>
+<p><img data-src="https://i.loli.net/2020/03/22/i4hkVUXy92Trd5l.jpg" alt=""></p>
+<p><img data-src="https://i.loli.net/2020/03/22/qNVopv2tZI85Uji.jpg" alt=""></p>
+<ol start="8">
+<li>如图所示恢复一开始备份的 MOS</li>
+</ol>
+<p><img data-src="https://i.loli.net/2020/03/22/XEc8UQGbLwivfjd.jpg" alt=""></p>
+<p><img data-src="https://i.loli.net/2020/03/22/M4PUgAHlTz9LnDu.jpg" alt=""></p>
+<p>然后点<code>高级</code> - <code>分区管理</code>，恢复原来用户区 MBSuDATA 的激活状态（有些古怪电脑用户区不激活就无法启动）；<br>
+9. 软件右上角去掉只读，点旁边 UDm 下拉列表框选择挂载 WTG 的安装分区；<br>
+挂载后软件界面右键该分区，菜单选择<code>快启处理</code>。生成完毕后，WTG 就算装好了。</p>
+<p><img data-src="https://i.loli.net/2020/03/22/7siFg6tXCfV3hWR.jpg" alt=""></p>
+<p><img data-src="https://i.loli.net/2020/03/22/TWyQAiCR69jhakY.jpg" alt=""></p>
+<h2 id="Linux的安装（Ubuntu、Deepin等Debian系发行版）"><a class="header-anchor" href="#Linux的安装（Ubuntu、Deepin等Debian系发行版）">¶</a>Linux 的安装（Ubuntu、Deepin 等 Debian 系发行版）</h2>
+<h3 id="安装系统镜像（以Deepin为例）"><a class="header-anchor" href="#安装系统镜像（以Deepin为例）">¶</a> 安装系统镜像（以 Deepin 为例）</h3>
+<ol>
+<li>
+<p>保险起见，再备份一次 MOS</p>
+<p><img data-src="https://i.loli.net/2020/03/26/K3G9DU7xYlLCIqs.png" alt="图片来自 无忧启动论坛@ddsony"></p>
+</li>
+<li>
+<p>挂载 Linux 的安装分区</p>
+<p><img data-src="https://i.loli.net/2020/03/22/BN63XmOeJEu1CIK.jpg" alt=""></p>
+<p><img data-src="https://i.loli.net/2020/03/22/mZuNJdMtTYX67BF.jpg" alt=""></p>
+</li>
+<li>
+<p>拿出另一个 U 盘，用 Easy2Boot 制作 ISO 启动盘。如图：</p>
+<p><img data-src="https://i.loli.net/2020/03/23/iZlh23pbjLTED4N.png" alt="图片来自 无忧启动论坛@ddsony"></p>
+<p>制作完成后，在_ISO\Linux\ 目录下拷入 Deepin 的镜像文件：</p>
+<p><img data-src="https://i.loli.net/2020/03/23/Wm6YpdiDvHRGSNZ.png" alt="图片来自 无忧启动论坛@ddsony"></p>
+<p>关机，重启引导进入 U 盘，选 <code>Linux</code> 菜单项进入，再选择你的镜像启动 ISO：</p>
+<p><img data-src="https://i.loli.net/2020/03/23/m39xOZRjiQ8yLgo.png" alt="图片来自 无忧启动论坛@ddsony"></p>
+<p><img data-src="https://i.loli.net/2020/03/23/Z1OEqGyldkAWiC3.png" alt="图片来自 无忧启动论坛@ddsony"></p>
+<p><img data-src="https://i.loli.net/2020/03/23/ltfHSXCrbL3RkuN.png" alt="图片来自 无忧启动论坛@ddsony"></p>
+<p><img data-src="https://i.loli.net/2020/03/23/35GVbgo4fTwRhxD.png" alt="图片来自 无忧启动论坛@ddsony"></p>
+<p>进入安装界面，跟着安装流程走就好。</p>
+<p>需要注意的是，在选择安装位置的页面，我们需要选择选择<code>高级安装</code>，找到上文事先分挂载好的安装分区，点击设定其文件系统为 <code>ext4</code>、挂载点为 <code>\</code>。</p>
+<p>我们还需要点击左下角<code>修改引导器</code>，把引导器也同样设为这个分区，之后就可以点击<code>安装</code>了。</p>
+<p>选择界面如图所示</p>
+<p><img data-src="https://i.loli.net/2020/03/23/4zNLJWTtBo6kFwx.png" alt="以Deepin为例"></p>
+</li>
+<li>
+<p>安装完成后，系统将会自动重启。我们回到本机系统。</p>
+<p>如果你已经装好 <a href="https://china.paragon-software.com/home-windows/extfs-for-windows-download">ExtFS for Windows</a> 的话，我们应该就能看到刚安装完 deepin 的分区了</p>
 <blockquote>
-<p><strong>注意：</strong> 使用什么符号开启标签，就要用什么符号结束。</p>
+<p>如果你不想安装这个软件，你还可以在刚才用来装 Linux 镜像的 LU 盘里操作（进试用）</p>
 </blockquote>
-<h3 id="代码标记"><a class="header-anchor" href="#代码标记">¶</a> 代码标记</h3>
-<p>使用反引号 <code>`</code> 将代码文字包起.</p>
-<pre><code>`&lt;code&gt;code here!&lt;/code&gt;`
-</code></pre>
+<p>我们打开这个分区，复制 <code>Ubuntu-UDm深隐资料包</code>里的 <code>grldr</code> 文件和 <code>/efi</code> 文件夹到根目录。</p>
+<p>然后打开 <code>/boot/grub</code> ，将下面的 <code>/grub.cfg</code> 复制到 根目录的 <code>/efi</code> 下，并更名为 <code>mbrosefi_qk.menu.cfg</code></p>
 <blockquote>
-<p><strong>注意：</strong></p>
+<p>需要注意的是，工具内原有提供的 <code>grldr</code>、<code>/efi/boot/bootia32</code> 和 <code>/efi/boot/bootia32</code> 存在问题，我这里使用工具提供的文件无法正常启动 Linux。</p>
+<p>我已经在自行打包的 <code>Ubuntu-UDm深潜资料包</code>中提供了我个人使用后成功安装 Ubuntu 的替换文件。其他发行版可以自行尝试使用。</p>
+</blockquote>
+</li>
+<li>
+<p>我们打开更名好的 <code>mbrosefi_qk.menu.cfg</code>，按照以下规则对其进行修改</p>
+<ul>
+<li>在所有 <code>set root='hdX,msdosY' </code>（X,Y 代表数字）类似的行 的前面加上 #注释掉，或者直接删掉该行</li>
+</ul>
+<p><img data-src="https://i.loli.net/2020/03/23/Fn7q9IKsLkCVJzR.jpg" alt=""></p>
+<ul>
+<li>所有以 <code>linux</code> 开始的行，须在该行代码末尾添加<code>空格 + $udmboot</code>。</li>
+</ul>
+<p><img data-src="https://i.loli.net/2020/03/23/c4Ga8btdr1AFWKU.jpg" alt=""></p>
+<p><img data-src="https://i.loli.net/2020/03/23/aG1Z6qCvtjh5PcR.jpg" alt=""></p>
+<ul>
+<li><code>linux  /boot/vmlinuz-...</code>、<code>initrd  /boot/initrd....</code> 和 <code>loadfont /boot/...</code> 等开始的行，需要在 <code>/boot</code> 字段前加入<code> ($rooti)</code> 字段。</li>
+</ul>
+<p><img data-src="https://i.loli.net/2020/03/23/4YpeKjR2yOntQk5.jpg" alt=""></p>
+   <center>↓↓↓↓↓↓↓↓↓↓↓↓</center>
+<p><img data-src="https://i.loli.net/2020/03/23/DPIyh4dCwKmFUta.jpg" alt=""></p>
+</li>
+<li>
+<p>打开资料包中的 <code>menu.lst</code> 和 <code>menu0.lst</code>，对照着刚刚修改的 <code>/efi/mbrosefi_qk.menu.cfg</code> 里的信息对 <code>menu.lst</code> 和 <code>menu0.lst</code> 进行以下修改</p>
 <ul>
 <li>
-<p>如果要在代码区段内插入反引号，应使用<strong>多个反引号</strong>来开启和结束代码区段。</p>
-<pre><code>``code`code``
-</code></pre>
+<p>把 <code>menu.lst</code> 和 <code>menu0.lst</code> 里所有的 ``–set=root <code>后面的一大串数字（UUID）全部修改为</code> /efi/mbrosefi_qk.menu.cfg <code>里</code> root=UUID=` 后面的一大串数字</p>
+<p><img data-src="https://i.loli.net/2020/03/23/nd9U5ItyMCrNZk3.jpg" alt="这样的一串数字"></p>
+<p>然后，修改以下内容：</p>
+</li>
+<li>
+<p>修改 <code>menu.lst</code> 和 <code>menu0.lst</code> 里所有的内核版本号数字为 <code>/efi/mbrosefi_qk.menu.cfg</code> 里的内核版本号数字</p>
+<p><img data-src="https://i.loli.net/2020/03/25/FYjGlzPWL3I1bwT.png" alt="/efi/mbrosefi_qk.menu.cfg 里的内核版本号数字"></p>
+<p><img data-src="https://i.loli.net/2020/03/25/sgKUm7TQ9V8W4lB.png" alt="要修改的 menu.lst 和 menu0.lst 里的内核版本号"></p>
+<p>完成后保存并复制到 Linux 的安装分区根目录 <code>/</code></p>
 </li>
 </ul>
-<p>代码区段的起始和结束端都可以<strong>放入一个空白</strong>，起始端后面一个，结束端前面一个，这样你就可以在区段的一开始就插入反引号.</p>
-<pre><code>  `` ` ``
-  `` code`code ``
-</code></pre>
-<ul>
-<li>在代码区段内，&amp; 和方括号都会被<strong>自动地转成 HTML 实体</strong>。</li>
-</ul>
-</blockquote>
-<h2 id="图片插入"><a class="header-anchor" href="#图片插入">¶</a> 图片插入</h2>
-<p>与链接插入类似，同样包括两种方式： 行内式与参考式。</p>
-<h3 id="行内式-v2"><a class="header-anchor" href="#行内式-v2">¶</a> 行内式</h3>
-<p>使用 <code>![alt text](图片网址)</code><br>
-还可以加上图片描述（title 文字）<br>
-<code>![alt text](图片网址 "描述文字")</code><br>
-示例：</p>
-<pre><code>![alt text](/assets/Img/test.jpg "墨镜滑稽")
-</code></pre>
-<p>效果：<img data-src="/assets/Img/test.jpg" alt="alt text" title="墨镜滑稽"></p>
-<h3 id="参考式-v2"><a class="header-anchor" href="#参考式-v2">¶</a> 参考式</h3>
-<p>使用 <code>![alt text][id]</code><br>
-「id」是图片参考的名称，图片参考的定义方式则和连结参考一样：</p>
-<pre><code>[id]: 图片路径 "描述文字"
-</code></pre>
-<blockquote>
-<p><strong>注意：</strong> 到目前为止， Markdown 还没有办法指定图片的宽高，需要的话可使用普通的 <strong><code>&lt;img&gt;</code></strong> 标签</p>
-</blockquote>
-<h2 id="内容目录（TOC）-（emmmmmm，对于hexo来说没什么卵用……）"><a class="header-anchor" href="#内容目录（TOC）-（emmmmmm，对于hexo来说没什么卵用……）">¶</a> 内容目录（TOC） （emmmmmm，对于 hexo 来说没什么卵用……）</h2>
-<p>在段落中填写 <code>[TOC]</code> 以显示全文内容的目录结构。</p>
-<p>效果：<br>
-[TOC]</p>
-<h2 id="表格"><a class="header-anchor" href="#表格">¶</a> 表格</h2>
-<p>示例：</p>
-<figure class="highlight plain"><table><tbody><tr><td class="code"><pre><span class="line">| 项目        | 价格   |  数量  |</span><br><span class="line">| --------   | -----:  | :----:  |</span><br><span class="line">| 计算机     | \$1600 |   5     |</span><br><span class="line">| 手机        |   \$12   |   12   |</span><br><span class="line">| 管线        |    \$1    |  234  |</span><br></pre></td></tr></tbody></table></figure>
-<p>效果：</p>
-<table>
-<thead>
-<tr>
-<th>项目</th>
-<th style="text-align:right">价格</th>
-<th style="text-align:center">数量</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>计算机</td>
-<td style="text-align:right"> $1600</td>
-<td style="text-align:center">5</td>
-</tr>
-<tr>
-<td> 手机</td>
-<td style="text-align:right"> $12</td>
-<td style="text-align:center">12</td>
-</tr>
-<tr>
-<td> 管线</td>
-<td style="text-align:right"> $1</td>
-<td style="text-align:center">234</td>
-</tr>
-</tbody>
-</table>
-<h2 id="待办事项及TODO列表"><a class="header-anchor" href="#待办事项及TODO列表">¶</a> 待办事项及 TODO 列表</h2>
-<p>使用带有 <code>- [ ]</code>（未完成） 或 <code>- [x]</code>（已完成）项的列表语法撰写一个待办事宜列表，并且支持子列表嵌套以及混用 Markdown 语法。<br>
-示例：</p>
-<pre><code>- [ ] 写一个个人主页
-- [x] 写一个Maekdown学习笔记$$
-</code></pre>
-<p>效果：</p>
-<ul>
-<li><input type="checkbox" id="checkbox0"><label for="checkbox0">写一个个人主页</label></li>
-<li><input type="checkbox" id="checkbox1" checked="true"><label for="checkbox1">写一个 Maekdown 学习笔记 </label></li>
-</ul>
-<h2 id="自动链接"><a class="header-anchor" href="#自动链接">¶</a> 自动链接</h2>
-<p>Markdown 支持以比较简短的自动链接形式来处理网址和电子邮件信箱，只需用方括号括起即可，Markdown 就会自动把它转成链接。</p>
-<pre><code>&lt;http://example.com/&gt;
-&lt;address@example.com&gt;
-</code></pre>
-<p>效果：<br>
-<a href="http://example.com/" target="_blank" rel="noopener">http://example.com/</a><br>
-<a href="mailto:address@example.com">address@example.com</a></p>
-<h2 id="反斜杠用法"><a class="header-anchor" href="#反斜杠用法">¶</a> 反斜杠用法</h2>
-<p>Markdown 可以利用反斜杠来插入一些在语法中有其它意义的符号，例如：如果你想要用星号加在文字旁边的方式来做出强调效果（但不用 <code>&lt;em&gt;</code> 标签），你可以在星号的前面加上反斜杠：</p>
-<pre><code>\*literal asterisks\*
-</code></pre>
-<p>Markdown 支持以下这些符号前面加上反斜杠来帮助插入普通的符号：</p>
-<pre><code>\   反斜线
-`   反引号
-*   星号
-_   底线
-{}  花括号
-[]  方括号
-()  括弧
-#   井字号
-+   加号
--   减号
-.   英文句点
-!   惊叹号
-</code></pre>
-<h2 id="HTML兼容性"><a class="header-anchor" href="#HTML兼容性">¶</a>HTML 兼容性</h2>
+</li>
+</ol>
+<h3 id="设置深度隐藏"><a class="header-anchor" href="#设置深度隐藏">¶</a> 设置深度隐藏</h3>
 <ol>
-<li>Markdown 文档内可任意使用 html 语句。<br>
-（你想在 Markdown 文档里码 HTML 也没问题的 233）</li>
-<li>Markdown 文档会对特殊字符自动转换，如 <code>&lt;</code> 和 <code>&amp;</code>。</li>
+<li>
+<p>重启电脑，用 MBR 或 UEFI 引导移动硬盘进入 UDm 菜单，然后尝试进入安装好的 Linux。</p>
+</li>
+<li>
+<p>如果 Linux 能正常启动，在简单配置 Linux 后重启回到主机系统，把 <code>udm</code> 和 <code>UDm-hook.sh</code> 复制到 移动硬盘普通储存区或另一个 U 盘，然后重启到 Linux 按步骤进行以下修改：</p>
+<ol>
+<li>复制 <code>udm</code> 到 <code>/usr/bin</code></li>
+<li>在 <code>/etc/initramfs-tools/hooks</code> 下新建脚本 <code>UDm-hook.sh</code>（名字可随意），代码如下：</li>
 </ol>
-<h2 id="文章过长折叠-（hexo用）"><a class="header-anchor" href="#文章过长折叠-（hexo用）">¶</a> 文章过长折叠 （hexo 用）</h2>
-<p>使用 <code>&lt;!--more--&gt;</code></p>
+<figure class="highlight sh"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"></span><br><span class="line">  PREREQ=<span class="string">""</span></span><br><span class="line"></span><br><span class="line">  prereqs()</span><br><span class="line">  {</span><br><span class="line">          <span class="built_in">echo</span> <span class="string">"<span class="variable">$PREREQ</span>"</span></span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="keyword">case</span> <span class="variable">$1</span> <span class="keyword">in</span></span><br><span class="line">  <span class="comment"># get pre-requisites</span></span><br><span class="line">  prereqs)</span><br><span class="line">          prereqs</span><br><span class="line">          <span class="built_in">exit</span> 0</span><br><span class="line">          ;;</span><br><span class="line">  <span class="keyword">esac</span></span><br><span class="line"></span><br><span class="line">. /usr/share/initramfs-tools/hook-functions</span><br><span class="line"></span><br><span class="line">copy_exec /usr/bin/udm /bin</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
 <blockquote>
-<p><strong>注意：</strong> <em>hexo-renderer-markdown-it</em> 不支持</p>
+<p>如果你找不到 <code>/etc/initramfs-tools</code>，请先安装工具</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">$ sudo apt-get install initramfs-tools</span><br></pre></td></tr></tbody></table></figure>
 </blockquote>
-<hr class="footnotes-sep">
-<section class="footnotes">
-<ol class="footnotes-list">
-<li id="fn1" class="footnote-item"><p>这是那个<em>注脚</em>的<strong>文本</strong>。 <a href="#fnref1" class="footnote-backref">↩︎</a></p>
+<ol start="3">
+<li>编辑 <code>/usr/initramfas-tools/init</code>，</li>
+</ol>
+<p>在打开的文档中寻找 <code>run_scripts /scripts/init-top </code>一行，并在该行代码下新增两条代码</p>
+ <figure class="highlight sh"><table><tbody><tr><td class="code"><pre><span class="line">udmboot=`udm 2&gt;/dev/null`; udmdev=`<span class="built_in">echo</span> <span class="variable">$udmboot</span> | cut -d<span class="string">" "</span> -f1`; udmroot=`<span class="built_in">echo</span> <span class="variable">$udmboot</span> | cut -d<span class="string">" "</span> -f2`</span><br><span class="line"><span class="keyword">if</span> [ -n <span class="string">"<span class="variable">${udmdev}</span>"</span> ]; <span class="keyword">then</span> ROOT=<span class="variable">${udmdev}</span>; umount <span class="variable">${udmdev}</span> 2&gt;/dev/null;<span class="keyword">fi</span></span><br></pre></td></tr></tbody></table></figure>
+<p>然后保存。</p>
+<ol start="4">
+<li>
+<p>打开终端，运行</p>
+<p>完成后重启回本机系统</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">$ sudo update-initramfs -u</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li>
+<p>打开 <code>MBMBROSTool</code> 工具，跟刚才一样深度卸载掉 Linux 的安装分区</p>
+<p><img data-src="https://i.loli.net/2020/03/22/i4hkVUXy92Trd5l.jpg" alt=""></p>
+<p><img data-src="https://i.loli.net/2020/03/22/qNVopv2tZI85Uji.jpg" alt=""></p>
 </li>
 </ol>
-</section>
+</li>
+</ol>
+<p><strong>注意：不用再恢复 MOS！！！</strong></p>
+<blockquote>
+<ul>
+<li>总结下 Linux 深度隐藏的操作
+<ol>
+<li>添加 <code>udm</code> 到 <code>/boot/initrd.img-xxx</code> 的 <code>/bin</code> 里</li>
+<li>修改 <code>/boot/initrd.img-xxx</code> 里的 <code>init</code>，加入脚本</li>
+<li>在 <code>MBROSTool</code> 上把 Linux 安装分区深度卸载</li>
+</ol>
+</li>
+<li>该方法仅在 Ubuntu 19.10 上测试成功，其他 Debian 系请自行测试，非 Debian 系可以参考一下上面的总结和资料包里的 <code>UDM对linux的支持.txt</code>。Arch 系发行版可以参考下<a href="https://wiki.archlinux.org/index.php/Mkinitcpio_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">这篇文档</a>来修改</li>
+</ul>
+</blockquote>
+<h1>后记</h1>
+<h2 id="升级Ubuntu内核后的操作"><a class="header-anchor" href="#升级Ubuntu内核后的操作">¶</a> 升级 Ubuntu 内核后的操作</h2>
+<p>先进行升级</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo upgrade</span><br></pre></td></tr></tbody></table></figure>
+<p>提示 linux 的内核有更新，可以在更新的时候记一下新内核的版本号</p>
+<p>升级后用 root 打开文件管理器</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">sudo nautilus</span><br></pre></td></tr></tbody></table></figure>
+<p>更新内核时如果没有留意版本号，可以打开 <code>/boot/grub/grub.cfg</code> 参照安装时的步骤找找</p>
+<p>知道新内核版本号后打开根目录下的 <code>menu.lst</code>、<code>menu0.lst</code> 以及 <code>/efi/mbrosefi_qk.menu.cfg</code>，把里面旧的版本号全部查找替换为新的版本号</p>
+<p>保存，重启查看效果</p>
+<h2 id="美化启动项"><a class="header-anchor" href="#美化启动项">¶</a> 美化启动项</h2>
+<p>先读写挂载子盘（参考 安装流程 - 处理硬盘分区）</p>
+<p>这里只展示一些我作的修改，详细的美化指南请看工具内的补充帮助</p>
+<ul>
+<li>
+<p>删掉 <code>/udm/pic/bubble.png</code> 可以关闭 MBR 启动菜单里的泡泡动画</p>
+</li>
+<li>
+<p><code>/efi/theme</code> 修改 EFI 启动下引导菜单的主题，加载的是 grub 的主题，但是主题的加载效果有些奇怪，同时要注意子盘大小限制</p>
+<p>这里我使用的是自行魔改了的 <a href="https://www.gnome-look.org/p/1200710/">Atomic GRUB Theme</a>，加入了原主题没有的 <code>udm.png</code>，修改 <code>reastar.png</code> 为 <code>reboot.png</code> 来让它奇怪的 grub 能够识别。资料包里会提供我自用的魔改主题</p>
+</li>
+</ul>
+<h2 id="VMWare加载"><a class="header-anchor" href="#VMWare加载">¶</a>VMWare 加载</h2>
+<p><img data-src="https://i.loli.net/2020/03/26/aolm1Cr4jXwuyLh.png" alt=""></p>
+<p><img data-src="https://i.loli.net/2020/03/26/oqPdYNwQBDk6iWT.png" alt=""></p>
+<p><img data-src="https://i.loli.net/2020/03/26/yfeMnH9LXIgp5rB.png" alt=""></p>
+<p><img data-src="https://i.loli.net/2020/03/26/cHVnr8gDEi7udGl.png" alt=""></p>
+<p><img data-src="https://i.loli.net/2020/03/26/eUMkCXApi1fHlI5.png" alt=""></p>
+<p><img data-src="https://i.loli.net/2020/03/26/pdk75AjSxPvOmTs.png" alt=""></p>
+<p><img data-src="https://i.loli.net/2020/03/26/eJShM6zIRfHb5FP.png" alt=""></p>
+<p><img data-src="https://i.loli.net/2020/03/26/FY4CQx75D9Nr3TU.png" alt=""></p>
+<p>其他默认或自行调整</p>
+<blockquote>
+<p>参考链接</p>
+<p><a href="http://bbs.wuyou.net/forum.php?mod=viewthread&amp;tid=410612&amp;extra=page%3D1">http://bbs.wuyou.net/forum.php?mod=viewthread&amp;tid=410612&amp;extra=page%3D1</a></p>
+<p><a href="https://bbs.luobotou.org/thread-43549-1-1.html">https://bbs.luobotou.org/thread-43549-1-1.html</a></p>
+<p><a href="https://bbs.luobotou.org/forum.php?mod=viewthread&amp;tid=44272&amp;extra=page%3D&amp;page=1">https://bbs.luobotou.org/forum.php?mod=viewthread&amp;tid=44272&amp;extra=page%3D&amp;page=1</a></p>
+<p><a href="https://bbs.luobotou.org/thread-45230-1-1.html">https://bbs.luobotou.org/thread-45230-1-1.html</a></p>
+<p><a href="http://manpages.ubuntu.com/manpages/bionic/en/man8/initramfs-tools.8.html">http://manpages.ubuntu.com/manpages/bionic/en/man8/initramfs-tools.8.html</a></p>
+</blockquote>
 ]]></content>
       <categories>
         <category>笔记</category>
       </categories>
       <tags>
-        <tag>Markdown</tag>
+        <tag>WTG</tag>
+        <tag>移动硬盘</tag>
       </tags>
   </entry>
 </search>

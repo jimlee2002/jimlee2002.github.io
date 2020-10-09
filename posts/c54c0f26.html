@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.0">
+<meta name="generator" content="Hexo 5.2.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
@@ -15,14 +15,14 @@
 <link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/undefined/font-awesome/css/font-awesome.min.css">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/pace-js@1/themes/black/pace-theme-minimal.css">
-  <script src="//cdn.jsdelivr.net/npm/pace-js@1/pace.min.js"></script>
 
-<script id="hexo-configurations">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"jimlee2002.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"manual"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"jimlee2002.github.io","root":"/","scheme":"Gemini","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#222","save":"manual"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
 
   <meta name="description" content="今天重新部署了一次 Hexo，记录一下过程。 方案：静态页面部署在 gitpage，hexo 文件备份到 github 私有库  注意： 博客配置文件：&#x2F;_config.yml （位于博客根目录下） 主题配置文件：&#x2F;themes&#x2F;ThemeName&#x2F;_config.yml （位于各主题文件夹下） 请注意区分二者  准备工作 github 上建一个 xxxx.github.io 的公开仓库和一个私有">
@@ -38,10 +38,11 @@
 <meta property="article:tag" content="hexo">
 <meta name="twitter:card" content="summary">
 
+
 <link rel="canonical" href="https://jimlee2002.github.io/posts/c54c0f26.html">
 
 
-<script id="page-configurations">
+<script data-pjax class="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
@@ -61,24 +62,36 @@
 
   <noscript>
   <style>
-  .use-motion .brand,
+  body { margin-top: 2rem; }
+
   .use-motion .menu-item,
-  .sidebar-inner,
+  .use-motion .sidebar,
   .use-motion .post-block,
   .use-motion .pagination,
   .use-motion .comments,
   .use-motion .post-header,
   .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
 
   .use-motion .site-title,
-  .use-motion .site-subtitle {
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
     opacity: initial;
     top: initial;
   }
 
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
   </style>
 </noscript>
 
@@ -193,35 +206,35 @@ foreignObject[data-mjx-xml] {
   stroke-width: 3;
 }
 
-mjx-container {
+mjx-container[display="true"] {
   overflow: auto hidden;
 }
 
-mjx-container + br {
+mjx-container[display="true"] + br {
   display: none;
 }
 </style></head>
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
 
+  <main class="main">
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="切换导航栏">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
   </div>
 
   <div class="site-meta">
 
     <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
+      <i class="logo-line"></i>
       <h1 class="site-title">Jim's Blog</h1>
-      <span class="logo-line-after"><i></i></span>
+      <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">Never Settle.</p>
   </div>
@@ -235,27 +248,26 @@ mjx-container + br {
 
 
 
-
 <nav class="site-nav">
-  <ul id="menu" class="menu">
+  <ul class="main-menu menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+    <a href="/" rel="section"><i class="home fa-fw"></i>首页</a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>分类</a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签</a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -274,7 +286,7 @@ mjx-container + br {
     <i class="fa fa-search"></i>
   </span>
   <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off"
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
            placeholder="搜索..." spellcheck="false"
            type="search" class="search-input">
   </div>
@@ -282,9 +294,9 @@ mjx-container + br {
     <i class="fa fa-times-circle"></i>
   </span>
 </div>
-<div id="search-result">
-  <div id="no-result">
-    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
   </div>
 </div>
 
@@ -292,6 +304,82 @@ mjx-container + br {
   </div>
 
 </div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">初始化 hexo</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">基本调整</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E5%A4%87%E4%BB%BD"><span class="nav-number">3.1.</span> <span class="nav-text"> 设置备份</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%87%E4%BB%BD%E6%93%8D%E4%BD%9C"><span class="nav-number">3.1.1.</span> <span class="nav-text"> 备份操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%98%E5%8E%9F%E6%93%8D%E4%BD%9C"><span class="nav-number">3.1.2.</span> <span class="nav-text"> 还原操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%92%E9%94%99%E6%8C%87%E5%8D%97"><span class="nav-number">3.1.3.</span> <span class="nav-text"> 排错指南</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E5%88%86%E7%B1%BB%EF%BC%8C%E5%BB%BA%E7%AB%8B%E6%A8%A1%E6%9D%BF"><span class="nav-number">3.2.</span> <span class="nav-text"> 设置分类，建立模板</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9B%B4%E6%8D%A2hexo-renderer-markdown-it%E6%B8%B2%E6%9F%93%E5%99%A8"><span class="nav-number">3.3.</span> <span class="nav-text"> 更换 hexo-renderer-markdown-it 渲染器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">主题安装配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE"><span class="nav-number">4.1.</span> <span class="nav-text"> 基本设置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%87%E6%8D%A2%E9%A3%8E%E6%A0%BC"><span class="nav-number">4.1.1.</span> <span class="nav-text"> 切换风格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E5%90%AF%E5%A4%9C%E9%97%B4%E6%A8%A1%E5%BC%8F%E9%80%82%E9%85%8D"><span class="nav-number">4.1.2.</span> <span class="nav-text"> 开启夜间模式适配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%87%E6%8D%A2%E8%AF%AD%E8%A8%80"><span class="nav-number">4.1.3.</span> <span class="nav-text"> 切换语言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E7%AB%99%E7%82%B9%E5%9B%BE%E6%A0%87"><span class="nav-number">4.1.4.</span> <span class="nav-text"> 设置站点图标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%87%E6%A1%88%E5%B1%95%E7%A4%BA"><span class="nav-number">4.1.5.</span> <span class="nav-text"> 备案展示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CC%E6%A0%87%E8%AF%86"><span class="nav-number">4.1.6.</span> <span class="nav-text">CC 标识</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E8%8F%9C%E5%8D%95%E6%A0%8F"><span class="nav-number">4.1.7.</span> <span class="nav-text"> 设置菜单栏</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E4%BE%A7%E8%BE%B9%E6%A0%8F"><span class="nav-number">4.2.</span> <span class="nav-text"> 设置侧边栏</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%A7%E8%BE%B9%E6%A0%8F%E5%A4%A7%E5%B0%8F%E4%BD%8D%E7%BD%AE"><span class="nav-number">4.2.1.</span> <span class="nav-text"> 侧边栏大小位置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%B4%E5%83%8F"><span class="nav-number">4.2.2.</span> <span class="nav-text"> 头像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8B%E6%83%85%E9%93%BE%E6%8E%A5"><span class="nav-number">4.2.3.</span> <span class="nav-text"> 友情链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TOC"><span class="nav-number">4.2.4.</span> <span class="nav-text">TOC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%B3%E6%97%B6%E4%BA%A4%E8%B0%88"><span class="nav-number">4.2.5.</span> <span class="nav-text"> 即时交谈</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%96%E5%AD%90%E9%A1%B5%E9%9D%A2"><span class="nav-number">4.3.</span> <span class="nav-text"> 帖子页面</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E7%AB%A0%E4%BF%A1%E6%81%AF"><span class="nav-number">4.3.1.</span> <span class="nav-text"> 文章信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%95%E9%83%A8%E6%A0%87%E7%AD%BE%E6%A0%B7%E5%BC%8F"><span class="nav-number">4.3.2.</span> <span class="nav-text"> 底部标签样式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%93%E8%B5%8F%E3%80%81%E6%96%87%E6%9C%AB%E4%BF%A1%E6%81%AF"><span class="nav-number">4.3.3.</span> <span class="nav-text"> 打赏、文末信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E4%B8%BB%E9%A2%98%E6%8E%A8%E8%8D%90"><span class="nav-number">4.3.4.</span> <span class="nav-text"> 相关主题推荐</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%87%E7%AD%BE%E9%A1%B5%E9%9D%A2"><span class="nav-number">4.3.5.</span> <span class="nav-text"> 标签页面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E7%B1%BB%E9%A1%B5%E9%9D%A2"><span class="nav-number">4.3.6.</span> <span class="nav-text"> 分类页面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#404%E7%95%8C%E9%9D%A2"><span class="nav-number">4.3.7.</span> <span class="nav-text">404 界面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B0%B7%E6%AD%8C%E6%97%A5%E5%8E%86-%EF%BC%88%E6%9C%AA%E9%85%8D%E7%BD%AE%EF%BC%89"><span class="nav-number">4.3.8.</span> <span class="nav-text"> 谷歌日历 （未配置）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E5%8D%93%E4%B8%8Achrome%E7%9A%84%E6%B2%89%E6%B5%B8%E9%A2%9C%E8%89%B2%EF%BC%9F%EF%BC%88%E4%B8%8D%E6%98%AF%E5%BE%88%E6%98%8E%E7%99%BD%EF%BC%89"><span class="nav-number">4.3.9.</span> <span class="nav-text"> 安卓上 chrome 的沉浸颜色？（不是很明白）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89logo%EF%BC%8C%E5%9C%A8%E7%BD%91%E7%AB%99%E6%A0%87%E9%A2%98%E8%8F%9C%E5%8D%95%E6%A0%8F%E4%B8%8A%E9%9D%A2%E7%9A%84%E4%BD%8D%E7%BD%AE"><span class="nav-number">4.3.10.</span> <span class="nav-text"> 自定义 logo，在网站标题菜单栏上面的位置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%9D%97%E7%9A%84%E9%A3%8E%E6%A0%BC"><span class="nav-number">4.3.11.</span> <span class="nav-text"> 代码块的风格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%94%E5%9B%9E%E9%A1%B6%E9%83%A8%E6%A0%B7%E5%BC%8F"><span class="nav-number">4.3.12.</span> <span class="nav-text"> 返回顶部样式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%98%85%E8%AF%BB%E8%BF%9B%E5%BA%A6%E8%AE%B0%E5%BF%86%E3%80%81%E4%B9%A6%E7%AD%BE"><span class="nav-number">4.3.13.</span> <span class="nav-text"> 阅读进度记忆、书签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%B3%E4%B8%8A%E8%A7%92%E6%9D%A5Github%E5%8F%89%E6%88%91%E5%95%8A%E5%9B%BE%E6%A0%87"><span class="nav-number">4.3.14.</span> <span class="nav-text"> 右上角来 Github 叉我啊图标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E4%BD%93%E8%AE%BE%E7%BD%AE"><span class="nav-number">4.3.15.</span> <span class="nav-text"> 字体设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SEO%E7%9B%B8%E5%85%B3"><span class="nav-number">4.3.16.</span> <span class="nav-text">SEO 相关</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%AB%98%E7%BA%A7%E8%AE%BE%E7%BD%AE"><span class="nav-number">4.3.17.</span> <span class="nav-text"> 高级设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RSS%E8%AE%A2%E9%98%85"><span class="nav-number">4.3.18.</span> <span class="nav-text">RSS 订阅</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MathJax-%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F%E6%B8%B2%E6%9F%93"><span class="nav-number">4.3.19.</span> <span class="nav-text">MathJax 数学公式渲染</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pjax"><span class="nav-number">4.3.20.</span> <span class="nav-text">pjax</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FancyBox"><span class="nav-number">4.3.21.</span> <span class="nav-text">FancyBox</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lazyload-%E5%9B%BE%E7%89%87%E6%87%92%E5%8A%A0%E8%BD%BD"><span class="nav-number">4.3.22.</span> <span class="nav-text">Lazyload 图片懒加载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pangu-Autospace-%E4%B8%AD%E8%8B%B1%E6%96%87%E8%87%AA%E5%8A%A8%E7%A9%BA%E6%A0%BC%E5%88%86%E7%A6%BB-%EF%BC%88%E6%9C%AA%E9%85%8D%E7%BD%AE%EF%BC%89"><span class="nav-number">4.3.23.</span> <span class="nav-text">Pangu Autospace 中英文自动空格分离 （未配置）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Quicklink-%EF%BC%88%E4%B8%8Epajx%E5%86%B2%E7%AA%81%EF%BC%8C%E6%9C%AA%E9%85%8D%E7%BD%AE%EF%BC%89"><span class="nav-number">4.3.24.</span> <span class="nav-text">Quicklink （与 pajx 冲突，未配置）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Animation-Effect-%E8%BF%87%E5%BA%A6%E5%8A%A8%E7%94%BB%E8%AE%BE%E7%BD%AE%EF%BC%88%E6%9C%AA%E9%85%8D%E7%BD%AE%EF%BC%89"><span class="nav-number">4.3.25.</span> <span class="nav-text">Animation Effect 过度动画设置（未配置）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Progress-Bar-%E7%BD%91%E9%A1%B5%E5%8A%A0%E8%BD%BD%E8%BF%9B%E5%BA%A6%E6%9D%A1%E5%8A%A8%E7%94%BB"><span class="nav-number">4.3.26.</span> <span class="nav-text">Progress Bar 网页加载进度条动画</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Valine-%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F"><span class="nav-number">4.3.27.</span> <span class="nav-text">Valine 评论系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LeanCloud-%E8%AE%BF%E9%97%AE%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1"><span class="nav-number">4.3.28.</span> <span class="nav-text">LeanCloud 访问数据统计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Local-Search-%E6%9C%AC%E5%9C%B0%E6%90%9C%E7%B4%A2"><span class="nav-number">4.3.29.</span> <span class="nav-text">Local Search 本地搜索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%B9%E6%AE%8A%E6%A0%87%E7%AD%BE"><span class="nav-number">4.3.30.</span> <span class="nav-text"> 特殊标签</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%95%E8%A8%80"><span class="nav-number">4.3.30.1.</span> <span class="nav-text"> 引言</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Note"><span class="nav-number">4.3.30.2.</span> <span class="nav-text">Note</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Header"><span class="nav-number">4.3.30.3.</span> <span class="nav-text">Header</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Primary-Header"><span class="nav-number">4.3.30.4.</span> <span class="nav-text">Primary Header</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Lists-in-note"><span class="nav-number">4.3.30.5.</span> <span class="nav-text">Lists in note</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Tabs"><span class="nav-number">4.3.30.6.</span> <span class="nav-text">Tabs</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PDF"><span class="nav-number">4.3.30.7.</span> <span class="nav-text">PDF</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mermaid-%E6%B5%81%E7%A8%8B%E5%9B%BE"><span class="nav-number">4.3.31.</span> <span class="nav-text">Mermaid 流程图</span></a></li></ol></li></ol></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Jim Lee"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Jim Lee</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/jimlee2002" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;jimlee2002" rel="noopener" target="_blank"><i class="github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:jimlee2002@outlook.com" title="E-Mail → mailto:jimlee2002@outlook.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="rss fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
     </header>
 
     
@@ -301,19 +389,24 @@ mjx-container + br {
   </div>
   <a role="button" class="book-mark-link book-mark-link-fixed"></a>
 
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
 
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
 
-          <div class="content post posts-expand">
-            
+    <div class="main-inner post posts-expand">
+      
 
-    
+      
+
+  
+
+
+<div class="post-block">
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://jimlee2002.github.io/posts/c54c0f26.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -330,54 +423,72 @@ mjx-container + br {
           博客折腾笔记①-hexo 部署与自定义
         </h1>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-03-19 20:00:30" itemprop="dateCreated datePublished" datetime="2020-03-19T20:00:30+08:00">2020-03-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-10-03 16:37:56" itemprop="dateModified" datetime="2020-10-03T16:37:56+08:00">2020-10-03</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a>
-                </span>
-            </span>
+      <time title="创建时间：2020-03-19 20:00:30" itemprop="dateCreated datePublished" datetime="2020-03-19T20:00:30+08:00">2020-03-19</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-10-03 16:37:56" itemprop="dateModified" datetime="2020-10-03T16:37:56+08:00">2020-10-03</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a>
+        </span>
+    </span>
 
-          
-            <span id="/posts/c54c0f26.html" class="post-meta-item leancloud_visitors" data-flag-title="博客折腾笔记①-hexo 部署与自定义" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>15k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>25 分钟</span>
-            </span>
+  
+    <span id="/posts/c54c0f26.html" class="post-meta-item leancloud_visitors" data-flag-title="博客折腾笔记①-hexo 部署与自定义" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/posts/c54c0f26.html#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/c54c0f26.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>15k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>25 分钟</span>
+    </span>
+</div>
 
         </div>
       </header>
@@ -386,8 +497,6 @@ mjx-container + br {
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
         <p>今天重新部署了一次 Hexo，记录一下过程。<br>
 方案：静态页面部署在 gitpage，hexo 文件备份到 github 私有库</p>
 <blockquote>
@@ -399,8 +508,8 @@ mjx-container + br {
 <h1>准备工作</h1>
 <p>github 上建一个 xxxx.github.io 的公开仓库和一个私有库<br>
 其中 xxxx 是你的 github 用户名，xxxx.github.io 是博客域名</p>
-<p><a href="https://hexo.io/zh-cn/" target="_blank" rel="noopener">hexo 官网</a><br>
-下载安装 <a href="http://nodejs.org/" target="_blank" rel="noopener">Node.js</a>、<a href="http://git-scm.com/" target="_blank" rel="noopener">Git</a>  ，git 配置好信息<br>
+<p><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/">hexo 官网</a><br>
+下载安装 <a target="_blank" rel="noopener" href="http://nodejs.org/">Node.js</a>、<a target="_blank" rel="noopener" href="http://git-scm.com/">Git</a>  ，git 配置好信息<br>
 然后 Cmd/Powershell 执行</p>
 <pre><code>npm install -g hexo-cli
 </code></pre>
@@ -414,7 +523,7 @@ npm install
 </code></pre>
 <p>然后修改文件下的_config.yml 参数</p>
 <blockquote>
-<p>参数详见 <a href="https://hexo.io/zh-cn/docs/configuration" target="_blank" rel="noopener">https://hexo.io/zh-cn/docs/configuration</a><br>
+<p>参数详见 <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/configuration">https://hexo.io/zh-cn/docs/configuration</a><br>
 记得修改域名</p>
 </blockquote>
 <p>修改_config.yml 的 deploy 部分</p>
@@ -459,7 +568,7 @@ repository:
 9、<code>public</code> 是 hexo g 生成的静态网页，不需要拷贝；<br>
 10、<code>.deploy_git</code> 同上，hexo g 也会生成，不需要拷贝；<br>
 11、<code>db.json</code> 文件，不需要拷贝。</p>
-<p>引用自：<a href="https://www.jianshu.com/p/baab042849023" target="_blank" rel="noopener">https://www.jianshu.com/p/baab042849023</a></p>
+<p>引用自：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/baab042849023">https://www.jianshu.com/p/baab042849023</a></p>
 </blockquote>
 <h3 id="备份操作"><a class="header-anchor" href="#备份操作">¶</a> 备份操作</h3>
 <pre><code>hexo backup
@@ -501,7 +610,7 @@ Emitted 'error' event at:
 </code></pre>
 <p>的错误时可以尝试删掉主题文件夹中的.git 隐藏文件夹试试</p>
 <blockquote>
-<p>参考  <a href="https://github.com/coneycode/hexo-git-backup/issues/27" target="_blank" rel="noopener">备份报错 #27</a></p>
+<p>参考  <a target="_blank" rel="noopener" href="https://github.com/coneycode/hexo-git-backup/issues/27">备份报错 #27</a></p>
 </blockquote>
 <h2 id="设置分类，建立模板"><a class="header-anchor" href="#设置分类，建立模板">¶</a> 设置分类，建立模板</h2>
 <p>略</p>
@@ -541,7 +650,7 @@ plugins:
 <ul>
 <li><s>KateX</s>（存在显示 bug，已弃用，目前实现方式见后）</li>
 </ul>
-<p><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex" xmlns="http://www.w3.org/2000/svg" width="18.882ex" height="2.646ex" role="img" focusable="false" viewBox="0 -919.5 8345.9 1169.5" xmlns:xlink="http://www.w3.org/1999/xlink"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="msqrt"><g transform="translate(853, 0)"><g data-mml-node="mn"><use xlink:href="#MJX-TEX-N-33"></use></g><g data-mml-node="mi" transform="translate(500, 0)"><use xlink:href="#MJX-TEX-I-78"></use></g><g data-mml-node="mo" transform="translate(1294.2, 0)"><use xlink:href="#MJX-TEX-N-2212"></use></g><g data-mml-node="mn" transform="translate(2294.4, 0)"><use xlink:href="#MJX-TEX-N-31"></use></g></g><g data-mml-node="mo" transform="translate(0, 59.5)"><use xlink:href="#MJX-TEX-N-221A"></use></g><rect width="2794.4" height="60" x="853" y="799.5"></rect></g><g data-mml-node="mo" transform="translate(3869.7, 0)"><use xlink:href="#MJX-TEX-N-2B"></use></g><g data-mml-node="mo" transform="translate(4869.9, 0)"><use xlink:href="#MJX-TEX-N-28"></use></g><g data-mml-node="mn" transform="translate(5258.9, 0)"><use xlink:href="#MJX-TEX-N-31"></use></g><g data-mml-node="mo" transform="translate(5981.1, 0)"><use xlink:href="#MJX-TEX-N-2B"></use></g><g data-mml-node="mi" transform="translate(6981.3, 0)"><use xlink:href="#MJX-TEX-I-78"></use></g><g data-mml-node="msup" transform="translate(7553.3, 0)"><g data-mml-node="mo"><use xlink:href="#MJX-TEX-N-29"></use></g><g data-mml-node="mn" transform="translate(389, 363) scale(0.707)"><use xlink:href="#MJX-TEX-N-32"></use></g></g></g></g></svg></mjx-container></p>
+<p><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex" xmlns="http://www.w3.org/2000/svg" width="18.882ex" height="2.646ex" role="img" focusable="false" viewBox="0 -919.5 8345.9 1169.5"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="msqrt"><g transform="translate(853, 0)"><g data-mml-node="mn"><path data-c="33" d="M127 463Q100 463 85 480T69 524Q69 579 117 622T233 665Q268 665 277 664Q351 652 390 611T430 522Q430 470 396 421T302 350L299 348Q299 347 308 345T337 336T375 315Q457 262 457 175Q457 96 395 37T238 -22Q158 -22 100 21T42 130Q42 158 60 175T105 193Q133 193 151 175T169 130Q169 119 166 110T159 94T148 82T136 74T126 70T118 67L114 66Q165 21 238 21Q293 21 321 74Q338 107 338 175V195Q338 290 274 322Q259 328 213 329L171 330L168 332Q166 335 166 348Q166 366 174 366Q202 366 232 371Q266 376 294 413T322 525V533Q322 590 287 612Q265 626 240 626Q208 626 181 615T143 592T132 580H135Q138 579 143 578T153 573T165 566T175 555T183 540T186 520Q186 498 172 481T127 463Z"></path></g><g data-mml-node="mi" transform="translate(500, 0)"><path data-c="1D465" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path></g><g data-mml-node="mo" transform="translate(1294.2, 0)"><path data-c="2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"></path></g><g data-mml-node="mn" transform="translate(2294.4, 0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path></g></g><g data-mml-node="mo" transform="translate(0, 59.5)"><path data-c="221A" d="M95 178Q89 178 81 186T72 200T103 230T169 280T207 309Q209 311 212 311H213Q219 311 227 294T281 177Q300 134 312 108L397 -77Q398 -77 501 136T707 565T814 786Q820 800 834 800Q841 800 846 794T853 782V776L620 293L385 -193Q381 -200 366 -200Q357 -200 354 -197Q352 -195 256 15L160 225L144 214Q129 202 113 190T95 178Z"></path></g><rect width="2794.4" height="60" x="853" y="799.5"></rect></g><g data-mml-node="mo" transform="translate(3869.7, 0)"><path data-c="2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"></path></g><g data-mml-node="mo" transform="translate(4869.9, 0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="mn" transform="translate(5258.9, 0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path></g><g data-mml-node="mo" transform="translate(5981.1, 0)"><path data-c="2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"></path></g><g data-mml-node="mi" transform="translate(6981.3, 0)"><path data-c="1D465" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path></g><g data-mml-node="msup" transform="translate(7553.3, 0)"><g data-mml-node="mo"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g><g data-mml-node="mn" transform="translate(389, 363) scale(0.707)"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path></g></g></g></g></svg></mjx-container></p>
 <figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$\sqrt{3x-1}+(1+x)^2$</span><br></pre></td></tr></tbody></table></figure>
 <ul>
 <li>Checkbox 选框，TO-DO 用</li>
@@ -567,10 +676,10 @@ H<sub>2</sub>O</li>
 </ul>
 <figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">19^th^</span><br><span class="line">H~2~O</span><br></pre></td></tr></tbody></table></figure>
 <ul>
-<li><a href="https://markdown-it.github.io/" target="_blank" rel="noopener">以及其他……</a></li>
+<li><a target="_blank" rel="noopener" href="https://markdown-it.github.io/">以及其他……</a></li>
 </ul>
 <h1>主题安装配置</h1>
-<p>这里主题选择的是 <a href="https://github.com/theme-next/hexo-theme-next" target="_blank" rel="noopener">next</a></p>
+<p>这里主题选择的是 <a target="_blank" rel="noopener" href="https://github.com/theme-next/hexo-theme-next">next</a></p>
 <pre><code>$ cd hexo
 $ git clone https://github.com/theme-next/hexo-theme-next themes/next
 </code></pre>
@@ -582,7 +691,7 @@ theme: next
 </code></pre>
 <p>随后打开编辑 /themes/next/_config.yml 进行主题配置</p>
 <blockquote>
-<p>官方文档：<a href="https://theme-next.org/docs/" target="_blank" rel="noopener">https://theme-next.org/docs/</a></p>
+<p>官方文档：<a target="_blank" rel="noopener" href="https://theme-next.org/docs/">https://theme-next.org/docs/</a></p>
 </blockquote>
 <h2 id="基本设置"><a class="header-anchor" href="#基本设置">¶</a> 基本设置</h2>
 <h3 id="切换风格"><a class="header-anchor" href="#切换风格">¶</a> 切换风格</h3>
@@ -902,7 +1011,7 @@ android_chrome_color: "#222"
 custom_logo: #/uploads/custom-logo.jpg
 </code></pre>
 <h3 id="代码块的风格"><a class="header-anchor" href="#代码块的风格">¶</a> 代码块的风格</h3>
-<p>配色方案预览：<a href="https://github.com/chriskempson/tomorrow-theme" target="_blank" rel="noopener">https://github.com/chriskempson/tomorrow-theme</a></p>
+<p>配色方案预览：<a target="_blank" rel="noopener" href="https://github.com/chriskempson/tomorrow-theme">https://github.com/chriskempson/tomorrow-theme</a></p>
 <pre><code>codeblock:
 # Code Highlight theme
 # Available values: normal | night | night eighties | night blue | night bright | solarized | solarized dark | galactic
@@ -950,7 +1059,7 @@ permalink: https://github.com/yourname
 title: Follow me on GitHub
 </code></pre>
 <h3 id="字体设置"><a class="header-anchor" href="#字体设置">¶</a> 字体设置</h3>
-<p>详见 <a href="https://theme-next.org/docs/theme-settings/#Fonts-Customization" target="_blank" rel="noopener">https://theme-next.org/docs/theme-settings/#Fonts-Customization</a><br>
+<p>详见 <a target="_blank" rel="noopener" href="https://theme-next.org/docs/theme-settings/#Fonts-Customization">https://theme-next.org/docs/theme-settings/#Fonts-Customization</a><br>
 这里用的是默认，只添加了中科大的源，其他的就不展示了</p>
 <pre><code># Uri of fonts host, e.g. https://fonts.googleapis.com (Default).
 host: //fonts.lug.ustc.edu.cn
@@ -979,9 +1088,9 @@ icon: icon.png
 autodiscovery: true
 template:
 </code></pre>
-<p>参数参考文档：<a href="https://github.com/hexojs/hexo-generator-feed" target="_blank" rel="noopener">https://github.com/hexojs/hexo-generator-feed</a></p>
+<p>参数参考文档：<a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo-generator-feed">https://github.com/hexojs/hexo-generator-feed</a></p>
 <h3 id="MathJax-数学公式渲染"><a class="header-anchor" href="#MathJax-数学公式渲染">¶</a>MathJax 数学公式渲染</h3>
-<p>参考：<a href="https://github.com/stevenjoezhang/hexo-filter-mathjax" target="_blank" rel="noopener">https://github.com/stevenjoezhang/hexo-filter-mathjax</a></p>
+<p>参考：<a target="_blank" rel="noopener" href="https://github.com/stevenjoezhang/hexo-filter-mathjax">https://github.com/stevenjoezhang/hexo-filter-mathjax</a></p>
 <pre><code>$ npm install hexo-filter-mathjax
 </code></pre>
 <p>博客配置文件加上</p>
@@ -1034,11 +1143,11 @@ lazyload: //cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js
 ...
 </code></pre>
 <h3 id="Pangu-Autospace-中英文自动空格分离-（未配置）"><a class="header-anchor" href="#Pangu-Autospace-中英文自动空格分离-（未配置）">¶</a>Pangu Autospace 中英文自动空格分离 （未配置）</h3>
-<p><a href="https://theme-next.org/docs/third-party-services/external-libraries#Pangu-Autospace" target="_blank" rel="noopener">https://theme-next.org/docs/third-party-services/external-libraries#Pangu-Autospace</a></p>
+<p><a target="_blank" rel="noopener" href="https://theme-next.org/docs/third-party-services/external-libraries#Pangu-Autospace">https://theme-next.org/docs/third-party-services/external-libraries#Pangu-Autospace</a></p>
 <h3 id="Quicklink-（与pajx冲突，未配置）"><a class="header-anchor" href="#Quicklink-（与pajx冲突，未配置）">¶</a>Quicklink （与 pajx 冲突，未配置）</h3>
-<p><a href="https://theme-next.org/docs/third-party-services/external-libraries#Quicklink" target="_blank" rel="noopener">https://theme-next.org/docs/third-party-services/external-libraries#Quicklink</a></p>
+<p><a target="_blank" rel="noopener" href="https://theme-next.org/docs/third-party-services/external-libraries#Quicklink">https://theme-next.org/docs/third-party-services/external-libraries#Quicklink</a></p>
 <h3 id="Animation-Effect-过度动画设置（未配置）"><a class="header-anchor" href="#Animation-Effect-过度动画设置（未配置）">¶</a>Animation Effect 过度动画设置（未配置）</h3>
-<p><a href="https://theme-next.org/docs/third-party-services/external-libraries#Animation-Effect" target="_blank" rel="noopener">https://theme-next.org/docs/third-party-services/external-libraries#Animation-Effect</a></p>
+<p><a target="_blank" rel="noopener" href="https://theme-next.org/docs/third-party-services/external-libraries#Animation-Effect">https://theme-next.org/docs/third-party-services/external-libraries#Animation-Effect</a></p>
 <h3 id="Progress-Bar-网页加载进度条动画"><a class="header-anchor" href="#Progress-Bar-网页加载进度条动画">¶</a>Progress Bar 网页加载进度条动画</h3>
 <p>同上，先</p>
 <pre><code>pace:
@@ -1052,16 +1161,16 @@ pace_css: //cdn.jsdelivr.net/npm/pace-js@1/themes/black/pace-theme-minimal.css
 ...
 </code></pre>
 <p>上方<code> pace_css</code> 中可以设置颜色（修改 black）<br>
-可选效果一览：<a href="https://github.hubspot.com/pace/docs/welcome/" target="_blank" rel="noopener">https://github.hubspot.com/pace/docs/welcome/</a><br>
-可选颜色：<a href="https://www.jsdelivr.com/package/npm/pace-js?path=themes" target="_blank" rel="noopener">https://www.jsdelivr.com/package/npm/pace-js?path=themes</a></p>
+可选效果一览：<a target="_blank" rel="noopener" href="https://github.hubspot.com/pace/docs/welcome/">https://github.hubspot.com/pace/docs/welcome/</a><br>
+可选颜色：<a target="_blank" rel="noopener" href="https://www.jsdelivr.com/package/npm/pace-js?path=themes">https://www.jsdelivr.com/package/npm/pace-js?path=themes</a></p>
 <h3 id="Valine-评论系统"><a class="header-anchor" href="#Valine-评论系统">¶</a>Valine 评论系统</h3>
-<p>这里使用 <a href="https://valine.js.org/" target="_blank" rel="noopener">Valine</a><br>
-先注册登录 <a href="https://leancloud.app/" target="_blank" rel="noopener">Leanclub 国际站</a>（需要验证手机号），然后参考 https://theme-next.org/docs/third-party-services/comments#Valine-China</p>
+<p>这里使用 <a target="_blank" rel="noopener" href="https://valine.js.org/">Valine</a><br>
+先注册登录 <a target="_blank" rel="noopener" href="https://leancloud.app/">Leanclub 国际站</a>（需要验证手机号），然后参考 https://theme-next.org/docs/third-party-services/comments#Valine-China</p>
 <blockquote>
 <p><em><strong>注意：</strong></em> 中国站需要实名验证，且网站似乎还要已备案才能用</p>
 </blockquote>
 <h3 id="LeanCloud-访问数据统计"><a class="header-anchor" href="#LeanCloud-访问数据统计">¶</a>LeanCloud 访问数据统计</h3>
-<p><a href="https://github.com/theme-next/hexo-theme-next/blob/master/docs/zh-CN/LEANCLOUD-COUNTER-SECURITY.md" target="_blank" rel="noopener">https://github.com/theme-next/hexo-theme-next/blob/master/docs/zh-CN/LEANCLOUD-COUNTER-SECURITY.md</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/theme-next/hexo-theme-next/blob/master/docs/zh-CN/LEANCLOUD-COUNTER-SECURITY.md">https://github.com/theme-next/hexo-theme-next/blob/master/docs/zh-CN/LEANCLOUD-COUNTER-SECURITY.md</a></p>
 <blockquote>
 <p><em><strong>注意：</strong></em> 涉及域名，更换域名时注意修改！</p>
 </blockquote>
@@ -1091,39 +1200,55 @@ unescape: false
 preload: false
 </code></pre>
 <h3 id="特殊标签"><a class="header-anchor" href="#特殊标签">¶</a> 特殊标签</h3>
-<p>使用文档：<a href="https://hexo.io/zh-cn/docs/tag-plugins.html" target="_blank" rel="noopener">https://hexo.io/zh-cn/docs/tag-plugins.html</a><br>
+<p>使用文档：<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/tag-plugins.html">https://hexo.io/zh-cn/docs/tag-plugins.html</a><br>
 这里仅提供示例</p>
 <h4 id="引言"><a class="header-anchor" href="#引言">¶</a> 引言</h4>
 <blockquote class="blockquote-center">
-            <p>Elegant in code, simple in core</p>
+<p>Elegant in code, simple in core</p>
 
-          </blockquote>
+</blockquote>
 <blockquote><p>Every interaction is both precious and an opportunity to delight.</p>
-<footer><strong>Seth Godin</strong><cite><a href="http://sethgodin.typepad.com/seths_blog/2009/07/welcome-to-island-marketing.html" target="_blank" rel="noopener">Welcome to Island Marketing</a></cite></footer></blockquote>
+<footer><strong>Seth Godin</strong><cite><a target="_blank" rel="noopener" href="http://sethgodin.typepad.com/seths_blog/2009/07/welcome-to-island-marketing.html">Welcome to Island Marketing</a></cite></footer></blockquote>
 <blockquote><p>Do not just seek happiness for yourself. Seek happiness for all. Through kindness. Through mercy.</p>
 <footer><strong>David Levithan</strong><cite>Wide Awake</cite></footer></blockquote>
 <h4 id="Note"><a class="header-anchor" href="#Note">¶</a>Note</h4>
-<p>文档：<a href="https://theme-next.org/docs/tag-plugins/note" target="_blank" rel="noopener">https://theme-next.org/docs/tag-plugins/note</a></p>
-<div class="note ">
-            <h4 id="Header"><a class="header-anchor" href="#Header">¶</a>Header</h4><p>(without define class style)</p>
-          </div>
-<div class="note primary">
-            <h4 id="Primary-Header"><a class="header-anchor" href="#Primary-Header">¶</a>Primary Header</h4><p><strong>Welcome</strong> to <a href="https://hexo.io" target="_blank" rel="noopener">Hexo!</a></p>
-          </div>
-<div class="note default">
-            <h4 id="Lists-in-note"><a class="header-anchor" href="#Lists-in-note">¶</a>Lists in note</h4><ul><li>ul</li><li>ul<ul><li>ul</li><li>ul</li></ul></li><li>ul</li></ul><ol><li>ol</li><li>ol</li><li>ol</li><li>ol</li><li>ol</li></ol>
-          </div>
+<p>文档：<a target="_blank" rel="noopener" href="https://theme-next.org/docs/tag-plugins/note">https://theme-next.org/docs/tag-plugins/note</a></p>
+<div class="note "><h4 id="Header"><a class="header-anchor" href="#Header">¶</a>Header</h4>
+<p>(without define class style)</p>
+</div>
+<div class="note primary"><h4 id="Primary-Header"><a class="header-anchor" href="#Primary-Header">¶</a>Primary Header</h4>
+<p><strong>Welcome</strong> to <a target="_blank" rel="noopener" href="https://hexo.io">Hexo!</a></p>
+</div>
+<div class="note default"><h4 id="Lists-in-note"><a class="header-anchor" href="#Lists-in-note">¶</a>Lists in note</h4>
+<ul>
+<li>ul</li>
+<li>ul
+<ul>
+<li>ul</li>
+<li>ul</li>
+</ul>
+</li>
+<li>ul</li>
+</ul>
+<ol>
+<li>ol</li>
+<li>ol</li>
+<li>ol</li>
+<li>ol</li>
+<li>ol</li>
+</ol>
+</div>
 <h4 id="Tabs"><a class="header-anchor" href="#Tabs">¶</a>Tabs</h4>
-<p>文档：<a href="https://theme-next.org/docs/tag-plugins/tabs" target="_blank" rel="noopener">https://theme-next.org/docs/tag-plugins/tabs</a><br>
+<p>文档：<a target="_blank" rel="noopener" href="https://theme-next.org/docs/tag-plugins/tabs">https://theme-next.org/docs/tag-plugins/tabs</a><br>
 <s>我真的不懂啊</s></p>
 <div class="tabs" id="first-unique-name"><ul class="nav-tabs"><li class="tab active"><a href="#first-unique-name-1">First unique name 1</a></li><li class="tab"><a href="#first-unique-name-2">First unique name 2</a></li><li class="tab"><a href="#first-unique-name-3">First unique name 3</a></li></ul><div class="tab-content"><div class="tab-pane active" id="first-unique-name-1"><p><strong>This is Tab 1.</strong></p></div><div class="tab-pane" id="first-unique-name-2"><p><strong>This is Tab 2.</strong></p></div><div class="tab-pane" id="first-unique-name-3"><p><strong>This is Tab 3.</strong></p></div></div></div>
 <h4 id="PDF"><a class="header-anchor" href="#PDF">¶</a>PDF</h4>
-<p>文档：<a href="https://theme-next.org/docs/tag-plugins/pdf" target="_blank" rel="noopener">https://theme-next.org/docs/tag-plugins/pdf</a></p>
+<p>文档：<a target="_blank" rel="noopener" href="https://theme-next.org/docs/tag-plugins/pdf">https://theme-next.org/docs/tag-plugins/pdf</a></p>
 <div class="pdfobject-container" data-target="/test.pdf" data-height="600px"></div>
 <h3 id="Mermaid-流程图"><a class="header-anchor" href="#Mermaid-流程图">¶</a>Mermaid 流程图</h3>
-<p>文档：<a href="https://theme-next.org/docs/tag-plugins/mermaid" target="_blank" rel="noopener">https://theme-next.org/docs/tag-plugins/mermaid</a></p>
+<p>文档：<a target="_blank" rel="noopener" href="https://theme-next.org/docs/tag-plugins/mermaid">https://theme-next.org/docs/tag-plugins/mermaid</a></p>
 <p><s>其他官方文档有的就自己看去吧</s></p>
-<svg style="display: none" id="MJX-SVG-global-cache"><defs><path id="MJX-TEX-N-221A" d="M95 178Q89 178 81 186T72 200T103 230T169 280T207 309Q209 311 212 311H213Q219 311 227 294T281 177Q300 134 312 108L397 -77Q398 -77 501 136T707 565T814 786Q820 800 834 800Q841 800 846 794T853 782V776L620 293L385 -193Q381 -200 366 -200Q357 -200 354 -197Q352 -195 256 15L160 225L144 214Q129 202 113 190T95 178Z"></path><path id="MJX-TEX-N-33" d="M127 463Q100 463 85 480T69 524Q69 579 117 622T233 665Q268 665 277 664Q351 652 390 611T430 522Q430 470 396 421T302 350L299 348Q299 347 308 345T337 336T375 315Q457 262 457 175Q457 96 395 37T238 -22Q158 -22 100 21T42 130Q42 158 60 175T105 193Q133 193 151 175T169 130Q169 119 166 110T159 94T148 82T136 74T126 70T118 67L114 66Q165 21 238 21Q293 21 321 74Q338 107 338 175V195Q338 290 274 322Q259 328 213 329L171 330L168 332Q166 335 166 348Q166 366 174 366Q202 366 232 371Q266 376 294 413T322 525V533Q322 590 287 612Q265 626 240 626Q208 626 181 615T143 592T132 580H135Q138 579 143 578T153 573T165 566T175 555T183 540T186 520Q186 498 172 481T127 463Z"></path><path id="MJX-TEX-I-78" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path><path id="MJX-TEX-N-2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"></path><path id="MJX-TEX-N-31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path><path id="MJX-TEX-N-2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"></path><path id="MJX-TEX-N-28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path><path id="MJX-TEX-N-29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path><path id="MJX-TEX-N-32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path></defs></svg>
+
     </div>
 
     
@@ -1133,10 +1258,10 @@ preload: false
   <div class="popular-posts-header">相关文章</div>
   <ul class="popular-posts">
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\posts\2b426e0a.html" rel="bookmark">博客折腾笔记③- 搭建个人动态页面 iM</a></div>
+      <div class="popular-posts-title"><a href="\posts\3a4e373e.html" rel="bookmark">博客折腾笔记②-hexo 的优化</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\posts\3a4e373e.html" rel="bookmark">博客折腾笔记②-hexo 的优化</a></div>
+      <div class="popular-posts-title"><a href="\posts\2b426e0a.html" rel="bookmark">博客折腾笔记③- 搭建个人动态页面 iM</a></div>
     </li>
     <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="\posts\4394c3fa.html" rel="bookmark">博客折腾笔记④- 使用 Tasker 在 Android 上实现个人动态的发送</a></div>
@@ -1146,55 +1271,54 @@ preload: false
     </li>
   </ul>
 
-        
 
-<div>
-<ul class="post-copyright">
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
   <li class="post-copyright-author">
-    <strong>本文作者： </strong>Jim Lee
+      <strong>本文作者： </strong>Jim Lee
   </li>
   <li class="post-copyright-link">
-    <strong>本文链接：</strong>
-    <a href="https://jimlee2002.github.io/posts/c54c0f26.html" title="博客折腾笔记①-hexo 部署与自定义">https://jimlee2002.github.io/posts/c54c0f26.html</a>
+      <strong>本文链接：</strong>
+      <a href="https://jimlee2002.github.io/posts/c54c0f26.html" title="博客折腾笔记①-hexo 部署与自定义">https://jimlee2002.github.io/posts/c54c0f26.html</a>
   </li>
   <li class="post-copyright-license">
-    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
   </li>
 </ul>
 </div>
 
-
-      <footer class="post-footer">
-          
           <div class="post-tags">
               <a href="/tags/hexo/" rel="tag"><i class="fa fa-tag"></i> hexo</a>
           </div>
 
         
 
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/posts/6c2e314d.html" rel="prev" title="Markdown 语法学习笔记①">
-      <i class="fa fa-chevron-left"></i> Markdown 语法学习笔记①
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/posts/39aaddee.html" rel="next" title="配置 Typora & PicGo 写 Hexo 博客">
-      配置 Typora & PicGo 写 Hexo 博客 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
-  </article>
-  
-  
-  
-
-
-
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/6c2e314d.html" rel="prev" title="Markdown 语法学习笔记①">
+                  <i class="fa fa-chevron-left"></i> Markdown 语法学习笔记①
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/posts/39aaddee.html" rel="next" title="配置 Typora & PicGo 写 Hexo 博客">
+                  配置 Typora & PicGo 写 Hexo 博客 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
           </div>
-          
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+    <div class="comments" id="valine-comments"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -1203,7 +1327,7 @@ preload: false
       activeClass = localStorage.getItem('comments_active') || activeClass;
     }
     if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
       if (activeTab) {
         activeTab.click();
       }
@@ -1212,117 +1336,142 @@ preload: false
   if (CONFIG.comments.storage) {
     window.addEventListener('tabs:click', event => {
       if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
+      const commentClass = event.target.classList[1];
       localStorage.setItem('comments_active', commentClass);
     });
   }
 </script>
 
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">2.</span> <span class="nav-text">初始化 hexo</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">3.</span> <span class="nav-text">基本调整</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#设置备份"><span class="nav-number">3.1.</span> <span class="nav-text"> 设置备份</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#备份操作"><span class="nav-number">3.1.1.</span> <span class="nav-text"> 备份操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#还原操作"><span class="nav-number">3.1.2.</span> <span class="nav-text"> 还原操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#排错指南"><span class="nav-number">3.1.3.</span> <span class="nav-text"> 排错指南</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置分类，建立模板"><span class="nav-number">3.2.</span> <span class="nav-text"> 设置分类，建立模板</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更换hexo-renderer-markdown-it渲染器"><span class="nav-number">3.3.</span> <span class="nav-text"> 更换 hexo-renderer-markdown-it 渲染器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">4.</span> <span class="nav-text">主题安装配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本设置"><span class="nav-number">4.1.</span> <span class="nav-text"> 基本设置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#切换风格"><span class="nav-number">4.1.1.</span> <span class="nav-text"> 切换风格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开启夜间模式适配"><span class="nav-number">4.1.2.</span> <span class="nav-text"> 开启夜间模式适配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#切换语言"><span class="nav-number">4.1.3.</span> <span class="nav-text"> 切换语言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置站点图标"><span class="nav-number">4.1.4.</span> <span class="nav-text"> 设置站点图标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#备案展示"><span class="nav-number">4.1.5.</span> <span class="nav-text"> 备案展示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CC标识"><span class="nav-number">4.1.6.</span> <span class="nav-text">CC 标识</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置菜单栏"><span class="nav-number">4.1.7.</span> <span class="nav-text"> 设置菜单栏</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置侧边栏"><span class="nav-number">4.2.</span> <span class="nav-text"> 设置侧边栏</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#侧边栏大小位置"><span class="nav-number">4.2.1.</span> <span class="nav-text"> 侧边栏大小位置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#头像"><span class="nav-number">4.2.2.</span> <span class="nav-text"> 头像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#友情链接"><span class="nav-number">4.2.3.</span> <span class="nav-text"> 友情链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TOC"><span class="nav-number">4.2.4.</span> <span class="nav-text">TOC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#即时交谈"><span class="nav-number">4.2.5.</span> <span class="nav-text"> 即时交谈</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#帖子页面"><span class="nav-number">4.3.</span> <span class="nav-text"> 帖子页面</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文章信息"><span class="nav-number">4.3.1.</span> <span class="nav-text"> 文章信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#底部标签样式"><span class="nav-number">4.3.2.</span> <span class="nav-text"> 底部标签样式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#打赏、文末信息"><span class="nav-number">4.3.3.</span> <span class="nav-text"> 打赏、文末信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#相关主题推荐"><span class="nav-number">4.3.4.</span> <span class="nav-text"> 相关主题推荐</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#标签页面"><span class="nav-number">4.3.5.</span> <span class="nav-text"> 标签页面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分类页面"><span class="nav-number">4.3.6.</span> <span class="nav-text"> 分类页面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#404界面"><span class="nav-number">4.3.7.</span> <span class="nav-text">404 界面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#谷歌日历-（未配置）"><span class="nav-number">4.3.8.</span> <span class="nav-text"> 谷歌日历 （未配置）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安卓上chrome的沉浸颜色？（不是很明白）"><span class="nav-number">4.3.9.</span> <span class="nav-text"> 安卓上 chrome 的沉浸颜色？（不是很明白）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义logo，在网站标题菜单栏上面的位置"><span class="nav-number">4.3.10.</span> <span class="nav-text"> 自定义 logo，在网站标题菜单栏上面的位置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码块的风格"><span class="nav-number">4.3.11.</span> <span class="nav-text"> 代码块的风格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回顶部样式"><span class="nav-number">4.3.12.</span> <span class="nav-text"> 返回顶部样式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#阅读进度记忆、书签"><span class="nav-number">4.3.13.</span> <span class="nav-text"> 阅读进度记忆、书签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#右上角来Github叉我啊图标"><span class="nav-number">4.3.14.</span> <span class="nav-text"> 右上角来 Github 叉我啊图标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字体设置"><span class="nav-number">4.3.15.</span> <span class="nav-text"> 字体设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SEO相关"><span class="nav-number">4.3.16.</span> <span class="nav-text">SEO 相关</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高级设置"><span class="nav-number">4.3.17.</span> <span class="nav-text"> 高级设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RSS订阅"><span class="nav-number">4.3.18.</span> <span class="nav-text">RSS 订阅</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MathJax-数学公式渲染"><span class="nav-number">4.3.19.</span> <span class="nav-text">MathJax 数学公式渲染</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pjax"><span class="nav-number">4.3.20.</span> <span class="nav-text">pjax</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FancyBox"><span class="nav-number">4.3.21.</span> <span class="nav-text">FancyBox</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lazyload-图片懒加载"><span class="nav-number">4.3.22.</span> <span class="nav-text">Lazyload 图片懒加载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pangu-Autospace-中英文自动空格分离-（未配置）"><span class="nav-number">4.3.23.</span> <span class="nav-text">Pangu Autospace 中英文自动空格分离 （未配置）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Quicklink-（与pajx冲突，未配置）"><span class="nav-number">4.3.24.</span> <span class="nav-text">Quicklink （与 pajx 冲突，未配置）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Animation-Effect-过度动画设置（未配置）"><span class="nav-number">4.3.25.</span> <span class="nav-text">Animation Effect 过度动画设置（未配置）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Progress-Bar-网页加载进度条动画"><span class="nav-number">4.3.26.</span> <span class="nav-text">Progress Bar 网页加载进度条动画</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Valine-评论系统"><span class="nav-number">4.3.27.</span> <span class="nav-text">Valine 评论系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LeanCloud-访问数据统计"><span class="nav-number">4.3.28.</span> <span class="nav-text">LeanCloud 访问数据统计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Local-Search-本地搜索"><span class="nav-number">4.3.29.</span> <span class="nav-text">Local Search 本地搜索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#特殊标签"><span class="nav-number">4.3.30.</span> <span class="nav-text"> 特殊标签</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#引言"><span class="nav-number">4.3.30.1.</span> <span class="nav-text"> 引言</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Note"><span class="nav-number">4.3.30.2.</span> <span class="nav-text">Note</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Header"><span class="nav-number">4.3.30.3.</span> <span class="nav-text">Header</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Primary-Header"><span class="nav-number">4.3.30.4.</span> <span class="nav-text">Primary Header</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Lists-in-note"><span class="nav-number">4.3.30.5.</span> <span class="nav-text">Lists in note</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Tabs"><span class="nav-number">4.3.30.6.</span> <span class="nav-text">Tabs</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PDF"><span class="nav-number">4.3.30.7.</span> <span class="nav-text">PDF</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mermaid-流程图"><span class="nav-number">4.3.31.</span> <span class="nav-text">Mermaid 流程图</span></a></li></ol></li></ol></li></ol></div>
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="Jim Lee"
-      src="/images/avatar.png">
-  <p class="site-author-name" itemprop="name">Jim Lee</p>
-  <div class="site-description" itemprop="description"></div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">9</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">1</span>
-        <span class="site-state-item-name">分类</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">9</span>
-        <span class="site-state-item-name">标签</span></a>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <a href="https://github.com/jimlee2002" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;jimlee2002" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i></a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="mailto:jimlee2002@outlook.com" title="E-Mail → mailto:jimlee2002@outlook.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i></a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-fw fa-rss"></i></a>
-      </span>
-  </div>
-
-
-
-      </div>
-
     </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
+  </main>
 
+  <footer class="footer">
+    <div class="footer-inner">
+      
 
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
+      
 
 <div class="copyright">
   
   &copy; 
   <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
-    <i class="fa fa-user"></i>
+    <i class="user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Jim Lee</span>
-    <span class="post-meta-divider">|</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
     <span class="post-meta-item-icon">
-      <i class="fa fa-area-chart"></i>
+      <i class="fa fa-chart-line"></i>
     </span>
     <span title="站点总字数">34k</span>
+  </span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
 
-        
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-pjax@0/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '.page-configurations',
+    '.main-inner',
+    '.post-toc-wrap',
+    '.languages',
+    '.pjax'
+  ],
+  analytics: false,
+  cacheBust: false,
+  scrollRestoration: false,
+  scrollTo: !CONFIG.bookmark.enable
+});
+
+document.addEventListener('pjax:success', () => {
+  pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  const hasTOC = document.querySelector('.post-toc');
+  document.querySelector('.sidebar-inner').classList.toggle('sidebar-nav-active', hasTOC);
+  document.querySelector(hasTOC ? '.sidebar-nav-toc' : '.sidebar-nav-overview').click();
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+<script data-pjax>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  const url = element.dataset.target;
+  const pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  const pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  const fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+<script data-pjax>
+if (document.querySelectorAll('.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8.8.0/dist/mermaid.min.js', () => {
+    mermaid.init({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    }, '.mermaid');
+  }, window.mermaid);
+}
+</script>
+
+
+
+
+
+  
 
 
 
@@ -1337,15 +1486,15 @@ preload: false
     }
 
     function addCount(Counter) {
-      var visitors = document.querySelector('.leancloud_visitors');
-      var url = decodeURI(visitors.id);
-      var title = visitors.dataset.flagTitle;
+      const visitors = document.querySelector('.leancloud_visitors');
+      const url = decodeURI(visitors.id);
+      const title = visitors.dataset.flagTitle;
 
       Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url })))
         .then(response => response.json())
         .then(({ results }) => {
           if (results.length > 0) {
-            var counter = results[0];
+            const counter = results[0];
             leancloudSelector(url).innerText = counter.time + 1;
             Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
               .catch(error => {
@@ -1363,8 +1512,8 @@ preload: false
     }
 
     function showTime(Counter) {
-      var visitors = document.querySelectorAll('.leancloud_visitors');
-      var entries = [...visitors].map(element => {
+      const visitors = document.querySelectorAll('.leancloud_visitors');
+      const entries = [...visitors].map(element => {
         return decodeURI(element.id);
       });
 
@@ -1372,7 +1521,7 @@ preload: false
         .then(response => response.json())
         .then(({ results }) => {
           for (let url of entries) {
-            let target = results.find(item => item.url === url);
+            const target = results.find(item => item.url === url);
             leancloudSelector(url).innerText = target ? target.time : 0;
           }
         })
@@ -1381,9 +1530,9 @@ preload: false
         });
     }
 
-    let { app_id, app_key, server_url } = {"enable":true,"app_id":"ywktyBaxXQAYfTGz2WMBK55O-MdYXbMMI","app_key":"vcnY60vG6MGlL2UwI97LJuoI","security":true,"server_url":null};
+    const { app_id, app_key, server_url } = {"enable":true,"app_id":"ywktyBaxXQAYfTGz2WMBK55O-MdYXbMMI","app_key":"vcnY60vG6MGlL2UwI97LJuoI","server_url":null,"security":true};
     function fetchData(api_server) {
-      var Counter = (method, url, data) => {
+      const Counter = (method, url, data) => {
         return fetch(`${api_server}/1.1${url}`, {
           method,
           headers: {
@@ -1402,7 +1551,7 @@ preload: false
       }
     }
 
-    let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+    const api_server = app_id.slice(-9) === '-MdYXbMMI' ? `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com` : server_url;
 
     if (api_server) {
       fetchData(api_server);
@@ -1417,151 +1566,22 @@ preload: false
 </script>
 
 
-      </div>
-    </footer>
-  </div>
+    <div class="pjax">
+  
 
   
-  <script src="/undefined/anime.min.js"></script>
-  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-pjax@0/pjax.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
-  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
-  <script src="/undefined/velocity/velocity.min.js"></script>
-  <script src="/undefined/velocity/velocity.ui.min.js"></script>
 
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/pisces.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-<script src="/js/bookmark.js"></script>
-
-  <script>
-var pjax = new Pjax({
-  selectors: [
-    'head title',
-    '#page-configurations',
-    '.content-wrap',
-    '.post-toc-wrap',
-    '.languages',
-    '#pjax'
-  ],
-  switches: {
-    '.post-toc-wrap': Pjax.switches.innerHTML
-  },
-  analytics: false,
-  cacheBust: false,
-  scrollTo : !CONFIG.bookmark.enable
-});
-
-window.addEventListener('pjax:success', () => {
-  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
-    var code = element.text || element.textContent || element.innerHTML || '';
-    var parent = element.parentNode;
-    parent.removeChild(element);
-    var script = document.createElement('script');
-    if (element.id) {
-      script.id = element.id;
-    }
-    if (element.className) {
-      script.className = element.className;
-    }
-    if (element.type) {
-      script.type = element.type;
-    }
-    if (element.src) {
-      script.src = element.src;
-      // Force synchronous loading of peripheral JS.
-      script.async = false;
-    }
-    if (element.dataset.pjax !== undefined) {
-      script.dataset.pjax = '';
-    }
-    if (code !== '') {
-      script.appendChild(document.createTextNode(code));
-    }
-    parent.appendChild(script);
-  });
-  NexT.boot.refresh();
-  // Define Motion Sequence & Bootstrap Motion.
-  if (CONFIG.motion.enable) {
-    NexT.motion.integrator
-      .init()
-      .add(NexT.motion.middleWares.subMenu)
-      .add(NexT.motion.middleWares.postList)
-      .bootstrap();
-  }
-  NexT.utils.updateSidebarPosition();
+<script>
+NexT.utils.loadComments('#valine-comments', () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', () => {
+    new Valine(Object.assign({"enable":true,"appId":"JfYtyYn8V6sVK32DpSYMp2xx-MdYXbMMI","appKey":"IOSvshbg8dOPcbsT4054XTH4","serverURLs":null,"placeholder":"来说些什么吧……","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"lang":null,"visitor":false,"comment_count":true,"recordIP":false,"enableQQ":false,"requiredFields":[],"notify":false,"verify":false,"language":"zh-cn"}, {
+      el: '#valine-comments',
+      path: "/posts/c54c0f26.html",
+      serverURLs: "https://jfytyyn8.api.lncldglobal.com"
+    }));
+  }, window.Valine);
 });
 </script>
-
-
-
-
-  
-
-
-
-
-  
-<script src="/js/local-search.js"></script>
-
-
-
-
-
-
-
-
-
-<script data-pjax>
-document.querySelectorAll('.pdfobject-container').forEach(element => {
-  let url = element.dataset.target;
-  let pdfOpenParams = {
-    navpanes : 0,
-    toolbar  : 0,
-    statusbar: 0,
-    pagemode : 'thumbs',
-    view     : 'FitH'
-  };
-  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
-  let fullURL = `/undefined/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
-
-  if (NexT.utils.supportsPDFs()) {
-    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
-  } else {
-    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
-  }
-});
-</script>
-
-
-<script data-pjax>
-if (document.querySelectorAll('pre.mermaid').length) {
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
-    mermaid.initialize({
-      theme    : 'forest',
-      logLevel : 3,
-      flowchart: { curve     : 'linear' },
-      gantt    : { axisFormat: '%m/%d/%Y' },
-      sequence : { actorMargin: 50 }
-    });
-  }, window.mermaid);
-}
-</script>
-
-
-    <div id="pjax">
-  
-
-  
 
     </div>
 </body>
