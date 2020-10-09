@@ -543,135 +543,6 @@ _   底线
       </tags>
   </entry>
   <entry>
-    <title>在 WSL2 上进行 OpenWrt 的编译</title>
-    <url>/posts/3a5c40a1.html</url>
-    <content><![CDATA[<h1>安装 WSL</h1>
-<ul>
-<li>从 Microsoft Store 安装 WSL：略</li>
-<li>使用 LxRunOffline 安装 WSL：参考 <a href="https://p3terx.com/archives/manage-wsl-with-lxrunoffline.html">LxRunOffline</a> 和 @P3TERX 的博客<a href="https://p3terx.com/archives/manage-wsl-with-lxrunoffline.html">《WSL 自定义安装目录、备份转移、设置默认用户 - LxRunOffline 使用教程》</a>。</li>
-</ul>
-<a id="more"></a>
-<h1>配置编译环境</h1>
-<h2 id="配置-Windows-Terminal-默认打开目录为"><a class="header-anchor" href="#配置-Windows-Terminal-默认打开目录为">¶</a> 配置 Windows Terminal 默认打开目录为 <code>~</code></h2>
-<p>打开 <code>Windows Terminal——设置</code>，在 WSL 对应的区域加入一行</p>
-<figure class="highlight plain"><table><tbody><tr><td class="code"><pre><span class="line">"startingDirectory": "//wsl$/&lt;name&gt;/home/&lt;username&gt;"</span><br></pre></td></tr></tbody></table></figure>
-<p>其中，<code>&lt;name&gt;</code> 是上方显示的 WSL 的名称，<code>username</code> 是当前 windows 账户用户名的名称。</p>
-<h2 id="更换阿里云的源"><a class="header-anchor" href="#更换阿里云的源">¶</a> 更换阿里云的源</h2>
-<p>完成 WSL 初始设置后：</p>
-<p>备份原来的源。</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">cp -ra /etc/apt/sources.list /etc/apt/sources.list.bak</span><br></pre></td></tr></tbody></table></figure>
-<p>修改</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">vim /etc/apt/sources.list</span><br></pre></td></tr></tbody></table></figure>
-<p>将其中的东西替换成：</p>
-<figure class="highlight plain"><table><tbody><tr><td class="code"><pre><span class="line">deb http://mirrors.aliyun.com/ubuntu/ focal main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ focal main restricted universe multiverse</span><br><span class="line"></span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ focal-security main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ focal-security main restricted universe multiverse</span><br><span class="line"></span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ focal-updates main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ focal-updates main restricted universe multiverse</span><br><span class="line"></span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ focal-proposed main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ focal-proposed main restricted universe multiverse</span><br><span class="line"></span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ focal-backports main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ focal-backports main restricted universe multiverse</span><br></pre></td></tr></tbody></table></figure>
-<p>保存，退出，然后更新缓存与升级。</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get upgrade</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="设置代理（以-Clash-为例）"><a class="header-anchor" href="#设置代理（以-Clash-为例）">¶</a> 设置代理（以 Clash 为例）</h2>
-<p>为了加速编译所需文件的下载，需要给 WSL 挂代理进行网络加速。</p>
-<p>WSL 不走主机端的代理，需要进行一番设置：</p>
-<p>主机开好 Clash，开启 <code>Allow LAN</code> 的选项，</p>
-<p>WSL 回到 <code>/home</code>：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~</span><br></pre></td></tr></tbody></table></figure>
-<p>修改 <code>~/.bashrc</code>，自定义代理启动命令：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">vim ~/.bashrc</span><br></pre></td></tr></tbody></table></figure>
-<p>在末尾加入以下代码：</p>
-<figure class="highlight plain"><table><tbody><tr><td class="code"><pre><span class="line">alias proxy='export https_proxy="http://127.0.0.1:7890";export http_proxy="http://127.0.0.1:7890";export all_proxy="socks5://127.0.0.1:7891";curl ip.sb;'</span><br><span class="line">alias unproxy='unset https_proxy;unset http_proxy;unset all_proxy;curl ip.sb;'</span><br></pre></td></tr></tbody></table></figure>
-<blockquote>
-<p>** 注意：** 其中 <code>7890</code> 是 Clash 的代理端口号，请根据自己的配置进行修改。<code>all_proxy</code> 一行的 socks5 端口号为 Clash 的 http 端口号 +1</p>
-</blockquote>
-<p>保存退出，在主机端 Clash 开启的情况下输入：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">proxy</span><br></pre></td></tr></tbody></table></figure>
-<p>即可开启代理。</p>
-<p>输入：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">unproxy</span><br></pre></td></tr></tbody></table></figure>
-<p>关闭代理。</p>
-<h2 id="设置-WSL-中不加载-Windows-的-PATH-内容"><a class="header-anchor" href="#设置-WSL-中不加载-Windows-的-PATH-内容">¶</a> 设置 WSL 中不加载 Windows 的 PATH 内容</h2>
-<p><strong>！！在 WSL 中，不进行此项设置会导致编译出错！！</strong></p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">vim /etc/wsl.conf</span><br></pre></td></tr></tbody></table></figure>
-<p>打开后输入：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">[interop]</span><br><span class="line">appendWindowsPath = <span class="literal">false</span></span><br></pre></td></tr></tbody></table></figure>
-<p>保存退出后<strong>重启</strong>即可。</p>
-<h2 id="安装编译依赖"><a class="header-anchor" href="#安装编译依赖">¶</a> 安装编译依赖</h2>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get -y install build-essential asciidoc binutils bzip2 gawk gettext git libncurses5-dev libz-dev patch python3 python2.7 unzip zlib1g-dev lib32gcc1 libc6-dev-i386 subversion flex uglifyjs git-core gcc-multilib p7zip p7zip-full msmtp libssl-dev texinfo libglib2.0-dev xmlto qemu-utils upx libelf-dev autoconf automake libtool autopoint device-tree-compiler g++-multilib antlr3 gperf wget curl swig rsync</span><br></pre></td></tr></tbody></table></figure>
-<p>然后就可以开始编译了。</p>
-<h1>编译</h1>
-<p>参见 <a href="">OpenWrt/LEDE 的编译与 Mentohust 软件包的添加 —— 以斐讯 K2 为例</a></p>
-<p>OpenWrt/Lede 源码请务必 <code>Clone</code> 到 <code>~</code> 下再进行操作</p>
-<h2 id="获取编译的固件"><a class="header-anchor" href="#获取编译的固件">¶</a> 获取编译的固件</h2>
-<p>在资源管理器地址栏输入 <code>\\wsl$</code> 即可访问 WSL 下的文件。以 x86_64 平台为例子，固件所在路径为：</p>
-<figure class="highlight plain"><table><tbody><tr><td class="code"><pre><span class="line">\\wsl$\WSL名称\home\用户名\lede\bin\targets\x86\64</span><br></pre></td></tr></tbody></table></figure>
-<h1>致谢</h1>
-<p>感谢 <a href="https://p3terx.com/">@P3TERX</a>，博客里的文章对我有很大帮助，本文自他的博客总结而来，亦有很大一部分文字直接复制自它的博客。</p>
-<h1>参考链接</h1>
-<blockquote>
-<p><a href="https://openwrt.org/docs/guide-developer/build-system/wsl">https://openwrt.org/docs/guide-developer/build-system/wsl</a></p>
-<p><a href="https://p3terx.com/archives/compiling-openwrt-with-wsl.html">https://p3terx.com/archives/compiling-openwrt-with-wsl.html</a></p>
-<p><a href="https://blog.csdn.net/wangyijieonline/article/details/105360138">https://blog.csdn.net/wangyijieonline/article/details/105360138</a></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>笔记</category>
-      </categories>
-      <tags>
-        <tag>WSL</tag>
-        <tag>OpenWrt</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>配置 Typora &amp; PicGo 写 Hexo 博客</title>
-    <url>/posts/39aaddee.html</url>
-    <content><![CDATA[<h1>工具介绍</h1>
-<h2 id="优雅的Markdown编辑器-——-Typora"><a class="header-anchor" href="#优雅的Markdown编辑器-——-Typora">¶</a> 优雅的 Markdown 编辑器 —— Typora</h2>
-<p><a href="https://www.typora.io/">官网</a></p>
-<p>简约、舒适、优雅，这是我对它的第一眼评价。</p>
-<p>完善的功能、所见即所得、自定义主题、拓展语法支持、良好的图片插入管理、数学支持、专注模式、打字机模式……</p>
-<p>以及免费 —— 这些都是我毫不犹豫下载安装它的原因。</p>
-<p>展现在我面前的它果然没有让我失望，漂亮的界面让我觉得原来的 VS Code 瞬间就不香了。</p>
-<p>当然，它的实力，还仅不限于此……</p>
-<a id="more"></a>
-<h2 id="小巧的图片上传工具——PicGo"><a class="header-anchor" href="#小巧的图片上传工具——PicGo">¶</a> 小巧的图片上传工具 ——PicGo</h2>
-<p><a href="https://molunerfinn.com/PicGo/">官网</a></p>
-<p>这是一个开源的体积小巧，功能强大的图床工具。</p>
-<p>它支持自建图床和多个常用图床，可以方便地对上传了的进行管理，还能安装拓展插件，实现截图上传、加水印上传等功能。</p>
-<p>但更重要的是，Typora 支持通过它实现拖入到文章中的图片上传图床并替换掉文中图片地址</p>
-<p>Awsome！有了它，再也不用手动上传图床复制链接了！</p>
-<p>下面就来配置下二者的结合使用。</p>
-<h1>二者配置</h1>
-<h2 id="配置PicGo的上传设置"><a class="header-anchor" href="#配置PicGo的上传设置">¶</a> 配置 PicGo 的上传设置</h2>
-<p>此处以 sm.ms 的注册图床为例，其他图床请参考<a href="https://picgo.github.io/PicGo-Doc/zh/guide/getting-started.html">官方文档</a></p>
-<ol>
-<li>
-<p><a href="http://xn--sm-5p3dp06f.ms">登录 sm.ms</a>，获取 API token，复制备用</p>
-<p><img data-src="https://i.loli.net/2020/03/21/wnxrfcZzPtvJk58.png" alt=""></p>
-</li>
-</ol>
-<img data-src="https://i.loli.net/2020/03/21/TYJIjPBk2lAHXgr.png" style="zoom: 80%;">
-<ol start="2">
-<li>
-<p>打开 PicGo，插件设置中输入 smms-user 并安装对应插件，</p>
-<img data-src="https://i.loli.net/2020/03/21/lk4dTXfQF1syWir.png" style="zoom:80%;">
-<p>安装完成后在图床设置里新出现的 <strong>SM.MS - 登录用户</strong>中输入刚才获得的 token，点击确定和设为默认图床</p>
-<img data-src="https://i.loli.net/2020/03/21/n9kpCUiR62EtjOV.png" style="zoom:80%;">
-</li>
-</ol>
-<p>此处 PicGo 配置完成</p>
-<h2 id="配置Typora"><a class="header-anchor" href="#配置Typora">¶</a> 配置 Typora</h2>
-<p>快捷键 <code>ctrl+逗号</code>打开偏好设置，进入 ``图像` 选项进行如下设置：</p>
-<img data-src="https://i.loli.net/2020/03/21/JBxqTtkSZ59wL2y.png" style="zoom:80%;">
-<p>其中<code>上传服务设定</code>中 <code>PicGo路径</code>一栏请根据自身情况填写 PicGo 的安装路径。</p>
-<p>如果需要上传网络上复制的图片到自己的图床，请勾选<code>插入图片时…</code> 中的<code>对网络位置的图片应用上述规则</code>。</p>
-<p>设置完后点击<code>验证图片上传选项</code>进行测试，成功即设置完成。</p>
-<p>Typora 和 PicGo 里各自的功能就不再展示了，这里仅作二者结合使用的介绍，其他请自行探索！</p>
-]]></content>
-      <categories>
-        <category>笔记</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-        <tag>图床</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>OpenWrt/LEDE 的编译与 Mentohust 软件包的添加</title>
     <url>/posts/a5ac1d77.html</url>
     <content><![CDATA[<h1>首次编译</h1>
@@ -846,6 +717,135 @@ _   底线
       </categories>
       <tags>
         <tag>OpenWrt</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>在 WSL2 上进行 OpenWrt 的编译</title>
+    <url>/posts/3a5c40a1.html</url>
+    <content><![CDATA[<h1>安装 WSL</h1>
+<ul>
+<li>从 Microsoft Store 安装 WSL：略</li>
+<li>使用 LxRunOffline 安装 WSL：参考 <a href="https://p3terx.com/archives/manage-wsl-with-lxrunoffline.html">LxRunOffline</a> 和 @P3TERX 的博客<a href="https://p3terx.com/archives/manage-wsl-with-lxrunoffline.html">《WSL 自定义安装目录、备份转移、设置默认用户 - LxRunOffline 使用教程》</a>。</li>
+</ul>
+<a id="more"></a>
+<h1>配置编译环境</h1>
+<h2 id="配置-Windows-Terminal-默认打开目录为"><a class="header-anchor" href="#配置-Windows-Terminal-默认打开目录为">¶</a> 配置 Windows Terminal 默认打开目录为 <code>~</code></h2>
+<p>打开 <code>Windows Terminal——设置</code>，在 WSL 对应的区域加入一行</p>
+<figure class="highlight plain"><table><tbody><tr><td class="code"><pre><span class="line">"startingDirectory": "//wsl$/&lt;name&gt;/home/&lt;username&gt;"</span><br></pre></td></tr></tbody></table></figure>
+<p>其中，<code>&lt;name&gt;</code> 是上方显示的 WSL 的名称，<code>username</code> 是当前 windows 账户用户名的名称。</p>
+<h2 id="更换阿里云的源"><a class="header-anchor" href="#更换阿里云的源">¶</a> 更换阿里云的源</h2>
+<p>完成 WSL 初始设置后：</p>
+<p>备份原来的源。</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">cp -ra /etc/apt/sources.list /etc/apt/sources.list.bak</span><br></pre></td></tr></tbody></table></figure>
+<p>修改</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">vim /etc/apt/sources.list</span><br></pre></td></tr></tbody></table></figure>
+<p>将其中的东西替换成：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="code"><pre><span class="line">deb http://mirrors.aliyun.com/ubuntu/ focal main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ focal main restricted universe multiverse</span><br><span class="line"></span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ focal-security main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ focal-security main restricted universe multiverse</span><br><span class="line"></span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ focal-updates main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ focal-updates main restricted universe multiverse</span><br><span class="line"></span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ focal-proposed main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ focal-proposed main restricted universe multiverse</span><br><span class="line"></span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ focal-backports main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ focal-backports main restricted universe multiverse</span><br></pre></td></tr></tbody></table></figure>
+<p>保存，退出，然后更新缓存与升级。</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get upgrade</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="设置代理（以-Clash-为例）"><a class="header-anchor" href="#设置代理（以-Clash-为例）">¶</a> 设置代理（以 Clash 为例）</h2>
+<p>为了加速编译所需文件的下载，需要给 WSL 挂代理进行网络加速。</p>
+<p>WSL 不走主机端的代理，需要进行一番设置：</p>
+<p>主机开好 Clash，开启 <code>Allow LAN</code> 的选项，</p>
+<p>WSL 回到 <code>/home</code>：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~</span><br></pre></td></tr></tbody></table></figure>
+<p>修改 <code>~/.bashrc</code>，自定义代理启动命令：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">vim ~/.bashrc</span><br></pre></td></tr></tbody></table></figure>
+<p>在末尾加入以下代码：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="code"><pre><span class="line">alias proxy='export https_proxy="http://127.0.0.1:7890";export http_proxy="http://127.0.0.1:7890";export all_proxy="socks5://127.0.0.1:7891";curl ip.sb;'</span><br><span class="line">alias unproxy='unset https_proxy;unset http_proxy;unset all_proxy;curl ip.sb;'</span><br></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p>** 注意：** 其中 <code>7890</code> 是 Clash 的代理端口号，请根据自己的配置进行修改。<code>all_proxy</code> 一行的 socks5 端口号为 Clash 的 http 端口号 +1</p>
+</blockquote>
+<p>保存退出，在主机端 Clash 开启的情况下输入：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">proxy</span><br></pre></td></tr></tbody></table></figure>
+<p>即可开启代理。</p>
+<p>输入：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">unproxy</span><br></pre></td></tr></tbody></table></figure>
+<p>关闭代理。</p>
+<h2 id="设置-WSL-中不加载-Windows-的-PATH-内容"><a class="header-anchor" href="#设置-WSL-中不加载-Windows-的-PATH-内容">¶</a> 设置 WSL 中不加载 Windows 的 PATH 内容</h2>
+<p><strong>！！在 WSL 中，不进行此项设置会导致编译出错！！</strong></p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">vim /etc/wsl.conf</span><br></pre></td></tr></tbody></table></figure>
+<p>打开后输入：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">[interop]</span><br><span class="line">appendWindowsPath = <span class="literal">false</span></span><br></pre></td></tr></tbody></table></figure>
+<p>保存退出后<strong>重启</strong>即可。</p>
+<h2 id="安装编译依赖"><a class="header-anchor" href="#安装编译依赖">¶</a> 安装编译依赖</h2>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get -y install build-essential asciidoc binutils bzip2 gawk gettext git libncurses5-dev libz-dev patch python3 python2.7 unzip zlib1g-dev lib32gcc1 libc6-dev-i386 subversion flex uglifyjs git-core gcc-multilib p7zip p7zip-full msmtp libssl-dev texinfo libglib2.0-dev xmlto qemu-utils upx libelf-dev autoconf automake libtool autopoint device-tree-compiler g++-multilib antlr3 gperf wget curl swig rsync</span><br></pre></td></tr></tbody></table></figure>
+<p>然后就可以开始编译了。</p>
+<h1>编译</h1>
+<p>参见 <a href="">OpenWrt/LEDE 的编译与 Mentohust 软件包的添加 —— 以斐讯 K2 为例</a></p>
+<p>OpenWrt/Lede 源码请务必 <code>Clone</code> 到 <code>~</code> 下再进行操作</p>
+<h2 id="获取编译的固件"><a class="header-anchor" href="#获取编译的固件">¶</a> 获取编译的固件</h2>
+<p>在资源管理器地址栏输入 <code>\\wsl$</code> 即可访问 WSL 下的文件。以 x86_64 平台为例子，固件所在路径为：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="code"><pre><span class="line">\\wsl$\WSL名称\home\用户名\lede\bin\targets\x86\64</span><br></pre></td></tr></tbody></table></figure>
+<h1>致谢</h1>
+<p>感谢 <a href="https://p3terx.com/">@P3TERX</a>，博客里的文章对我有很大帮助，本文自他的博客总结而来，亦有很大一部分文字直接复制自它的博客。</p>
+<h1>参考链接</h1>
+<blockquote>
+<p><a href="https://openwrt.org/docs/guide-developer/build-system/wsl">https://openwrt.org/docs/guide-developer/build-system/wsl</a></p>
+<p><a href="https://p3terx.com/archives/compiling-openwrt-with-wsl.html">https://p3terx.com/archives/compiling-openwrt-with-wsl.html</a></p>
+<p><a href="https://blog.csdn.net/wangyijieonline/article/details/105360138">https://blog.csdn.net/wangyijieonline/article/details/105360138</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>OpenWrt</tag>
+        <tag>WSL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>配置 Typora &amp; PicGo 写 Hexo 博客</title>
+    <url>/posts/39aaddee.html</url>
+    <content><![CDATA[<h1>工具介绍</h1>
+<h2 id="优雅的Markdown编辑器-——-Typora"><a class="header-anchor" href="#优雅的Markdown编辑器-——-Typora">¶</a> 优雅的 Markdown 编辑器 —— Typora</h2>
+<p><a href="https://www.typora.io/">官网</a></p>
+<p>简约、舒适、优雅，这是我对它的第一眼评价。</p>
+<p>完善的功能、所见即所得、自定义主题、拓展语法支持、良好的图片插入管理、数学支持、专注模式、打字机模式……</p>
+<p>以及免费 —— 这些都是我毫不犹豫下载安装它的原因。</p>
+<p>展现在我面前的它果然没有让我失望，漂亮的界面让我觉得原来的 VS Code 瞬间就不香了。</p>
+<p>当然，它的实力，还仅不限于此……</p>
+<a id="more"></a>
+<h2 id="小巧的图片上传工具——PicGo"><a class="header-anchor" href="#小巧的图片上传工具——PicGo">¶</a> 小巧的图片上传工具 ——PicGo</h2>
+<p><a href="https://molunerfinn.com/PicGo/">官网</a></p>
+<p>这是一个开源的体积小巧，功能强大的图床工具。</p>
+<p>它支持自建图床和多个常用图床，可以方便地对上传了的进行管理，还能安装拓展插件，实现截图上传、加水印上传等功能。</p>
+<p>但更重要的是，Typora 支持通过它实现拖入到文章中的图片上传图床并替换掉文中图片地址</p>
+<p>Awsome！有了它，再也不用手动上传图床复制链接了！</p>
+<p>下面就来配置下二者的结合使用。</p>
+<h1>二者配置</h1>
+<h2 id="配置PicGo的上传设置"><a class="header-anchor" href="#配置PicGo的上传设置">¶</a> 配置 PicGo 的上传设置</h2>
+<p>此处以 sm.ms 的注册图床为例，其他图床请参考<a href="https://picgo.github.io/PicGo-Doc/zh/guide/getting-started.html">官方文档</a></p>
+<ol>
+<li>
+<p><a href="http://xn--sm-5p3dp06f.ms">登录 sm.ms</a>，获取 API token，复制备用</p>
+<p><img data-src="https://i.loli.net/2020/03/21/wnxrfcZzPtvJk58.png" alt=""></p>
+</li>
+</ol>
+<img data-src="https://i.loli.net/2020/03/21/TYJIjPBk2lAHXgr.png" style="zoom: 80%;">
+<ol start="2">
+<li>
+<p>打开 PicGo，插件设置中输入 smms-user 并安装对应插件，</p>
+<img data-src="https://i.loli.net/2020/03/21/lk4dTXfQF1syWir.png" style="zoom:80%;">
+<p>安装完成后在图床设置里新出现的 <strong>SM.MS - 登录用户</strong>中输入刚才获得的 token，点击确定和设为默认图床</p>
+<img data-src="https://i.loli.net/2020/03/21/n9kpCUiR62EtjOV.png" style="zoom:80%;">
+</li>
+</ol>
+<p>此处 PicGo 配置完成</p>
+<h2 id="配置Typora"><a class="header-anchor" href="#配置Typora">¶</a> 配置 Typora</h2>
+<p>快捷键 <code>ctrl+逗号</code>打开偏好设置，进入 ``图像` 选项进行如下设置：</p>
+<img data-src="https://i.loli.net/2020/03/21/JBxqTtkSZ59wL2y.png" style="zoom:80%;">
+<p>其中<code>上传服务设定</code>中 <code>PicGo路径</code>一栏请根据自身情况填写 PicGo 的安装路径。</p>
+<p>如果需要上传网络上复制的图片到自己的图床，请勾选<code>插入图片时…</code> 中的<code>对网络位置的图片应用上述规则</code>。</p>
+<p>设置完后点击<code>验证图片上传选项</code>进行测试，成功即设置完成。</p>
+<p>Typora 和 PicGo 里各自的功能就不再展示了，这里仅作二者结合使用的介绍，其他请自行探索！</p>
+]]></content>
+      <categories>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>图床</tag>
       </tags>
   </entry>
   <entry>
