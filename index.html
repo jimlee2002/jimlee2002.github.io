@@ -93,6 +93,7 @@
   </style>
 </noscript>
 
+<link rel="alternate" href="/atom.xml" title="Jim's Blog" type="application/atom+xml">
 <style>mjx-container[jax="SVG"] {
   direction: ltr;
 }
@@ -210,8 +211,7 @@ mjx-container[display="true"] {
 mjx-container[display="true"] + br {
   display: none;
 }
-</style><link rel="alternate" href="/atom.xml" title="Jim's Blog" type="application/atom+xml">
-</head>
+</style></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
   <div class="headband"></div>
@@ -612,7 +612,7 @@ mjx-container[display="true"] + br {
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>为使得MentoHUST在路由器上依然可用，需要对MentoHUST针对自己路由器的芯片架构进行交叉编译。本文以使用<strong>MT7620</strong>的路由器平台为例，主要提供WSL下对MentoHUST进行交叉编译的实例。</p>
+          <p>为使得 MentoHUST 在路由器上依然可用，需要对 MentoHUST 针对自己路由器的芯片架构进行交叉编译。本文以使用 <strong>MT7620</strong> 的路由器平台为例，主要提供 WSL 下对 MentoHUST 进行交叉编译的实例。</p>
 <p>限于能力与水平，本文有许多遗漏与不足之处，还请多多指教。</p>
           <!--noindex-->
             <div class="post-button">
@@ -733,9 +733,9 @@ mjx-container[display="true"] + br {
     
     <div class="post-body" itemprop="articleBody">
           <h1>准备工作</h1>
-<p>以下所以操作都基于<code>/home</code>进行，用户名为<code>jim</code>。</p>
-<h2 id="安装相关依赖"><a class="header-anchor" href="#安装相关依赖">¶</a>安装相关依赖</h2>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install build-essential bison flex zlib1g-dev libncurses5-dev subversion quilt intltool ruby fastjar unzip gawk autogen autopoint ccache gettext libssl-dev xsltproc zip git</span><br></pre></td></tr></table></figure>
+<p>以下所以操作都基于 <code>/home</code> 进行，用户名为 <code>jim</code>。</p>
+<h2 id="安装相关依赖"><a class="header-anchor" href="#安装相关依赖">¶</a> 安装相关依赖</h2>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install build-essential bison flex zlib1g-dev libncurses5-dev subversion quilt intltool ruby fastjar unzip gawk autogen autopoint ccache gettext libssl-dev xsltproc zip git</span><br></pre></td></tr></tbody></table></figure>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/posts/5ed2bcfa.html#more" rel="contents">
