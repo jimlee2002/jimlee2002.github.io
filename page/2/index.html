@@ -29,7 +29,7 @@
 
   <meta property="og:type" content="website">
 <meta property="og:title" content="Jim&#39;s Blog">
-<meta property="og:url" content="https://jimlee2002.github.io/archives/2018/01/index.html">
+<meta property="og:url" content="https://jimlee2002.github.io/page/2/index.html">
 <meta property="og:site_name" content="Jim&#39;s Blog">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="Jim Lee">
@@ -37,20 +37,20 @@
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://jimlee2002.github.io/archives/2018/01/">
+<link rel="canonical" href="https://jimlee2002.github.io/page/2/">
 
 
 <script data-pjax class="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : false,
+    isHome : true,
     isPost : false,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>归档 | Jim's Blog</title>
+  <title>Jim's Blog</title>
   
 
 
@@ -390,53 +390,166 @@ mjx-container[display="true"] + br {
 </noscript>
 
 
-    <div class="main-inner archive posts-collapse">
+    <div class="main-inner index posts-expand">
       
 
       
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jimlee2002.github.io/posts/6c2e314d.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Jim Lee">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jim's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/6c2e314d.html" class="post-title-link" itemprop="url">Markdown 语法学习笔记①</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-01-07 15:10:39" itemprop="dateCreated datePublished" datetime="2018-01-07T15:10:39+08:00">2018-01-07</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-10-03 16:38:37" itemprop="dateModified" datetime="2020-10-03T16:38:37+08:00">2020-10-03</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a>
+        </span>
+    </span>
 
   
+    <span id="/posts/6c2e314d.html" class="post-meta-item leancloud_visitors" data-flag-title="Markdown 语法学习笔记①" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/posts/6c2e314d.html#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/6c2e314d.html" itemprop="commentCount"></span>
+    </a>
+  </span>
   
   
-  <div class="post-block">
-    <div class="post-content">
-      <div class="collection-title">
-        <span class="collection-header">嗯..! 目前共计 11 篇日志。 继续努力。</span>
       </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>3.5k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>7 分钟</span>
+    </span>
+</div>
 
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="标题"><a class="header-anchor" href="#标题">¶</a> 标题</h2>
+<p>两种语法，分别为类 Setext 和类 atx 形式。</p>
+<h3 id="类-Setext-式"><a class="header-anchor" href="#类-Setext-式">¶</a> 类 Setext 式</h3>
+<p>利用 <code>=</code> 和 <code>-</code>：</p>
+<pre><code>标题
+=====
+标题
+-----
+</code></pre>
+<h3 id="类-atx-式"><a class="header-anchor" href="#类-atx-式">¶</a> 类 atx 式</h3>
+<p>在行首插入 1 到 6 个<code>#</code>, 对应到标题 1 到 6 阶。</p>
+<pre><code># 标题
+## 标题
+### 标题
+#### 标题
+##### 标题
+###### 标题
+</code></pre>
+<p>也可以</p>
+<pre><code># 标题 #
+## 标题 ##
+### 标题 ###  
+</code></pre>
+<blockquote>
+<p><strong>注意：</strong> 不要忘记<code>#</code>与标题文字间的空格<br>
+错误示范：<code>##标题</code></p>
+</blockquote>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/6c2e314d.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
-    <div class="collection-year">
-      <span class="collection-header">2018</span>
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2018-01-07T15:10:39+08:00"
-              content="2018-01-07">
-          01-07
-        </time>
-      </div>
+    
+    
+    
 
-      <div class="post-title">
-          <a class="post-title-link" href="/posts/6c2e314d.html" itemprop="url">
-            <span itemprop="name">Markdown 语法学习笔记①</span>
-          </a>
-      </div>
-
+    <footer class="post-footer">
+        <div class="post-eof"></div>
       
-    </header>
+    </footer>
   </article>
+</div>
 
 
-    </div>
-  </div>
-  
-  
-  
+
+
 
   
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+  </nav>
 
 
 
@@ -718,7 +831,7 @@ NexT.utils.loadComments('#valine-comments', () => {
   NexT.utils.getScript('//cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', () => {
     new Valine(Object.assign({"enable":true,"appId":"JfYtyYn8V6sVK32DpSYMp2xx-MdYXbMMI","appKey":"IOSvshbg8dOPcbsT4054XTH4","serverURLs":null,"placeholder":"来说些什么吧……","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"lang":"zh-cn","visitor":false,"comment_count":true,"recordIP":false,"enableQQ":false,"requiredFields":[],"notify":false,"verify":false}, {
       el: '#valine-comments',
-      path: "/archives/2018/01/",
+      path: "/page/2/",
       serverURLs: "https://jfytyyn8.api.lncldglobal.com"
     }));
   }, window.Valine);
