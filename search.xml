@@ -2046,6 +2046,7 @@ preload: false
 <li><a href="https://winscp.net/eng/download.php">WinSCP</a></li>
 <li>SSH 工具（如 PuTTY、XShell、MobaXterm）</li>
 </ul>
+<a id="more"></a>
 <h1>写入并测试 MentoHUST</h1>
 <p>使用 WinSCP 上传 <code>mentohust</code> 文件至路由器的 <code>/etc</code> 目录下。</p>
 <p>赋予 <code>mentohust</code> 文件可执行权限：</p>
