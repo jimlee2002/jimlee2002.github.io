@@ -328,6 +328,14 @@
       <span class="post-meta-item-text">阅读次数：</span>
       <span class="leancloud-visitors-count"></span>
     </span>
+    <span id="/posts/39aaddee.html" class="post-meta-item twikoo_visitors" data-flag-title="配置 Typora & PicGo 写 Hexo 博客" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="twikoo_visitors"></span>
+    </span>
+  
       </div>
       <div class="post-meta">
     <span class="post-meta-item" title="本文字数">
@@ -465,6 +473,7 @@
 
 
 
+    <div class="comments"><div id="twikoo-comments"></div></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -702,6 +711,15 @@ if (document.querySelectorAll('.mermaid').length) {
 
     <div class="pjax">
 
+<script>
+NexT.utils.loadComments('#twikoo-comments', () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js', () => {
+    twikoo.init(Object.assign({"enable":true,"visitor":true,"envId":"twikoo-3gnlqnma9bc5e92b"}, {
+      el: '#twikoo-comments'
+    }));
+  }, window.twikoo);
+});
+</script>
 
     </div>
 </body>

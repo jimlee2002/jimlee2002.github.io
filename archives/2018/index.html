@@ -535,6 +535,15 @@ if (document.querySelectorAll('.mermaid').length) {
 
     <div class="pjax">
 
+<script>
+NexT.utils.loadComments('#twikoo-comments', () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js', () => {
+    twikoo.init(Object.assign({"enable":true,"visitor":true,"envId":"twikoo-3gnlqnma9bc5e92b"}, {
+      el: '#twikoo-comments'
+    }));
+  }, window.twikoo);
+});
+</script>
 
     </div>
 </body>

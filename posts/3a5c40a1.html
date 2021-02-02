@@ -322,6 +322,14 @@
       <span class="post-meta-item-text">阅读次数：</span>
       <span class="leancloud-visitors-count"></span>
     </span>
+    <span id="/posts/3a5c40a1.html" class="post-meta-item twikoo_visitors" data-flag-title="在 WSL2 上进行 OpenWrt 的编译" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="twikoo_visitors"></span>
+    </span>
+  
       </div>
       <div class="post-meta">
     <span class="post-meta-item" title="本文字数">
@@ -329,14 +337,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>3.1k</span>
+      <span>2.7k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>6 分钟</span>
+      <span>5 分钟</span>
     </span>
 </div>
 
@@ -420,10 +428,10 @@
   <div class="popular-posts-header">相关文章</div>
   <ul class="popular-posts">
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\posts\6f5f0d34.html" rel="bookmark">MentoHUST 在 OpenWrt 上的配置</a></div>
+      <div class="popular-posts-title"><a href="\posts\4d028789.html" rel="bookmark">使用 WSL 交叉编译 MentoHUST</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\posts\4d028789.html" rel="bookmark">使用 WSL 交叉编译 MentoHUST</a></div>
+      <div class="popular-posts-title"><a href="\posts\6f5f0d34.html" rel="bookmark">MentoHUST 在 OpenWrt 上的配置</a></div>
     </li>
     <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="\posts\a5ac1d77.html" rel="bookmark">OpenWrt/LEDE 的编译与 Mentohust 软件包的添加</a></div>
@@ -477,6 +485,7 @@
 
 
 
+    <div class="comments"><div id="twikoo-comments"></div></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -714,6 +723,15 @@ if (document.querySelectorAll('.mermaid').length) {
 
     <div class="pjax">
 
+<script>
+NexT.utils.loadComments('#twikoo-comments', () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js', () => {
+    twikoo.init(Object.assign({"enable":true,"visitor":true,"envId":"twikoo-3gnlqnma9bc5e92b"}, {
+      el: '#twikoo-comments'
+    }));
+  }, window.twikoo);
+});
+</script>
 
     </div>
 </body>
