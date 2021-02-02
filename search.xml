@@ -1,60 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>博客折腾笔记②-hexo 的优化</title>
-    <url>/posts/3a4e373e.html</url>
-    <content><![CDATA[<h1 id="wen-zhang-yong-jiu-lian-jie-wei-yi-hua">文章永久链接唯一化</h1>
-<p>为解决 hexo 默认设置下改变源文件名或使用中文标题带来的文章链接问题，这里使用 <code>hexo-abbrlink</code> 插件来解决问题</p>
-<figure class="highlight nginx"><table><tbody><tr><td class="code"><pre><span class="line"><span class="attribute">npm</span> install hexo-abbrlink --save</span><br></pre></td></tr></tbody></table></figure>
-<a id="more"></a>
-<p>然后更改博客配置文件<code>_config.yml</code>, 这里我改成</p>
-<figure class="highlight yaml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="attr">permalink:</span> <span class="string">:posts/:year/:abbrlink/</span></span><br></pre></td></tr></tbody></table></figure>
-<p>还可以设置永久链接的生成算法，在博客配置文件中加入</p>
-<figure class="highlight yaml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="attr">abbrlink:</span></span><br><span class="line">  <span class="attr">alg:</span> <span class="string">crc32</span>  <span class="comment"># support crc16(default) and crc32</span></span><br><span class="line">  <span class="attr">rep:</span> <span class="string">hex</span>    <span class="comment"># support dec(default) and hex</span></span><br></pre></td></tr></tbody></table></figure>
-<p>不同算法的生成效果：</p>
-<figure class="highlight plain"><table><tbody><tr><td class="code"><pre><span class="line">crc16 &amp; hex</span><br><span class="line">https://post.zz173.com/posts/66c8.html</span><br><span class="line">crc16 &amp; dec</span><br><span class="line">https://post.zz173.com/posts/65535.html</span><br><span class="line">crc32 &amp; hex</span><br><span class="line">https://post.zz173.com/posts/8ddf18fb.html</span><br><span class="line">crc32 &amp; dec</span><br><span class="line">https://post.zz173.com/posts/1690090958.html</span><br></pre></td></tr></tbody></table></figure>
-<p>一些知识补充：</p>
-<blockquote>
-<blockquote>
-<p>百度蜘蛛抓取网页的规则：对于蜘蛛说网页权重越高、信用度越高抓取越频繁，例如网站的首页和内页。蜘蛛先抓取网站的首页，因为首页权重更高，并且大部分的链接都是指向首页。然后通过首页抓取网站的内页，并不是所有内页蜘蛛都会去抓取。</p>
-</blockquote>
-<p>搜索引擎认为对于一般的中小型站点，3 层足够承受所有的内容了，所以蜘蛛经常抓取的内容是前三层，而超过三层的内容蜘蛛认为那些内容并不重要，所以不经常爬取。出于这个原因所以 permalink 后面跟着的最好不要超过 2 个斜杠。[^]</p>
-</blockquote>
-<h1 id="xin-she-bei-shang-hui-fu-bo-ke-bei-fen-de-wen-ti-jie-jue">新设备上恢复博客备份的问题解决</h1>
-<h2 id="code-sudo-npm-install-code-shi-bai"><a class="header-anchor" href="#sudo-npm-install-失败">¶</a><code>sudo npm install </code>失败</h2>
-<p>解决方案：不要用 <code>sudo</code>, 直接 <code>npm install</code> 就好</p>
-<h2 id="code-hexo-b-code-bao-cuo"><a class="header-anchor" href="#hexo-b报错">¶</a><code>hexo b</code> 报错</h2>
-<p>在新装的 UTG 上恢复 Blog，最后执行 <code>hexo b</code> 的时候报错了</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">fatal: <span class="string">'github'</span> does not appear to be a git repository</span><br><span class="line">fatal: 无法读取远程仓库。</span><br><span class="line"></span><br><span class="line">请确认您有正确的访问权限并且仓库存在。</span><br></pre></td></tr></tbody></table></figure>
-<p>翻了翻插件的 issuse，看到了相似的问题<a href="https://github.com/coneycode/hexo-git-backup/issues/20">#20</a></p>
-<p>参考里面的内容，修改<strong>博客配置文件</strong>里插件的相关配置，把 <code>github</code> 换成 <code>origin</code></p>
-<figure class="highlight plain"><table><tbody><tr><td class="code"><pre><span class="line">backup:</span><br><span class="line">  type: git</span><br><span class="line">  repository:</span><br><span class="line">    origin: git@github:bx_reader/bx-reader-api.git,master</span><br></pre></td></tr></tbody></table></figure>
-<p>这里顺便把 git 的 https 连接改成了 git 连接，这样就不用每次都输入账号密码了</p>
-<p>再次尝试，问题解决</p>
-<h1 id="hexo-wen-zhang-jia-mi">Hexo 文章加密</h1>
-<p>使用插件 <a href="https://github.com/MikeCoder/hexo-blog-encrypt">hexo-blog-encrypt</a></p>
-<h2 id="an-zhuang"><a class="header-anchor" href="#安装">¶</a> 安装</h2>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">npm install --save hexo-blog-encrypt</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="shi-yong"><a class="header-anchor" href="#使用">¶</a> 使用</h2>
-<p>在文章信息头添加 <code>password</code> 字段</p>
-<figure class="highlight yaml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">Hello</span> <span class="string">World</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2016-03-30 21:18:02</span></span><br><span class="line"><span class="attr">password:</span> <span class="string">mikemessi</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></tbody></table></figure>
-<p>也可以在文章信息头单独自定义密码输入交互信息</p>
-<figure class="highlight yaml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">Hello</span> <span class="string">World</span></span><br><span class="line"><span class="attr">tags:</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">作为日记加密</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2016-03-30 21:12:21</span></span><br><span class="line"><span class="attr">password:</span> <span class="string">mikemessi</span></span><br><span class="line"><span class="attr">abstract:</span> <span class="string">有东西被加密了,</span> <span class="string">请输入密码查看.</span></span><br><span class="line"><span class="attr">message:</span> <span class="string">您好,</span> <span class="string">这里需要密码.</span></span><br><span class="line"><span class="attr">wrong_pass_message:</span> <span class="string">抱歉,</span> <span class="string">这个密码看着不太对,</span> <span class="string">请再试试.</span></span><br><span class="line"><span class="attr">wrong_hash_message:</span> <span class="string">抱歉,</span> <span class="string">这个文章不能被校验,</span> <span class="string">不过您还是能看看解密后的内容.</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></tbody></table></figure>
-<h2 id="jin-jie"><a class="header-anchor" href="#进阶">¶</a> 进阶</h2>
-<h3 id="quan-ju-pei-zhi"><a class="header-anchor" href="#全局配置">¶</a> 全局配置</h3>
-<p>在站点根目录下的<code>_config.yml</code> 里可以添加以下内容进行全局配置</p>
-<figure class="highlight yaml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># Security</span></span><br><span class="line"><span class="attr">encrypt:</span> <span class="comment"># hexo-blog-encrypt</span></span><br><span class="line">  <span class="attr">abstract:</span> <span class="string">有东西被加密了,</span> <span class="string">请输入密码查看.</span></span><br><span class="line">  <span class="attr">message:</span> <span class="string">您好,</span> <span class="string">这里需要密码.</span></span><br><span class="line">  <span class="attr">tags:</span></span><br><span class="line">  <span class="bullet">-</span> {<span class="attr">name:</span> <span class="string">tagName</span>, <span class="attr">password:</span> <span class="string">密码A</span>}</span><br><span class="line">  <span class="bullet">-</span> {<span class="attr">name:</span> <span class="string">tagName</span>, <span class="attr">password:</span> <span class="string">密码B</span>}</span><br><span class="line">  <span class="attr">template:</span> <span class="string">&lt;div</span> <span class="string">id="hexo-blog-encrypt"</span> <span class="string">data-wpm="{{hbeWrongPassMessage}}"</span> <span class="string">data-whm="{{hbeWrongHashMessage}}"&gt;&lt;div</span> <span class="string">class="hbe-input-container"&gt;&lt;input</span> <span class="string">type="password"</span> <span class="string">id="hbePass"</span> <span class="string">placeholder="{{hbeMessage}}"</span> <span class="string">/&gt;&lt;label&gt;{{hbeMessage}}&lt;/label&gt;&lt;div</span> <span class="string">class="bottom-line"&gt;&lt;/div&gt;&lt;/div&gt;&lt;script</span> <span class="string">id="hbeData"</span> <span class="string">type="hbeData"</span> <span class="string">data-hmacdigest="{{hbeHmacDigest}}"&gt;{{hbeEncryptedData}}&lt;/script&gt;&lt;/div&gt;</span></span><br><span class="line">  <span class="attr">wrong_pass_message:</span> <span class="string">抱歉,</span> <span class="string">这个密码看着不太对,</span> <span class="string">请再试试.</span></span><br><span class="line">  <span class="attr">wrong_hash_message:</span> <span class="string">抱歉,</span> <span class="string">这个文章不能被校验,</span> <span class="string">不过您还是能看看解密后的内容.</span></span><br></pre></td></tr></tbody></table></figure>
-<p>配置优先级是</p>
-<p><strong>文章信息头 &gt; <code>_config.yml</code> (站点根目录下的) &gt; 默认配置</strong></p>
-]]></content>
-      <categories>
-        <category>笔记</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>博客折腾笔记③- 搭建个人动态页面 iM</title>
     <url>/posts/2b426e0a.html</url>
     <content><![CDATA[<p>今天在少数派上看到一篇搭建类似微博的个人动态页面的指南，我非常感高兴：出于对实现私密树洞分享心情的需要以及言论审查的苦恼，我想在博客上实现这样的功能很久了。感谢原作者为不懂技术的脚本小子我造好了轮子，接下来只需简单配置即可实现所需功能了。</p>
@@ -102,6 +48,60 @@
 <li><input type="checkbox" id="checkbox1"><label for="checkbox1">尝试用</label><code>hexo-blog-encrypt</code> 加密页面？</li>
 <li><input type="checkbox" id="checkbox2"><label for="checkbox2">直接在页面处添加一个在线输入框方便输入？</label></li>
 </ul>
+]]></content>
+      <categories>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>博客折腾笔记②-hexo 的优化</title>
+    <url>/posts/3a4e373e.html</url>
+    <content><![CDATA[<h1 id="wen-zhang-yong-jiu-lian-jie-wei-yi-hua">文章永久链接唯一化</h1>
+<p>为解决 hexo 默认设置下改变源文件名或使用中文标题带来的文章链接问题，这里使用 <code>hexo-abbrlink</code> 插件来解决问题</p>
+<figure class="highlight nginx"><table><tbody><tr><td class="code"><pre><span class="line"><span class="attribute">npm</span> install hexo-abbrlink --save</span><br></pre></td></tr></tbody></table></figure>
+<a id="more"></a>
+<p>然后更改博客配置文件<code>_config.yml</code>, 这里我改成</p>
+<figure class="highlight yaml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="attr">permalink:</span> <span class="string">:posts/:year/:abbrlink/</span></span><br></pre></td></tr></tbody></table></figure>
+<p>还可以设置永久链接的生成算法，在博客配置文件中加入</p>
+<figure class="highlight yaml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="attr">abbrlink:</span></span><br><span class="line">  <span class="attr">alg:</span> <span class="string">crc32</span>  <span class="comment"># support crc16(default) and crc32</span></span><br><span class="line">  <span class="attr">rep:</span> <span class="string">hex</span>    <span class="comment"># support dec(default) and hex</span></span><br></pre></td></tr></tbody></table></figure>
+<p>不同算法的生成效果：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="code"><pre><span class="line">crc16 &amp; hex</span><br><span class="line">https://post.zz173.com/posts/66c8.html</span><br><span class="line">crc16 &amp; dec</span><br><span class="line">https://post.zz173.com/posts/65535.html</span><br><span class="line">crc32 &amp; hex</span><br><span class="line">https://post.zz173.com/posts/8ddf18fb.html</span><br><span class="line">crc32 &amp; dec</span><br><span class="line">https://post.zz173.com/posts/1690090958.html</span><br></pre></td></tr></tbody></table></figure>
+<p>一些知识补充：</p>
+<blockquote>
+<blockquote>
+<p>百度蜘蛛抓取网页的规则：对于蜘蛛说网页权重越高、信用度越高抓取越频繁，例如网站的首页和内页。蜘蛛先抓取网站的首页，因为首页权重更高，并且大部分的链接都是指向首页。然后通过首页抓取网站的内页，并不是所有内页蜘蛛都会去抓取。</p>
+</blockquote>
+<p>搜索引擎认为对于一般的中小型站点，3 层足够承受所有的内容了，所以蜘蛛经常抓取的内容是前三层，而超过三层的内容蜘蛛认为那些内容并不重要，所以不经常爬取。出于这个原因所以 permalink 后面跟着的最好不要超过 2 个斜杠。[^]</p>
+</blockquote>
+<h1 id="xin-she-bei-shang-hui-fu-bo-ke-bei-fen-de-wen-ti-jie-jue">新设备上恢复博客备份的问题解决</h1>
+<h2 id="code-sudo-npm-install-code-shi-bai"><a class="header-anchor" href="#sudo-npm-install-失败">¶</a><code>sudo npm install </code>失败</h2>
+<p>解决方案：不要用 <code>sudo</code>, 直接 <code>npm install</code> 就好</p>
+<h2 id="code-hexo-b-code-bao-cuo"><a class="header-anchor" href="#hexo-b报错">¶</a><code>hexo b</code> 报错</h2>
+<p>在新装的 UTG 上恢复 Blog，最后执行 <code>hexo b</code> 的时候报错了</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">fatal: <span class="string">'github'</span> does not appear to be a git repository</span><br><span class="line">fatal: 无法读取远程仓库。</span><br><span class="line"></span><br><span class="line">请确认您有正确的访问权限并且仓库存在。</span><br></pre></td></tr></tbody></table></figure>
+<p>翻了翻插件的 issuse，看到了相似的问题<a href="https://github.com/coneycode/hexo-git-backup/issues/20">#20</a></p>
+<p>参考里面的内容，修改<strong>博客配置文件</strong>里插件的相关配置，把 <code>github</code> 换成 <code>origin</code></p>
+<figure class="highlight plain"><table><tbody><tr><td class="code"><pre><span class="line">backup:</span><br><span class="line">  type: git</span><br><span class="line">  repository:</span><br><span class="line">    origin: git@github:bx_reader/bx-reader-api.git,master</span><br></pre></td></tr></tbody></table></figure>
+<p>这里顺便把 git 的 https 连接改成了 git 连接，这样就不用每次都输入账号密码了</p>
+<p>再次尝试，问题解决</p>
+<h1 id="hexo-wen-zhang-jia-mi">Hexo 文章加密</h1>
+<p>使用插件 <a href="https://github.com/MikeCoder/hexo-blog-encrypt">hexo-blog-encrypt</a></p>
+<h2 id="an-zhuang"><a class="header-anchor" href="#安装">¶</a> 安装</h2>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">npm install --save hexo-blog-encrypt</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="shi-yong"><a class="header-anchor" href="#使用">¶</a> 使用</h2>
+<p>在文章信息头添加 <code>password</code> 字段</p>
+<figure class="highlight yaml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">Hello</span> <span class="string">World</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2016-03-30 21:18:02</span></span><br><span class="line"><span class="attr">password:</span> <span class="string">mikemessi</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></tbody></table></figure>
+<p>也可以在文章信息头单独自定义密码输入交互信息</p>
+<figure class="highlight yaml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">Hello</span> <span class="string">World</span></span><br><span class="line"><span class="attr">tags:</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">作为日记加密</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2016-03-30 21:12:21</span></span><br><span class="line"><span class="attr">password:</span> <span class="string">mikemessi</span></span><br><span class="line"><span class="attr">abstract:</span> <span class="string">有东西被加密了,</span> <span class="string">请输入密码查看.</span></span><br><span class="line"><span class="attr">message:</span> <span class="string">您好,</span> <span class="string">这里需要密码.</span></span><br><span class="line"><span class="attr">wrong_pass_message:</span> <span class="string">抱歉,</span> <span class="string">这个密码看着不太对,</span> <span class="string">请再试试.</span></span><br><span class="line"><span class="attr">wrong_hash_message:</span> <span class="string">抱歉,</span> <span class="string">这个文章不能被校验,</span> <span class="string">不过您还是能看看解密后的内容.</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></tbody></table></figure>
+<h2 id="jin-jie"><a class="header-anchor" href="#进阶">¶</a> 进阶</h2>
+<h3 id="quan-ju-pei-zhi"><a class="header-anchor" href="#全局配置">¶</a> 全局配置</h3>
+<p>在站点根目录下的<code>_config.yml</code> 里可以添加以下内容进行全局配置</p>
+<figure class="highlight yaml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># Security</span></span><br><span class="line"><span class="attr">encrypt:</span> <span class="comment"># hexo-blog-encrypt</span></span><br><span class="line">  <span class="attr">abstract:</span> <span class="string">有东西被加密了,</span> <span class="string">请输入密码查看.</span></span><br><span class="line">  <span class="attr">message:</span> <span class="string">您好,</span> <span class="string">这里需要密码.</span></span><br><span class="line">  <span class="attr">tags:</span></span><br><span class="line">  <span class="bullet">-</span> {<span class="attr">name:</span> <span class="string">tagName</span>, <span class="attr">password:</span> <span class="string">密码A</span>}</span><br><span class="line">  <span class="bullet">-</span> {<span class="attr">name:</span> <span class="string">tagName</span>, <span class="attr">password:</span> <span class="string">密码B</span>}</span><br><span class="line">  <span class="attr">template:</span> <span class="string">&lt;div</span> <span class="string">id="hexo-blog-encrypt"</span> <span class="string">data-wpm="{{hbeWrongPassMessage}}"</span> <span class="string">data-whm="{{hbeWrongHashMessage}}"&gt;&lt;div</span> <span class="string">class="hbe-input-container"&gt;&lt;input</span> <span class="string">type="password"</span> <span class="string">id="hbePass"</span> <span class="string">placeholder="{{hbeMessage}}"</span> <span class="string">/&gt;&lt;label&gt;{{hbeMessage}}&lt;/label&gt;&lt;div</span> <span class="string">class="bottom-line"&gt;&lt;/div&gt;&lt;/div&gt;&lt;script</span> <span class="string">id="hbeData"</span> <span class="string">type="hbeData"</span> <span class="string">data-hmacdigest="{{hbeHmacDigest}}"&gt;{{hbeEncryptedData}}&lt;/script&gt;&lt;/div&gt;</span></span><br><span class="line">  <span class="attr">wrong_pass_message:</span> <span class="string">抱歉,</span> <span class="string">这个密码看着不太对,</span> <span class="string">请再试试.</span></span><br><span class="line">  <span class="attr">wrong_hash_message:</span> <span class="string">抱歉,</span> <span class="string">这个文章不能被校验,</span> <span class="string">不过您还是能看看解密后的内容.</span></span><br></pre></td></tr></tbody></table></figure>
+<p>配置优先级是</p>
+<p><strong>文章信息头 &gt; <code>_config.yml</code> (站点根目录下的) &gt; 默认配置</strong></p>
 ]]></content>
       <categories>
         <category>笔记</category>
@@ -536,6 +536,40 @@ _   底线
       </tags>
   </entry>
   <entry>
+    <title>编译适用于 X86 的 MentoHUST</title>
+    <url>/posts/5ed2bcfa.html</url>
+    <content><![CDATA[<h1 id="zhun-bei-gong-zuo">准备工作</h1>
+<p>以下所以操作都基于 <code>/home</code> 进行，用户名为 <code>jim</code>。</p>
+<h2 id="an-zhuang-xiang-guan-yi-lai"><a class="header-anchor" href="#安装相关依赖">¶</a> 安装相关依赖</h2>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">sudo apt install build-essential bison flex zlib1g-dev libncurses5-dev subversion quilt intltool ruby fastjar unzip gawk autogen autopoint ccache gettext libssl-dev xsltproc zip git</span><br></pre></td></tr></tbody></table></figure>
+<a id="more"></a>
+<h2 id="huo-qu-libpcab-yuan-ma"><a class="header-anchor" href="#获取libpcab源码">¶</a> 获取 libpcab 源码</h2>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">wget https://www.tcpdump.org/release/libpcap-1.9.1.tar.gz -O libpcap.tar.gz</span><br><span class="line">tar -xzf libpcap.tar.gz</span><br><span class="line">mv libpcap-1.9.1 libpcap</span><br><span class="line">rm libpcap.tar.gz</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="huo-qu-mento-hust-yuan-ma"><a class="header-anchor" href="#获取MentoHUST源码">¶</a> 获取 MentoHUST 源码</h2>
+<p>以 <a href="https://github.com/hyrathb">@hyrathb</a> 的 <a href="https://github.com/hyrathb/mentohust">MentoHUST</a> 为例：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/hyrathb/mentohust.git mentohust</span><br></pre></td></tr></tbody></table></figure>
+<h1 id="jin-xing-bian-yi">进行编译</h1>
+<h2 id="bian-yi-libpcab"><a class="header-anchor" href="#编译libpcab">¶</a> 编译 libpcab</h2>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> libpcap</span><br><span class="line">./configure --prefix=/home --with-pcap=linux</span><br><span class="line">make</span><br></pre></td></tr></tbody></table></figure>
+<p><code>make</code> 部分，<strong>只要看到 <code>ranlib libpcap.a</code> 没有出错即可</strong>，不用理会 <code>libpcap.so</code> 是否出错。</p>
+<p>完成后，应能在 <code>/home/libpcap</code> 下看到 <code>libpcap.a</code>。</p>
+<h2 id="bian-yi-mento-hust"><a class="header-anchor" href="#编译MentoHUST">¶</a> 编译 MentoHUST</h2>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> mentohust</span><br><span class="line">sh autogen.sh</span><br><span class="line">./configure --disable-encodepass --disable-notify --with-pcap=/home/jim/libpcap/libpcap.a</span><br><span class="line">make</span><br></pre></td></tr></tbody></table></figure>
+<p>执行成功后即可在 <code>/home/mentohust/src</code> 下获取到所需的 <code>mentohust</code> 二进制文件了。</p>
+<h1 id="can-kao-wen-zhang">参考文章</h1>
+<ul>
+<li><a href="https://github.com/KumaTea/MentoHUST-SYSU-Guide/blob/master/Guide.md">支持锐捷认证与 IPv6 的路由器配置指南：以 K2P 为例</a></li>
+<li><a href="https://blog.csdn.net/warriorpaw/article/details/7990226">交叉编译 mentohust 实现锐捷认证共享上网</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>MentoHUST</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>MentoHUST 在 OpenWrt 上的配置</title>
     <url>/posts/6f5f0d34.html</url>
     <content><![CDATA[<h1 id="zhun-bei-gong-zuo">准备工作</h1>
@@ -585,142 +619,6 @@ _   底线
       <tags>
         <tag>OpenWrt</tag>
         <tag>MentoHUST</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>编译适用于 X86 的 MentoHUST</title>
-    <url>/posts/5ed2bcfa.html</url>
-    <content><![CDATA[<h1 id="zhun-bei-gong-zuo">准备工作</h1>
-<p>以下所以操作都基于 <code>/home</code> 进行，用户名为 <code>jim</code>。</p>
-<h2 id="an-zhuang-xiang-guan-yi-lai"><a class="header-anchor" href="#安装相关依赖">¶</a> 安装相关依赖</h2>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">sudo apt install build-essential bison flex zlib1g-dev libncurses5-dev subversion quilt intltool ruby fastjar unzip gawk autogen autopoint ccache gettext libssl-dev xsltproc zip git</span><br></pre></td></tr></tbody></table></figure>
-<a id="more"></a>
-<h2 id="huo-qu-libpcab-yuan-ma"><a class="header-anchor" href="#获取libpcab源码">¶</a> 获取 libpcab 源码</h2>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">wget https://www.tcpdump.org/release/libpcap-1.9.1.tar.gz -O libpcap.tar.gz</span><br><span class="line">tar -xzf libpcap.tar.gz</span><br><span class="line">mv libpcap-1.9.1 libpcap</span><br><span class="line">rm libpcap.tar.gz</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="huo-qu-mento-hust-yuan-ma"><a class="header-anchor" href="#获取MentoHUST源码">¶</a> 获取 MentoHUST 源码</h2>
-<p>以 <a href="https://github.com/hyrathb">@hyrathb</a> 的 <a href="https://github.com/hyrathb/mentohust">MentoHUST</a> 为例：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/hyrathb/mentohust.git mentohust</span><br></pre></td></tr></tbody></table></figure>
-<h1 id="jin-xing-bian-yi">进行编译</h1>
-<h2 id="bian-yi-libpcab"><a class="header-anchor" href="#编译libpcab">¶</a> 编译 libpcab</h2>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> libpcap</span><br><span class="line">./configure --prefix=/home --with-pcap=linux</span><br><span class="line">make</span><br></pre></td></tr></tbody></table></figure>
-<p><code>make</code> 部分，<strong>只要看到 <code>ranlib libpcap.a</code> 没有出错即可</strong>，不用理会 <code>libpcap.so</code> 是否出错。</p>
-<p>完成后，应能在 <code>/home/libpcap</code> 下看到 <code>libpcap.a</code>。</p>
-<h2 id="bian-yi-mento-hust"><a class="header-anchor" href="#编译MentoHUST">¶</a> 编译 MentoHUST</h2>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> mentohust</span><br><span class="line">sh autogen.sh</span><br><span class="line">./configure --disable-encodepass --disable-notify --with-pcap=/home/jim/libpcap/libpcap.a</span><br><span class="line">make</span><br></pre></td></tr></tbody></table></figure>
-<p>执行成功后即可在 <code>/home/mentohust/src</code> 下获取到所需的 <code>mentohust</code> 二进制文件了。</p>
-<h1 id="can-kao-wen-zhang">参考文章</h1>
-<ul>
-<li><a href="https://github.com/KumaTea/MentoHUST-SYSU-Guide/blob/master/Guide.md">支持锐捷认证与 IPv6 的路由器配置指南：以 K2P 为例</a></li>
-<li><a href="https://blog.csdn.net/warriorpaw/article/details/7990226">交叉编译 mentohust 实现锐捷认证共享上网</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>笔记</category>
-      </categories>
-      <tags>
-        <tag>MentoHUST</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>博客折腾笔记④- 使用 Tasker 在 Android 上实现个人动态的发送</title>
-    <url>/posts/4394c3fa.html</url>
-    <content><![CDATA[<p><a href="https://jimlee2002.github.io/posts/2b426e0a.html">前情提要</a></p>
-<p>折腾了两天，我终于是实现在 Android 上使用 Tasker 向刚搭建好的个人动态系统发送内容了。</p>
-<h1 id="xiao-guo-zhan-shi">效果展示</h1>
-<p>这是一个在 Android 上向<a href="https://github.com/daibor/nonsense.fun">废话胶囊（b 言 b 语）</a>发送内容的简单 Tasker 工程。</p>
-<p>项目地址：<a href="https://github.com/jimlee2002/nonsense.fun_tasker">https://github.com/jimlee2002/nonsense.fun_tasker</a></p>
-<img data-src="https://i.loli.net/2020/04/22/Hy7kwJL8FDr6I5O.png" style="zoom: 50%;">
-<a id="more"></a>
-<h1 id="an-zhuang-pei-zhi">安装配置</h1>
-<h2 id="直接下载安装已经导出好的apk文件"><a class="header-anchor" href="#直接下载安装已经导出好的apk文件">¶</a> 直接下载安装已经导出好的 <a href="https://github.com/jimlee2002/nonsense.fun_tasker/releases">apk 文件</a></h2>
-<p>应用使用插件 <code>Tasker App Factory</code> 导出。</p>
-<p>注意，该应用<strong>需要 root 权限</strong>。</p>
-<h2 id="导入Tasker工程"><a class="header-anchor" href="#导入Tasker工程">¶</a> 导入 Tasker 工程</h2>
-<p><strong>注意：部分手机可能需要 Root 权限才能使用，该工程默认开启<code>使用Root运行</code>，可以自行到<code>场景/Main/发送/按下</code>的第 6 个和第 8 个任务里关掉该选项</strong>。</p>
-<p><img data-src="https://i.loli.net/2020/04/22/iaTO5gAQLjnufBZ.png" style="zoom: 50%;"><img data-src="https://i.loli.net/2020/04/22/SIJivZ5L4Na9Cu3.png" style="zoom: 50%;"></p>
-<p><img data-src="https://i.loli.net/2020/04/24/c1R3x9HEzyQiTpN.png" style="zoom:50%;"><img data-src="https://i.loli.net/2020/04/22/7BoIjaJL9h6ilf1.png" style="zoom: 50%;"></p>
-<hr>
-<ol>
-<li>
-<p><a href="https://github.com/jimlee2002/nonsense.fun_tasker/releases">下载</a><code>bb.prj.xml</code>，存入到手机任意你找得到的位置。</p>
-</li>
-<li>
-<p>下载安装 Tasker。</p>
-</li>
-<li>
-<p>进入主界面长按左下角的按钮，点击<code>导入项目</code>，在打开的界面中找到并打开刚才存入的 <code>bb.prj.xml。</code></p>
-<p><img data-src="https://i.loli.net/2020/04/22/mpwnk2ZWvMc6uSU.png" style="zoom: 50%;"><img data-src="https://i.loli.net/2020/04/22/3Zc2KIWVfBzhiDM.png" style="zoom: 50%;"></p>
-<blockquote>
-<p>提示：点击右下角的手机按钮可以快速回到内部储存空间目录</p>
-</blockquote>
-</li>
-<li>
-<p>完成后回到主界面，点击应用栏里图标长得和 Tasker 很像的 <code>Tasker Secondary</code>，打开界面。</p>
-<p><img data-src="https://i.loli.net/2020/04/22/Gju9BY64UsWlvTw.png" style="zoom: 50%;"><img data-src="https://i.loli.net/2020/04/22/Hy7kwJL8FDr6I5O.png" style="zoom: 50%;"></p>
-</li>
-<li>
-<p><strong>长按</strong>发送按钮，打开设置页面进行必要设置。</p>
-<img data-src="https://i.loli.net/2020/04/22/YM5CJ6vb4OIdemy.png" style="zoom: 50%;">
-<p><strong>Title：</strong> 这里是发送界面顶端的文字，请随意修改。</p>
-<p><strong>AppID、MasterKey：</strong> 网页打开 LeanCloud，在你的项目里点击<code>设置/应用Keys</code>，复制对应的密钥分别填入。</p>
-<p><img data-src="https://i.loli.net/2020/04/20/Kaxt5GOo3LRgMmy.png" alt=""></p>
-<p><strong>className：</strong> 一般是 <code>content</code>，只要你是按照<a href="https://sspai.com/post/60024">少数派的指南</a>来做的话。</p>
-<p><strong>–insecure：</strong> 是否在脚本命令末尾加上 <code>--insecue</code>。参数默认关闭，如果无法发送可以尝试打开这个选项试试。</p>
-<p><strong>完成后点击确认返回</strong>。</p>
-</li>
-</ol>
-<p>这样就配置完成了，请试试看吧！</p>
-<h1 id="tasker-gong-cheng-shi-yong-fang-fa">Tasker 工程使用方法</h1>
-<h2 id="通过-Tasker-Secondary-打开"><a class="header-anchor" href="#通过-Tasker-Secondary-打开">¶</a> 通过 Tasker Secondary 打开</h2>
-<img data-src="https://i.loli.net/2020/04/22/Gju9BY64UsWlvTw.png" style="zoom: 50%;">
-<h2 id="通过桌面小工具创建快捷方式打开"><a class="header-anchor" href="#通过桌面小工具创建快捷方式打开">¶</a> 通过桌面小工具创建快捷方式打开</h2>
-<ol>
-<li>
-<p>打开 Tasker，然后<strong>点击返回键</strong>回到主界面。</p>
-</li>
-<li>
-<p>在桌面上新建 Tasker 的桌面小部件 "任务"，在打开的界面选择 <code>Show UI</code>,</p>
-<p>在界面下方选择图标，然后点击左上角返回桌面。</p>
-<p><img data-src="https://i.loli.net/2020/04/22/QWRPd7IKmV3oXYj.png" style="zoom: 50%;"><img data-src="https://i.loli.net/2020/04/22/t5dlHRyUgDM7aKX.png" style="zoom: 50%;"></p>
-<p>完成，现在你应该能看到快捷方式了。</p>
-</li>
-</ol>
-<h2 id="自行导出为APK安装"><a class="header-anchor" href="#自行导出为APK安装">¶</a> 自行导出为 APK 安装</h2>
-<p>** 注意：你必须拥有手机的 Root 权限，并勾选<code>场景/Main/发送/按下</code>的第 6 个和第 8 个任务中的<code>使用Root运行</code>选项 **</p>
-<ol>
-<li>
-<p>Google Play 安装 <code>Tasker App Factory</code>。</p>
-</li>
-<li>
-<p>打开 Tasker，主界面左下方长按选择已经导入的项目，然后选择<code>导出\作为应用。</code></p>
-<img data-src="https://i.loli.net/2020/04/22/peARXFgoinvOJzx.png" style="zoom: 50%;">
-<blockquote>
-<p>提示：你可以通过点击<code>更名</code>重命名工程名称来修改应用名。</p>
-</blockquote>
-<img data-src="https://i.loli.net/2020/04/22/TZzLONjeHJviCp5.png" style="zoom:50%;">
-</li>
-<li>
-<p>根据提示输入包名和版本号。</p>
-<img data-src="https://i.loli.net/2020/04/22/Q7nXMpqxhB5o8a3.png" style="zoom: 50%;">
-</li>
-<li>
-<p>点击左上角返回，Tasker 会将项目以 APK 格式导出到<code>内部储存/Tasker/factory/kids</code> 并安装。</p>
-</li>
-</ol>
-<h1 id="hou-ji">后记</h1>
-<p>界面如果有问题可以自行在 Tasker 的<code>场景</code>中修改。</p>
-<p>个人能力有限，做的比较粗糙，还请不吝赐教！</p>
-<h1 id="zhi-xie">致谢</h1>
-<p>感谢 <a href="https://github.com/daibor">daibor</a> 制作了这么棒的<a href="https://github.com/daibor/nonsense.fun">项目。</a></p>
-<p>感谢少数派的 @SoSo 在评论下分享的方法启发了这个工程。</p>
-]]></content>
-      <categories>
-        <category>笔记</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-        <tag>Tasker</tag>
-        <tag>Android</tag>
       </tags>
   </entry>
   <entry>
@@ -898,6 +796,108 @@ _   底线
       </categories>
       <tags>
         <tag>OpenWrt</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>博客折腾笔记④- 使用 Tasker 在 Android 上实现个人动态的发送</title>
+    <url>/posts/4394c3fa.html</url>
+    <content><![CDATA[<p><a href="https://jimlee2002.github.io/posts/2b426e0a.html">前情提要</a></p>
+<p>折腾了两天，我终于是实现在 Android 上使用 Tasker 向刚搭建好的个人动态系统发送内容了。</p>
+<h1 id="xiao-guo-zhan-shi">效果展示</h1>
+<p>这是一个在 Android 上向<a href="https://github.com/daibor/nonsense.fun">废话胶囊（b 言 b 语）</a>发送内容的简单 Tasker 工程。</p>
+<p>项目地址：<a href="https://github.com/jimlee2002/nonsense.fun_tasker">https://github.com/jimlee2002/nonsense.fun_tasker</a></p>
+<img data-src="https://i.loli.net/2020/04/22/Hy7kwJL8FDr6I5O.png" style="zoom: 50%;">
+<a id="more"></a>
+<h1 id="an-zhuang-pei-zhi">安装配置</h1>
+<h2 id="直接下载安装已经导出好的apk文件"><a class="header-anchor" href="#直接下载安装已经导出好的apk文件">¶</a> 直接下载安装已经导出好的 <a href="https://github.com/jimlee2002/nonsense.fun_tasker/releases">apk 文件</a></h2>
+<p>应用使用插件 <code>Tasker App Factory</code> 导出。</p>
+<p>注意，该应用<strong>需要 root 权限</strong>。</p>
+<h2 id="导入Tasker工程"><a class="header-anchor" href="#导入Tasker工程">¶</a> 导入 Tasker 工程</h2>
+<p><strong>注意：部分手机可能需要 Root 权限才能使用，该工程默认开启<code>使用Root运行</code>，可以自行到<code>场景/Main/发送/按下</code>的第 6 个和第 8 个任务里关掉该选项</strong>。</p>
+<p><img data-src="https://i.loli.net/2020/04/22/iaTO5gAQLjnufBZ.png" style="zoom: 50%;"><img data-src="https://i.loli.net/2020/04/22/SIJivZ5L4Na9Cu3.png" style="zoom: 50%;"></p>
+<p><img data-src="https://i.loli.net/2020/04/24/c1R3x9HEzyQiTpN.png" style="zoom:50%;"><img data-src="https://i.loli.net/2020/04/22/7BoIjaJL9h6ilf1.png" style="zoom: 50%;"></p>
+<hr>
+<ol>
+<li>
+<p><a href="https://github.com/jimlee2002/nonsense.fun_tasker/releases">下载</a><code>bb.prj.xml</code>，存入到手机任意你找得到的位置。</p>
+</li>
+<li>
+<p>下载安装 Tasker。</p>
+</li>
+<li>
+<p>进入主界面长按左下角的按钮，点击<code>导入项目</code>，在打开的界面中找到并打开刚才存入的 <code>bb.prj.xml。</code></p>
+<p><img data-src="https://i.loli.net/2020/04/22/mpwnk2ZWvMc6uSU.png" style="zoom: 50%;"><img data-src="https://i.loli.net/2020/04/22/3Zc2KIWVfBzhiDM.png" style="zoom: 50%;"></p>
+<blockquote>
+<p>提示：点击右下角的手机按钮可以快速回到内部储存空间目录</p>
+</blockquote>
+</li>
+<li>
+<p>完成后回到主界面，点击应用栏里图标长得和 Tasker 很像的 <code>Tasker Secondary</code>，打开界面。</p>
+<p><img data-src="https://i.loli.net/2020/04/22/Gju9BY64UsWlvTw.png" style="zoom: 50%;"><img data-src="https://i.loli.net/2020/04/22/Hy7kwJL8FDr6I5O.png" style="zoom: 50%;"></p>
+</li>
+<li>
+<p><strong>长按</strong>发送按钮，打开设置页面进行必要设置。</p>
+<img data-src="https://i.loli.net/2020/04/22/YM5CJ6vb4OIdemy.png" style="zoom: 50%;">
+<p><strong>Title：</strong> 这里是发送界面顶端的文字，请随意修改。</p>
+<p><strong>AppID、MasterKey：</strong> 网页打开 LeanCloud，在你的项目里点击<code>设置/应用Keys</code>，复制对应的密钥分别填入。</p>
+<p><img data-src="https://i.loli.net/2020/04/20/Kaxt5GOo3LRgMmy.png" alt=""></p>
+<p><strong>className：</strong> 一般是 <code>content</code>，只要你是按照<a href="https://sspai.com/post/60024">少数派的指南</a>来做的话。</p>
+<p><strong>–insecure：</strong> 是否在脚本命令末尾加上 <code>--insecue</code>。参数默认关闭，如果无法发送可以尝试打开这个选项试试。</p>
+<p><strong>完成后点击确认返回</strong>。</p>
+</li>
+</ol>
+<p>这样就配置完成了，请试试看吧！</p>
+<h1 id="tasker-gong-cheng-shi-yong-fang-fa">Tasker 工程使用方法</h1>
+<h2 id="通过-Tasker-Secondary-打开"><a class="header-anchor" href="#通过-Tasker-Secondary-打开">¶</a> 通过 Tasker Secondary 打开</h2>
+<img data-src="https://i.loli.net/2020/04/22/Gju9BY64UsWlvTw.png" style="zoom: 50%;">
+<h2 id="通过桌面小工具创建快捷方式打开"><a class="header-anchor" href="#通过桌面小工具创建快捷方式打开">¶</a> 通过桌面小工具创建快捷方式打开</h2>
+<ol>
+<li>
+<p>打开 Tasker，然后<strong>点击返回键</strong>回到主界面。</p>
+</li>
+<li>
+<p>在桌面上新建 Tasker 的桌面小部件 "任务"，在打开的界面选择 <code>Show UI</code>,</p>
+<p>在界面下方选择图标，然后点击左上角返回桌面。</p>
+<p><img data-src="https://i.loli.net/2020/04/22/QWRPd7IKmV3oXYj.png" style="zoom: 50%;"><img data-src="https://i.loli.net/2020/04/22/t5dlHRyUgDM7aKX.png" style="zoom: 50%;"></p>
+<p>完成，现在你应该能看到快捷方式了。</p>
+</li>
+</ol>
+<h2 id="自行导出为APK安装"><a class="header-anchor" href="#自行导出为APK安装">¶</a> 自行导出为 APK 安装</h2>
+<p>** 注意：你必须拥有手机的 Root 权限，并勾选<code>场景/Main/发送/按下</code>的第 6 个和第 8 个任务中的<code>使用Root运行</code>选项 **</p>
+<ol>
+<li>
+<p>Google Play 安装 <code>Tasker App Factory</code>。</p>
+</li>
+<li>
+<p>打开 Tasker，主界面左下方长按选择已经导入的项目，然后选择<code>导出\作为应用。</code></p>
+<img data-src="https://i.loli.net/2020/04/22/peARXFgoinvOJzx.png" style="zoom: 50%;">
+<blockquote>
+<p>提示：你可以通过点击<code>更名</code>重命名工程名称来修改应用名。</p>
+</blockquote>
+<img data-src="https://i.loli.net/2020/04/22/TZzLONjeHJviCp5.png" style="zoom:50%;">
+</li>
+<li>
+<p>根据提示输入包名和版本号。</p>
+<img data-src="https://i.loli.net/2020/04/22/Q7nXMpqxhB5o8a3.png" style="zoom: 50%;">
+</li>
+<li>
+<p>点击左上角返回，Tasker 会将项目以 APK 格式导出到<code>内部储存/Tasker/factory/kids</code> 并安装。</p>
+</li>
+</ol>
+<h1 id="hou-ji">后记</h1>
+<p>界面如果有问题可以自行在 Tasker 的<code>场景</code>中修改。</p>
+<p>个人能力有限，做的比较粗糙，还请不吝赐教！</p>
+<h1 id="zhi-xie">致谢</h1>
+<p>感谢 <a href="https://github.com/daibor">daibor</a> 制作了这么棒的<a href="https://github.com/daibor/nonsense.fun">项目。</a></p>
+<p>感谢少数派的 @SoSo 在评论下分享的方法启发了这个工程。</p>
+]]></content>
+      <categories>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>Tasker</tag>
+        <tag>Android</tag>
       </tags>
   </entry>
   <entry>
