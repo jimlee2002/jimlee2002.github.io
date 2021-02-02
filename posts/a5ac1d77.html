@@ -24,7 +24,7 @@
 
 <script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"jimlee2002.github.io","root":"/","images":"/images","scheme":"Gemini","version":"8.2.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+    var CONFIG = {"hostname":"jimlee2002.github.io","root":"/","images":"/images","scheme":"Gemini","version":"8.2.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
 <meta name="description" content="首次编译   依赖安装   12sudo apt-get updatesudo apt-get -y install build-essential asciidoc binutils bzip2 gawk gettext git libncurses5-dev libz-dev patch python3 python2.7 unzip zlib1g-dev lib32gcc1 libc6-de">
 <meta property="og:type" content="article">
@@ -191,7 +191,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">首次编译</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">再次编译</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0"><span class="nav-number">2.1.</span> <span class="nav-text"> 更新</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E6%B8%85%E7%90%86"><span class="nav-number">2.2.</span> <span class="nav-text"> 文件清理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E8%AF%91"><span class="nav-number">2.3.</span> <span class="nav-text"> 编译</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">进阶操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">致谢</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">参考链接</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#shou-ci-bian-yi"><span class="nav-number">1.</span> <span class="nav-text">首次编译</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#zai-ci-bian-yi"><span class="nav-number">2.</span> <span class="nav-text">再次编译</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#geng-xin"><span class="nav-number">2.1.</span> <span class="nav-text"> 更新</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#wen-jian-qing-li"><span class="nav-number">2.2.</span> <span class="nav-text"> 文件清理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bian-yi"><span class="nav-number">2.3.</span> <span class="nav-text"> 编译</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#jin-jie-cao-zuo"><span class="nav-number">3.</span> <span class="nav-text">进阶操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#zhi-xie"><span class="nav-number">4.</span> <span class="nav-text">致谢</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#can-kao-lian-jie"><span class="nav-number">5.</span> <span class="nav-text">参考链接</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -340,7 +340,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h1>首次编译</h1>
+        <h1 id="shou-ci-bian-yi">首次编译</h1>
 <ul>
 <li>
 <p>依赖安装</p>
@@ -386,14 +386,14 @@
 </blockquote>
 </li>
 </ul>
-<h1>再次编译</h1>
+<h1 id="zai-ci-bian-yi">再次编译</h1>
 <ul>
 <li>
 <p>进入目录</p>
 <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> lede</span><br></pre></td></tr></tbody></table></figure>
 </li>
 </ul>
-<h2 id="更新"><a class="header-anchor" href="#更新">¶</a> 更新</h2>
+<h2 id="geng-xin"><a class="header-anchor" href="#更新">¶</a> 更新</h2>
 <blockquote>
 <p>短期内再次编译可忽略</p>
 </blockquote>
@@ -414,7 +414,7 @@
 </blockquote>
 </li>
 </ul>
-<h2 id="文件清理"><a class="header-anchor" href="#文件清理">¶</a> 文件清理</h2>
+<h2 id="wen-jian-qing-li"><a class="header-anchor" href="#文件清理">¶</a> 文件清理</h2>
 <ul>
 <li>
 <p>清除旧的编译产物（可选）</p>
@@ -459,7 +459,7 @@
 </blockquote>
 </li>
 </ul>
-<h2 id="编译"><a class="header-anchor" href="#编译">¶</a> 编译</h2>
+<h2 id="bian-yi"><a class="header-anchor" href="#编译">¶</a> 编译</h2>
 <ul>
 <li>
 <p>调整 Open­Wrt 系统组件</p>
@@ -483,7 +483,7 @@
 <p>编译好的固件存放在 <code>lede/bin/targets/</code> 对应架构的文件下，名称为 <code>openwrt-xxxx-xxxx-squashfs-sysupgrade.bin</code></p>
 </li>
 </ul>
-<h1>进阶操作</h1>
+<h1 id="jin-jie-cao-zuo">进阶操作</h1>
 <ul>
 <li>
 <p>使用 Github Action 进行云编译</p>
@@ -494,10 +494,10 @@
 <p>在 WSL 上进行编译</p>
 </li>
 </ul>
-<h1>致谢</h1>
+<h1 id="zhi-xie">致谢</h1>
 <p><a target="_blank" rel="noopener" href="https://p3terx.com/">@P3TERX</a>，博客里的文章对我有很大帮助，本文自他的博客总结而来，亦有很大一部分文字直接复制自它的博客。他亦是上文所提到的 Github Action 云编译 OpenWrt 模板的作者。</p>
 <p><a target="_blank" rel="noopener" href="https://www.right.com.cn/forum">恩山论坛</a>，我路由相关知识的启蒙点，感谢各路大神的经验分享。</p>
-<h1>参考链接</h1>
+<h1 id="can-kao-lian-jie">参考链接</h1>
 <blockquote>
 <p><a target="_blank" rel="noopener" href="https://github.com/coolsnowwolf/lede">https://github.com/coolsnowwolf/lede</a></p>
 <p><a target="_blank" rel="noopener" href="https://p3terx.com/archives/openwrt-compilation-steps-and-commands.html">https://p3terx.com/archives/openwrt-compilation-steps-and-commands.html</a></p>
@@ -516,10 +516,10 @@
   <div class="popular-posts-header">相关文章</div>
   <ul class="popular-posts">
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\posts\4d028789.html" rel="bookmark">使用 WSL 交叉编译 MentoHUST</a></div>
+      <div class="popular-posts-title"><a href="\posts\6f5f0d34.html" rel="bookmark">MentoHUST 在 OpenWrt 上的配置</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\posts\6f5f0d34.html" rel="bookmark">MentoHUST 在 OpenWrt 上的配置</a></div>
+      <div class="popular-posts-title"><a href="\posts\4d028789.html" rel="bookmark">使用 WSL 交叉编译 MentoHUST</a></div>
     </li>
     <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="\posts\3a5c40a1.html" rel="bookmark">在 WSL2 上进行 OpenWrt 的编译</a></div>
@@ -622,7 +622,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.2.1/source/js/utils.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.2.1/source/js/motion.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.2.1/source/js/next-boot.js"></script><script>
 var pjax = new Pjax({
   selectors: [
     'head title',
@@ -658,7 +658,7 @@ document.addEventListener('pjax:success', () => {
 
 
   
-<script src="/js/local-search.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.2.1/source/js/local-search.js"></script>
 
 
 

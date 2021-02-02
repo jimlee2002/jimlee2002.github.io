@@ -24,7 +24,7 @@
 
 <script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"jimlee2002.github.io","root":"/","images":"/images","scheme":"Gemini","version":"8.2.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+    var CONFIG = {"hostname":"jimlee2002.github.io","root":"/","images":"/images","scheme":"Gemini","version":"8.2.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
 <meta property="og:type" content="website">
 <meta property="og:title" content="Jim&#39;s Blog">
@@ -89,6 +89,7 @@
   </style>
 </noscript>
 
+<link rel="alternate" href="/atom.xml" title="Jim's Blog" type="application/atom+xml">
 <style>mjx-container[jax="SVG"] {
   direction: ltr;
 }
@@ -206,8 +207,7 @@ mjx-container[display="true"] {
 mjx-container[display="true"] + br {
   display: none;
 }
-</style><link rel="alternate" href="/atom.xml" title="Jim's Blog" type="application/atom+xml">
-</head>
+</style></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
   <div class="headband"></div>
@@ -439,7 +439,7 @@ mjx-container[display="true"] + br {
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>896</span>
+      <span>916</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -457,7 +457,7 @@ mjx-container[display="true"] + br {
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1>准备工作</h1>
+          <h1 id="zhun-bei-gong-zuo">准备工作</h1>
 <ul>
 <li>一台刷好 OpenWrt 的路由器</li>
 <li>编译好的对应路由器架构的 <code>mentohust</code> 可执行文件 </li>
@@ -672,9 +672,9 @@ mjx-container[display="true"] + br {
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1>准备工作</h1>
+          <h1 id="zhun-bei-gong-zuo">准备工作</h1>
 <p>以下所以操作都基于 <code>/home</code> 进行，用户名为 <code>jim</code>。</p>
-<h2 id="安装相关依赖"><a class="header-anchor" href="#安装相关依赖">¶</a> 安装相关依赖</h2>
+<h2 id="an-zhuang-xiang-guan-yi-lai"><a class="header-anchor" href="#安装相关依赖">¶</a> 安装相关依赖</h2>
 <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install build-essential bison flex zlib1g-dev libncurses5-dev subversion quilt intltool ruby fastjar unzip gawk autogen autopoint ccache gettext libssl-dev xsltproc zip git</span><br></pre></td></tr></tbody></table></figure>
           <!--noindex-->
             <div class="post-button">
@@ -767,14 +767,14 @@ mjx-container[display="true"] + br {
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>2.7k</span>
+      <span>3.1k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>5 分钟</span>
+      <span>6 分钟</span>
     </span>
 </div>
 
@@ -785,7 +785,7 @@ mjx-container[display="true"] + br {
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1>安装 WSL</h1>
+          <h1 id="an-zhuang-wsl">安装 WSL</h1>
 <ul>
 <li>从 Microsoft Store 安装 WSL：略</li>
 <li>使用 LxRunOffline 安装 WSL：参考 <a target="_blank" rel="noopener" href="https://p3terx.com/archives/manage-wsl-with-lxrunoffline.html">LxRunOffline</a> 和 @P3TERX 的博客<a target="_blank" rel="noopener" href="https://p3terx.com/archives/manage-wsl-with-lxrunoffline.html">《WSL 自定义安装目录、备份转移、设置默认用户 - LxRunOffline 使用教程》</a>。</li>
@@ -893,7 +893,7 @@ mjx-container[display="true"] + br {
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1>首次编译</h1>
+          <h1 id="shou-ci-bian-yi">首次编译</h1>
 <ul>
 <li>
 <p>依赖安装</p>
@@ -1013,7 +1013,7 @@ mjx-container[display="true"] + br {
     <div class="post-body" itemprop="articleBody">
           <p><a href="https://jimlee2002.github.io/posts/2b426e0a.html">前情提要</a></p>
 <p>折腾了两天，我终于是实现在 Android 上使用 Tasker 向刚搭建好的个人动态系统发送内容了。</p>
-<h1>效果展示</h1>
+<h1 id="xiao-guo-zhan-shi">效果展示</h1>
 <p>这是一个在 Android 上向<a target="_blank" rel="noopener" href="https://github.com/daibor/nonsense.fun">废话胶囊（b 言 b 语）</a>发送内容的简单 Tasker 工程。</p>
 <p>项目地址：<a target="_blank" rel="noopener" href="https://github.com/jimlee2002/nonsense.fun_tasker">https://github.com/jimlee2002/nonsense.fun_tasker</a></p>
 <img src="https://i.loli.net/2020/04/22/Hy7kwJL8FDr6I5O.png" style="zoom: 50%;">
@@ -1222,14 +1222,14 @@ mjx-container[display="true"] + br {
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>2.2k</span>
+      <span>2.6k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>4 分钟</span>
+      <span>5 分钟</span>
     </span>
 </div>
 
@@ -1240,7 +1240,7 @@ mjx-container[display="true"] + br {
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1>文章永久链接唯一化</h1>
+          <h1 id="wen-zhang-yong-jiu-lian-jie-wei-yi-hua">文章永久链接唯一化</h1>
 <p>为解决 hexo 默认设置下改变源文件名或使用中文标题带来的文章链接问题，这里使用 <code>hexo-abbrlink</code> 插件来解决问题</p>
 <figure class="highlight nginx"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">npm</span> install hexo-abbrlink --save</span><br></pre></td></tr></tbody></table></figure>
           <!--noindex-->
@@ -1334,7 +1334,7 @@ mjx-container[display="true"] + br {
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>5k</span>
+      <span>5.1k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -1466,8 +1466,8 @@ mjx-container[display="true"] + br {
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1>工具介绍</h1>
-<h2 id="优雅的Markdown编辑器-——-Typora"><a class="header-anchor" href="#优雅的Markdown编辑器-——-Typora">¶</a> 优雅的 Markdown 编辑器 —— Typora</h2>
+          <h1 id="gong-ju-jie-shao">工具介绍</h1>
+<h2 id="you-ya-de-markdown-bian-ji-qi-typora"><a class="header-anchor" href="#优雅的Markdown编辑器-——-Typora">¶</a> 优雅的 Markdown 编辑器 —— Typora</h2>
 <p><a target="_blank" rel="noopener" href="https://www.typora.io/">官网</a></p>
 <p>简约、舒适、优雅，这是我对它的第一眼评价。</p>
 <p>完善的功能、所见即所得、自定义主题、拓展语法支持、良好的图片插入管理、数学支持、专注模式、打字机模式……</p>
@@ -1553,7 +1553,7 @@ mjx-container[display="true"] + br {
   <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.2.1/source/js/utils.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.2.1/source/js/motion.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.2.1/source/js/next-boot.js"></script><script>
 var pjax = new Pjax({
   selectors: [
     'head title',
@@ -1589,7 +1589,7 @@ document.addEventListener('pjax:success', () => {
 
 
   
-<script src="/js/local-search.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.2.1/source/js/local-search.js"></script>
 
 
 

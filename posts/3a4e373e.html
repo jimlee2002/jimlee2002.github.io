@@ -24,7 +24,7 @@
 
 <script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"jimlee2002.github.io","root":"/","images":"/images","scheme":"Gemini","version":"8.2.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+    var CONFIG = {"hostname":"jimlee2002.github.io","root":"/","images":"/images","scheme":"Gemini","version":"8.2.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
 <meta name="description" content="文章永久链接唯一化 为解决 hexo 默认设置下改变源文件名或使用中文标题带来的文章链接问题，这里使用 hexo-abbrlink 插件来解决问题 1npm install hexo-abbrlink --save">
 <meta property="og:type" content="article">
@@ -191,7 +191,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">文章永久链接唯一化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">新设备上恢复博客备份的问题解决</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#sudo-npm-install-%E5%A4%B1%E8%B4%A5"><span class="nav-number">2.1.</span> <span class="nav-text">sudo npm install 失败</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hexo-b%E6%8A%A5%E9%94%99"><span class="nav-number">2.2.</span> <span class="nav-text">hexo b 报错</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">Hexo 文章加密</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">3.1.</span> <span class="nav-text"> 安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8"><span class="nav-number">3.2.</span> <span class="nav-text"> 使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9B%E9%98%B6"><span class="nav-number">3.3.</span> <span class="nav-text"> 进阶</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%A8%E5%B1%80%E9%85%8D%E7%BD%AE"><span class="nav-number">3.3.1.</span> <span class="nav-text"> 全局配置</span></a></li></ol></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#wen-zhang-yong-jiu-lian-jie-wei-yi-hua"><span class="nav-number">1.</span> <span class="nav-text">文章永久链接唯一化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#xin-she-bei-shang-hui-fu-bo-ke-bei-fen-de-wen-ti-jie-jue"><span class="nav-number">2.</span> <span class="nav-text">新设备上恢复博客备份的问题解决</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#code-sudo-npm-install-code-shi-bai"><span class="nav-number">2.1.</span> <span class="nav-text">sudo npm install 失败</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#code-hexo-b-code-bao-cuo"><span class="nav-number">2.2.</span> <span class="nav-text">hexo b 报错</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#hexo-wen-zhang-jia-mi"><span class="nav-number">3.</span> <span class="nav-text">Hexo 文章加密</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#an-zhuang"><span class="nav-number">3.1.</span> <span class="nav-text"> 安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#shi-yong"><span class="nav-number">3.2.</span> <span class="nav-text"> 使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jin-jie"><span class="nav-number">3.3.</span> <span class="nav-text"> 进阶</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#quan-ju-pei-zhi"><span class="nav-number">3.3.1.</span> <span class="nav-text"> 全局配置</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -328,14 +328,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>2.2k</span>
+      <span>2.6k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>4 分钟</span>
+      <span>5 分钟</span>
     </span>
 </div>
 
@@ -346,7 +346,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h1>文章永久链接唯一化</h1>
+        <h1 id="wen-zhang-yong-jiu-lian-jie-wei-yi-hua">文章永久链接唯一化</h1>
 <p>为解决 hexo 默认设置下改变源文件名或使用中文标题带来的文章链接问题，这里使用 <code>hexo-abbrlink</code> 插件来解决问题</p>
 <figure class="highlight nginx"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">npm</span> install hexo-abbrlink --save</span><br></pre></td></tr></tbody></table></figure>
 <a id="more"></a>
@@ -363,10 +363,10 @@
 </blockquote>
 <p>搜索引擎认为对于一般的中小型站点，3 层足够承受所有的内容了，所以蜘蛛经常抓取的内容是前三层，而超过三层的内容蜘蛛认为那些内容并不重要，所以不经常爬取。出于这个原因所以 permalink 后面跟着的最好不要超过 2 个斜杠。[^]</p>
 </blockquote>
-<h1>新设备上恢复博客备份的问题解决</h1>
-<h2 id="sudo-npm-install-失败"><a class="header-anchor" href="#sudo-npm-install-失败">¶</a><code>sudo npm install </code>失败</h2>
+<h1 id="xin-she-bei-shang-hui-fu-bo-ke-bei-fen-de-wen-ti-jie-jue">新设备上恢复博客备份的问题解决</h1>
+<h2 id="code-sudo-npm-install-code-shi-bai"><a class="header-anchor" href="#sudo-npm-install-失败">¶</a><code>sudo npm install </code>失败</h2>
 <p>解决方案：不要用 <code>sudo</code>, 直接 <code>npm install</code> 就好</p>
-<h2 id="hexo-b报错"><a class="header-anchor" href="#hexo-b报错">¶</a><code>hexo b</code> 报错</h2>
+<h2 id="code-hexo-b-code-bao-cuo"><a class="header-anchor" href="#hexo-b报错">¶</a><code>hexo b</code> 报错</h2>
 <p>在新装的 UTG 上恢复 Blog，最后执行 <code>hexo b</code> 的时候报错了</p>
 <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fatal: <span class="string">'github'</span> does not appear to be a git repository</span><br><span class="line">fatal: 无法读取远程仓库。</span><br><span class="line"></span><br><span class="line">请确认您有正确的访问权限并且仓库存在。</span><br></pre></td></tr></tbody></table></figure>
 <p>翻了翻插件的 issuse，看到了相似的问题<a target="_blank" rel="noopener" href="https://github.com/coneycode/hexo-git-backup/issues/20">#20</a></p>
@@ -374,17 +374,17 @@
 <figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">backup:</span><br><span class="line">  type: git</span><br><span class="line">  repository:</span><br><span class="line">    origin: git@github:bx_reader/bx-reader-api.git,master</span><br></pre></td></tr></tbody></table></figure>
 <p>这里顺便把 git 的 https 连接改成了 git 连接，这样就不用每次都输入账号密码了</p>
 <p>再次尝试，问题解决</p>
-<h1>Hexo 文章加密</h1>
+<h1 id="hexo-wen-zhang-jia-mi">Hexo 文章加密</h1>
 <p>使用插件 <a target="_blank" rel="noopener" href="https://github.com/MikeCoder/hexo-blog-encrypt">hexo-blog-encrypt</a></p>
-<h2 id="安装"><a class="header-anchor" href="#安装">¶</a> 安装</h2>
+<h2 id="an-zhuang"><a class="header-anchor" href="#安装">¶</a> 安装</h2>
 <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save hexo-blog-encrypt</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="使用"><a class="header-anchor" href="#使用">¶</a> 使用</h2>
+<h2 id="shi-yong"><a class="header-anchor" href="#使用">¶</a> 使用</h2>
 <p>在文章信息头添加 <code>password</code> 字段</p>
 <figure class="highlight yaml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">Hello</span> <span class="string">World</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2016-03-30 21:18:02</span></span><br><span class="line"><span class="attr">password:</span> <span class="string">mikemessi</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></tbody></table></figure>
 <p>也可以在文章信息头单独自定义密码输入交互信息</p>
 <figure class="highlight yaml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">Hello</span> <span class="string">World</span></span><br><span class="line"><span class="attr">tags:</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">作为日记加密</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2016-03-30 21:12:21</span></span><br><span class="line"><span class="attr">password:</span> <span class="string">mikemessi</span></span><br><span class="line"><span class="attr">abstract:</span> <span class="string">有东西被加密了,</span> <span class="string">请输入密码查看.</span></span><br><span class="line"><span class="attr">message:</span> <span class="string">您好,</span> <span class="string">这里需要密码.</span></span><br><span class="line"><span class="attr">wrong_pass_message:</span> <span class="string">抱歉,</span> <span class="string">这个密码看着不太对,</span> <span class="string">请再试试.</span></span><br><span class="line"><span class="attr">wrong_hash_message:</span> <span class="string">抱歉,</span> <span class="string">这个文章不能被校验,</span> <span class="string">不过您还是能看看解密后的内容.</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></tbody></table></figure>
-<h2 id="进阶"><a class="header-anchor" href="#进阶">¶</a> 进阶</h2>
-<h3 id="全局配置"><a class="header-anchor" href="#全局配置">¶</a> 全局配置</h3>
+<h2 id="jin-jie"><a class="header-anchor" href="#进阶">¶</a> 进阶</h2>
+<h3 id="quan-ju-pei-zhi"><a class="header-anchor" href="#全局配置">¶</a> 全局配置</h3>
 <p>在站点根目录下的<code>_config.yml</code> 里可以添加以下内容进行全局配置</p>
 <figure class="highlight yaml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Security</span></span><br><span class="line"><span class="attr">encrypt:</span> <span class="comment"># hexo-blog-encrypt</span></span><br><span class="line">  <span class="attr">abstract:</span> <span class="string">有东西被加密了,</span> <span class="string">请输入密码查看.</span></span><br><span class="line">  <span class="attr">message:</span> <span class="string">您好,</span> <span class="string">这里需要密码.</span></span><br><span class="line">  <span class="attr">tags:</span></span><br><span class="line">  <span class="bullet">-</span> {<span class="attr">name:</span> <span class="string">tagName</span>, <span class="attr">password:</span> <span class="string">密码A</span>}</span><br><span class="line">  <span class="bullet">-</span> {<span class="attr">name:</span> <span class="string">tagName</span>, <span class="attr">password:</span> <span class="string">密码B</span>}</span><br><span class="line">  <span class="attr">template:</span> <span class="string">&lt;div</span> <span class="string">id="hexo-blog-encrypt"</span> <span class="string">data-wpm="{{hbeWrongPassMessage}}"</span> <span class="string">data-whm="{{hbeWrongHashMessage}}"&gt;&lt;div</span> <span class="string">class="hbe-input-container"&gt;&lt;input</span> <span class="string">type="password"</span> <span class="string">id="hbePass"</span> <span class="string">placeholder="{{hbeMessage}}"</span> <span class="string">/&gt;&lt;label&gt;{{hbeMessage}}&lt;/label&gt;&lt;div</span> <span class="string">class="bottom-line"&gt;&lt;/div&gt;&lt;/div&gt;&lt;script</span> <span class="string">id="hbeData"</span> <span class="string">type="hbeData"</span> <span class="string">data-hmacdigest="{{hbeHmacDigest}}"&gt;{{hbeEncryptedData}}&lt;/script&gt;&lt;/div&gt;</span></span><br><span class="line">  <span class="attr">wrong_pass_message:</span> <span class="string">抱歉,</span> <span class="string">这个密码看着不太对,</span> <span class="string">请再试试.</span></span><br><span class="line">  <span class="attr">wrong_hash_message:</span> <span class="string">抱歉,</span> <span class="string">这个文章不能被校验,</span> <span class="string">不过您还是能看看解密后的内容.</span></span><br></pre></td></tr></tbody></table></figure>
 <p>配置优先级是</p>
@@ -402,10 +402,10 @@
       <div class="popular-posts-title"><a href="\posts\2b426e0a.html" rel="bookmark">博客折腾笔记③- 搭建个人动态页面 iM</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\posts\4394c3fa.html" rel="bookmark">博客折腾笔记④- 使用 Tasker 在 Android 上实现个人动态的发送</a></div>
+      <div class="popular-posts-title"><a href="\posts\39aaddee.html" rel="bookmark">配置 Typora & PicGo 写 Hexo 博客</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\posts\39aaddee.html" rel="bookmark">配置 Typora & PicGo 写 Hexo 博客</a></div>
+      <div class="popular-posts-title"><a href="\posts\4394c3fa.html" rel="bookmark">博客折腾笔记④- 使用 Tasker 在 Android 上实现个人动态的发送</a></div>
     </li>
     <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="\posts\c54c0f26.html" rel="bookmark">博客折腾笔记①-hexo 部署与自定义</a></div>
@@ -508,7 +508,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.2.1/source/js/utils.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.2.1/source/js/motion.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.2.1/source/js/next-boot.js"></script><script>
 var pjax = new Pjax({
   selectors: [
     'head title',
@@ -544,7 +544,7 @@ document.addEventListener('pjax:success', () => {
 
 
   
-<script src="/js/local-search.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.2.1/source/js/local-search.js"></script>
 
 
 

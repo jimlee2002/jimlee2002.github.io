@@ -24,7 +24,7 @@
 
 <script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"jimlee2002.github.io","root":"/","images":"/images","scheme":"Gemini","version":"8.2.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+    var CONFIG = {"hostname":"jimlee2002.github.io","root":"/","images":"/images","scheme":"Gemini","version":"8.2.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
 <meta name="description" content="写在前面：本文大量复制和借鉴了无忧启动论坛 @ddsony 的教程内容，没有他的帖子就没有我的这篇折腾笔记，十分感谢他帖子的详细指引！  手上有一块闲置 SSD（建兴 T9，128G），想将它利用上来做一块多合一移动系统盘方便随身应急使用。 上网冲浪偶然发现还有系统 All in One 移动硬盘的玩法，于是打算折腾一下">
 <meta property="og:type" content="article">
@@ -247,7 +247,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">实现目标</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">制作过程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E8%B5%84%E6%96%99"><span class="nav-number">2.1.</span> <span class="nav-text"> 准备资料</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">安装流程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%84%E7%90%86%E7%A1%AC%E7%9B%98%E5%88%86%E5%8C%BA-%E5%AE%89%E8%A3%85PE"><span class="nav-number">3.1.</span> <span class="nav-text"> 处理硬盘分区 &amp; 安装 PE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WTG%E5%AE%89%E8%A3%85"><span class="nav-number">3.2.</span> <span class="nav-text">WTG 安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux%E7%9A%84%E5%AE%89%E8%A3%85%EF%BC%88Ubuntu%E3%80%81Deepin%E7%AD%89Debian%E7%B3%BB%E5%8F%91%E8%A1%8C%E7%89%88%EF%BC%89"><span class="nav-number">3.3.</span> <span class="nav-text">Linux 的安装（Ubuntu、Deepin 等 Debian 系发行版）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E7%B3%BB%E7%BB%9F%E9%95%9C%E5%83%8F%EF%BC%88%E4%BB%A5Deepin%E4%B8%BA%E4%BE%8B%EF%BC%89"><span class="nav-number">3.3.1.</span> <span class="nav-text"> 安装系统镜像（以 Deepin 为例）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E6%B7%B1%E5%BA%A6%E9%9A%90%E8%97%8F"><span class="nav-number">3.3.2.</span> <span class="nav-text"> 设置深度隐藏</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">后记</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%87%E7%BA%A7Ubuntu%E5%86%85%E6%A0%B8%E5%90%8E%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="nav-number">4.1.</span> <span class="nav-text"> 升级 Ubuntu 内核后的操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BE%8E%E5%8C%96%E5%90%AF%E5%8A%A8%E9%A1%B9"><span class="nav-number">4.2.</span> <span class="nav-text"> 美化启动项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VMWare%E5%8A%A0%E8%BD%BD"><span class="nav-number">4.3.</span> <span class="nav-text">VMWare 加载</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#shi-xian-mu-biao"><span class="nav-number">1.</span> <span class="nav-text">实现目标</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#zhi-zuo-guo-cheng"><span class="nav-number">2.</span> <span class="nav-text">制作过程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#zhun-bei-zi-liao"><span class="nav-number">2.1.</span> <span class="nav-text"> 准备资料</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#an-zhuang-liu-cheng"><span class="nav-number">3.</span> <span class="nav-text">安装流程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#chu-li-ying-pan-fen-qu-amp-an-zhuang-pe"><span class="nav-number">3.1.</span> <span class="nav-text"> 处理硬盘分区 &amp; 安装 PE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#wtg-an-zhuang"><span class="nav-number">3.2.</span> <span class="nav-text">WTG 安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#linux-de-an-zhuang-ubuntu-deepin-deng-debian-xi-fa-xing-ban"><span class="nav-number">3.3.</span> <span class="nav-text">Linux 的安装（Ubuntu、Deepin 等 Debian 系发行版）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#an-zhuang-xi-tong-jing-xiang-yi-deepin-wei-li"><span class="nav-number">3.3.1.</span> <span class="nav-text"> 安装系统镜像（以 Deepin 为例）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#she-zhi-shen-du-yin-cang"><span class="nav-number">3.3.2.</span> <span class="nav-text"> 设置深度隐藏</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#hou-ji"><span class="nav-number">4.</span> <span class="nav-text">后记</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#sheng-ji-ubuntu-nei-he-hou-de-cao-zuo"><span class="nav-number">4.1.</span> <span class="nav-text"> 升级 Ubuntu 内核后的操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mei-hua-qi-dong-xiang"><span class="nav-number">4.2.</span> <span class="nav-text"> 美化启动项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vm-ware-jia-zai"><span class="nav-number">4.3.</span> <span class="nav-text">VMWare 加载</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -384,7 +384,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>5k</span>
+      <span>5.1k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -408,7 +408,7 @@
 <p>手上有一块闲置 SSD（建兴 T9，128G），想将它利用上来做一块多合一移动系统盘方便随身应急使用。</p>
 <p>上网冲浪偶然发现还有系统 All in One 移动硬盘的玩法，于是打算折腾一下</p>
 <a id="more"></a>
-<h1>实现目标</h1>
+<h1 id="shi-xian-mu-biao">实现目标</h1>
 <ol>
 <li>同时兼容 UEFI 和 Legacy 启动</li>
 <li>隐藏系统分区和启动分区，可以当作普通移动硬盘使用</li>
@@ -416,8 +416,8 @@
 <li>Linux（这里使用 Ubuntu）</li>
 <li>WIN PE（这里使用 <a target="_blank" rel="noopener" href="http://bbs.wuyou.net/forum.php?mod=viewthread&amp;tid=349965&amp;extra=page%3D1">chiannet 制作的 USBOS V3</a>）</li>
 </ol>
-<h1>制作过程</h1>
-<h2 id="准备资料"><a class="header-anchor" href="#准备资料">¶</a> 准备资料</h2>
+<h1 id="zhi-zuo-guo-cheng">制作过程</h1>
+<h2 id="zhun-bei-zi-liao"><a class="header-anchor" href="#准备资料">¶</a> 准备资料</h2>
 <p>一个移动硬盘 / U 盘（固态 U 盘或者 WTG 认证 U 盘），用来安装</p>
 <p>另一个空白 U 盘，大小最好 4G 以上，用作装 Linux 的启动盘</p>
 <p>我整理的<a target="_blank" rel="noopener" href="http://www.filedropper.com/200326wtg">资料包</a></p>
@@ -429,8 +429,8 @@
 <p><a target="_blank" rel="noopener" href="http://bbs.wuyou.net/forum.php?mod=viewthread&amp;tid=330493&amp;extra=page%3D1">MBROSTool</a> 本文主要工具</p>
 <p><a target="_blank" rel="noopener" href="https://msfn.org/board/topic/149612-winntsetup-v40/">WinNTSetup</a> 安装 WTG 用</p>
 <p><a target="_blank" rel="noopener" href="https://china.paragon-software.com/home-windows/extfs-for-windows-download">ExtFS for Windows</a> 在 windows 下读写 ext4 的分区，10 天免费试用，到期后限制向 Ext4 分区读写的性能。</p>
-<h1>安装流程</h1>
-<h2 id="处理硬盘分区-安装PE"><a class="header-anchor" href="#处理硬盘分区-安装PE">¶</a> 处理硬盘分区 &amp; 安装 PE</h2>
+<h1 id="an-zhuang-liu-cheng">安装流程</h1>
+<h2 id="chu-li-ying-pan-fen-qu-amp-an-zhuang-pe"><a class="header-anchor" href="#处理硬盘分区-安装PE">¶</a> 处理硬盘分区 &amp; 安装 PE</h2>
 <ol>
 <li>连接移动硬盘，打开 MBROSTool，在<code>选项</code>中把<code>显示所有磁盘</code>打勾</li>
 </ol>
@@ -468,7 +468,7 @@
 <blockquote>
 <p>删掉子盘 <code>/udm/pic/bubble.png</code> 可以关闭掉 MBR 引导时菜单的泡泡动画</p>
 </blockquote>
-<h2 id="WTG安装"><a class="header-anchor" href="#WTG安装">¶</a>WTG 安装</h2>
+<h2 id="wtg-an-zhuang"><a class="header-anchor" href="#WTG安装">¶</a>WTG 安装</h2>
 <ol>
 <li>回到主界面，打开<code>高级</code> -<code>BootICE</code> 按下图操作</li>
 </ol>
@@ -522,8 +522,8 @@
 挂载后软件界面右键该分区，菜单选择<code>快启处理</code>。生成完毕后，WTG 就算装好了。</p>
 <p><img data-src="https://i.loli.net/2020/03/22/7siFg6tXCfV3hWR.jpg" alt=""></p>
 <p><img data-src="https://i.loli.net/2020/03/22/TWyQAiCR69jhakY.jpg" alt=""></p>
-<h2 id="Linux的安装（Ubuntu、Deepin等Debian系发行版）"><a class="header-anchor" href="#Linux的安装（Ubuntu、Deepin等Debian系发行版）">¶</a>Linux 的安装（Ubuntu、Deepin 等 Debian 系发行版）</h2>
-<h3 id="安装系统镜像（以Deepin为例）"><a class="header-anchor" href="#安装系统镜像（以Deepin为例）">¶</a> 安装系统镜像（以 Deepin 为例）</h3>
+<h2 id="linux-de-an-zhuang-ubuntu-deepin-deng-debian-xi-fa-xing-ban"><a class="header-anchor" href="#Linux的安装（Ubuntu、Deepin等Debian系发行版）">¶</a>Linux 的安装（Ubuntu、Deepin 等 Debian 系发行版）</h2>
+<h3 id="an-zhuang-xi-tong-jing-xiang-yi-deepin-wei-li"><a class="header-anchor" href="#安装系统镜像（以Deepin为例）">¶</a> 安装系统镜像（以 Deepin 为例）</h3>
 <ol>
 <li>
 <p>保险起见，再备份一次 MOS</p>
@@ -598,7 +598,7 @@
 </ul>
 </li>
 </ol>
-<h3 id="设置深度隐藏"><a class="header-anchor" href="#设置深度隐藏">¶</a> 设置深度隐藏</h3>
+<h3 id="she-zhi-shen-du-yin-cang"><a class="header-anchor" href="#设置深度隐藏">¶</a> 设置深度隐藏</h3>
 <ol>
 <li>
 <p>重启电脑，用 MBR 或 UEFI 引导移动硬盘进入 UDm 菜单，然后尝试进入安装好的 Linux。</p>
@@ -647,8 +647,8 @@
 <li>该方法仅在 Ubuntu 19.10 上测试成功，其他 Debian 系请自行测试，非 Debian 系可以参考一下上面的总结和资料包里的 <code>UDM对linux的支持.txt</code>。Arch 系发行版可以参考下<a target="_blank" rel="noopener" href="https://wiki.archlinux.org/index.php/Mkinitcpio_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">这篇文档</a>来修改</li>
 </ul>
 </blockquote>
-<h1>后记</h1>
-<h2 id="升级Ubuntu内核后的操作"><a class="header-anchor" href="#升级Ubuntu内核后的操作">¶</a> 升级 Ubuntu 内核后的操作</h2>
+<h1 id="hou-ji">后记</h1>
+<h2 id="sheng-ji-ubuntu-nei-he-hou-de-cao-zuo"><a class="header-anchor" href="#升级Ubuntu内核后的操作">¶</a> 升级 Ubuntu 内核后的操作</h2>
 <p>先进行升级</p>
 <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo upgrade</span><br></pre></td></tr></tbody></table></figure>
 <p>提示 linux 的内核有更新，可以在更新的时候记一下新内核的版本号</p>
@@ -657,7 +657,7 @@
 <p>更新内核时如果没有留意版本号，可以打开 <code>/boot/grub/grub.cfg</code> 参照安装时的步骤找找</p>
 <p>知道新内核版本号后打开根目录下的 <code>menu.lst</code>、<code>menu0.lst</code> 以及 <code>/efi/mbrosefi_qk.menu.cfg</code>，把里面旧的版本号全部查找替换为新的版本号</p>
 <p>保存，重启查看效果</p>
-<h2 id="美化启动项"><a class="header-anchor" href="#美化启动项">¶</a> 美化启动项</h2>
+<h2 id="mei-hua-qi-dong-xiang"><a class="header-anchor" href="#美化启动项">¶</a> 美化启动项</h2>
 <p>先读写挂载子盘（参考 安装流程 - 处理硬盘分区）</p>
 <p>这里只展示一些我作的修改，详细的美化指南请看工具内的补充帮助</p>
 <ul>
@@ -669,7 +669,7 @@
 <p>这里我使用的是自行魔改了的 <a target="_blank" rel="noopener" href="https://www.gnome-look.org/p/1200710/">Atomic GRUB Theme</a>，加入了原主题没有的 <code>udm.png</code>，修改 <code>reastar.png</code> 为 <code>reboot.png</code> 来让它奇怪的 grub 能够识别。资料包里会提供我自用的魔改主题</p>
 </li>
 </ul>
-<h2 id="VMWare加载"><a class="header-anchor" href="#VMWare加载">¶</a>VMWare 加载</h2>
+<h2 id="vm-ware-jia-zai"><a class="header-anchor" href="#VMWare加载">¶</a>VMWare 加载</h2>
 <p><img data-src="https://i.loli.net/2020/03/26/aolm1Cr4jXwuyLh.png" alt=""></p>
 <p><img data-src="https://i.loli.net/2020/03/26/oqPdYNwQBDk6iWT.png" alt=""></p>
 <p><img data-src="https://i.loli.net/2020/03/26/yfeMnH9LXIgp5rB.png" alt=""></p>
@@ -792,7 +792,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.2.1/source/js/utils.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.2.1/source/js/motion.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.2.1/source/js/next-boot.js"></script><script>
 var pjax = new Pjax({
   selectors: [
     'head title',
@@ -828,7 +828,7 @@ document.addEventListener('pjax:success', () => {
 
 
   
-<script src="/js/local-search.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.2.1/source/js/local-search.js"></script>
 
 
 

@@ -24,7 +24,7 @@
 
 <script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"jimlee2002.github.io","root":"/","images":"/images","scheme":"Gemini","version":"8.2.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+    var CONFIG = {"hostname":"jimlee2002.github.io","root":"/","images":"/images","scheme":"Gemini","version":"8.2.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
 <meta name="description" content="准备工作  一台刷好 OpenWrt 的路由器 编译好的对应路由器架构的 mentohust 可执行文件  WinSCP SSH 工具（如 PuTTY、XShell、MobaXterm）">
 <meta property="og:type" content="article">
@@ -36,8 +36,8 @@
 <meta property="article:published_time" content="2020-10-29T16:19:58.000Z">
 <meta property="article:modified_time" content="2020-11-03T13:15:18.346Z">
 <meta property="article:author" content="Jim Lee">
-<meta property="article:tag" content="OpenWrt">
 <meta property="article:tag" content="MentoHUST">
+<meta property="article:tag" content="OpenWrt">
 <meta name="twitter:card" content="summary">
 
 
@@ -192,7 +192,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">写入并测试 MentoHUST</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">进行认证</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">设置开机自动认证</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#zhun-bei-gong-zuo"><span class="nav-number">1.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#xie-ru-bing-ce-shi-mento-hust"><span class="nav-number">2.</span> <span class="nav-text">写入并测试 MentoHUST</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#jin-xing-ren-zheng"><span class="nav-number">3.</span> <span class="nav-text">进行认证</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#she-zhi-kai-ji-zi-dong-ren-zheng"><span class="nav-number">4.</span> <span class="nav-text">设置开机自动认证</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -329,7 +329,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>896</span>
+      <span>916</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -347,7 +347,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h1>准备工作</h1>
+        <h1 id="zhun-bei-gong-zuo">准备工作</h1>
 <ul>
 <li>一台刷好 OpenWrt 的路由器</li>
 <li>编译好的对应路由器架构的 <code>mentohust</code> 可执行文件 </li>
@@ -355,21 +355,21 @@
 <li>SSH 工具（如 PuTTY、XShell、MobaXterm）</li>
 </ul>
 <a id="more"></a>
-<h1>写入并测试 MentoHUST</h1>
+<h1 id="xie-ru-bing-ce-shi-mento-hust">写入并测试 MentoHUST</h1>
 <p>使用 WinSCP 上传 <code>mentohust</code> 文件至路由器的 <code>/etc</code> 目录下。</p>
 <p>赋予 <code>mentohust</code> 文件可执行权限：</p>
 <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod a+x /etc/mentohust</span><br></pre></td></tr></tbody></table></figure>
 <p>测试 MentoHUST 是否可用：</p>
 <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/mentohust -h</span><br></pre></td></tr></tbody></table></figure>
 <p>如输出无误，将输出帮助文档。</p>
-<h1>进行认证</h1>
+<h1 id="jin-xing-ren-zheng">进行认证</h1>
 <p>输入命令:</p>
 <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/mentohust -u &lt;用户名&gt; -p &lt;密码&gt; -n &lt;wan口对应网卡&gt; -e 60 -d 1</span><br></pre></td></tr></tbody></table></figure>
 <p>其中，<code>-e</code> 与 <code>-d</code> 请根据自己学校实际情况修改，此处仅提供示例。</p>
 <p>输出显示成功后应该就能上网了，测试无问题后请先暂时按 <code>Ctrl</code>+<code>C</code> 退出程序，输入命令：</p>
 <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/mentohust -u &lt;用户名&gt; -p &lt;密码&gt; -n &lt;wan口对应网卡&gt; -e 60 -d 1 -b 3 -w</span><br></pre></td></tr></tbody></table></figure>
 <p>之后，MentoHUST 会以后台运行模式进行认证，并将日志输出到 <code>/tmp/mentohust.log</code> 下，同时将当前配置信息保存至 <code>/etc/mentohust.conf</code>。</p>
-<h1>设置开机自动认证</h1>
+<h1 id="she-zhi-kai-ji-zi-dong-ren-zheng">设置开机自动认证</h1>
 <ol>
 <li>
 <p>在 <code>/etc/init.d/</code> 下新建文件 <code>mentohust</code>，打开编辑，复制以下代码：</p>
@@ -400,13 +400,13 @@
       <div class="popular-posts-title"><a href="\posts\4d028789.html" rel="bookmark">使用 WSL 交叉编译 MentoHUST</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\posts\a5ac1d77.html" rel="bookmark">OpenWrt/LEDE 的编译与 Mentohust 软件包的添加</a></div>
+      <div class="popular-posts-title"><a href="\posts\5ed2bcfa.html" rel="bookmark">编译适用于 X86 的 MentoHUST</a></div>
     </li>
     <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="\posts\3a5c40a1.html" rel="bookmark">在 WSL2 上进行 OpenWrt 的编译</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\posts\5ed2bcfa.html" rel="bookmark">编译适用于 X86 的 MentoHUST</a></div>
+      <div class="popular-posts-title"><a href="\posts\a5ac1d77.html" rel="bookmark">OpenWrt/LEDE 的编译与 Mentohust 软件包的添加</a></div>
     </li>
   </ul>
 
@@ -430,8 +430,8 @@
 </div>
 
           <div class="post-tags">
-              <a href="/tags/OpenWrt/" rel="tag"><i class="fa fa-tag"></i> OpenWrt</a>
               <a href="/tags/MentoHUST/" rel="tag"><i class="fa fa-tag"></i> MentoHUST</a>
+              <a href="/tags/OpenWrt/" rel="tag"><i class="fa fa-tag"></i> OpenWrt</a>
           </div>
 
         
@@ -504,7 +504,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.2.1/source/js/utils.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.2.1/source/js/motion.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.2.1/source/js/next-boot.js"></script><script>
 var pjax = new Pjax({
   selectors: [
     'head title',
@@ -540,7 +540,7 @@ document.addEventListener('pjax:success', () => {
 
 
   
-<script src="/js/local-search.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.2.1/source/js/local-search.js"></script>
 
 
 

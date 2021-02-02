@@ -24,7 +24,7 @@
 
 <script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"jimlee2002.github.io","root":"/","images":"/images","scheme":"Gemini","version":"8.2.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+    var CONFIG = {"hostname":"jimlee2002.github.io","root":"/","images":"/images","scheme":"Gemini","version":"8.2.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
 <meta name="description" content="前情提要 折腾了两天，我终于是实现在 Android 上使用 Tasker 向刚搭建好的个人动态系统发送内容了。 效果展示 这是一个在 Android 上向废话胶囊（b 言 b 语）发送内容的简单 Tasker 工程。 项目地址：https:&#x2F;&#x2F;github.com&#x2F;jimlee2002&#x2F;nonsense.fun_tasker">
 <meta property="og:type" content="article">
@@ -113,6 +113,7 @@
   </style>
 </noscript>
 
+<link rel="alternate" href="/atom.xml" title="Jim's Blog" type="application/atom+xml">
 <style>mjx-container[jax="SVG"] {
   direction: ltr;
 }
@@ -230,8 +231,7 @@ mjx-container[display="true"] {
 mjx-container[display="true"] + br {
   display: none;
 }
-</style><link rel="alternate" href="/atom.xml" title="Jim's Blog" type="application/atom+xml">
-</head>
+</style></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
   <div class="headband"></div>
@@ -328,7 +328,7 @@ mjx-container[display="true"] + br {
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">效果展示</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">安装配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B4%E6%8E%A5%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85%E5%B7%B2%E7%BB%8F%E5%AF%BC%E5%87%BA%E5%A5%BD%E7%9A%84apk%E6%96%87%E4%BB%B6"><span class="nav-number">2.1.</span> <span class="nav-text"> 直接下载安装已经导出好的 apk 文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%BC%E5%85%A5Tasker%E5%B7%A5%E7%A8%8B"><span class="nav-number">2.2.</span> <span class="nav-text"> 导入 Tasker 工程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">Tasker 工程使用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E8%BF%87-Tasker-Secondary-%E6%89%93%E5%BC%80"><span class="nav-number">3.1.</span> <span class="nav-text"> 通过 Tasker Secondary 打开</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E6%A1%8C%E9%9D%A2%E5%B0%8F%E5%B7%A5%E5%85%B7%E5%88%9B%E5%BB%BA%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F%E6%89%93%E5%BC%80"><span class="nav-number">3.2.</span> <span class="nav-text"> 通过桌面小工具创建快捷方式打开</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E8%A1%8C%E5%AF%BC%E5%87%BA%E4%B8%BAAPK%E5%AE%89%E8%A3%85"><span class="nav-number">3.3.</span> <span class="nav-text"> 自行导出为 APK 安装</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">后记</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">致谢</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#xiao-guo-zhan-shi"><span class="nav-number">1.</span> <span class="nav-text">效果展示</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#an-zhuang-pei-zhi"><span class="nav-number">2.</span> <span class="nav-text">安装配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B4%E6%8E%A5%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85%E5%B7%B2%E7%BB%8F%E5%AF%BC%E5%87%BA%E5%A5%BD%E7%9A%84apk%E6%96%87%E4%BB%B6"><span class="nav-number">2.1.</span> <span class="nav-text"> 直接下载安装已经导出好的 apk 文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%BC%E5%85%A5Tasker%E5%B7%A5%E7%A8%8B"><span class="nav-number">2.2.</span> <span class="nav-text"> 导入 Tasker 工程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#tasker-gong-cheng-shi-yong-fang-fa"><span class="nav-number">3.</span> <span class="nav-text">Tasker 工程使用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E8%BF%87-Tasker-Secondary-%E6%89%93%E5%BC%80"><span class="nav-number">3.1.</span> <span class="nav-text"> 通过 Tasker Secondary 打开</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E6%A1%8C%E9%9D%A2%E5%B0%8F%E5%B7%A5%E5%85%B7%E5%88%9B%E5%BB%BA%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F%E6%89%93%E5%BC%80"><span class="nav-number">3.2.</span> <span class="nav-text"> 通过桌面小工具创建快捷方式打开</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E8%A1%8C%E5%AF%BC%E5%87%BA%E4%B8%BAAPK%E5%AE%89%E8%A3%85"><span class="nav-number">3.3.</span> <span class="nav-text"> 自行导出为 APK 安装</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#hou-ji"><span class="nav-number">4.</span> <span class="nav-text">后记</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#zhi-xie"><span class="nav-number">5.</span> <span class="nav-text">致谢</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -485,12 +485,12 @@ mjx-container[display="true"] + br {
     <div class="post-body" itemprop="articleBody">
         <p><a href="https://jimlee2002.github.io/posts/2b426e0a.html">前情提要</a></p>
 <p>折腾了两天，我终于是实现在 Android 上使用 Tasker 向刚搭建好的个人动态系统发送内容了。</p>
-<h1>效果展示</h1>
+<h1 id="xiao-guo-zhan-shi">效果展示</h1>
 <p>这是一个在 Android 上向<a target="_blank" rel="noopener" href="https://github.com/daibor/nonsense.fun">废话胶囊（b 言 b 语）</a>发送内容的简单 Tasker 工程。</p>
 <p>项目地址：<a target="_blank" rel="noopener" href="https://github.com/jimlee2002/nonsense.fun_tasker">https://github.com/jimlee2002/nonsense.fun_tasker</a></p>
 <img data-src="https://i.loli.net/2020/04/22/Hy7kwJL8FDr6I5O.png" style="zoom: 50%;">
 <a id="more"></a>
-<h1>安装配置</h1>
+<h1 id="an-zhuang-pei-zhi">安装配置</h1>
 <h2 id="直接下载安装已经导出好的apk文件"><a class="header-anchor" href="#直接下载安装已经导出好的apk文件">¶</a> 直接下载安装已经导出好的 <a target="_blank" rel="noopener" href="https://github.com/jimlee2002/nonsense.fun_tasker/releases">apk 文件</a></h2>
 <p>应用使用插件 <code>Tasker App Factory</code> 导出。</p>
 <p>注意，该应用<strong>需要 root 权限</strong>。</p>
@@ -529,7 +529,7 @@ mjx-container[display="true"] + br {
 </li>
 </ol>
 <p>这样就配置完成了，请试试看吧！</p>
-<h1>Tasker 工程使用方法</h1>
+<h1 id="tasker-gong-cheng-shi-yong-fang-fa">Tasker 工程使用方法</h1>
 <h2 id="通过-Tasker-Secondary-打开"><a class="header-anchor" href="#通过-Tasker-Secondary-打开">¶</a> 通过 Tasker Secondary 打开</h2>
 <img data-src="https://i.loli.net/2020/04/22/Gju9BY64UsWlvTw.png" style="zoom: 50%;">
 <h2 id="通过桌面小工具创建快捷方式打开"><a class="header-anchor" href="#通过桌面小工具创建快捷方式打开">¶</a> 通过桌面小工具创建快捷方式打开</h2>
@@ -566,10 +566,10 @@ mjx-container[display="true"] + br {
 <p>点击左上角返回，Tasker 会将项目以 APK 格式导出到<code>内部储存/Tasker/factory/kids</code> 并安装。</p>
 </li>
 </ol>
-<h1>后记</h1>
+<h1 id="hou-ji">后记</h1>
 <p>界面如果有问题可以自行在 Tasker 的<code>场景</code>中修改。</p>
 <p>个人能力有限，做的比较粗糙，还请不吝赐教！</p>
-<h1>致谢</h1>
+<h1 id="zhi-xie">致谢</h1>
 <p>感谢 <a target="_blank" rel="noopener" href="https://github.com/daibor">daibor</a> 制作了这么棒的<a target="_blank" rel="noopener" href="https://github.com/daibor/nonsense.fun">项目。</a></p>
 <p>感谢少数派的 @SoSo 在评论下分享的方法启发了这个工程。</p>
 
@@ -693,7 +693,7 @@ mjx-container[display="true"] + br {
   <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.2.1/source/js/utils.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.2.1/source/js/motion.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.2.1/source/js/next-boot.js"></script><script>
 var pjax = new Pjax({
   selectors: [
     'head title',
@@ -729,7 +729,7 @@ document.addEventListener('pjax:success', () => {
 
 
   
-<script src="/js/local-search.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.2.1/source/js/local-search.js"></script>
 
 
 
