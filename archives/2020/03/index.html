@@ -598,7 +598,7 @@ if (document.querySelectorAll('.mermaid').length) {
 <script>
 NexT.utils.loadComments('#twikoo-comments', () => {
   NexT.utils.getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js', () => {
-    twikoo.init(Object.assign({"enable":true,"visitor":true,"envId":"twikoo-3gnlqnma9bc5e92b"}, {
+    twikoo.init(Object.assign({"enable":true,"visitor":false,"envId":"twikoo-3gnlqnma9bc5e92b"}, {
       el: '#twikoo-comments'
     }));
   }, window.twikoo);
