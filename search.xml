@@ -1,6 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>博客折腾笔记②-hexo 的优化</title>
+    <url>/posts/3a4e373e.html</url>
+    <content><![CDATA[<h1 id="wen-zhang-yong-jiu-lian-jie-wei-yi-hua">文章永久链接唯一化</h1>
+<p>为解决 hexo 默认设置下改变源文件名或使用中文标题带来的文章链接问题，这里使用 <code>hexo-abbrlink</code> 插件来解决问题</p>
+<figure class="highlight nginx"><table><tbody><tr><td class="code"><pre><span class="line"><span class="attribute">npm</span> install hexo-abbrlink --save</span><br></pre></td></tr></tbody></table></figure>
+<a id="more"></a>
+<p>然后更改博客配置文件<code>_config.yml</code>, 这里我改成</p>
+<figure class="highlight yaml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="attr">permalink:</span> <span class="string">:posts/:year/:abbrlink/</span></span><br></pre></td></tr></tbody></table></figure>
+<p>还可以设置永久链接的生成算法，在博客配置文件中加入</p>
+<figure class="highlight yaml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="attr">abbrlink:</span></span><br><span class="line">  <span class="attr">alg:</span> <span class="string">crc32</span>  <span class="comment"># support crc16(default) and crc32</span></span><br><span class="line">  <span class="attr">rep:</span> <span class="string">hex</span>    <span class="comment"># support dec(default) and hex</span></span><br></pre></td></tr></tbody></table></figure>
+<p>不同算法的生成效果：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="code"><pre><span class="line">crc16 &amp; hex</span><br><span class="line">https://post.zz173.com/posts/66c8.html</span><br><span class="line">crc16 &amp; dec</span><br><span class="line">https://post.zz173.com/posts/65535.html</span><br><span class="line">crc32 &amp; hex</span><br><span class="line">https://post.zz173.com/posts/8ddf18fb.html</span><br><span class="line">crc32 &amp; dec</span><br><span class="line">https://post.zz173.com/posts/1690090958.html</span><br></pre></td></tr></tbody></table></figure>
+<p>一些知识补充：</p>
+<blockquote>
+<blockquote>
+<p>百度蜘蛛抓取网页的规则：对于蜘蛛说网页权重越高、信用度越高抓取越频繁，例如网站的首页和内页。蜘蛛先抓取网站的首页，因为首页权重更高，并且大部分的链接都是指向首页。然后通过首页抓取网站的内页，并不是所有内页蜘蛛都会去抓取。</p>
+</blockquote>
+<p>搜索引擎认为对于一般的中小型站点，3 层足够承受所有的内容了，所以蜘蛛经常抓取的内容是前三层，而超过三层的内容蜘蛛认为那些内容并不重要，所以不经常爬取。出于这个原因所以 permalink 后面跟着的最好不要超过 2 个斜杠。[^]</p>
+</blockquote>
+<h1 id="xin-she-bei-shang-hui-fu-bo-ke-bei-fen-de-wen-ti-jie-jue">新设备上恢复博客备份的问题解决</h1>
+<h2 id="code-sudo-npm-install-code-shi-bai"><a class="header-anchor" href="#sudo-npm-install-失败">¶</a><code>sudo npm install </code>失败</h2>
+<p>解决方案：不要用 <code>sudo</code>, 直接 <code>npm install</code> 就好</p>
+<h2 id="code-hexo-b-code-bao-cuo"><a class="header-anchor" href="#hexo-b报错">¶</a><code>hexo b</code> 报错</h2>
+<p>在新装的 UTG 上恢复 Blog，最后执行 <code>hexo b</code> 的时候报错了</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">fatal: <span class="string">'github'</span> does not appear to be a git repository</span><br><span class="line">fatal: 无法读取远程仓库。</span><br><span class="line"></span><br><span class="line">请确认您有正确的访问权限并且仓库存在。</span><br></pre></td></tr></tbody></table></figure>
+<p>翻了翻插件的 issuse，看到了相似的问题<a href="https://github.com/coneycode/hexo-git-backup/issues/20">#20</a></p>
+<p>参考里面的内容，修改<strong>博客配置文件</strong>里插件的相关配置，把 <code>github</code> 换成 <code>origin</code></p>
+<figure class="highlight plain"><table><tbody><tr><td class="code"><pre><span class="line">backup:</span><br><span class="line">  type: git</span><br><span class="line">  repository:</span><br><span class="line">    origin: git@github:bx_reader/bx-reader-api.git,master</span><br></pre></td></tr></tbody></table></figure>
+<p>这里顺便把 git 的 https 连接改成了 git 连接，这样就不用每次都输入账号密码了</p>
+<p>再次尝试，问题解决</p>
+<h1 id="hexo-wen-zhang-jia-mi">Hexo 文章加密</h1>
+<p>使用插件 <a href="https://github.com/MikeCoder/hexo-blog-encrypt">hexo-blog-encrypt</a></p>
+<h2 id="an-zhuang"><a class="header-anchor" href="#安装">¶</a> 安装</h2>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">npm install --save hexo-blog-encrypt</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="shi-yong"><a class="header-anchor" href="#使用">¶</a> 使用</h2>
+<p>在文章信息头添加 <code>password</code> 字段</p>
+<figure class="highlight yaml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">Hello</span> <span class="string">World</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2016-03-30 21:18:02</span></span><br><span class="line"><span class="attr">password:</span> <span class="string">mikemessi</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></tbody></table></figure>
+<p>也可以在文章信息头单独自定义密码输入交互信息</p>
+<figure class="highlight yaml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">Hello</span> <span class="string">World</span></span><br><span class="line"><span class="attr">tags:</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">作为日记加密</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2016-03-30 21:12:21</span></span><br><span class="line"><span class="attr">password:</span> <span class="string">mikemessi</span></span><br><span class="line"><span class="attr">abstract:</span> <span class="string">有东西被加密了,</span> <span class="string">请输入密码查看.</span></span><br><span class="line"><span class="attr">message:</span> <span class="string">您好,</span> <span class="string">这里需要密码.</span></span><br><span class="line"><span class="attr">wrong_pass_message:</span> <span class="string">抱歉,</span> <span class="string">这个密码看着不太对,</span> <span class="string">请再试试.</span></span><br><span class="line"><span class="attr">wrong_hash_message:</span> <span class="string">抱歉,</span> <span class="string">这个文章不能被校验,</span> <span class="string">不过您还是能看看解密后的内容.</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></tbody></table></figure>
+<h2 id="jin-jie"><a class="header-anchor" href="#进阶">¶</a> 进阶</h2>
+<h3 id="quan-ju-pei-zhi"><a class="header-anchor" href="#全局配置">¶</a> 全局配置</h3>
+<p>在站点根目录下的<code>_config.yml</code> 里可以添加以下内容进行全局配置</p>
+<figure class="highlight yaml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># Security</span></span><br><span class="line"><span class="attr">encrypt:</span> <span class="comment"># hexo-blog-encrypt</span></span><br><span class="line">  <span class="attr">abstract:</span> <span class="string">有东西被加密了,</span> <span class="string">请输入密码查看.</span></span><br><span class="line">  <span class="attr">message:</span> <span class="string">您好,</span> <span class="string">这里需要密码.</span></span><br><span class="line">  <span class="attr">tags:</span></span><br><span class="line">  <span class="bullet">-</span> {<span class="attr">name:</span> <span class="string">tagName</span>, <span class="attr">password:</span> <span class="string">密码A</span>}</span><br><span class="line">  <span class="bullet">-</span> {<span class="attr">name:</span> <span class="string">tagName</span>, <span class="attr">password:</span> <span class="string">密码B</span>}</span><br><span class="line">  <span class="attr">template:</span> <span class="string">&lt;div</span> <span class="string">id="hexo-blog-encrypt"</span> <span class="string">data-wpm="{{hbeWrongPassMessage}}"</span> <span class="string">data-whm="{{hbeWrongHashMessage}}"&gt;&lt;div</span> <span class="string">class="hbe-input-container"&gt;&lt;input</span> <span class="string">type="password"</span> <span class="string">id="hbePass"</span> <span class="string">placeholder="{{hbeMessage}}"</span> <span class="string">/&gt;&lt;label&gt;{{hbeMessage}}&lt;/label&gt;&lt;div</span> <span class="string">class="bottom-line"&gt;&lt;/div&gt;&lt;/div&gt;&lt;script</span> <span class="string">id="hbeData"</span> <span class="string">type="hbeData"</span> <span class="string">data-hmacdigest="{{hbeHmacDigest}}"&gt;{{hbeEncryptedData}}&lt;/script&gt;&lt;/div&gt;</span></span><br><span class="line">  <span class="attr">wrong_pass_message:</span> <span class="string">抱歉,</span> <span class="string">这个密码看着不太对,</span> <span class="string">请再试试.</span></span><br><span class="line">  <span class="attr">wrong_hash_message:</span> <span class="string">抱歉,</span> <span class="string">这个文章不能被校验,</span> <span class="string">不过您还是能看看解密后的内容.</span></span><br></pre></td></tr></tbody></table></figure>
+<p>配置优先级是</p>
+<p><strong>文章信息头 &gt; <code>_config.yml</code> (站点根目录下的) &gt; 默认配置</strong></p>
+]]></content>
+      <categories>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>博客折腾笔记③- 搭建个人动态页面 iM</title>
     <url>/posts/2b426e0a.html</url>
     <content><![CDATA[<p>今天在少数派上看到一篇搭建类似微博的个人动态页面的指南，我非常感高兴：出于对实现私密树洞分享心情的需要以及言论审查的苦恼，我想在博客上实现这样的功能很久了。感谢原作者为不懂技术的脚本小子我造好了轮子，接下来只需简单配置即可实现所需功能了。</p>
@@ -48,60 +102,6 @@
 <li><input type="checkbox" id="checkbox1"><label for="checkbox1">尝试用</label><code>hexo-blog-encrypt</code> 加密页面？</li>
 <li><input type="checkbox" id="checkbox2"><label for="checkbox2">直接在页面处添加一个在线输入框方便输入？</label></li>
 </ul>
-]]></content>
-      <categories>
-        <category>笔记</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>博客折腾笔记②-hexo 的优化</title>
-    <url>/posts/3a4e373e.html</url>
-    <content><![CDATA[<h1 id="wen-zhang-yong-jiu-lian-jie-wei-yi-hua">文章永久链接唯一化</h1>
-<p>为解决 hexo 默认设置下改变源文件名或使用中文标题带来的文章链接问题，这里使用 <code>hexo-abbrlink</code> 插件来解决问题</p>
-<figure class="highlight nginx"><table><tbody><tr><td class="code"><pre><span class="line"><span class="attribute">npm</span> install hexo-abbrlink --save</span><br></pre></td></tr></tbody></table></figure>
-<a id="more"></a>
-<p>然后更改博客配置文件<code>_config.yml</code>, 这里我改成</p>
-<figure class="highlight yaml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="attr">permalink:</span> <span class="string">:posts/:year/:abbrlink/</span></span><br></pre></td></tr></tbody></table></figure>
-<p>还可以设置永久链接的生成算法，在博客配置文件中加入</p>
-<figure class="highlight yaml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="attr">abbrlink:</span></span><br><span class="line">  <span class="attr">alg:</span> <span class="string">crc32</span>  <span class="comment"># support crc16(default) and crc32</span></span><br><span class="line">  <span class="attr">rep:</span> <span class="string">hex</span>    <span class="comment"># support dec(default) and hex</span></span><br></pre></td></tr></tbody></table></figure>
-<p>不同算法的生成效果：</p>
-<figure class="highlight plain"><table><tbody><tr><td class="code"><pre><span class="line">crc16 &amp; hex</span><br><span class="line">https://post.zz173.com/posts/66c8.html</span><br><span class="line">crc16 &amp; dec</span><br><span class="line">https://post.zz173.com/posts/65535.html</span><br><span class="line">crc32 &amp; hex</span><br><span class="line">https://post.zz173.com/posts/8ddf18fb.html</span><br><span class="line">crc32 &amp; dec</span><br><span class="line">https://post.zz173.com/posts/1690090958.html</span><br></pre></td></tr></tbody></table></figure>
-<p>一些知识补充：</p>
-<blockquote>
-<blockquote>
-<p>百度蜘蛛抓取网页的规则：对于蜘蛛说网页权重越高、信用度越高抓取越频繁，例如网站的首页和内页。蜘蛛先抓取网站的首页，因为首页权重更高，并且大部分的链接都是指向首页。然后通过首页抓取网站的内页，并不是所有内页蜘蛛都会去抓取。</p>
-</blockquote>
-<p>搜索引擎认为对于一般的中小型站点，3 层足够承受所有的内容了，所以蜘蛛经常抓取的内容是前三层，而超过三层的内容蜘蛛认为那些内容并不重要，所以不经常爬取。出于这个原因所以 permalink 后面跟着的最好不要超过 2 个斜杠。[^]</p>
-</blockquote>
-<h1 id="xin-she-bei-shang-hui-fu-bo-ke-bei-fen-de-wen-ti-jie-jue">新设备上恢复博客备份的问题解决</h1>
-<h2 id="code-sudo-npm-install-code-shi-bai"><a class="header-anchor" href="#sudo-npm-install-失败">¶</a><code>sudo npm install </code>失败</h2>
-<p>解决方案：不要用 <code>sudo</code>, 直接 <code>npm install</code> 就好</p>
-<h2 id="code-hexo-b-code-bao-cuo"><a class="header-anchor" href="#hexo-b报错">¶</a><code>hexo b</code> 报错</h2>
-<p>在新装的 UTG 上恢复 Blog，最后执行 <code>hexo b</code> 的时候报错了</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">fatal: <span class="string">'github'</span> does not appear to be a git repository</span><br><span class="line">fatal: 无法读取远程仓库。</span><br><span class="line"></span><br><span class="line">请确认您有正确的访问权限并且仓库存在。</span><br></pre></td></tr></tbody></table></figure>
-<p>翻了翻插件的 issuse，看到了相似的问题<a href="https://github.com/coneycode/hexo-git-backup/issues/20">#20</a></p>
-<p>参考里面的内容，修改<strong>博客配置文件</strong>里插件的相关配置，把 <code>github</code> 换成 <code>origin</code></p>
-<figure class="highlight plain"><table><tbody><tr><td class="code"><pre><span class="line">backup:</span><br><span class="line">  type: git</span><br><span class="line">  repository:</span><br><span class="line">    origin: git@github:bx_reader/bx-reader-api.git,master</span><br></pre></td></tr></tbody></table></figure>
-<p>这里顺便把 git 的 https 连接改成了 git 连接，这样就不用每次都输入账号密码了</p>
-<p>再次尝试，问题解决</p>
-<h1 id="hexo-wen-zhang-jia-mi">Hexo 文章加密</h1>
-<p>使用插件 <a href="https://github.com/MikeCoder/hexo-blog-encrypt">hexo-blog-encrypt</a></p>
-<h2 id="an-zhuang"><a class="header-anchor" href="#安装">¶</a> 安装</h2>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">npm install --save hexo-blog-encrypt</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="shi-yong"><a class="header-anchor" href="#使用">¶</a> 使用</h2>
-<p>在文章信息头添加 <code>password</code> 字段</p>
-<figure class="highlight yaml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">Hello</span> <span class="string">World</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2016-03-30 21:18:02</span></span><br><span class="line"><span class="attr">password:</span> <span class="string">mikemessi</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></tbody></table></figure>
-<p>也可以在文章信息头单独自定义密码输入交互信息</p>
-<figure class="highlight yaml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">Hello</span> <span class="string">World</span></span><br><span class="line"><span class="attr">tags:</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">作为日记加密</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2016-03-30 21:12:21</span></span><br><span class="line"><span class="attr">password:</span> <span class="string">mikemessi</span></span><br><span class="line"><span class="attr">abstract:</span> <span class="string">有东西被加密了,</span> <span class="string">请输入密码查看.</span></span><br><span class="line"><span class="attr">message:</span> <span class="string">您好,</span> <span class="string">这里需要密码.</span></span><br><span class="line"><span class="attr">wrong_pass_message:</span> <span class="string">抱歉,</span> <span class="string">这个密码看着不太对,</span> <span class="string">请再试试.</span></span><br><span class="line"><span class="attr">wrong_hash_message:</span> <span class="string">抱歉,</span> <span class="string">这个文章不能被校验,</span> <span class="string">不过您还是能看看解密后的内容.</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></tbody></table></figure>
-<h2 id="jin-jie"><a class="header-anchor" href="#进阶">¶</a> 进阶</h2>
-<h3 id="quan-ju-pei-zhi"><a class="header-anchor" href="#全局配置">¶</a> 全局配置</h3>
-<p>在站点根目录下的<code>_config.yml</code> 里可以添加以下内容进行全局配置</p>
-<figure class="highlight yaml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># Security</span></span><br><span class="line"><span class="attr">encrypt:</span> <span class="comment"># hexo-blog-encrypt</span></span><br><span class="line">  <span class="attr">abstract:</span> <span class="string">有东西被加密了,</span> <span class="string">请输入密码查看.</span></span><br><span class="line">  <span class="attr">message:</span> <span class="string">您好,</span> <span class="string">这里需要密码.</span></span><br><span class="line">  <span class="attr">tags:</span></span><br><span class="line">  <span class="bullet">-</span> {<span class="attr">name:</span> <span class="string">tagName</span>, <span class="attr">password:</span> <span class="string">密码A</span>}</span><br><span class="line">  <span class="bullet">-</span> {<span class="attr">name:</span> <span class="string">tagName</span>, <span class="attr">password:</span> <span class="string">密码B</span>}</span><br><span class="line">  <span class="attr">template:</span> <span class="string">&lt;div</span> <span class="string">id="hexo-blog-encrypt"</span> <span class="string">data-wpm="{{hbeWrongPassMessage}}"</span> <span class="string">data-whm="{{hbeWrongHashMessage}}"&gt;&lt;div</span> <span class="string">class="hbe-input-container"&gt;&lt;input</span> <span class="string">type="password"</span> <span class="string">id="hbePass"</span> <span class="string">placeholder="{{hbeMessage}}"</span> <span class="string">/&gt;&lt;label&gt;{{hbeMessage}}&lt;/label&gt;&lt;div</span> <span class="string">class="bottom-line"&gt;&lt;/div&gt;&lt;/div&gt;&lt;script</span> <span class="string">id="hbeData"</span> <span class="string">type="hbeData"</span> <span class="string">data-hmacdigest="{{hbeHmacDigest}}"&gt;{{hbeEncryptedData}}&lt;/script&gt;&lt;/div&gt;</span></span><br><span class="line">  <span class="attr">wrong_pass_message:</span> <span class="string">抱歉,</span> <span class="string">这个密码看着不太对,</span> <span class="string">请再试试.</span></span><br><span class="line">  <span class="attr">wrong_hash_message:</span> <span class="string">抱歉,</span> <span class="string">这个文章不能被校验,</span> <span class="string">不过您还是能看看解密后的内容.</span></span><br></pre></td></tr></tbody></table></figure>
-<p>配置优先级是</p>
-<p><strong>文章信息头 &gt; <code>_config.yml</code> (站点根目录下的) &gt; 默认配置</strong></p>
 ]]></content>
       <categories>
         <category>笔记</category>
@@ -441,6 +441,58 @@ _   底线
       </tags>
   </entry>
   <entry>
+    <title>MentoHUST 在 OpenWrt 上的配置</title>
+    <url>/posts/6f5f0d34.html</url>
+    <content><![CDATA[<h1 id="zhun-bei-gong-zuo">准备工作</h1>
+<ul>
+<li>一台刷好 OpenWrt 的路由器</li>
+<li>编译好的对应路由器架构的 <code>mentohust</code> 可执行文件 </li>
+<li><a href="https://winscp.net/eng/download.php">WinSCP</a></li>
+<li>SSH 工具（如 PuTTY、XShell、MobaXterm）</li>
+</ul>
+<a id="more"></a>
+<h1 id="xie-ru-bing-ce-shi-mento-hust">写入并测试 MentoHUST</h1>
+<p>使用 WinSCP 上传 <code>mentohust</code> 文件至路由器的 <code>/etc</code> 目录下。</p>
+<p>赋予 <code>mentohust</code> 文件可执行权限：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">chmod a+x /etc/mentohust</span><br></pre></td></tr></tbody></table></figure>
+<p>测试 MentoHUST 是否可用：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">/etc/mentohust -h</span><br></pre></td></tr></tbody></table></figure>
+<p>如输出无误，将输出帮助文档。</p>
+<h1 id="jin-xing-ren-zheng">进行认证</h1>
+<p>输入命令:</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">/etc/mentohust -u &lt;用户名&gt; -p &lt;密码&gt; -n &lt;wan口对应网卡&gt; -e 60 -d 1</span><br></pre></td></tr></tbody></table></figure>
+<p>其中，<code>-e</code> 与 <code>-d</code> 请根据自己学校实际情况修改，此处仅提供示例。</p>
+<p>输出显示成功后应该就能上网了，测试无问题后请先暂时按 <code>Ctrl</code>+<code>C</code> 退出程序，输入命令：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">/etc/mentohust -u &lt;用户名&gt; -p &lt;密码&gt; -n &lt;wan口对应网卡&gt; -e 60 -d 1 -b 3 -w</span><br></pre></td></tr></tbody></table></figure>
+<p>之后，MentoHUST 会以后台运行模式进行认证，并将日志输出到 <code>/tmp/mentohust.log</code> 下，同时将当前配置信息保存至 <code>/etc/mentohust.conf</code>。</p>
+<h1 id="she-zhi-kai-ji-zi-dong-ren-zheng">设置开机自动认证</h1>
+<ol>
+<li>
+<p>在 <code>/etc/init.d/</code> 下新建文件 <code>mentohust</code>，打开编辑，复制以下代码：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh /etc/rc.common</span></span><br><span class="line"><span class="comment"># Example script</span></span><br><span class="line"><span class="comment"># Copyright (C) 2007 OpenWrt.org</span></span><br><span class="line"> </span><br><span class="line">START=99</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="title">start</span></span>() {        </span><br><span class="line">        <span class="built_in">echo</span> start</span><br><span class="line">        /etc/mentohust</span><br><span class="line">} </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">stop</span></span>() {        </span><br><span class="line">     	<span class="built_in">echo</span> start</span><br><span class="line">        /etc/mentohust -k</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>保存后退出。</p>
+<p>你也可以在主机上预先创建好这一文件，在主机保存后使用 WinSCP 上传至路由器 <code>/etc/init.d/</code> 下</p>
+</li>
+<li>
+<p>赋予该脚本可执行权限：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">chmod a+x /etc/init.d/mentohust</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li>
+<p>设置该脚本开机自启动</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">/etc/init.d/mentohust <span class="built_in">enable</span></span><br></pre></td></tr></tbody></table></figure>
+</li>
+</ol>
+<p>自此，路由器将会在每次开机时自动运行 MentoHUST 以进行认证。</p>
+]]></content>
+      <categories>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>MentoHUST</tag>
+        <tag>OpenWrt</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>使用 WSL 交叉编译 MentoHUST</title>
     <url>/posts/4d028789.html</url>
     <content><![CDATA[<p>为使得 MentoHUST 在路由器上依然可用，需要对 MentoHUST 针对自己路由器的芯片架构进行交叉编译。本文以使用 <strong>MT7620</strong> 的路由器平台为例，主要提供 WSL 下对 MentoHUST 进行交叉编译的实例。</p>
@@ -531,8 +583,8 @@ _   底线
         <category>笔记</category>
       </categories>
       <tags>
-        <tag>OpenWrt</tag>
         <tag>MentoHUST</tag>
+        <tag>OpenWrt</tag>
       </tags>
   </entry>
   <entry>
@@ -570,55 +622,105 @@ _   底线
       </tags>
   </entry>
   <entry>
-    <title>MentoHUST 在 OpenWrt 上的配置</title>
-    <url>/posts/6f5f0d34.html</url>
-    <content><![CDATA[<h1 id="zhun-bei-gong-zuo">准备工作</h1>
-<ul>
-<li>一台刷好 OpenWrt 的路由器</li>
-<li>编译好的对应路由器架构的 <code>mentohust</code> 可执行文件 </li>
-<li><a href="https://winscp.net/eng/download.php">WinSCP</a></li>
-<li>SSH 工具（如 PuTTY、XShell、MobaXterm）</li>
-</ul>
+    <title>博客折腾笔记④- 使用 Tasker 在 Android 上实现个人动态的发送</title>
+    <url>/posts/4394c3fa.html</url>
+    <content><![CDATA[<p><a href="https://jimlee2002.github.io/posts/2b426e0a.html">前情提要</a></p>
+<p>折腾了两天，我终于是实现在 Android 上使用 Tasker 向刚搭建好的个人动态系统发送内容了。</p>
+<h1 id="xiao-guo-zhan-shi">效果展示</h1>
+<p>这是一个在 Android 上向<a href="https://github.com/daibor/nonsense.fun">废话胶囊（b 言 b 语）</a>发送内容的简单 Tasker 工程。</p>
+<p>项目地址：<a href="https://github.com/jimlee2002/nonsense.fun_tasker">https://github.com/jimlee2002/nonsense.fun_tasker</a></p>
+<img data-src="https://i.loli.net/2020/04/22/Hy7kwJL8FDr6I5O.png" style="zoom: 50%;">
 <a id="more"></a>
-<h1 id="xie-ru-bing-ce-shi-mento-hust">写入并测试 MentoHUST</h1>
-<p>使用 WinSCP 上传 <code>mentohust</code> 文件至路由器的 <code>/etc</code> 目录下。</p>
-<p>赋予 <code>mentohust</code> 文件可执行权限：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">chmod a+x /etc/mentohust</span><br></pre></td></tr></tbody></table></figure>
-<p>测试 MentoHUST 是否可用：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">/etc/mentohust -h</span><br></pre></td></tr></tbody></table></figure>
-<p>如输出无误，将输出帮助文档。</p>
-<h1 id="jin-xing-ren-zheng">进行认证</h1>
-<p>输入命令:</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">/etc/mentohust -u &lt;用户名&gt; -p &lt;密码&gt; -n &lt;wan口对应网卡&gt; -e 60 -d 1</span><br></pre></td></tr></tbody></table></figure>
-<p>其中，<code>-e</code> 与 <code>-d</code> 请根据自己学校实际情况修改，此处仅提供示例。</p>
-<p>输出显示成功后应该就能上网了，测试无问题后请先暂时按 <code>Ctrl</code>+<code>C</code> 退出程序，输入命令：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">/etc/mentohust -u &lt;用户名&gt; -p &lt;密码&gt; -n &lt;wan口对应网卡&gt; -e 60 -d 1 -b 3 -w</span><br></pre></td></tr></tbody></table></figure>
-<p>之后，MentoHUST 会以后台运行模式进行认证，并将日志输出到 <code>/tmp/mentohust.log</code> 下，同时将当前配置信息保存至 <code>/etc/mentohust.conf</code>。</p>
-<h1 id="she-zhi-kai-ji-zi-dong-ren-zheng">设置开机自动认证</h1>
+<h1 id="an-zhuang-pei-zhi">安装配置</h1>
+<h2 id="直接下载安装已经导出好的apk文件"><a class="header-anchor" href="#直接下载安装已经导出好的apk文件">¶</a> 直接下载安装已经导出好的 <a href="https://github.com/jimlee2002/nonsense.fun_tasker/releases">apk 文件</a></h2>
+<p>应用使用插件 <code>Tasker App Factory</code> 导出。</p>
+<p>注意，该应用<strong>需要 root 权限</strong>。</p>
+<h2 id="导入Tasker工程"><a class="header-anchor" href="#导入Tasker工程">¶</a> 导入 Tasker 工程</h2>
+<p><strong>注意：部分手机可能需要 Root 权限才能使用，该工程默认开启<code>使用Root运行</code>，可以自行到<code>场景/Main/发送/按下</code>的第 6 个和第 8 个任务里关掉该选项</strong>。</p>
+<p><img data-src="https://i.loli.net/2020/04/22/iaTO5gAQLjnufBZ.png" style="zoom: 50%;"><img data-src="https://i.loli.net/2020/04/22/SIJivZ5L4Na9Cu3.png" style="zoom: 50%;"></p>
+<p><img data-src="https://i.loli.net/2020/04/24/c1R3x9HEzyQiTpN.png" style="zoom:50%;"><img data-src="https://i.loli.net/2020/04/22/7BoIjaJL9h6ilf1.png" style="zoom: 50%;"></p>
+<hr>
 <ol>
 <li>
-<p>在 <code>/etc/init.d/</code> 下新建文件 <code>mentohust</code>，打开编辑，复制以下代码：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh /etc/rc.common</span></span><br><span class="line"><span class="comment"># Example script</span></span><br><span class="line"><span class="comment"># Copyright (C) 2007 OpenWrt.org</span></span><br><span class="line"> </span><br><span class="line">START=99</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="title">start</span></span>() {        </span><br><span class="line">        <span class="built_in">echo</span> start</span><br><span class="line">        /etc/mentohust</span><br><span class="line">} </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">stop</span></span>() {        </span><br><span class="line">     	<span class="built_in">echo</span> start</span><br><span class="line">        /etc/mentohust -k</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<p>保存后退出。</p>
-<p>你也可以在主机上预先创建好这一文件，在主机保存后使用 WinSCP 上传至路由器 <code>/etc/init.d/</code> 下</p>
+<p><a href="https://github.com/jimlee2002/nonsense.fun_tasker/releases">下载</a><code>bb.prj.xml</code>，存入到手机任意你找得到的位置。</p>
 </li>
 <li>
-<p>赋予该脚本可执行权限：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">chmod a+x /etc/init.d/mentohust</span><br></pre></td></tr></tbody></table></figure>
+<p>下载安装 Tasker。</p>
 </li>
 <li>
-<p>设置该脚本开机自启动</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">/etc/init.d/mentohust <span class="built_in">enable</span></span><br></pre></td></tr></tbody></table></figure>
+<p>进入主界面长按左下角的按钮，点击<code>导入项目</code>，在打开的界面中找到并打开刚才存入的 <code>bb.prj.xml。</code></p>
+<p><img data-src="https://i.loli.net/2020/04/22/mpwnk2ZWvMc6uSU.png" style="zoom: 50%;"><img data-src="https://i.loli.net/2020/04/22/3Zc2KIWVfBzhiDM.png" style="zoom: 50%;"></p>
+<blockquote>
+<p>提示：点击右下角的手机按钮可以快速回到内部储存空间目录</p>
+</blockquote>
+</li>
+<li>
+<p>完成后回到主界面，点击应用栏里图标长得和 Tasker 很像的 <code>Tasker Secondary</code>，打开界面。</p>
+<p><img data-src="https://i.loli.net/2020/04/22/Gju9BY64UsWlvTw.png" style="zoom: 50%;"><img data-src="https://i.loli.net/2020/04/22/Hy7kwJL8FDr6I5O.png" style="zoom: 50%;"></p>
+</li>
+<li>
+<p><strong>长按</strong>发送按钮，打开设置页面进行必要设置。</p>
+<img data-src="https://i.loli.net/2020/04/22/YM5CJ6vb4OIdemy.png" style="zoom: 50%;">
+<p><strong>Title：</strong> 这里是发送界面顶端的文字，请随意修改。</p>
+<p><strong>AppID、MasterKey：</strong> 网页打开 LeanCloud，在你的项目里点击<code>设置/应用Keys</code>，复制对应的密钥分别填入。</p>
+<p><img data-src="https://i.loli.net/2020/04/20/Kaxt5GOo3LRgMmy.png" alt=""></p>
+<p><strong>className：</strong> 一般是 <code>content</code>，只要你是按照<a href="https://sspai.com/post/60024">少数派的指南</a>来做的话。</p>
+<p><strong>–insecure：</strong> 是否在脚本命令末尾加上 <code>--insecue</code>。参数默认关闭，如果无法发送可以尝试打开这个选项试试。</p>
+<p><strong>完成后点击确认返回</strong>。</p>
 </li>
 </ol>
-<p>自此，路由器将会在每次开机时自动运行 MentoHUST 以进行认证。</p>
+<p>这样就配置完成了，请试试看吧！</p>
+<h1 id="tasker-gong-cheng-shi-yong-fang-fa">Tasker 工程使用方法</h1>
+<h2 id="通过-Tasker-Secondary-打开"><a class="header-anchor" href="#通过-Tasker-Secondary-打开">¶</a> 通过 Tasker Secondary 打开</h2>
+<img data-src="https://i.loli.net/2020/04/22/Gju9BY64UsWlvTw.png" style="zoom: 50%;">
+<h2 id="通过桌面小工具创建快捷方式打开"><a class="header-anchor" href="#通过桌面小工具创建快捷方式打开">¶</a> 通过桌面小工具创建快捷方式打开</h2>
+<ol>
+<li>
+<p>打开 Tasker，然后<strong>点击返回键</strong>回到主界面。</p>
+</li>
+<li>
+<p>在桌面上新建 Tasker 的桌面小部件 "任务"，在打开的界面选择 <code>Show UI</code>,</p>
+<p>在界面下方选择图标，然后点击左上角返回桌面。</p>
+<p><img data-src="https://i.loli.net/2020/04/22/QWRPd7IKmV3oXYj.png" style="zoom: 50%;"><img data-src="https://i.loli.net/2020/04/22/t5dlHRyUgDM7aKX.png" style="zoom: 50%;"></p>
+<p>完成，现在你应该能看到快捷方式了。</p>
+</li>
+</ol>
+<h2 id="自行导出为APK安装"><a class="header-anchor" href="#自行导出为APK安装">¶</a> 自行导出为 APK 安装</h2>
+<p>** 注意：你必须拥有手机的 Root 权限，并勾选<code>场景/Main/发送/按下</code>的第 6 个和第 8 个任务中的<code>使用Root运行</code>选项 **</p>
+<ol>
+<li>
+<p>Google Play 安装 <code>Tasker App Factory</code>。</p>
+</li>
+<li>
+<p>打开 Tasker，主界面左下方长按选择已经导入的项目，然后选择<code>导出\作为应用。</code></p>
+<img data-src="https://i.loli.net/2020/04/22/peARXFgoinvOJzx.png" style="zoom: 50%;">
+<blockquote>
+<p>提示：你可以通过点击<code>更名</code>重命名工程名称来修改应用名。</p>
+</blockquote>
+<img data-src="https://i.loli.net/2020/04/22/TZzLONjeHJviCp5.png" style="zoom:50%;">
+</li>
+<li>
+<p>根据提示输入包名和版本号。</p>
+<img data-src="https://i.loli.net/2020/04/22/Q7nXMpqxhB5o8a3.png" style="zoom: 50%;">
+</li>
+<li>
+<p>点击左上角返回，Tasker 会将项目以 APK 格式导出到<code>内部储存/Tasker/factory/kids</code> 并安装。</p>
+</li>
+</ol>
+<h1 id="hou-ji">后记</h1>
+<p>界面如果有问题可以自行在 Tasker 的<code>场景</code>中修改。</p>
+<p>个人能力有限，做的比较粗糙，还请不吝赐教！</p>
+<h1 id="zhi-xie">致谢</h1>
+<p>感谢 <a href="https://github.com/daibor">daibor</a> 制作了这么棒的<a href="https://github.com/daibor/nonsense.fun">项目。</a></p>
+<p>感谢少数派的 @SoSo 在评论下分享的方法启发了这个工程。</p>
 ]]></content>
       <categories>
         <category>笔记</category>
       </categories>
       <tags>
-        <tag>OpenWrt</tag>
-        <tag>MentoHUST</tag>
+        <tag>hexo</tag>
+        <tag>Tasker</tag>
+        <tag>Android</tag>
       </tags>
   </entry>
   <entry>
@@ -799,162 +901,6 @@ _   底线
       </tags>
   </entry>
   <entry>
-    <title>博客折腾笔记④- 使用 Tasker 在 Android 上实现个人动态的发送</title>
-    <url>/posts/4394c3fa.html</url>
-    <content><![CDATA[<p><a href="https://jimlee2002.github.io/posts/2b426e0a.html">前情提要</a></p>
-<p>折腾了两天，我终于是实现在 Android 上使用 Tasker 向刚搭建好的个人动态系统发送内容了。</p>
-<h1 id="xiao-guo-zhan-shi">效果展示</h1>
-<p>这是一个在 Android 上向<a href="https://github.com/daibor/nonsense.fun">废话胶囊（b 言 b 语）</a>发送内容的简单 Tasker 工程。</p>
-<p>项目地址：<a href="https://github.com/jimlee2002/nonsense.fun_tasker">https://github.com/jimlee2002/nonsense.fun_tasker</a></p>
-<img data-src="https://i.loli.net/2020/04/22/Hy7kwJL8FDr6I5O.png" style="zoom: 50%;">
-<a id="more"></a>
-<h1 id="an-zhuang-pei-zhi">安装配置</h1>
-<h2 id="直接下载安装已经导出好的apk文件"><a class="header-anchor" href="#直接下载安装已经导出好的apk文件">¶</a> 直接下载安装已经导出好的 <a href="https://github.com/jimlee2002/nonsense.fun_tasker/releases">apk 文件</a></h2>
-<p>应用使用插件 <code>Tasker App Factory</code> 导出。</p>
-<p>注意，该应用<strong>需要 root 权限</strong>。</p>
-<h2 id="导入Tasker工程"><a class="header-anchor" href="#导入Tasker工程">¶</a> 导入 Tasker 工程</h2>
-<p><strong>注意：部分手机可能需要 Root 权限才能使用，该工程默认开启<code>使用Root运行</code>，可以自行到<code>场景/Main/发送/按下</code>的第 6 个和第 8 个任务里关掉该选项</strong>。</p>
-<p><img data-src="https://i.loli.net/2020/04/22/iaTO5gAQLjnufBZ.png" style="zoom: 50%;"><img data-src="https://i.loli.net/2020/04/22/SIJivZ5L4Na9Cu3.png" style="zoom: 50%;"></p>
-<p><img data-src="https://i.loli.net/2020/04/24/c1R3x9HEzyQiTpN.png" style="zoom:50%;"><img data-src="https://i.loli.net/2020/04/22/7BoIjaJL9h6ilf1.png" style="zoom: 50%;"></p>
-<hr>
-<ol>
-<li>
-<p><a href="https://github.com/jimlee2002/nonsense.fun_tasker/releases">下载</a><code>bb.prj.xml</code>，存入到手机任意你找得到的位置。</p>
-</li>
-<li>
-<p>下载安装 Tasker。</p>
-</li>
-<li>
-<p>进入主界面长按左下角的按钮，点击<code>导入项目</code>，在打开的界面中找到并打开刚才存入的 <code>bb.prj.xml。</code></p>
-<p><img data-src="https://i.loli.net/2020/04/22/mpwnk2ZWvMc6uSU.png" style="zoom: 50%;"><img data-src="https://i.loli.net/2020/04/22/3Zc2KIWVfBzhiDM.png" style="zoom: 50%;"></p>
-<blockquote>
-<p>提示：点击右下角的手机按钮可以快速回到内部储存空间目录</p>
-</blockquote>
-</li>
-<li>
-<p>完成后回到主界面，点击应用栏里图标长得和 Tasker 很像的 <code>Tasker Secondary</code>，打开界面。</p>
-<p><img data-src="https://i.loli.net/2020/04/22/Gju9BY64UsWlvTw.png" style="zoom: 50%;"><img data-src="https://i.loli.net/2020/04/22/Hy7kwJL8FDr6I5O.png" style="zoom: 50%;"></p>
-</li>
-<li>
-<p><strong>长按</strong>发送按钮，打开设置页面进行必要设置。</p>
-<img data-src="https://i.loli.net/2020/04/22/YM5CJ6vb4OIdemy.png" style="zoom: 50%;">
-<p><strong>Title：</strong> 这里是发送界面顶端的文字，请随意修改。</p>
-<p><strong>AppID、MasterKey：</strong> 网页打开 LeanCloud，在你的项目里点击<code>设置/应用Keys</code>，复制对应的密钥分别填入。</p>
-<p><img data-src="https://i.loli.net/2020/04/20/Kaxt5GOo3LRgMmy.png" alt=""></p>
-<p><strong>className：</strong> 一般是 <code>content</code>，只要你是按照<a href="https://sspai.com/post/60024">少数派的指南</a>来做的话。</p>
-<p><strong>–insecure：</strong> 是否在脚本命令末尾加上 <code>--insecue</code>。参数默认关闭，如果无法发送可以尝试打开这个选项试试。</p>
-<p><strong>完成后点击确认返回</strong>。</p>
-</li>
-</ol>
-<p>这样就配置完成了，请试试看吧！</p>
-<h1 id="tasker-gong-cheng-shi-yong-fang-fa">Tasker 工程使用方法</h1>
-<h2 id="通过-Tasker-Secondary-打开"><a class="header-anchor" href="#通过-Tasker-Secondary-打开">¶</a> 通过 Tasker Secondary 打开</h2>
-<img data-src="https://i.loli.net/2020/04/22/Gju9BY64UsWlvTw.png" style="zoom: 50%;">
-<h2 id="通过桌面小工具创建快捷方式打开"><a class="header-anchor" href="#通过桌面小工具创建快捷方式打开">¶</a> 通过桌面小工具创建快捷方式打开</h2>
-<ol>
-<li>
-<p>打开 Tasker，然后<strong>点击返回键</strong>回到主界面。</p>
-</li>
-<li>
-<p>在桌面上新建 Tasker 的桌面小部件 "任务"，在打开的界面选择 <code>Show UI</code>,</p>
-<p>在界面下方选择图标，然后点击左上角返回桌面。</p>
-<p><img data-src="https://i.loli.net/2020/04/22/QWRPd7IKmV3oXYj.png" style="zoom: 50%;"><img data-src="https://i.loli.net/2020/04/22/t5dlHRyUgDM7aKX.png" style="zoom: 50%;"></p>
-<p>完成，现在你应该能看到快捷方式了。</p>
-</li>
-</ol>
-<h2 id="自行导出为APK安装"><a class="header-anchor" href="#自行导出为APK安装">¶</a> 自行导出为 APK 安装</h2>
-<p>** 注意：你必须拥有手机的 Root 权限，并勾选<code>场景/Main/发送/按下</code>的第 6 个和第 8 个任务中的<code>使用Root运行</code>选项 **</p>
-<ol>
-<li>
-<p>Google Play 安装 <code>Tasker App Factory</code>。</p>
-</li>
-<li>
-<p>打开 Tasker，主界面左下方长按选择已经导入的项目，然后选择<code>导出\作为应用。</code></p>
-<img data-src="https://i.loli.net/2020/04/22/peARXFgoinvOJzx.png" style="zoom: 50%;">
-<blockquote>
-<p>提示：你可以通过点击<code>更名</code>重命名工程名称来修改应用名。</p>
-</blockquote>
-<img data-src="https://i.loli.net/2020/04/22/TZzLONjeHJviCp5.png" style="zoom:50%;">
-</li>
-<li>
-<p>根据提示输入包名和版本号。</p>
-<img data-src="https://i.loli.net/2020/04/22/Q7nXMpqxhB5o8a3.png" style="zoom: 50%;">
-</li>
-<li>
-<p>点击左上角返回，Tasker 会将项目以 APK 格式导出到<code>内部储存/Tasker/factory/kids</code> 并安装。</p>
-</li>
-</ol>
-<h1 id="hou-ji">后记</h1>
-<p>界面如果有问题可以自行在 Tasker 的<code>场景</code>中修改。</p>
-<p>个人能力有限，做的比较粗糙，还请不吝赐教！</p>
-<h1 id="zhi-xie">致谢</h1>
-<p>感谢 <a href="https://github.com/daibor">daibor</a> 制作了这么棒的<a href="https://github.com/daibor/nonsense.fun">项目。</a></p>
-<p>感谢少数派的 @SoSo 在评论下分享的方法启发了这个工程。</p>
-]]></content>
-      <categories>
-        <category>笔记</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-        <tag>Tasker</tag>
-        <tag>Android</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>配置 Typora &amp; PicGo 写 Hexo 博客</title>
-    <url>/posts/39aaddee.html</url>
-    <content><![CDATA[<h1 id="gong-ju-jie-shao">工具介绍</h1>
-<h2 id="you-ya-de-markdown-bian-ji-qi-typora"><a class="header-anchor" href="#优雅的Markdown编辑器-——-Typora">¶</a> 优雅的 Markdown 编辑器 —— Typora</h2>
-<p><a href="https://www.typora.io/">官网</a></p>
-<p>简约、舒适、优雅，这是我对它的第一眼评价。</p>
-<p>完善的功能、所见即所得、自定义主题、拓展语法支持、良好的图片插入管理、数学支持、专注模式、打字机模式……</p>
-<p>以及免费 —— 这些都是我毫不犹豫下载安装它的原因。</p>
-<p>展现在我面前的它果然没有让我失望，漂亮的界面让我觉得原来的 VS Code 瞬间就不香了。</p>
-<p>当然，它的实力，还仅不限于此……</p>
-<a id="more"></a>
-<h2 id="xiao-qiao-de-tu-pian-shang-chuan-gong-ju-pic-go"><a class="header-anchor" href="#小巧的图片上传工具——PicGo">¶</a> 小巧的图片上传工具 ——PicGo</h2>
-<p><a href="https://molunerfinn.com/PicGo/">官网</a></p>
-<p>这是一个开源的体积小巧，功能强大的图床工具。</p>
-<p>它支持自建图床和多个常用图床，可以方便地对上传了的进行管理，还能安装拓展插件，实现截图上传、加水印上传等功能。</p>
-<p>但更重要的是，Typora 支持通过它实现拖入到文章中的图片上传图床并替换掉文中图片地址</p>
-<p>Awsome！有了它，再也不用手动上传图床复制链接了！</p>
-<p>下面就来配置下二者的结合使用。</p>
-<h1 id="er-zhe-pei-zhi">二者配置</h1>
-<h2 id="pei-zhi-pic-go-de-shang-chuan-she-zhi"><a class="header-anchor" href="#配置PicGo的上传设置">¶</a> 配置 PicGo 的上传设置</h2>
-<p>此处以 sm.ms 的注册图床为例，其他图床请参考<a href="https://picgo.github.io/PicGo-Doc/zh/guide/getting-started.html">官方文档</a></p>
-<ol>
-<li>
-<p><a href="http://xn--sm-5p3dp06f.ms">登录 sm.ms</a>，获取 API token，复制备用</p>
-<p><img data-src="https://i.loli.net/2020/03/21/wnxrfcZzPtvJk58.png" alt=""></p>
-</li>
-</ol>
-<img data-src="https://i.loli.net/2020/03/21/TYJIjPBk2lAHXgr.png" style="zoom: 80%;">
-<ol start="2">
-<li>
-<p>打开 PicGo，插件设置中输入 smms-user 并安装对应插件，</p>
-<img data-src="https://i.loli.net/2020/03/21/lk4dTXfQF1syWir.png" style="zoom:80%;">
-<p>安装完成后在图床设置里新出现的 <strong>SM.MS - 登录用户</strong>中输入刚才获得的 token，点击确定和设为默认图床</p>
-<img data-src="https://i.loli.net/2020/03/21/n9kpCUiR62EtjOV.png" style="zoom:80%;">
-</li>
-</ol>
-<p>此处 PicGo 配置完成</p>
-<h2 id="pei-zhi-typora"><a class="header-anchor" href="#配置Typora">¶</a> 配置 Typora</h2>
-<p>快捷键 <code>ctrl+逗号</code>打开偏好设置，进入 ``图像` 选项进行如下设置：</p>
-<img data-src="https://i.loli.net/2020/03/21/JBxqTtkSZ59wL2y.png" style="zoom:80%;">
-<p>其中<code>上传服务设定</code>中 <code>PicGo路径</code>一栏请根据自身情况填写 PicGo 的安装路径。</p>
-<p>如果需要上传网络上复制的图片到自己的图床，请勾选<code>插入图片时…</code> 中的<code>对网络位置的图片应用上述规则</code>。</p>
-<p>设置完后点击<code>验证图片上传选项</code>进行测试，成功即设置完成。</p>
-<p>Typora 和 PicGo 里各自的功能就不再展示了，这里仅作二者结合使用的介绍，其他请自行探索！</p>
-]]></content>
-      <categories>
-        <category>笔记</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-        <tag>图床</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>在 WSL2 上进行 OpenWrt 的编译</title>
     <url>/posts/3a5c40a1.html</url>
     <content><![CDATA[<h1 id="an-zhuang-wsl">安装 WSL</h1>
@@ -1027,6 +973,60 @@ _   底线
       <tags>
         <tag>OpenWrt</tag>
         <tag>WSL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>配置 Typora &amp; PicGo 写 Hexo 博客</title>
+    <url>/posts/39aaddee.html</url>
+    <content><![CDATA[<h1 id="gong-ju-jie-shao">工具介绍</h1>
+<h2 id="you-ya-de-markdown-bian-ji-qi-typora"><a class="header-anchor" href="#优雅的Markdown编辑器-——-Typora">¶</a> 优雅的 Markdown 编辑器 —— Typora</h2>
+<p><a href="https://www.typora.io/">官网</a></p>
+<p>简约、舒适、优雅，这是我对它的第一眼评价。</p>
+<p>完善的功能、所见即所得、自定义主题、拓展语法支持、良好的图片插入管理、数学支持、专注模式、打字机模式……</p>
+<p>以及免费 —— 这些都是我毫不犹豫下载安装它的原因。</p>
+<p>展现在我面前的它果然没有让我失望，漂亮的界面让我觉得原来的 VS Code 瞬间就不香了。</p>
+<p>当然，它的实力，还仅不限于此……</p>
+<a id="more"></a>
+<h2 id="xiao-qiao-de-tu-pian-shang-chuan-gong-ju-pic-go"><a class="header-anchor" href="#小巧的图片上传工具——PicGo">¶</a> 小巧的图片上传工具 ——PicGo</h2>
+<p><a href="https://molunerfinn.com/PicGo/">官网</a></p>
+<p>这是一个开源的体积小巧，功能强大的图床工具。</p>
+<p>它支持自建图床和多个常用图床，可以方便地对上传了的进行管理，还能安装拓展插件，实现截图上传、加水印上传等功能。</p>
+<p>但更重要的是，Typora 支持通过它实现拖入到文章中的图片上传图床并替换掉文中图片地址</p>
+<p>Awsome！有了它，再也不用手动上传图床复制链接了！</p>
+<p>下面就来配置下二者的结合使用。</p>
+<h1 id="er-zhe-pei-zhi">二者配置</h1>
+<h2 id="pei-zhi-pic-go-de-shang-chuan-she-zhi"><a class="header-anchor" href="#配置PicGo的上传设置">¶</a> 配置 PicGo 的上传设置</h2>
+<p>此处以 sm.ms 的注册图床为例，其他图床请参考<a href="https://picgo.github.io/PicGo-Doc/zh/guide/getting-started.html">官方文档</a></p>
+<ol>
+<li>
+<p><a href="http://xn--sm-5p3dp06f.ms">登录 sm.ms</a>，获取 API token，复制备用</p>
+<p><img data-src="https://i.loli.net/2020/03/21/wnxrfcZzPtvJk58.png" alt=""></p>
+</li>
+</ol>
+<img data-src="https://i.loli.net/2020/03/21/TYJIjPBk2lAHXgr.png" style="zoom: 80%;">
+<ol start="2">
+<li>
+<p>打开 PicGo，插件设置中输入 smms-user 并安装对应插件，</p>
+<img data-src="https://i.loli.net/2020/03/21/lk4dTXfQF1syWir.png" style="zoom:80%;">
+<p>安装完成后在图床设置里新出现的 <strong>SM.MS - 登录用户</strong>中输入刚才获得的 token，点击确定和设为默认图床</p>
+<img data-src="https://i.loli.net/2020/03/21/n9kpCUiR62EtjOV.png" style="zoom:80%;">
+</li>
+</ol>
+<p>此处 PicGo 配置完成</p>
+<h2 id="pei-zhi-typora"><a class="header-anchor" href="#配置Typora">¶</a> 配置 Typora</h2>
+<p>快捷键 <code>ctrl+逗号</code>打开偏好设置，进入 ``图像` 选项进行如下设置：</p>
+<img data-src="https://i.loli.net/2020/03/21/JBxqTtkSZ59wL2y.png" style="zoom:80%;">
+<p>其中<code>上传服务设定</code>中 <code>PicGo路径</code>一栏请根据自身情况填写 PicGo 的安装路径。</p>
+<p>如果需要上传网络上复制的图片到自己的图床，请勾选<code>插入图片时…</code> 中的<code>对网络位置的图片应用上述规则</code>。</p>
+<p>设置完后点击<code>验证图片上传选项</code>进行测试，成功即设置完成。</p>
+<p>Typora 和 PicGo 里各自的功能就不再展示了，这里仅作二者结合使用的介绍，其他请自行探索！</p>
+]]></content>
+      <categories>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>图床</tag>
       </tags>
   </entry>
   <entry>
