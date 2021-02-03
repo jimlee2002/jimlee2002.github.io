@@ -24,12 +24,12 @@
 
 <script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"jimlee2002.github.io","root":"/","images":"/images","scheme":"Gemini","version":"8.2.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+    var CONFIG = {"hostname":"jiml.ee","root":"/","images":"/images","scheme":"Gemini","version":"8.2.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
 <meta name="description" content="今天在少数派上看到一篇搭建类似微博的个人动态页面的指南，我非常感高兴：出于对实现私密树洞分享心情的需要以及言论审查的苦恼，我想在博客上实现这样的功能很久了。感谢原作者为不懂技术的脚本小子我造好了轮子，接下来只需简单配置即可实现所需功能了。 以下是我的配置过程：  参考文章：保卫表达：用后端 BaaS 快速搭建专属无点赞评论版微博 ——b 言 b 语">
 <meta property="og:type" content="article">
 <meta property="og:title" content="博客折腾笔记③- 搭建个人动态页面 iM">
-<meta property="og:url" content="https://jimlee2002.github.io/posts/2b426e0a.html">
+<meta property="og:url" content="https://jiml.ee/posts/2b426e0a.html">
 <meta property="og:site_name" content="Jim&#39;s Blog">
 <meta property="og:description" content="今天在少数派上看到一篇搭建类似微博的个人动态页面的指南，我非常感高兴：出于对实现私密树洞分享心情的需要以及言论审查的苦恼，我想在博客上实现这样的功能很久了。感谢原作者为不懂技术的脚本小子我造好了轮子，接下来只需简单配置即可实现所需功能了。 以下是我的配置过程：  参考文章：保卫表达：用后端 BaaS 快速搭建专属无点赞评论版微博 ——b 言 b 语">
 <meta property="og:locale" content="zh_CN">
@@ -46,7 +46,7 @@
 <meta name="twitter:image" content="https://i.loli.net/2020/04/20/cgBW2ryuwPd1iXf.png">
 
 
-<link rel="canonical" href="https://jimlee2002.github.io/posts/2b426e0a.html">
+<link rel="canonical" href="https://jiml.ee/posts/2b426e0a.html">
 
 
 <script data-pjax class="page-configurations">
@@ -276,7 +276,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://jimlee2002.github.io/posts/2b426e0a.html">
+    <link itemprop="mainEntityOfPage" href="https://jiml.ee/posts/2b426e0a.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -377,7 +377,7 @@
 <p><img data-src="https://i.loli.net/2020/04/20/QAK8tCqRg79GyNL.png" alt=""></p>
 <p>尝试发送一次请求，如果配置正确，在 LeanCloud 的后台刷新就能看到一条记录了。<strong>此后的删除、修改，都需要通过该后台进行。</strong></p>
 <h2 id="android"><a class="header-anchor" href="#Android">¶</a>Android</h2>
-<p>请参考我的<a href="https://jimlee2002.github.io/posts/4394c3fa.html">另一篇文章</a></p>
+<p>请参考我的<a target="_blank" rel="noopener" href="https://jimlee2002.github.io/posts/4394c3fa.html">另一篇文章</a></p>
 <h1 id="zai-bo-ke-shang-tian-jia-jie-mian">在博客上添加界面</h1>
 <p>在博客 <code>/source</code> 下新建文件夹 <code>iM</code></p>
 <p>下载作者提供的<a target="_blank" rel="noopener" href="https://github.com/daibor/nonsense.fun">页面文件</a></p>
@@ -410,10 +410,10 @@
       <div class="popular-posts-title"><a href="\posts\3a4e373e.html" rel="bookmark">博客折腾笔记②-hexo 的优化</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\posts\4394c3fa.html" rel="bookmark">博客折腾笔记④- 使用 Tasker 在 Android 上实现个人动态的发送</a></div>
+      <div class="popular-posts-title"><a href="\posts\39aaddee.html" rel="bookmark">配置 Typora & PicGo 写 Hexo 博客</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\posts\39aaddee.html" rel="bookmark">配置 Typora & PicGo 写 Hexo 博客</a></div>
+      <div class="popular-posts-title"><a href="\posts\4394c3fa.html" rel="bookmark">博客折腾笔记④- 使用 Tasker 在 Android 上实现个人动态的发送</a></div>
     </li>
     <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="\posts\c54c0f26.html" rel="bookmark">博客折腾笔记①-hexo 部署与自定义</a></div>
@@ -431,7 +431,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://jimlee2002.github.io/posts/2b426e0a.html" title="博客折腾笔记③- 搭建个人动态页面 iM">https://jimlee2002.github.io/posts/2b426e0a.html</a>
+      <a href="https://jiml.ee/posts/2b426e0a.html" title="博客折腾笔记③- 搭建个人动态页面 iM">https://jiml.ee/posts/2b426e0a.html</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
