@@ -89,6 +89,7 @@
   </style>
 </noscript>
 
+<link rel="alternate" href="/atom.xml" title="Jim's Blog" type="application/atom+xml">
 <style>mjx-container[jax="SVG"] {
   direction: ltr;
 }
@@ -206,8 +207,7 @@ mjx-container[display="true"] {
 mjx-container[display="true"] + br {
   display: none;
 }
-</style><link rel="alternate" href="/atom.xml" title="Jim's Blog" type="application/atom+xml">
-</head>
+</style></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
   <div class="headband"></div>
@@ -248,6 +248,7 @@ mjx-container[display="true"] + br {
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
         <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -439,7 +440,7 @@ mjx-container[display="true"] + br {
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>896</span>
+      <span>916</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -459,10 +460,10 @@ mjx-container[display="true"] + br {
     <div class="post-body" itemprop="articleBody">
           <h1 id="zhun-bei-gong-zuo">准备工作</h1>
 <ul>
-<li>一台刷好 OpenWrt 的路由器</li>
-<li>编译好的对应路由器架构的 <code>mentohust</code> 可执行文件 </li>
+<li>一台刷好OpenWrt的路由器</li>
+<li>编译好的对应路由器架构的<code>mentohust</code>可执行文件</li>
 <li><a target="_blank" rel="noopener" href="https://winscp.net/eng/download.php">WinSCP</a></li>
-<li>SSH 工具（如 PuTTY、XShell、MobaXterm）</li>
+<li>SSH工具（如PuTTY、XShell、MobaXterm）</li>
 </ul>
           <!--noindex-->
             <div class="post-button">
@@ -567,7 +568,7 @@ mjx-container[display="true"] + br {
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>为使得 MentoHUST 在路由器上依然可用，需要对 MentoHUST 针对自己路由器的芯片架构进行交叉编译。本文以使用 <strong>MT7620</strong> 的路由器平台为例，主要提供 WSL 下对 MentoHUST 进行交叉编译的实例。</p>
+          <p>为使得MentoHUST在路由器上依然可用，需要对MentoHUST针对自己路由器的芯片架构进行交叉编译。本文以使用<strong>MT7620</strong>的路由器平台为例，主要提供WSL下对MentoHUST进行交叉编译的实例。</p>
 <p>限于能力与水平，本文有许多遗漏与不足之处，还请多多指教。</p>
           <!--noindex-->
             <div class="post-button">
@@ -654,7 +655,7 @@ mjx-container[display="true"] + br {
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>826</span>
+      <span>821</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -673,9 +674,9 @@ mjx-container[display="true"] + br {
     
     <div class="post-body" itemprop="articleBody">
           <h1 id="zhun-bei-gong-zuo">准备工作</h1>
-<p>以下所以操作都基于 <code>/home</code> 进行，用户名为 <code>jim</code>。</p>
-<h2 id="an-zhuang-xiang-guan-yi-lai"><a class="header-anchor" href="#安装相关依赖">¶</a> 安装相关依赖</h2>
-<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install build-essential bison flex zlib1g-dev libncurses5-dev subversion quilt intltool ruby fastjar unzip gawk autogen autopoint ccache gettext libssl-dev xsltproc zip git</span><br></pre></td></tr></tbody></table></figure>
+<p>以下所以操作都基于<code>/home</code>进行，用户名为<code>jim</code>。</p>
+<h2 id="an-zhuang-xiang-guan-yi-lai" id="安装相关依赖"><a class="header-anchor" href="#安装相关依赖"></a>安装相关依赖</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install build-essential bison flex zlib1g-dev libncurses5-dev subversion quilt intltool ruby fastjar unzip gawk autogen autopoint ccache gettext libssl-dev xsltproc zip git</span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/posts/5ed2bcfa.html#more" rel="contents">
@@ -767,14 +768,14 @@ mjx-container[display="true"] + br {
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>2.7k</span>
+      <span>3.1k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>5 分钟</span>
+      <span>6 分钟</span>
     </span>
 </div>
 
@@ -785,7 +786,7 @@ mjx-container[display="true"] + br {
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="an-zhuang-wsl">安装 WSL</h1>
+          <h1 id="an-zhuang-wsl">安装WSL</h1>
 <ul>
 <li>从 Microsoft Store 安装 WSL：略</li>
 <li>使用 LxRunOffline 安装 WSL：参考 <a target="_blank" rel="noopener" href="https://p3terx.com/archives/manage-wsl-with-lxrunoffline.html">LxRunOffline</a> 和 @P3TERX 的博客<a target="_blank" rel="noopener" href="https://p3terx.com/archives/manage-wsl-with-lxrunoffline.html">《WSL 自定义安装目录、备份转移、设置默认用户 - LxRunOffline 使用教程》</a>。</li>
@@ -897,11 +898,11 @@ mjx-container[display="true"] + br {
 <ul>
 <li>
 <p>依赖安装</p>
-  <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get -y install build-essential asciidoc binutils bzip2 gawk gettext git libncurses5-dev libz-dev patch python3 python2.7 unzip zlib1g-dev lib32gcc1 libc6-dev-i386 subversion flex uglifyjs git-core gcc-multilib p7zip p7zip-full msmtp libssl-dev texinfo libglib2.0-dev xmlto qemu-utils upx libelf-dev autoconf automake libtool autopoint device-tree-compiler g++-multilib antlr3 gperf wget curl swig rsync</span><br></pre></td></tr></tbody></table></figure>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get -y install build-essential asciidoc binutils bzip2 gawk gettext git libncurses5-dev libz-dev patch python3 python2.7 unzip zlib1g-dev lib32gcc1 libc6-dev-i386 subversion flex uglifyjs git-core gcc-multilib p7zip p7zip-full msmtp libssl-dev texinfo libglib2.0-dev xmlto qemu-utils upx libelf-dev autoconf automake libtool autopoint device-tree-compiler g++-multilib antlr3 gperf wget curl swig rsync</span><br></pre></td></tr></table></figure>
 </li>
 <li>
 <p>代码下载，进入目录</p>
-  <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/coolsnowwolf/lede</span><br><span class="line"><span class="built_in">cd</span> lede</span><br></pre></td></tr></tbody></table></figure>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/coolsnowwolf/lede</span><br><span class="line"><span class="built_in">cd</span> lede</span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/posts/a5ac1d77.html#more" rel="contents">
@@ -1014,9 +1015,9 @@ mjx-container[display="true"] + br {
           <p><a target="_blank" rel="noopener" href="https://jimlee2002.github.io/posts/2b426e0a.html">前情提要</a></p>
 <p>折腾了两天，我终于是实现在 Android 上使用 Tasker 向刚搭建好的个人动态系统发送内容了。</p>
 <h1 id="xiao-guo-zhan-shi">效果展示</h1>
-<p>这是一个在 Android 上向<a target="_blank" rel="noopener" href="https://github.com/daibor/nonsense.fun">废话胶囊（b 言 b 语）</a>发送内容的简单 Tasker 工程。</p>
+<p>这是一个在 Android 上向<a target="_blank" rel="noopener" href="https://github.com/daibor/nonsense.fun">废话胶囊（b言b语）</a>发送内容的简单 Tasker 工程。</p>
 <p>项目地址：<a target="_blank" rel="noopener" href="https://github.com/jimlee2002/nonsense.fun_tasker">https://github.com/jimlee2002/nonsense.fun_tasker</a></p>
-<img src="https://i.loli.net/2020/04/22/Hy7kwJL8FDr6I5O.png" style="zoom: 50%;">
+<img data-src="https://i.loli.net/2020/04/22/Hy7kwJL8FDr6I5O.png" style="zoom: 50%;">
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/posts/4394c3fa.html#more" rel="contents">
@@ -1129,7 +1130,7 @@ mjx-container[display="true"] + br {
           <p>今天在少数派上看到一篇搭建类似微博的个人动态页面的指南，我非常感高兴：出于对实现私密树洞分享心情的需要以及言论审查的苦恼，我想在博客上实现这样的功能很久了。感谢原作者为不懂技术的脚本小子我造好了轮子，接下来只需简单配置即可实现所需功能了。</p>
 <p>以下是我的配置过程：</p>
 <blockquote>
-<p>参考文章：<a target="_blank" rel="noopener" href="https://sspai.com/post/60024">保卫表达：用后端 BaaS 快速搭建专属无点赞评论版微博 ——b 言 b 语</a></p>
+<p>参考文章：<a target="_blank" rel="noopener" href="https://sspai.com/post/60024">保卫表达：用后端 BaaS 快速搭建专属无点赞评论版微博——b言b语</a></p>
 </blockquote>
           <!--noindex-->
             <div class="post-button">
@@ -1222,14 +1223,14 @@ mjx-container[display="true"] + br {
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>2.2k</span>
+      <span>2.6k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>4 分钟</span>
+      <span>5 分钟</span>
     </span>
 </div>
 
@@ -1241,8 +1242,8 @@ mjx-container[display="true"] + br {
     
     <div class="post-body" itemprop="articleBody">
           <h1 id="wen-zhang-yong-jiu-lian-jie-wei-yi-hua">文章永久链接唯一化</h1>
-<p>为解决 hexo 默认设置下改变源文件名或使用中文标题带来的文章链接问题，这里使用 <code>hexo-abbrlink</code> 插件来解决问题</p>
-<figure class="highlight nginx"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">npm</span> install hexo-abbrlink --save</span><br></pre></td></tr></tbody></table></figure>
+<p>为解决hexo默认设置下改变源文件名或使用中文标题带来的文章链接问题，这里使用<code>hexo-abbrlink</code>插件来解决问题</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">npm</span> install hexo-abbrlink --save</span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/posts/3a4e373e.html#more" rel="contents">
@@ -1334,7 +1335,7 @@ mjx-container[display="true"] + br {
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>5k</span>
+      <span>5.1k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -1353,10 +1354,10 @@ mjx-container[display="true"] + br {
     
     <div class="post-body" itemprop="articleBody">
           <blockquote>
-<p><strong>写在前面</strong>：本文大量复制和借鉴了<a target="_blank" rel="noopener" href="http://bbs.wuyou.net/forum.php?mod=viewthread&amp;tid=410612&amp;extra=page%3D1">无忧启动论坛 @ddsony 的教程内容</a>，没有他的帖子就没有我的这篇折腾笔记，十分感谢他帖子的详细指引！</p>
+<p><strong>写在前面</strong>：本文大量复制和借鉴了<a target="_blank" rel="noopener" href="http://bbs.wuyou.net/forum.php?mod=viewthread&amp;tid=410612&amp;extra=page%3D1">无忧启动论坛@ddsony的教程内容</a>，没有他的帖子就没有我的这篇折腾笔记，十分感谢他帖子的详细指引！</p>
 </blockquote>
-<p>手上有一块闲置 SSD（建兴 T9，128G），想将它利用上来做一块多合一移动系统盘方便随身应急使用。</p>
-<p>上网冲浪偶然发现还有系统 All in One 移动硬盘的玩法，于是打算折腾一下</p>
+<p>手上有一块闲置SSD（建兴T9，128G），想将它利用上来做一块多合一移动系统盘方便随身应急使用。</p>
+<p>上网冲浪偶然发现还有系统All in One移动硬盘的玩法，于是打算折腾一下</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/posts/2af4a4f4.html#more" rel="contents">
@@ -1448,7 +1449,7 @@ mjx-container[display="true"] + br {
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>726</span>
+      <span>722</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -1467,11 +1468,11 @@ mjx-container[display="true"] + br {
     
     <div class="post-body" itemprop="articleBody">
           <h1 id="gong-ju-jie-shao">工具介绍</h1>
-<h2 id="you-ya-de-markdown-bian-ji-qi-typora"><a class="header-anchor" href="#优雅的Markdown编辑器-——-Typora">¶</a> 优雅的 Markdown 编辑器 —— Typora</h2>
+<h2 id="you-ya-de-markdown-bian-ji-qi-typora" id="优雅的Markdown编辑器-——-Typora"><a class="header-anchor" href="#优雅的Markdown编辑器-——-Typora"></a>优雅的Markdown编辑器 —— Typora</h2>
 <p><a target="_blank" rel="noopener" href="https://www.typora.io/">官网</a></p>
 <p>简约、舒适、优雅，这是我对它的第一眼评价。</p>
 <p>完善的功能、所见即所得、自定义主题、拓展语法支持、良好的图片插入管理、数学支持、专注模式、打字机模式……</p>
-<p>以及免费 —— 这些都是我毫不犹豫下载安装它的原因。</p>
+<p>以及免费——这些都是我毫不犹豫下载安装它的原因。</p>
 <p>展现在我面前的它果然没有让我失望，漂亮的界面让我觉得原来的 VS Code 瞬间就不香了。</p>
 <p>当然，它的实力，还仅不限于此……</p>
           <!--noindex-->
@@ -1533,7 +1534,7 @@ mjx-container[display="true"] + br {
 
 
 <div class="copyright">
-  &copy; 2019 – 
+  &copy; 2018 – 
   <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>

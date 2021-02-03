@@ -21,9 +21,9 @@
 <p>搜索引擎认为对于一般的中小型站点，3 层足够承受所有的内容了，所以蜘蛛经常抓取的内容是前三层，而超过三层的内容蜘蛛认为那些内容并不重要，所以不经常爬取。出于这个原因所以 permalink 后面跟着的最好不要超过 2 个斜杠。[^]</p>
 </blockquote>
 <h1 id="xin-she-bei-shang-hui-fu-bo-ke-bei-fen-de-wen-ti-jie-jue">新设备上恢复博客备份的问题解决</h1>
-<h2 id="code-sudo-npm-install-code-shi-bai"><a class="header-anchor" href="#sudo-npm-install-失败">¶</a><code>sudo npm install </code>失败</h2>
+<h2 id="code-sudo-npm-install-code-shi-bai"><a class="header-anchor" href="#sudo-npm-install-失败"></a><code>sudo npm install </code>失败</h2>
 <p>解决方案：不要用 <code>sudo</code>, 直接 <code>npm install</code> 就好</p>
-<h2 id="code-hexo-b-code-bao-cuo"><a class="header-anchor" href="#hexo-b报错">¶</a><code>hexo b</code> 报错</h2>
+<h2 id="code-hexo-b-code-bao-cuo"><a class="header-anchor" href="#hexo-b报错"></a><code>hexo b</code> 报错</h2>
 <p>在新装的 UTG 上恢复 Blog，最后执行 <code>hexo b</code> 的时候报错了</p>
 <figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">fatal: <span class="string">'github'</span> does not appear to be a git repository</span><br><span class="line">fatal: 无法读取远程仓库。</span><br><span class="line"></span><br><span class="line">请确认您有正确的访问权限并且仓库存在。</span><br></pre></td></tr></tbody></table></figure>
 <p>翻了翻插件的 issuse，看到了相似的问题<a href="https://github.com/coneycode/hexo-git-backup/issues/20">#20</a></p>
@@ -33,15 +33,15 @@
 <p>再次尝试，问题解决</p>
 <h1 id="hexo-wen-zhang-jia-mi">Hexo 文章加密</h1>
 <p>使用插件 <a href="https://github.com/MikeCoder/hexo-blog-encrypt">hexo-blog-encrypt</a></p>
-<h2 id="an-zhuang"><a class="header-anchor" href="#安装">¶</a> 安装</h2>
+<h2 id="an-zhuang"><a class="header-anchor" href="#安装"></a>安装</h2>
 <figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">npm install --save hexo-blog-encrypt</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="shi-yong"><a class="header-anchor" href="#使用">¶</a> 使用</h2>
+<h2 id="shi-yong"><a class="header-anchor" href="#使用"></a>使用</h2>
 <p>在文章信息头添加 <code>password</code> 字段</p>
 <figure class="highlight yaml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">Hello</span> <span class="string">World</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2016-03-30 21:18:02</span></span><br><span class="line"><span class="attr">password:</span> <span class="string">mikemessi</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></tbody></table></figure>
 <p>也可以在文章信息头单独自定义密码输入交互信息</p>
 <figure class="highlight yaml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">Hello</span> <span class="string">World</span></span><br><span class="line"><span class="attr">tags:</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">作为日记加密</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2016-03-30 21:12:21</span></span><br><span class="line"><span class="attr">password:</span> <span class="string">mikemessi</span></span><br><span class="line"><span class="attr">abstract:</span> <span class="string">有东西被加密了,</span> <span class="string">请输入密码查看.</span></span><br><span class="line"><span class="attr">message:</span> <span class="string">您好,</span> <span class="string">这里需要密码.</span></span><br><span class="line"><span class="attr">wrong_pass_message:</span> <span class="string">抱歉,</span> <span class="string">这个密码看着不太对,</span> <span class="string">请再试试.</span></span><br><span class="line"><span class="attr">wrong_hash_message:</span> <span class="string">抱歉,</span> <span class="string">这个文章不能被校验,</span> <span class="string">不过您还是能看看解密后的内容.</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></tbody></table></figure>
-<h2 id="jin-jie"><a class="header-anchor" href="#进阶">¶</a> 进阶</h2>
-<h3 id="quan-ju-pei-zhi"><a class="header-anchor" href="#全局配置">¶</a> 全局配置</h3>
+<h2 id="jin-jie"><a class="header-anchor" href="#进阶"></a>进阶</h2>
+<h3 id="quan-ju-pei-zhi"><a class="header-anchor" href="#全局配置"></a>全局配置</h3>
 <p>在站点根目录下的<code>_config.yml</code> 里可以添加以下内容进行全局配置</p>
 <figure class="highlight yaml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># Security</span></span><br><span class="line"><span class="attr">encrypt:</span> <span class="comment"># hexo-blog-encrypt</span></span><br><span class="line">  <span class="attr">abstract:</span> <span class="string">有东西被加密了,</span> <span class="string">请输入密码查看.</span></span><br><span class="line">  <span class="attr">message:</span> <span class="string">您好,</span> <span class="string">这里需要密码.</span></span><br><span class="line">  <span class="attr">tags:</span></span><br><span class="line">  <span class="bullet">-</span> {<span class="attr">name:</span> <span class="string">tagName</span>, <span class="attr">password:</span> <span class="string">密码A</span>}</span><br><span class="line">  <span class="bullet">-</span> {<span class="attr">name:</span> <span class="string">tagName</span>, <span class="attr">password:</span> <span class="string">密码B</span>}</span><br><span class="line">  <span class="attr">template:</span> <span class="string">&lt;div</span> <span class="string">id="hexo-blog-encrypt"</span> <span class="string">data-wpm="{{hbeWrongPassMessage}}"</span> <span class="string">data-whm="{{hbeWrongHashMessage}}"&gt;&lt;div</span> <span class="string">class="hbe-input-container"&gt;&lt;input</span> <span class="string">type="password"</span> <span class="string">id="hbePass"</span> <span class="string">placeholder="{{hbeMessage}}"</span> <span class="string">/&gt;&lt;label&gt;{{hbeMessage}}&lt;/label&gt;&lt;div</span> <span class="string">class="bottom-line"&gt;&lt;/div&gt;&lt;/div&gt;&lt;script</span> <span class="string">id="hbeData"</span> <span class="string">type="hbeData"</span> <span class="string">data-hmacdigest="{{hbeHmacDigest}}"&gt;{{hbeEncryptedData}}&lt;/script&gt;&lt;/div&gt;</span></span><br><span class="line">  <span class="attr">wrong_pass_message:</span> <span class="string">抱歉,</span> <span class="string">这个密码看着不太对,</span> <span class="string">请再试试.</span></span><br><span class="line">  <span class="attr">wrong_hash_message:</span> <span class="string">抱歉,</span> <span class="string">这个文章不能被校验,</span> <span class="string">不过您还是能看看解密后的内容.</span></span><br></pre></td></tr></tbody></table></figure>
 <p>配置优先级是</p>
@@ -55,18 +55,74 @@
       </tags>
   </entry>
   <entry>
+    <title>博客折腾笔记③- 搭建个人动态页面 iM</title>
+    <url>/posts/2b426e0a.html</url>
+    <content><![CDATA[<p>今天在少数派上看到一篇搭建类似微博的个人动态页面的指南，我非常感高兴：出于对实现私密树洞分享心情的需要以及言论审查的苦恼，我想在博客上实现这样的功能很久了。感谢原作者为不懂技术的脚本小子我造好了轮子，接下来只需简单配置即可实现所需功能了。</p>
+<p>以下是我的配置过程：</p>
+<blockquote>
+<p>参考文章：<a href="https://sspai.com/post/60024">保卫表达：用后端 BaaS 快速搭建专属无点赞评论版微博 ——b 言 b 语</a></p>
+</blockquote>
+<a id="more"></a>
+<h1 id="pei-zhi-hou-duan-baa-s">配置后端 BaaS</h1>
+<p>这里使用 <a href="https://leancloud.app/">LeanCloud 国际版</a></p>
+<p>登入后创建应用并命名</p>
+<p>进入新建好的应用，点击<code>新建Class</code>，将新建的 Class 命名为 content</p>
+<p>同时设置下方 create 、delete 、update 三项权限为” 指定用户 “，其他权限默认即可</p>
+<p><img data-src="https://i.loli.net/2020/04/20/cgBW2ryuwPd1iXf.png" alt=""></p>
+<p>点击刚创建的 content Class</p>
+<p>点击 添加列 并创建名称为 content 的「列」，类型为 String</p>
+<p><img data-src="https://i.loli.net/2020/04/20/vLmAcuBIGPUZK4x.png" alt=""></p>
+<p><img data-src="https://i.loli.net/2020/04/20/czwJRK4F75DsPbA.png" alt=""></p>
+<p>完成后点击左侧<code>设置</code> - <code>应用 Keys</code>，记录三组 Keys 备用</p>
+<p><img data-src="https://i.loli.net/2020/04/20/Kaxt5GOo3LRgMmy.png" alt=""></p>
+<h1 id="pei-zhi-ke-hu-duan-fa-song-gong-ju">配置客户端发送工具</h1>
+<h2 id="winodws-shi-yong-a-href-https-www-getquicker-net-quicker-a"><a class="header-anchor" href="#Winodws：使用Quicker"></a>Winodws：使用 <a href="https://www.getquicker.net/">Quicker</a></h2>
+<p>Quicker 模板地址：<a href="https://getquicker.net/sharedaction?code=eeb80278-5f53-4b0d-d333-08d7e0dd26a9">点击安装</a></p>
+<p>安装模板后右键编辑模板，修改变量定义和其他内容</p>
+<p><img data-src="https://i.loli.net/2020/04/20/QAK8tCqRg79GyNL.png" alt=""></p>
+<p>尝试发送一次请求，如果配置正确，在 LeanCloud 的后台刷新就能看到一条记录了。<strong>此后的删除、修改，都需要通过该后台进行。</strong></p>
+<h2 id="android"><a class="header-anchor" href="#Android"></a>Android</h2>
+<p>请参考我的<a href="https://jimlee2002.github.io/posts/4394c3fa.html">另一篇文章</a></p>
+<h1 id="zai-bo-ke-shang-tian-jia-jie-mian">在博客上添加界面</h1>
+<p>在博客 <code>/source</code> 下新建文件夹 <code>iM</code></p>
+<p>下载作者提供的<a href="https://github.com/daibor/nonsense.fun">页面文件</a></p>
+<p>将其复制到 <code>/source/iM</code> 下，打开编辑器自行修改其中内容</p>
+<p>请注意填写 53-54 行的 <code>appId</code> 和 <code>appKey</code></p>
+<p>修改后打开博客根目录<code>_config.yml</code>，在 <code>skip_render</code> 添加新建好的 <code>iM</code> 文件夹</p>
+<figure class="highlight yaml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="attr">skip_render:</span> </span><br><span class="line">  <span class="bullet">-</span> <span class="string">"404.html"</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">"iM/**"</span></span><br></pre></td></tr></tbody></table></figure>
+<p>保存后打开所用主题文件夹下的<code>_config.yml</code>，向菜单栏添加 iM 的入口</p>
+<p>这里以主题 NeXT 为例：编辑 <code>menu</code> 下面的内容，添加<code> iM: /iM/ || user</code></p>
+<figure class="highlight yaml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># Usage: `Key: /link/ || icon`</span></span><br><span class="line"><span class="comment"># Key is the name of menu item. If the translation for this item is available, the translated text will be loaded, otherwise the Key name will be used. Key is case-senstive.</span></span><br><span class="line"><span class="comment"># Value before `||` delimiter is the target link, value after `||` delimiter is the name of Font Awesome icon.</span></span><br><span class="line"><span class="comment"># When running the site in a subdirectory (e.g. yoursite.com/blog), remove the leading slash from link value (/archives -&gt; archives).</span></span><br><span class="line"><span class="comment"># External url should start with http:// or https://</span></span><br><span class="line"><span class="attr">menu:</span></span><br><span class="line">  <span class="attr">home:</span> <span class="string">/</span> <span class="string">||</span> <span class="string">home</span></span><br><span class="line">  <span class="attr">categories:</span> <span class="string">/categories/</span> <span class="string">||</span> <span class="string">th</span></span><br><span class="line">  <span class="attr">tags:</span> <span class="string">/tags/</span> <span class="string">||</span> <span class="string">tags</span></span><br><span class="line">  <span class="attr">archives:</span> <span class="string">/archives/</span> <span class="string">||</span> <span class="string">archive</span></span><br><span class="line">  <span class="attr">iM:</span> <span class="string">/iM/</span> <span class="string">||</span> <span class="string">user</span> </span><br></pre></td></tr></tbody></table></figure>
+<p>完成后终端依次输入</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g</span><br><span class="line">hexo s</span><br></pre></td></tr></tbody></table></figure>
+<p>打开 localhost:4000 查看效果</p>
+<h1 id="to-do">To-Do</h1>
+<ul>
+<li><input type="checkbox" id="checkbox0"><label for="checkbox0">修改美化 iM 的页面文件</label><code>index.md</code>，参考 Cytus2 里的界面魔改？</li>
+<li><input type="checkbox" id="checkbox1"><label for="checkbox1">尝试用</label><code>hexo-blog-encrypt</code> 加密页面？</li>
+<li><input type="checkbox" id="checkbox2"><label for="checkbox2">直接在页面处添加一个在线输入框方便输入？</label></li>
+</ul>
+]]></content>
+      <categories>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Markdown 语法学习笔记①</title>
     <url>/posts/6c2e314d.html</url>
-    <content><![CDATA[<h2 id="biao-ti"><a class="header-anchor" href="#标题">¶</a> 标题</h2>
+    <content><![CDATA[<h2 id="biao-ti"><a class="header-anchor" href="#标题"></a>标题</h2>
 <p>两种语法，分别为类 Setext 和类 atx 形式。</p>
-<h3 id="lei-setext-shi"><a class="header-anchor" href="#类-Setext-式">¶</a> 类 Setext 式</h3>
+<h3 id="lei-setext-shi"><a class="header-anchor" href="#类-Setext-式"></a>类 Setext 式</h3>
 <p>利用 <code>=</code> 和 <code>-</code>：</p>
 <pre><code>标题
 =====
 标题
 -----
 </code></pre>
-<h3 id="lei-atx-shi"><a class="header-anchor" href="#类-atx-式">¶</a> 类 atx 式</h3>
+<h3 id="lei-atx-shi"><a class="header-anchor" href="#类-atx-式"></a>类 atx 式</h3>
 <p>在行首插入 1 到 6 个<code>#</code>, 对应到标题 1 到 6 阶。</p>
 <pre><code># 标题
 ## 标题
@@ -85,7 +141,7 @@
 错误示范：<code>##标题</code></p>
 </blockquote>
 <a id="more"></a>
-<h2 id="qu-kuai-yin-yong"><a class="header-anchor" href="#区块引用">¶</a> 区块引用</h2>
+<h2 id="qu-kuai-yin-yong"><a class="header-anchor" href="#区块引用"></a>区块引用</h2>
 <p>使用 <code>&gt;</code></p>
 <pre><code>&gt; 一些文字
 </code></pre>
@@ -104,7 +160,7 @@
 &gt; 
 &gt;     return shell_exec("echo $input | $markdown_script");
 </code></pre>
-<h2 id="lie-biao"><a class="header-anchor" href="#列表">¶</a> 列表</h2>
+<h2 id="lie-biao"><a class="header-anchor" href="#列表"></a>列表</h2>
 <p>分为有序列表与无序列表。<br>
 如果列表项目间用空行分开，那么中间内容将不会被列表项包括在内。</p>
 <pre><code>* 列表项
@@ -119,13 +175,13 @@
 <pre><code>* 列表项
         &lt;codehere&gt;
 </code></pre>
-<h3 id="you-xu-lie-biao"><a class="header-anchor" href="#有序列表">¶</a> 有序列表</h3>
+<h3 id="you-xu-lie-biao"><a class="header-anchor" href="#有序列表"></a>有序列表</h3>
 <p>使用 <code>*</code>,<code>+</code> 和 <code>-</code> 标记</p>
 <pre><code>* 列表项
 + 列表项
 - 列表项
 </code></pre>
-<h3 id="wu-xu-lie-biao"><a class="header-anchor" href="#无序列表">¶</a> 无序列表</h3>
+<h3 id="wu-xu-lie-biao"><a class="header-anchor" href="#无序列表"></a>无序列表</h3>
 <p>使用<strong>数字加英文句点<code>.</code> 的方式</strong></p>
 <pre><code>1. 列表项
 2. 列表项
@@ -140,14 +196,14 @@
 eg:<code>1986\. What a great season.</code></li>
 </ol>
 </blockquote>
-<h2 id="dai-ma-qu-kuai"><a class="header-anchor" href="#代码区块">¶</a> 代码区块</h2>
+<h2 id="dai-ma-qu-kuai"><a class="header-anchor" href="#代码区块"></a>代码区块</h2>
 <p>只需简单地缩进一格（或四个空格）即可</p>
 <p>这是文字</p>
 <pre><code>这是代码
 </code></pre>
 <p>一个代码区块会一直持续到没有缩进的那一行（或是文件结尾）。</p>
 <p>同时，在代码区块中，一般的 Markdown 语法不会被转换。</p>
-<h2 id="fen-ge-xian"><a class="header-anchor" href="#分隔线">¶</a> 分隔线</h2>
+<h2 id="fen-ge-xian"><a class="header-anchor" href="#分隔线"></a>分隔线</h2>
 <p>使用三个以上的 <code>*</code>、<code>-</code>、<code>_</code>来建立一个分隔线，可以在星号或是减号中间插入空格，但注意行内不能有其他东西</p>
 <pre><code>文字
 ***
@@ -164,16 +220,16 @@ ___
 文字
 * * *
 </code></pre>
-<h2 id="lian-jie-cha-ru"><a class="header-anchor" href="#链接插入">¶</a> 链接插入</h2>
+<h2 id="lian-jie-cha-ru"><a class="header-anchor" href="#链接插入"></a>链接插入</h2>
 <p>Markdown 支持两种形式的链接语法： 行内式和参考式两种形式。<br>
 不管是哪一种，链接文字都是用 <code>[]</code> 来标记。</p>
-<h3 id="xing-nei-shi"><a class="header-anchor" href="#行内式">¶</a> 行内式</h3>
+<h3 id="xing-nei-shi"><a class="header-anchor" href="#行内式"></a>行内式</h3>
 <p>使用方括号 <code>[]</code> 括住所需加链接的文字，并在后面以圆括号 <code>()</code> 形式插入链接（可以是相对路径）。<br>
 如需加入链接描述 (链接的 title 文字) 只需在圆括号中的链接后以 <code>""</code> 包起文字即可。</p>
 <pre><code>这是一个[链接](https://xsllen.tk)
 这是一个有名字的[链接](https://xsllen.tk "Jim's Blog")
 </code></pre>
-<h3 id="can-kao-shi"><a class="header-anchor" href="#参考式">¶</a> 参考式</h3>
+<h3 id="can-kao-shi"><a class="header-anchor" href="#参考式"></a>参考式</h3>
 <p>使用方括号 <code>[]</code> 括住所需加链接的文字，并在后面再接上一个方括号 <code>[]</code> 进行用于辨识链接的标记。<br>
 你也可以选择性地在两个方括号中间加上一个空格。</p>
 <pre><code>这是一个[链接][1]
@@ -219,25 +275,25 @@ ___
 [yahoo]:  http://search.yahoo.com/  "Yahoo Search"
 [msn]:    http://search.msn.com/    "MSN Search"
 </code></pre>
-<h2 id="wen-zi-chu-li"><a class="header-anchor" href="#文字处理">¶</a> 文字处理</h2>
-<h3 id="xie-ti"><a class="header-anchor" href="#斜体">¶</a> 斜体</h3>
+<h2 id="wen-zi-chu-li"><a class="header-anchor" href="#文字处理"></a>文字处理</h2>
+<h3 id="xie-ti"><a class="header-anchor" href="#斜体"></a>斜体</h3>
 <p>使用一个 <code>*</code> 或<code>_</code>符号将文字包围起来。</p>
 <pre><code>*斜体文字*
 _斜体文字_
 </code></pre>
-<h3 id="jia-cu"><a class="header-anchor" href="#加粗">¶</a> 加粗</h3>
+<h3 id="jia-cu"><a class="header-anchor" href="#加粗"></a>加粗</h3>
 <p>使用两个 <code>*</code> 或<code>_</code>符号将文字包围起来。</p>
 <pre><code>**加粗文字**
 __加粗文字__
 </code></pre>
-<h3 id="cu-xie-ti"><a class="header-anchor" href="#粗斜体">¶</a> 粗斜体</h3>
+<h3 id="cu-xie-ti"><a class="header-anchor" href="#粗斜体"></a>粗斜体</h3>
 <p>使用三个 <code>*</code> 或<code>_</code>符号将文字包围起来。</p>
 <pre><code>***粗斜体文字***
 </code></pre>
-<h3 id="shan-chu-xian"><a class="header-anchor" href="#删除线">¶</a> 删除线</h3>
+<h3 id="shan-chu-xian"><a class="header-anchor" href="#删除线"></a>删除线</h3>
 <p>使用两个 <code>~</code> 符号将文字包围起来。<br>
 <s>带删除线的文字</s></p>
-<h3 id="zhu-jiao"><a class="header-anchor" href="#注脚">¶</a> 注脚</h3>
+<h3 id="zhu-jiao"><a class="header-anchor" href="#注脚"></a>注脚</h3>
 <p>使用 <code>[^keyword]</code> 表示注脚，并在文本的任意地方对该注脚定义（类似与参考式）<br>
 示例：</p>
 <pre><code>这里有一个注脚[^footnote]。
@@ -248,7 +304,7 @@ __加粗文字__
 <blockquote>
 <p><strong>注意：</strong> 使用什么符号开启标签，就要用什么符号结束。</p>
 </blockquote>
-<h3 id="dai-ma-biao-ji"><a class="header-anchor" href="#代码标记">¶</a> 代码标记</h3>
+<h3 id="dai-ma-biao-ji"><a class="header-anchor" href="#代码标记"></a>代码标记</h3>
 <p>使用反引号 <code>`</code> 将代码文字包起.</p>
 <pre><code>`&lt;code&gt;code here!&lt;/code&gt;`
 </code></pre>
@@ -269,9 +325,9 @@ __加粗文字__
 <li>在代码区段内，&amp; 和方括号都会被<strong>自动地转成 HTML 实体</strong>。</li>
 </ul>
 </blockquote>
-<h2 id="tu-pian-cha-ru"><a class="header-anchor" href="#图片插入">¶</a> 图片插入</h2>
+<h2 id="tu-pian-cha-ru"><a class="header-anchor" href="#图片插入"></a>图片插入</h2>
 <p>与链接插入类似，同样包括两种方式： 行内式与参考式。</p>
-<h3 id="xing-nei-shi-1"><a class="header-anchor" href="#行内式-2">¶</a> 行内式</h3>
+<h3 id="xing-nei-shi-1"><a class="header-anchor" href="#行内式-2"></a>行内式</h3>
 <p>使用 <code>![alt text](图片网址)</code><br>
 还可以加上图片描述（title 文字）<br>
 <code>![alt text](图片网址 "描述文字")</code><br>
@@ -279,7 +335,7 @@ __加粗文字__
 <pre><code>![alt text](https://i.loli.net/2021/02/03/EBOnPQvCUc46b3i.jpg ":)")
 </code></pre>
 <p>效果：<img data-src="https://i.loli.net/2021/02/03/EBOnPQvCUc46b3i.jpg" alt="alt text" title=":)"></p>
-<h3 id="can-kao-shi-1"><a class="header-anchor" href="#参考式-2">¶</a> 参考式</h3>
+<h3 id="can-kao-shi-1"><a class="header-anchor" href="#参考式-2"></a>参考式</h3>
 <p>使用 <code>![alt text][id]</code><br>
 「id」是图片参考的名称，图片参考的定义方式则和连结参考一样：</p>
 <pre><code>[id]: 图片路径 "描述文字"
@@ -287,12 +343,12 @@ __加粗文字__
 <blockquote>
 <p><strong>注意：</strong> 到目前为止， Markdown 还没有办法指定图片的宽高，需要的话可使用普通的 <strong><code>&lt;img&gt;</code></strong> 标签</p>
 </blockquote>
-<h2 id="nei-rong-mu-lu-toc"><a class="header-anchor" href="#内容目录（TOC）">¶</a> 内容目录（TOC）</h2>
+<h2 id="nei-rong-mu-lu-toc"><a class="header-anchor" href="#内容目录（TOC）"></a>内容目录（TOC）</h2>
 <p><s>（emmmmmm，对于 hexo 来说没什么卵用……）</s><br>
 在段落中填写 <code>[TOC]</code> 以显示全文内容的目录结构。</p>
 <p>效果：<br>
 [TOC]</p>
-<h2 id="biao-ge"><a class="header-anchor" href="#表格">¶</a> 表格</h2>
+<h2 id="biao-ge"><a class="header-anchor" href="#表格"></a>表格</h2>
 <p>示例：</p>
 <figure class="highlight plain"><table><tbody><tr><td class="code"><pre><span class="line">| 项目        | 价格   |  数量  |</span><br><span class="line">| --------   | -----:  | :----:  |</span><br><span class="line">| 计算机     | \$1600 |   5     |</span><br><span class="line">| 手机        |   \$12   |   12   |</span><br><span class="line">| 管线        |    \$1    |  234  |</span><br></pre></td></tr></tbody></table></figure>
 <p>效果：</p>
@@ -322,7 +378,7 @@ __加粗文字__
 </tr>
 </tbody>
 </table>
-<h2 id="dai-ban-shi-xiang-ji-todo-lie-biao"><a class="header-anchor" href="#待办事项及TODO列表">¶</a> 待办事项及 TODO 列表</h2>
+<h2 id="dai-ban-shi-xiang-ji-todo-lie-biao"><a class="header-anchor" href="#待办事项及TODO列表"></a>待办事项及 TODO 列表</h2>
 <p>使用带有 <code>- [ ]</code>（未完成） 或 <code>- [x]</code>（已完成）项的列表语法撰写一个待办事宜列表，并且支持子列表嵌套以及混用 Markdown 语法。<br>
 示例：</p>
 <pre><code>- [ ] 写一个个人主页
@@ -331,9 +387,9 @@ __加粗文字__
 <p>效果：</p>
 <ul>
 <li><input type="checkbox" id="checkbox0"><label for="checkbox0">写一个个人主页</label></li>
-<li><input type="checkbox" id="checkbox1" checked="true"><label for="checkbox1">写一个 Maekdown 学习笔记 </label></li>
+<li><input type="checkbox" id="checkbox1" checked="true"><label for="checkbox1">写一个 Maekdown 学习笔记</label></li>
 </ul>
-<h2 id="zi-dong-lian-jie"><a class="header-anchor" href="#自动链接">¶</a> 自动链接</h2>
+<h2 id="zi-dong-lian-jie"><a class="header-anchor" href="#自动链接"></a>自动链接</h2>
 <p>Markdown 支持以比较简短的自动链接形式来处理网址和电子邮件信箱，只需用方括号括起即可，Markdown 就会自动把它转成链接。</p>
 <pre><code>&lt;http://example.com/&gt;
 &lt;address@example.com&gt;
@@ -341,7 +397,7 @@ __加粗文字__
 <p>效果：<br>
 <a href="http://example.com/">http://example.com/</a><br>
 <a href="mailto:address@example.com">address@example.com</a></p>
-<h2 id="fan-xie-gang-yong-fa"><a class="header-anchor" href="#反斜杠用法">¶</a> 反斜杠用法</h2>
+<h2 id="fan-xie-gang-yong-fa"><a class="header-anchor" href="#反斜杠用法"></a>反斜杠用法</h2>
 <p>Markdown 可以利用反斜杠来插入一些在语法中有其它意义的符号，例如：如果你想要用星号加在文字旁边的方式来做出强调效果（但不用 <code>&lt;em&gt;</code> 标签），你可以在星号的前面加上反斜杠：</p>
 <pre><code>\*literal asterisks\*
 </code></pre>
@@ -359,13 +415,13 @@ _   底线
 .   英文句点
 !   惊叹号
 </code></pre>
-<h2 id="html-jian-rong-xing"><a class="header-anchor" href="#HTML兼容性">¶</a>HTML 兼容性</h2>
+<h2 id="html-jian-rong-xing"><a class="header-anchor" href="#HTML兼容性"></a>HTML 兼容性</h2>
 <ol>
 <li>Markdown 文档内可任意使用 html 语句。<br>
 （你想在 Markdown 文档里码 HTML 也没问题的 233）</li>
 <li>Markdown 文档会对特殊字符自动转换，如 <code>&lt;</code> 和 <code>&amp;</code>。</li>
 </ol>
-<h2 id="wen-zhang-guo-chang-zhe-die-hexo-yong"><a class="header-anchor" href="#文章过长折叠-（hexo用）">¶</a> 文章过长折叠 （hexo 用）</h2>
+<h2 id="wen-zhang-guo-chang-zhe-die-hexo-yong"><a class="header-anchor" href="#文章过长折叠-（hexo用）"></a>文章过长折叠 （hexo 用）</h2>
 <p>使用 <code>&lt;!--more--&gt;</code></p>
 <blockquote>
 <p><strong>注意：</strong> <em>hexo-renderer-markdown-it</em> 不支持</p>
@@ -383,6 +439,101 @@ _   底线
       </categories>
       <tags>
         <tag>Markdown</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用 WSL 交叉编译 MentoHUST</title>
+    <url>/posts/4d028789.html</url>
+    <content><![CDATA[<p>为使得 MentoHUST 在路由器上依然可用，需要对 MentoHUST 针对自己路由器的芯片架构进行交叉编译。本文以使用 <strong>MT7620</strong> 的路由器平台为例，主要提供 WSL 下对 MentoHUST 进行交叉编译的实例。</p>
+<p>限于能力与水平，本文有许多遗漏与不足之处，还请多多指教。</p>
+<a id="more"></a>
+<h2 id="zhun-bei-gong-zuo"><a class="header-anchor" href="#准备工作"></a>准备工作</h2>
+<ul>
+<li>
+<p>一台已刷入 OpenWrt 的路由器</p>
+</li>
+<li>
+<p>已安装 Linux 系统的实体机或虚拟机 / 已安装 WSL 的 Windows 10</p>
+<blockquote>
+<p>如果你准备使用 WSL 进行编译，请先参考<a href="https://jimlee2002.github.io/posts/3a5c40a1.html">在 WSL2 上进行 OpenWrt 的编译</a>的 “配置编译环境” 进行 WSL 的相关设置。</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="an-zhuang-xiang-guan-yi-lai"><a class="header-anchor" href="#安装相关依赖"></a>安装相关依赖</h3>
+<p>打开终端，输入：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">sudo apt install build-essential bison flex zlib1g-dev libncurses5-dev subversion quilt intltool ruby fastjar unzip gawk autogen autopoint ccache gettext libssl-dev xsltproc zip git</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="xia-zai-suo-xu-wen-jian"><a class="header-anchor" href="#下载所需文件"></a>下载所需文件</h3>
+<ol>
+<li>
+<p>在终端下前往 <code>home</code>，并创建目录 <code>mt7620</code> 以便组织管理文件。</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> /home/jim</span><br><span class="line">mkdir mt7620</span><br><span class="line"><span class="built_in">cd</span> mt7620</span><br></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p><strong>目录请根据自己需要命名，这里仅作示范。</strong><br>
+<strong>其中 <code>jim</code> 为本示例中的 Linux 用户名，请根据自己的 Linux 用户名修改相关命令。</strong></p>
+</blockquote>
+</li>
+<li>
+<p>到 <a href="http://downloads.openwrt.org/">OpenWrt 的官网</a>下载对应你路由器的芯片和当前版本系统的交叉编译工具包 (SDK)。</p>
+<p>本指南使用 19.07.4 的 SDK</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">wget https://downloads.openwrt.org/releases/19.07.4/targets/ramips/mt7620/openwrt-sdk-19.07.4-ramips-mt7620_gcc-7.5.0_musl.Linux-x86_64.tar.xz -O sdk.tar.xz</span><br><span class="line">tar -xJf sdk.tar.xz</span><br><span class="line">mv openwrt-sdk-19.07.4-ramips-mt7620_gcc-7.5.0_musl.Linux-x86_64 sdk</span><br><span class="line">rm sdk.tar.xz</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li>
+<p>下载 libpcap 源码至 <code>libpcap</code> 文件夹，<a href="https://www.tcpdump.org/release/libpcap-1.9.1.tar.gz">撰文时最新为 1.9.1 版</a>。</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">wget https://www.tcpdump.org/release/libpcap-1.9.1.tar.gz -O libpcap.tar.gz</span><br><span class="line">tar -xzf libpcap.tar.gz</span><br><span class="line">mv libpcap-1.9.1 libpcap</span><br><span class="line">rm libpcap.tar.gz</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li>
+<p>下载 MentoHUST 源码至 <code>mentohust</code> 文件夹。这里使用 <a href="https://github.com/hyrathb">@hyrathb</a> 的，请根据自己需要替换源码链接。</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/hyrathb/mentohust.git mentohust</span><br></pre></td></tr></tbody></table></figure>
+</li>
+</ol>
+<h2 id="jiao-cha-bian-yi"><a class="header-anchor" href="#交叉编译"></a>交叉编译</h2>
+<h3 id="pei-zhi-jiao-cha-bian-yi-huan-jing"><a class="header-anchor" href="#配置交叉编译环境"></a>配置交叉编译环境</h3>
+<p>终端输入：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">PATH=<span class="variable">$PATH</span>:/home/jim/mt7620/sdk/staging_dir/toolchain-mipsel_24kc_gcc-7.5.0_musl/bin</span><br><span class="line"><span class="built_in">export</span> PATH</span><br><span class="line">STAGING_DIR=/home/jim/mt7620/sdk/staging_dir/toolchain-mipsel_24kc_gcc-7.5.0_musl</span><br><span class="line"><span class="built_in">export</span> STAGING_DIR</span><br><span class="line"><span class="built_in">export</span> CC=mipsel-openwrt-linux-gcc</span><br><span class="line"><span class="built_in">export</span> CPP=mipsel-openwrt-linux-cpp</span><br><span class="line"><span class="built_in">export</span> GCC=mipsel-openwrt-linux-gcc</span><br><span class="line"><span class="built_in">export</span> CXX=mipsel-openwrt-linux-g++</span><br><span class="line"><span class="built_in">export</span> RANLIB=mipsel-openwrt-linux-musl-ranlib</span><br><span class="line"><span class="built_in">export</span> ac_cv_linux_vers=4.4.60</span><br><span class="line"><span class="built_in">export</span> LDFLAGS=<span class="string">"-static"</span></span><br><span class="line"><span class="built_in">export</span> CFLAGS=<span class="string">"-Os -s"</span></span><br></pre></td></tr></tbody></table></figure>
+<p><strong>请不要直接复制粘贴，需要针对你的实际情况进行修改。</strong></p>
+<p>需修改的地方（尖括号部分）有：</p>
+<ul>
+<li><code>PATH=$PATH:…/staging_dir/&lt;path&gt;/bin</code></li>
+<li><code>STAGING_DIR=…/staging_dir/&lt;path&gt;</code></li>
+<li><code>CC</code>、<code>CPP</code>、<code>GCC</code>、<code>CXX</code>、<code>RANLIB</code> 请对比参考<code>…/staging_dir/&lt;path&gt;/bin</code> 内的对应文件名进行修改</li>
+<li><strong><code>RANLIB</code> 要根据 <code>sdk</code> 里目录的结尾修改</strong>。这个例子，结尾是 <code>musl</code>，因此 <code>export RANLIB=mipsel-openwrt-linux-musl-ranlib</code>。如果你的结尾是 <code>uClibc</code>，就应该改成 <code>export RANLIB=mipsel-openwrt-linux-uclibc-ranlib</code>。</li>
+<li><code>ac_cv_linux_vers</code> 为你所编译目标 OpenWrt 当前 Linux 内核版本号</li>
+</ul>
+<h3 id="bian-yi-libpcap"><a class="header-anchor" href="#编译libpcap"></a>编译 libpcap</h3>
+<p>进入 <code>libpcap</code> 文件夹</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> /home/jim/mt7620/libpcap</span><br></pre></td></tr></tbody></table></figure>
+<p>进行编译</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">./configure --host=mipsel-linux --prefix=/home/jim/mt7620/ --with-pcap=linux</span><br><span class="line">make</span><br></pre></td></tr></tbody></table></figure>
+<p><strong>请不要直接复制粘贴，需要针对你的实际情况进行修改。</strong></p>
+<p>需修改的地方有：</p>
+<ul>
+<li><code>--host</code>，对应你的路由器芯片架构进行修改（<code>arm-linux</code>、<code>mipsel-linux</code>）</li>
+<li><code>--prefix</code>，换成你的路径</li>
+</ul>
+<p><code>./configure</code> 部分不应出错。</p>
+<p><code>make</code> 部分，<strong>只要看到 <code>ranlib libpcap.a</code> 没有出错即可</strong>，不用理会 <code>libpcap.so</code> 是否出错。</p>
+<p>完成后请查看你的 <code>libpcap</code> 目录下是否生成 <code>libpcap.a</code>。</p>
+<h3 id="bian-yi-mento-hust"><a class="header-anchor" href="#编译MentoHUST"></a>编译 MentoHUST</h3>
+<p>进入 <code>MentoHUST</code> 目录，生成 Makefile：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> /home/jim/mt7620/mentohust</span><br><span class="line">sh autogen.sh</span><br></pre></td></tr></tbody></table></figure>
+<p>获取自己所在平台：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">./config.guess</span><br></pre></td></tr></tbody></table></figure>
+<p>输出的信息替换到下方代码的 <code>--build</code> 中，然后执行命令进行编译：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">./configure --build=x86_64-pc-linux-gnu --host=mipsel-linux   --disable-encodepass --disable-notify --with-pcap=/home/jim/mt7620/libpcap/libpcap.a</span><br><span class="line">make</span><br></pre></td></tr></tbody></table></figure>
+<p>其中 <code>--with-pca</code> 后内容请修改为自己的对应路径</p>
+<p>如果运行无误，完成后就可以在 <code>/home/jim/mt7620/mentohust/src</code> 中获取所需要的 <code>mentohust</code> 文件了，教程结束。</p>
+<h2 id="can-kao-wen-zhang"><a class="header-anchor" href="#参考文章"></a>参考文章</h2>
+<ul>
+<li><a href="https://github.com/KumaTea/MentoHUST-SYSU-Guide/blob/master/Guide.md">支持锐捷认证与 IPv6 的路由器配置指南：以 K2P 为例</a></li>
+<li><a href="https://blog.csdn.net/warriorpaw/article/details/7990226">交叉编译 mentohust 实现锐捷认证共享上网</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>OpenWrt</tag>
+        <tag>MentoHUST</tag>
       </tags>
   </entry>
   <entry>
@@ -433,247 +584,110 @@ _   底线
         <category>笔记</category>
       </categories>
       <tags>
-        <tag>MentoHUST</tag>
         <tag>OpenWrt</tag>
+        <tag>MentoHUST</tag>
       </tags>
   </entry>
   <entry>
-    <title>博客折腾笔记③- 搭建个人动态页面 iM</title>
-    <url>/posts/2b426e0a.html</url>
-    <content><![CDATA[<p>今天在少数派上看到一篇搭建类似微博的个人动态页面的指南，我非常感高兴：出于对实现私密树洞分享心情的需要以及言论审查的苦恼，我想在博客上实现这样的功能很久了。感谢原作者为不懂技术的脚本小子我造好了轮子，接下来只需简单配置即可实现所需功能了。</p>
-<p>以下是我的配置过程：</p>
-<blockquote>
-<p>参考文章：<a href="https://sspai.com/post/60024">保卫表达：用后端 BaaS 快速搭建专属无点赞评论版微博 ——b 言 b 语</a></p>
-</blockquote>
+    <title>博客折腾笔记④- 使用 Tasker 在 Android 上实现个人动态的发送</title>
+    <url>/posts/4394c3fa.html</url>
+    <content><![CDATA[<p><a href="https://jimlee2002.github.io/posts/2b426e0a.html">前情提要</a></p>
+<p>折腾了两天，我终于是实现在 Android 上使用 Tasker 向刚搭建好的个人动态系统发送内容了。</p>
+<h1 id="xiao-guo-zhan-shi">效果展示</h1>
+<p>这是一个在 Android 上向<a href="https://github.com/daibor/nonsense.fun">废话胶囊（b 言 b 语）</a>发送内容的简单 Tasker 工程。</p>
+<p>项目地址：<a href="https://github.com/jimlee2002/nonsense.fun_tasker">https://github.com/jimlee2002/nonsense.fun_tasker</a></p>
+<img data-src="https://i.loli.net/2020/04/22/Hy7kwJL8FDr6I5O.png" style="zoom: 50%;">
 <a id="more"></a>
-<h1 id="pei-zhi-hou-duan-baa-s">配置后端 BaaS</h1>
-<p>这里使用 <a href="https://leancloud.app/">LeanCloud 国际版</a></p>
-<p>登入后创建应用并命名</p>
-<p>进入新建好的应用，点击<code>新建Class</code>，将新建的 Class 命名为 content</p>
-<p>同时设置下方 create 、delete 、update 三项权限为” 指定用户 “，其他权限默认即可</p>
-<p><img data-src="https://i.loli.net/2020/04/20/cgBW2ryuwPd1iXf.png" alt=""></p>
-<p>点击刚创建的 content Class</p>
-<p>点击 添加列 并创建名称为 content 的「列」，类型为 String</p>
-<p><img data-src="https://i.loli.net/2020/04/20/vLmAcuBIGPUZK4x.png" alt=""></p>
-<p><img data-src="https://i.loli.net/2020/04/20/czwJRK4F75DsPbA.png" alt=""></p>
-<p>完成后点击左侧<code>设置</code> - <code>应用 Keys</code>，记录三组 Keys 备用</p>
+<h1 id="an-zhuang-pei-zhi">安装配置</h1>
+<h2 id="直接下载安装已经导出好的apk文件"><a class="header-anchor" href="#直接下载安装已经导出好的apk文件"></a>直接下载安装已经导出好的 <a href="https://github.com/jimlee2002/nonsense.fun_tasker/releases">apk 文件</a></h2>
+<p>应用使用插件 <code>Tasker App Factory</code> 导出。</p>
+<p>注意，该应用<strong>需要 root 权限</strong>。</p>
+<h2 id="导入Tasker工程"><a class="header-anchor" href="#导入Tasker工程"></a>导入 Tasker 工程</h2>
+<p><strong>注意：部分手机可能需要 Root 权限才能使用，该工程默认开启<code>使用Root运行</code>，可以自行到<code>场景/Main/发送/按下</code>的第 6 个和第 8 个任务里关掉该选项</strong>。</p>
+<p><img data-src="https://i.loli.net/2020/04/22/iaTO5gAQLjnufBZ.png" style="zoom: 50%;"><img data-src="https://i.loli.net/2020/04/22/SIJivZ5L4Na9Cu3.png" style="zoom: 50%;"></p>
+<p><img data-src="https://i.loli.net/2020/04/24/c1R3x9HEzyQiTpN.png" style="zoom:50%;"><img data-src="https://i.loli.net/2020/04/22/7BoIjaJL9h6ilf1.png" style="zoom: 50%;"></p>
+<hr>
+<ol>
+<li>
+<p><a href="https://github.com/jimlee2002/nonsense.fun_tasker/releases">下载</a><code>bb.prj.xml</code>，存入到手机任意你找得到的位置。</p>
+</li>
+<li>
+<p>下载安装 Tasker。</p>
+</li>
+<li>
+<p>进入主界面长按左下角的按钮，点击<code>导入项目</code>，在打开的界面中找到并打开刚才存入的 <code>bb.prj.xml。</code></p>
+<p><img data-src="https://i.loli.net/2020/04/22/mpwnk2ZWvMc6uSU.png" style="zoom: 50%;"><img data-src="https://i.loli.net/2020/04/22/3Zc2KIWVfBzhiDM.png" style="zoom: 50%;"></p>
+<blockquote>
+<p>提示：点击右下角的手机按钮可以快速回到内部储存空间目录</p>
+</blockquote>
+</li>
+<li>
+<p>完成后回到主界面，点击应用栏里图标长得和 Tasker 很像的 <code>Tasker Secondary</code>，打开界面。</p>
+<p><img data-src="https://i.loli.net/2020/04/22/Gju9BY64UsWlvTw.png" style="zoom: 50%;"><img data-src="https://i.loli.net/2020/04/22/Hy7kwJL8FDr6I5O.png" style="zoom: 50%;"></p>
+</li>
+<li>
+<p><strong>长按</strong>发送按钮，打开设置页面进行必要设置。</p>
+<img data-src="https://i.loli.net/2020/04/22/YM5CJ6vb4OIdemy.png" style="zoom: 50%;">
+<p><strong>Title：</strong> 这里是发送界面顶端的文字，请随意修改。</p>
+<p><strong>AppID、MasterKey：</strong> 网页打开 LeanCloud，在你的项目里点击<code>设置/应用Keys</code>，复制对应的密钥分别填入。</p>
 <p><img data-src="https://i.loli.net/2020/04/20/Kaxt5GOo3LRgMmy.png" alt=""></p>
-<h1 id="pei-zhi-ke-hu-duan-fa-song-gong-ju">配置客户端发送工具</h1>
-<h2 id="winodws-shi-yong-a-href-https-www-getquicker-net-quicker-a"><a class="header-anchor" href="#Winodws：使用Quicker">¶</a>Winodws：使用 <a href="https://www.getquicker.net/">Quicker</a></h2>
-<p>Quicker 模板地址：<a href="https://getquicker.net/sharedaction?code=eeb80278-5f53-4b0d-d333-08d7e0dd26a9">点击安装</a></p>
-<p>安装模板后右键编辑模板，修改变量定义和其他内容</p>
-<p><img data-src="https://i.loli.net/2020/04/20/QAK8tCqRg79GyNL.png" alt=""></p>
-<p>尝试发送一次请求，如果配置正确，在 LeanCloud 的后台刷新就能看到一条记录了。<strong>此后的删除、修改，都需要通过该后台进行。</strong></p>
-<h2 id="android"><a class="header-anchor" href="#Android">¶</a>Android</h2>
-<p>请参考我的<a href="https://jimlee2002.github.io/posts/4394c3fa.html">另一篇文章</a></p>
-<h1 id="zai-bo-ke-shang-tian-jia-jie-mian">在博客上添加界面</h1>
-<p>在博客 <code>/source</code> 下新建文件夹 <code>iM</code></p>
-<p>下载作者提供的<a href="https://github.com/daibor/nonsense.fun">页面文件</a></p>
-<p>将其复制到 <code>/source/iM</code> 下，打开编辑器自行修改其中内容</p>
-<p>请注意填写 53-54 行的 <code>appId</code> 和 <code>appKey</code></p>
-<p>修改后打开博客根目录<code>_config.yml</code>，在 <code>skip_render</code> 添加新建好的 <code>iM</code> 文件夹</p>
-<figure class="highlight yaml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="attr">skip_render:</span> </span><br><span class="line">  <span class="bullet">-</span> <span class="string">"404.html"</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">"iM/**"</span></span><br></pre></td></tr></tbody></table></figure>
-<p>保存后打开所用主题文件夹下的<code>_config.yml</code>，向菜单栏添加 iM 的入口</p>
-<p>这里以主题 NeXT 为例：编辑 <code>menu</code> 下面的内容，添加<code> iM: /iM/ || user</code></p>
-<figure class="highlight yaml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment"># Usage: `Key: /link/ || icon`</span></span><br><span class="line"><span class="comment"># Key is the name of menu item. If the translation for this item is available, the translated text will be loaded, otherwise the Key name will be used. Key is case-senstive.</span></span><br><span class="line"><span class="comment"># Value before `||` delimiter is the target link, value after `||` delimiter is the name of Font Awesome icon.</span></span><br><span class="line"><span class="comment"># When running the site in a subdirectory (e.g. yoursite.com/blog), remove the leading slash from link value (/archives -&gt; archives).</span></span><br><span class="line"><span class="comment"># External url should start with http:// or https://</span></span><br><span class="line"><span class="attr">menu:</span></span><br><span class="line">  <span class="attr">home:</span> <span class="string">/</span> <span class="string">||</span> <span class="string">home</span></span><br><span class="line">  <span class="attr">categories:</span> <span class="string">/categories/</span> <span class="string">||</span> <span class="string">th</span></span><br><span class="line">  <span class="attr">tags:</span> <span class="string">/tags/</span> <span class="string">||</span> <span class="string">tags</span></span><br><span class="line">  <span class="attr">archives:</span> <span class="string">/archives/</span> <span class="string">||</span> <span class="string">archive</span></span><br><span class="line">  <span class="attr">iM:</span> <span class="string">/iM/</span> <span class="string">||</span> <span class="string">user</span> </span><br></pre></td></tr></tbody></table></figure>
-<p>完成后终端依次输入</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g</span><br><span class="line">hexo s</span><br></pre></td></tr></tbody></table></figure>
-<p>打开 localhost:4000 查看效果</p>
-<h1 id="to-do">To-Do</h1>
-<ul>
-<li><input type="checkbox" id="checkbox0"><label for="checkbox0">修改美化 iM 的页面文件</label><code>index.md</code>，参考 Cytus2 里的界面魔改？</li>
-<li><input type="checkbox" id="checkbox1"><label for="checkbox1">尝试用</label><code>hexo-blog-encrypt</code> 加密页面？</li>
-<li><input type="checkbox" id="checkbox2"><label for="checkbox2">直接在页面处添加一个在线输入框方便输入？</label></li>
-</ul>
+<p><strong>className：</strong> 一般是 <code>content</code>，只要你是按照<a href="https://sspai.com/post/60024">少数派的指南</a>来做的话。</p>
+<p><strong>–insecure：</strong> 是否在脚本命令末尾加上 <code>--insecue</code>。参数默认关闭，如果无法发送可以尝试打开这个选项试试。</p>
+<p><strong>完成后点击确认返回</strong>。</p>
+</li>
+</ol>
+<p>这样就配置完成了，请试试看吧！</p>
+<h1 id="tasker-gong-cheng-shi-yong-fang-fa">Tasker 工程使用方法</h1>
+<h2 id="通过-Tasker-Secondary-打开"><a class="header-anchor" href="#通过-Tasker-Secondary-打开"></a>通过 Tasker Secondary 打开</h2>
+<img data-src="https://i.loli.net/2020/04/22/Gju9BY64UsWlvTw.png" style="zoom: 50%;">
+<h2 id="通过桌面小工具创建快捷方式打开"><a class="header-anchor" href="#通过桌面小工具创建快捷方式打开"></a>通过桌面小工具创建快捷方式打开</h2>
+<ol>
+<li>
+<p>打开 Tasker，然后<strong>点击返回键</strong>回到主界面。</p>
+</li>
+<li>
+<p>在桌面上新建 Tasker 的桌面小部件 "任务"，在打开的界面选择 <code>Show UI</code>,</p>
+<p>在界面下方选择图标，然后点击左上角返回桌面。</p>
+<p><img data-src="https://i.loli.net/2020/04/22/QWRPd7IKmV3oXYj.png" style="zoom: 50%;"><img data-src="https://i.loli.net/2020/04/22/t5dlHRyUgDM7aKX.png" style="zoom: 50%;"></p>
+<p>完成，现在你应该能看到快捷方式了。</p>
+</li>
+</ol>
+<h2 id="自行导出为APK安装"><a class="header-anchor" href="#自行导出为APK安装"></a>自行导出为 APK 安装</h2>
+<p>** 注意：你必须拥有手机的 Root 权限，并勾选<code>场景/Main/发送/按下</code>的第 6 个和第 8 个任务中的<code>使用Root运行</code>选项 **</p>
+<ol>
+<li>
+<p>Google Play 安装 <code>Tasker App Factory</code>。</p>
+</li>
+<li>
+<p>打开 Tasker，主界面左下方长按选择已经导入的项目，然后选择<code>导出\作为应用。</code></p>
+<img data-src="https://i.loli.net/2020/04/22/peARXFgoinvOJzx.png" style="zoom: 50%;">
+<blockquote>
+<p>提示：你可以通过点击<code>更名</code>重命名工程名称来修改应用名。</p>
+</blockquote>
+<img data-src="https://i.loli.net/2020/04/22/TZzLONjeHJviCp5.png" style="zoom:50%;">
+</li>
+<li>
+<p>根据提示输入包名和版本号。</p>
+<img data-src="https://i.loli.net/2020/04/22/Q7nXMpqxhB5o8a3.png" style="zoom: 50%;">
+</li>
+<li>
+<p>点击左上角返回，Tasker 会将项目以 APK 格式导出到<code>内部储存/Tasker/factory/kids</code> 并安装。</p>
+</li>
+</ol>
+<h1 id="hou-ji">后记</h1>
+<p>界面如果有问题可以自行在 Tasker 的<code>场景</code>中修改。</p>
+<p>个人能力有限，做的比较粗糙，还请不吝赐教！</p>
+<h1 id="zhi-xie">致谢</h1>
+<p>感谢 <a href="https://github.com/daibor">daibor</a> 制作了这么棒的<a href="https://github.com/daibor/nonsense.fun">项目。</a></p>
+<p>感谢少数派的 @SoSo 在评论下分享的方法启发了这个工程。</p>
 ]]></content>
       <categories>
         <category>笔记</category>
       </categories>
       <tags>
         <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>使用 WSL 交叉编译 MentoHUST</title>
-    <url>/posts/4d028789.html</url>
-    <content><![CDATA[<p>为使得 MentoHUST 在路由器上依然可用，需要对 MentoHUST 针对自己路由器的芯片架构进行交叉编译。本文以使用 <strong>MT7620</strong> 的路由器平台为例，主要提供 WSL 下对 MentoHUST 进行交叉编译的实例。</p>
-<p>限于能力与水平，本文有许多遗漏与不足之处，还请多多指教。</p>
-<a id="more"></a>
-<h2 id="zhun-bei-gong-zuo"><a class="header-anchor" href="#准备工作">¶</a> 准备工作</h2>
-<ul>
-<li>
-<p>一台已刷入 OpenWrt 的路由器</p>
-</li>
-<li>
-<p>已安装 Linux 系统的实体机或虚拟机 / 已安装 WSL 的 Windows 10</p>
-<blockquote>
-<p>如果你准备使用 WSL 进行编译，请先参考<a href="https://jimlee2002.github.io/posts/3a5c40a1.html">在 WSL2 上进行 OpenWrt 的编译</a>的 “配置编译环境” 进行 WSL 的相关设置。</p>
-</blockquote>
-</li>
-</ul>
-<h3 id="an-zhuang-xiang-guan-yi-lai"><a class="header-anchor" href="#安装相关依赖">¶</a> 安装相关依赖</h3>
-<p>打开终端，输入：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">sudo apt install build-essential bison flex zlib1g-dev libncurses5-dev subversion quilt intltool ruby fastjar unzip gawk autogen autopoint ccache gettext libssl-dev xsltproc zip git</span><br></pre></td></tr></tbody></table></figure>
-<h3 id="xia-zai-suo-xu-wen-jian"><a class="header-anchor" href="#下载所需文件">¶</a> 下载所需文件</h3>
-<ol>
-<li>
-<p>在终端下前往 <code>home</code>，并创建目录 <code>mt7620</code> 以便组织管理文件。</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> /home/jim</span><br><span class="line">mkdir mt7620</span><br><span class="line"><span class="built_in">cd</span> mt7620</span><br></pre></td></tr></tbody></table></figure>
-<blockquote>
-<p><strong>目录请根据自己需要命名，这里仅作示范。</strong><br>
-<strong>其中 <code>jim</code> 为本示例中的 Linux 用户名，请根据自己的 Linux 用户名修改相关命令。</strong></p>
-</blockquote>
-</li>
-<li>
-<p>到 <a href="http://downloads.openwrt.org/">OpenWrt 的官网</a>下载对应你路由器的芯片和当前版本系统的交叉编译工具包 (SDK)。</p>
-<p>本指南使用 19.07.4 的 SDK</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">wget https://downloads.openwrt.org/releases/19.07.4/targets/ramips/mt7620/openwrt-sdk-19.07.4-ramips-mt7620_gcc-7.5.0_musl.Linux-x86_64.tar.xz -O sdk.tar.xz</span><br><span class="line">tar -xJf sdk.tar.xz</span><br><span class="line">mv openwrt-sdk-19.07.4-ramips-mt7620_gcc-7.5.0_musl.Linux-x86_64 sdk</span><br><span class="line">rm sdk.tar.xz</span><br></pre></td></tr></tbody></table></figure>
-</li>
-<li>
-<p>下载 libpcap 源码至 <code>libpcap</code> 文件夹，<a href="https://www.tcpdump.org/release/libpcap-1.9.1.tar.gz">撰文时最新为 1.9.1 版</a>。</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">wget https://www.tcpdump.org/release/libpcap-1.9.1.tar.gz -O libpcap.tar.gz</span><br><span class="line">tar -xzf libpcap.tar.gz</span><br><span class="line">mv libpcap-1.9.1 libpcap</span><br><span class="line">rm libpcap.tar.gz</span><br></pre></td></tr></tbody></table></figure>
-</li>
-<li>
-<p>下载 MentoHUST 源码至 <code>mentohust</code> 文件夹。这里使用 <a href="https://github.com/hyrathb">@hyrathb</a> 的，请根据自己需要替换源码链接。</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/hyrathb/mentohust.git mentohust</span><br></pre></td></tr></tbody></table></figure>
-</li>
-</ol>
-<h2 id="jiao-cha-bian-yi"><a class="header-anchor" href="#交叉编译">¶</a> 交叉编译</h2>
-<h3 id="pei-zhi-jiao-cha-bian-yi-huan-jing"><a class="header-anchor" href="#配置交叉编译环境">¶</a> 配置交叉编译环境</h3>
-<p>终端输入：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">PATH=<span class="variable">$PATH</span>:/home/jim/mt7620/sdk/staging_dir/toolchain-mipsel_24kc_gcc-7.5.0_musl/bin</span><br><span class="line"><span class="built_in">export</span> PATH</span><br><span class="line">STAGING_DIR=/home/jim/mt7620/sdk/staging_dir/toolchain-mipsel_24kc_gcc-7.5.0_musl</span><br><span class="line"><span class="built_in">export</span> STAGING_DIR</span><br><span class="line"><span class="built_in">export</span> CC=mipsel-openwrt-linux-gcc</span><br><span class="line"><span class="built_in">export</span> CPP=mipsel-openwrt-linux-cpp</span><br><span class="line"><span class="built_in">export</span> GCC=mipsel-openwrt-linux-gcc</span><br><span class="line"><span class="built_in">export</span> CXX=mipsel-openwrt-linux-g++</span><br><span class="line"><span class="built_in">export</span> RANLIB=mipsel-openwrt-linux-musl-ranlib</span><br><span class="line"><span class="built_in">export</span> ac_cv_linux_vers=4.4.60</span><br><span class="line"><span class="built_in">export</span> LDFLAGS=<span class="string">"-static"</span></span><br><span class="line"><span class="built_in">export</span> CFLAGS=<span class="string">"-Os -s"</span></span><br></pre></td></tr></tbody></table></figure>
-<p><strong>请不要直接复制粘贴，需要针对你的实际情况进行修改。</strong></p>
-<p>需修改的地方（尖括号部分）有：</p>
-<ul>
-<li><code>PATH=$PATH:…/staging_dir/&lt;path&gt;/bin</code></li>
-<li><code>STAGING_DIR=…/staging_dir/&lt;path&gt;</code></li>
-<li><code>CC</code>、<code>CPP</code>、<code>GCC</code>、<code>CXX</code>、<code>RANLIB</code> 请对比参考<code>…/staging_dir/&lt;path&gt;/bin</code> 内的对应文件名进行修改</li>
-<li><strong><code>RANLIB</code> 要根据 <code>sdk</code> 里目录的结尾修改</strong>。这个例子，结尾是 <code>musl</code>，因此 <code>export RANLIB=mipsel-openwrt-linux-musl-ranlib</code>。如果你的结尾是 <code>uClibc</code>，就应该改成 <code>export RANLIB=mipsel-openwrt-linux-uclibc-ranlib</code>。</li>
-<li><code>ac_cv_linux_vers</code> 为你所编译目标 OpenWrt 当前 Linux 内核版本号 </li>
-</ul>
-<h3 id="bian-yi-libpcap"><a class="header-anchor" href="#编译libpcap">¶</a> 编译 libpcap</h3>
-<p>进入 <code>libpcap</code> 文件夹</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> /home/jim/mt7620/libpcap</span><br></pre></td></tr></tbody></table></figure>
-<p>进行编译</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">./configure --host=mipsel-linux --prefix=/home/jim/mt7620/ --with-pcap=linux</span><br><span class="line">make</span><br></pre></td></tr></tbody></table></figure>
-<p><strong>请不要直接复制粘贴，需要针对你的实际情况进行修改。</strong></p>
-<p>需修改的地方有：</p>
-<ul>
-<li><code>--host</code>，对应你的路由器芯片架构进行修改（<code>arm-linux</code>、<code>mipsel-linux</code>）</li>
-<li><code>--prefix</code>，换成你的路径</li>
-</ul>
-<p><code>./configure</code> 部分不应出错。</p>
-<p><code>make</code> 部分，<strong>只要看到 <code>ranlib libpcap.a</code> 没有出错即可</strong>，不用理会 <code>libpcap.so</code> 是否出错。</p>
-<p>完成后请查看你的 <code>libpcap</code> 目录下是否生成 <code>libpcap.a</code>。</p>
-<h3 id="bian-yi-mento-hust"><a class="header-anchor" href="#编译MentoHUST">¶</a> 编译 MentoHUST</h3>
-<p>进入 <code>MentoHUST</code> 目录，生成 Makefile：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> /home/jim/mt7620/mentohust</span><br><span class="line">sh autogen.sh</span><br></pre></td></tr></tbody></table></figure>
-<p>获取自己所在平台：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">./config.guess</span><br></pre></td></tr></tbody></table></figure>
-<p>输出的信息替换到下方代码的 <code>--build</code> 中，然后执行命令进行编译：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">./configure --build=x86_64-pc-linux-gnu --host=mipsel-linux   --disable-encodepass --disable-notify --with-pcap=/home/jim/mt7620/libpcap/libpcap.a</span><br><span class="line">make</span><br></pre></td></tr></tbody></table></figure>
-<p>其中 <code>--with-pca</code> 后内容请修改为自己的对应路径</p>
-<p>如果运行无误，完成后就可以在 <code>/home/jim/mt7620/mentohust/src</code> 中获取所需要的 <code>mentohust</code> 文件了，教程结束。</p>
-<h2 id="can-kao-wen-zhang"><a class="header-anchor" href="#参考文章">¶</a> 参考文章</h2>
-<ul>
-<li><a href="https://github.com/KumaTea/MentoHUST-SYSU-Guide/blob/master/Guide.md">支持锐捷认证与 IPv6 的路由器配置指南：以 K2P 为例</a></li>
-<li><a href="https://blog.csdn.net/warriorpaw/article/details/7990226">交叉编译 mentohust 实现锐捷认证共享上网</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>笔记</category>
-      </categories>
-      <tags>
-        <tag>MentoHUST</tag>
-        <tag>OpenWrt</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>编译适用于 X86 的 MentoHUST</title>
-    <url>/posts/5ed2bcfa.html</url>
-    <content><![CDATA[<h1 id="zhun-bei-gong-zuo">准备工作</h1>
-<p>以下所以操作都基于 <code>/home</code> 进行，用户名为 <code>jim</code>。</p>
-<h2 id="an-zhuang-xiang-guan-yi-lai"><a class="header-anchor" href="#安装相关依赖">¶</a> 安装相关依赖</h2>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">sudo apt install build-essential bison flex zlib1g-dev libncurses5-dev subversion quilt intltool ruby fastjar unzip gawk autogen autopoint ccache gettext libssl-dev xsltproc zip git</span><br></pre></td></tr></tbody></table></figure>
-<a id="more"></a>
-<h2 id="huo-qu-libpcab-yuan-ma"><a class="header-anchor" href="#获取libpcab源码">¶</a> 获取 libpcab 源码</h2>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">wget https://www.tcpdump.org/release/libpcap-1.9.1.tar.gz -O libpcap.tar.gz</span><br><span class="line">tar -xzf libpcap.tar.gz</span><br><span class="line">mv libpcap-1.9.1 libpcap</span><br><span class="line">rm libpcap.tar.gz</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="huo-qu-mento-hust-yuan-ma"><a class="header-anchor" href="#获取MentoHUST源码">¶</a> 获取 MentoHUST 源码</h2>
-<p>以 <a href="https://github.com/hyrathb">@hyrathb</a> 的 <a href="https://github.com/hyrathb/mentohust">MentoHUST</a> 为例：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/hyrathb/mentohust.git mentohust</span><br></pre></td></tr></tbody></table></figure>
-<h1 id="jin-xing-bian-yi">进行编译</h1>
-<h2 id="bian-yi-libpcab"><a class="header-anchor" href="#编译libpcab">¶</a> 编译 libpcab</h2>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> libpcap</span><br><span class="line">./configure --prefix=/home --with-pcap=linux</span><br><span class="line">make</span><br></pre></td></tr></tbody></table></figure>
-<p><code>make</code> 部分，<strong>只要看到 <code>ranlib libpcap.a</code> 没有出错即可</strong>，不用理会 <code>libpcap.so</code> 是否出错。</p>
-<p>完成后，应能在 <code>/home/libpcap</code> 下看到 <code>libpcap.a</code>。</p>
-<h2 id="bian-yi-mento-hust"><a class="header-anchor" href="#编译MentoHUST">¶</a> 编译 MentoHUST</h2>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> mentohust</span><br><span class="line">sh autogen.sh</span><br><span class="line">./configure --disable-encodepass --disable-notify --with-pcap=/home/jim/libpcap/libpcap.a</span><br><span class="line">make</span><br></pre></td></tr></tbody></table></figure>
-<p>执行成功后即可在 <code>/home/mentohust/src</code> 下获取到所需的 <code>mentohust</code> 二进制文件了。</p>
-<h1 id="can-kao-wen-zhang">参考文章</h1>
-<ul>
-<li><a href="https://github.com/KumaTea/MentoHUST-SYSU-Guide/blob/master/Guide.md">支持锐捷认证与 IPv6 的路由器配置指南：以 K2P 为例</a></li>
-<li><a href="https://blog.csdn.net/warriorpaw/article/details/7990226">交叉编译 mentohust 实现锐捷认证共享上网</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>笔记</category>
-      </categories>
-      <tags>
-        <tag>MentoHUST</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>配置 Typora &amp; PicGo 写 Hexo 博客</title>
-    <url>/posts/39aaddee.html</url>
-    <content><![CDATA[<h1 id="gong-ju-jie-shao">工具介绍</h1>
-<h2 id="you-ya-de-markdown-bian-ji-qi-typora"><a class="header-anchor" href="#优雅的Markdown编辑器-——-Typora">¶</a> 优雅的 Markdown 编辑器 —— Typora</h2>
-<p><a href="https://www.typora.io/">官网</a></p>
-<p>简约、舒适、优雅，这是我对它的第一眼评价。</p>
-<p>完善的功能、所见即所得、自定义主题、拓展语法支持、良好的图片插入管理、数学支持、专注模式、打字机模式……</p>
-<p>以及免费 —— 这些都是我毫不犹豫下载安装它的原因。</p>
-<p>展现在我面前的它果然没有让我失望，漂亮的界面让我觉得原来的 VS Code 瞬间就不香了。</p>
-<p>当然，它的实力，还仅不限于此……</p>
-<a id="more"></a>
-<h2 id="xiao-qiao-de-tu-pian-shang-chuan-gong-ju-pic-go"><a class="header-anchor" href="#小巧的图片上传工具——PicGo">¶</a> 小巧的图片上传工具 ——PicGo</h2>
-<p><a href="https://molunerfinn.com/PicGo/">官网</a></p>
-<p>这是一个开源的体积小巧，功能强大的图床工具。</p>
-<p>它支持自建图床和多个常用图床，可以方便地对上传了的进行管理，还能安装拓展插件，实现截图上传、加水印上传等功能。</p>
-<p>但更重要的是，Typora 支持通过它实现拖入到文章中的图片上传图床并替换掉文中图片地址</p>
-<p>Awsome！有了它，再也不用手动上传图床复制链接了！</p>
-<p>下面就来配置下二者的结合使用。</p>
-<h1 id="er-zhe-pei-zhi">二者配置</h1>
-<h2 id="pei-zhi-pic-go-de-shang-chuan-she-zhi"><a class="header-anchor" href="#配置PicGo的上传设置">¶</a> 配置 PicGo 的上传设置</h2>
-<p>此处以 sm.ms 的注册图床为例，其他图床请参考<a href="https://picgo.github.io/PicGo-Doc/zh/guide/getting-started.html">官方文档</a></p>
-<ol>
-<li>
-<p><a href="http://xn--sm-5p3dp06f.ms">登录 sm.ms</a>，获取 API token，复制备用</p>
-<p><img data-src="https://i.loli.net/2020/03/21/wnxrfcZzPtvJk58.png" alt=""></p>
-</li>
-</ol>
-<img data-src="https://i.loli.net/2020/03/21/TYJIjPBk2lAHXgr.png" style="zoom: 80%;">
-<ol start="2">
-<li>
-<p>打开 PicGo，插件设置中输入 smms-user 并安装对应插件，</p>
-<img data-src="https://i.loli.net/2020/03/21/lk4dTXfQF1syWir.png" style="zoom:80%;">
-<p>安装完成后在图床设置里新出现的 <strong>SM.MS - 登录用户</strong>中输入刚才获得的 token，点击确定和设为默认图床</p>
-<img data-src="https://i.loli.net/2020/03/21/n9kpCUiR62EtjOV.png" style="zoom:80%;">
-</li>
-</ol>
-<p>此处 PicGo 配置完成</p>
-<h2 id="pei-zhi-typora"><a class="header-anchor" href="#配置Typora">¶</a> 配置 Typora</h2>
-<p>快捷键 <code>ctrl+逗号</code>打开偏好设置，进入 ``图像` 选项进行如下设置：</p>
-<img data-src="https://i.loli.net/2020/03/21/JBxqTtkSZ59wL2y.png" style="zoom:80%;">
-<p>其中<code>上传服务设定</code>中 <code>PicGo路径</code>一栏请根据自身情况填写 PicGo 的安装路径。</p>
-<p>如果需要上传网络上复制的图片到自己的图床，请勾选<code>插入图片时…</code> 中的<code>对网络位置的图片应用上述规则</code>。</p>
-<p>设置完后点击<code>验证图片上传选项</code>进行测试，成功即设置完成。</p>
-<p>Typora 和 PicGo 里各自的功能就不再展示了，这里仅作二者结合使用的介绍，其他请自行探索！</p>
-]]></content>
-      <categories>
-        <category>笔记</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-        <tag>图床</tag>
+        <tag>Tasker</tag>
+        <tag>Android</tag>
       </tags>
   </entry>
   <entry>
@@ -732,7 +746,7 @@ _   底线
 <figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> lede</span><br></pre></td></tr></tbody></table></figure>
 </li>
 </ul>
-<h2 id="geng-xin"><a class="header-anchor" href="#更新">¶</a> 更新</h2>
+<h2 id="geng-xin"><a class="header-anchor" href="#更新"></a>更新</h2>
 <blockquote>
 <p>短期内再次编译可忽略</p>
 </blockquote>
@@ -753,7 +767,7 @@ _   底线
 </blockquote>
 </li>
 </ul>
-<h2 id="wen-jian-qing-li"><a class="header-anchor" href="#文件清理">¶</a> 文件清理</h2>
+<h2 id="wen-jian-qing-li"><a class="header-anchor" href="#文件清理"></a>文件清理</h2>
 <ul>
 <li>
 <p>清除旧的编译产物（可选）</p>
@@ -798,7 +812,7 @@ _   底线
 </blockquote>
 </li>
 </ul>
-<h2 id="bian-yi"><a class="header-anchor" href="#编译">¶</a> 编译</h2>
+<h2 id="bian-yi"><a class="header-anchor" href="#编译"></a>编译</h2>
 <ul>
 <li>
 <p>调整 Open­Wrt 系统组件</p>
@@ -854,108 +868,6 @@ _   底线
       </tags>
   </entry>
   <entry>
-    <title>博客折腾笔记④- 使用 Tasker 在 Android 上实现个人动态的发送</title>
-    <url>/posts/4394c3fa.html</url>
-    <content><![CDATA[<p><a href="https://jimlee2002.github.io/posts/2b426e0a.html">前情提要</a></p>
-<p>折腾了两天，我终于是实现在 Android 上使用 Tasker 向刚搭建好的个人动态系统发送内容了。</p>
-<h1 id="xiao-guo-zhan-shi">效果展示</h1>
-<p>这是一个在 Android 上向<a href="https://github.com/daibor/nonsense.fun">废话胶囊（b 言 b 语）</a>发送内容的简单 Tasker 工程。</p>
-<p>项目地址：<a href="https://github.com/jimlee2002/nonsense.fun_tasker">https://github.com/jimlee2002/nonsense.fun_tasker</a></p>
-<img data-src="https://i.loli.net/2020/04/22/Hy7kwJL8FDr6I5O.png" style="zoom: 50%;">
-<a id="more"></a>
-<h1 id="an-zhuang-pei-zhi">安装配置</h1>
-<h2 id="直接下载安装已经导出好的apk文件"><a class="header-anchor" href="#直接下载安装已经导出好的apk文件">¶</a> 直接下载安装已经导出好的 <a href="https://github.com/jimlee2002/nonsense.fun_tasker/releases">apk 文件</a></h2>
-<p>应用使用插件 <code>Tasker App Factory</code> 导出。</p>
-<p>注意，该应用<strong>需要 root 权限</strong>。</p>
-<h2 id="导入Tasker工程"><a class="header-anchor" href="#导入Tasker工程">¶</a> 导入 Tasker 工程</h2>
-<p><strong>注意：部分手机可能需要 Root 权限才能使用，该工程默认开启<code>使用Root运行</code>，可以自行到<code>场景/Main/发送/按下</code>的第 6 个和第 8 个任务里关掉该选项</strong>。</p>
-<p><img data-src="https://i.loli.net/2020/04/22/iaTO5gAQLjnufBZ.png" style="zoom: 50%;"><img data-src="https://i.loli.net/2020/04/22/SIJivZ5L4Na9Cu3.png" style="zoom: 50%;"></p>
-<p><img data-src="https://i.loli.net/2020/04/24/c1R3x9HEzyQiTpN.png" style="zoom:50%;"><img data-src="https://i.loli.net/2020/04/22/7BoIjaJL9h6ilf1.png" style="zoom: 50%;"></p>
-<hr>
-<ol>
-<li>
-<p><a href="https://github.com/jimlee2002/nonsense.fun_tasker/releases">下载</a><code>bb.prj.xml</code>，存入到手机任意你找得到的位置。</p>
-</li>
-<li>
-<p>下载安装 Tasker。</p>
-</li>
-<li>
-<p>进入主界面长按左下角的按钮，点击<code>导入项目</code>，在打开的界面中找到并打开刚才存入的 <code>bb.prj.xml。</code></p>
-<p><img data-src="https://i.loli.net/2020/04/22/mpwnk2ZWvMc6uSU.png" style="zoom: 50%;"><img data-src="https://i.loli.net/2020/04/22/3Zc2KIWVfBzhiDM.png" style="zoom: 50%;"></p>
-<blockquote>
-<p>提示：点击右下角的手机按钮可以快速回到内部储存空间目录</p>
-</blockquote>
-</li>
-<li>
-<p>完成后回到主界面，点击应用栏里图标长得和 Tasker 很像的 <code>Tasker Secondary</code>，打开界面。</p>
-<p><img data-src="https://i.loli.net/2020/04/22/Gju9BY64UsWlvTw.png" style="zoom: 50%;"><img data-src="https://i.loli.net/2020/04/22/Hy7kwJL8FDr6I5O.png" style="zoom: 50%;"></p>
-</li>
-<li>
-<p><strong>长按</strong>发送按钮，打开设置页面进行必要设置。</p>
-<img data-src="https://i.loli.net/2020/04/22/YM5CJ6vb4OIdemy.png" style="zoom: 50%;">
-<p><strong>Title：</strong> 这里是发送界面顶端的文字，请随意修改。</p>
-<p><strong>AppID、MasterKey：</strong> 网页打开 LeanCloud，在你的项目里点击<code>设置/应用Keys</code>，复制对应的密钥分别填入。</p>
-<p><img data-src="https://i.loli.net/2020/04/20/Kaxt5GOo3LRgMmy.png" alt=""></p>
-<p><strong>className：</strong> 一般是 <code>content</code>，只要你是按照<a href="https://sspai.com/post/60024">少数派的指南</a>来做的话。</p>
-<p><strong>–insecure：</strong> 是否在脚本命令末尾加上 <code>--insecue</code>。参数默认关闭，如果无法发送可以尝试打开这个选项试试。</p>
-<p><strong>完成后点击确认返回</strong>。</p>
-</li>
-</ol>
-<p>这样就配置完成了，请试试看吧！</p>
-<h1 id="tasker-gong-cheng-shi-yong-fang-fa">Tasker 工程使用方法</h1>
-<h2 id="通过-Tasker-Secondary-打开"><a class="header-anchor" href="#通过-Tasker-Secondary-打开">¶</a> 通过 Tasker Secondary 打开</h2>
-<img data-src="https://i.loli.net/2020/04/22/Gju9BY64UsWlvTw.png" style="zoom: 50%;">
-<h2 id="通过桌面小工具创建快捷方式打开"><a class="header-anchor" href="#通过桌面小工具创建快捷方式打开">¶</a> 通过桌面小工具创建快捷方式打开</h2>
-<ol>
-<li>
-<p>打开 Tasker，然后<strong>点击返回键</strong>回到主界面。</p>
-</li>
-<li>
-<p>在桌面上新建 Tasker 的桌面小部件 "任务"，在打开的界面选择 <code>Show UI</code>,</p>
-<p>在界面下方选择图标，然后点击左上角返回桌面。</p>
-<p><img data-src="https://i.loli.net/2020/04/22/QWRPd7IKmV3oXYj.png" style="zoom: 50%;"><img data-src="https://i.loli.net/2020/04/22/t5dlHRyUgDM7aKX.png" style="zoom: 50%;"></p>
-<p>完成，现在你应该能看到快捷方式了。</p>
-</li>
-</ol>
-<h2 id="自行导出为APK安装"><a class="header-anchor" href="#自行导出为APK安装">¶</a> 自行导出为 APK 安装</h2>
-<p>** 注意：你必须拥有手机的 Root 权限，并勾选<code>场景/Main/发送/按下</code>的第 6 个和第 8 个任务中的<code>使用Root运行</code>选项 **</p>
-<ol>
-<li>
-<p>Google Play 安装 <code>Tasker App Factory</code>。</p>
-</li>
-<li>
-<p>打开 Tasker，主界面左下方长按选择已经导入的项目，然后选择<code>导出\作为应用。</code></p>
-<img data-src="https://i.loli.net/2020/04/22/peARXFgoinvOJzx.png" style="zoom: 50%;">
-<blockquote>
-<p>提示：你可以通过点击<code>更名</code>重命名工程名称来修改应用名。</p>
-</blockquote>
-<img data-src="https://i.loli.net/2020/04/22/TZzLONjeHJviCp5.png" style="zoom:50%;">
-</li>
-<li>
-<p>根据提示输入包名和版本号。</p>
-<img data-src="https://i.loli.net/2020/04/22/Q7nXMpqxhB5o8a3.png" style="zoom: 50%;">
-</li>
-<li>
-<p>点击左上角返回，Tasker 会将项目以 APK 格式导出到<code>内部储存/Tasker/factory/kids</code> 并安装。</p>
-</li>
-</ol>
-<h1 id="hou-ji">后记</h1>
-<p>界面如果有问题可以自行在 Tasker 的<code>场景</code>中修改。</p>
-<p>个人能力有限，做的比较粗糙，还请不吝赐教！</p>
-<h1 id="zhi-xie">致谢</h1>
-<p>感谢 <a href="https://github.com/daibor">daibor</a> 制作了这么棒的<a href="https://github.com/daibor/nonsense.fun">项目。</a></p>
-<p>感谢少数派的 @SoSo 在评论下分享的方法启发了这个工程。</p>
-]]></content>
-      <categories>
-        <category>笔记</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-        <tag>Tasker</tag>
-        <tag>Android</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>在 WSL2 上进行 OpenWrt 的编译</title>
     <url>/posts/3a5c40a1.html</url>
     <content><![CDATA[<h1 id="an-zhuang-wsl">安装 WSL</h1>
@@ -965,11 +877,11 @@ _   底线
 </ul>
 <a id="more"></a>
 <h1 id="pei-zhi-bian-yi-huan-jing">配置编译环境</h1>
-<h2 id="pei-zhi-windows-terminal-mo-ren-da-kai-mu-lu-wei-code-code"><a class="header-anchor" href="#配置-Windows-Terminal-默认打开目录为">¶</a> 配置 Windows Terminal 默认打开目录为 <code>~</code></h2>
+<h2 id="pei-zhi-windows-terminal-mo-ren-da-kai-mu-lu-wei-code-code"><a class="header-anchor" href="#配置-Windows-Terminal-默认打开目录为"></a>配置 Windows Terminal 默认打开目录为 <code>~</code></h2>
 <p>打开 <code>Windows Terminal——设置</code>，在 WSL 对应的区域加入一行</p>
 <figure class="highlight plain"><table><tbody><tr><td class="code"><pre><span class="line">"startingDirectory": "//wsl$/&lt;name&gt;/home/&lt;username&gt;"</span><br></pre></td></tr></tbody></table></figure>
 <p>其中，<code>&lt;name&gt;</code> 是上方显示的 WSL 的名称，<code>username</code> 是当前 windows 账户用户名的名称。</p>
-<h2 id="geng-huan-a-li-yun-de-yuan"><a class="header-anchor" href="#更换阿里云的源">¶</a> 更换阿里云的源</h2>
+<h2 id="geng-huan-a-li-yun-de-yuan"><a class="header-anchor" href="#更换阿里云的源"></a>更换阿里云的源</h2>
 <p>完成 WSL 初始设置后：</p>
 <p>备份原来的源。</p>
 <figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">cp -ra /etc/apt/sources.list /etc/apt/sources.list.bak</span><br></pre></td></tr></tbody></table></figure>
@@ -979,7 +891,7 @@ _   底线
 <figure class="highlight plain"><table><tbody><tr><td class="code"><pre><span class="line">deb http://mirrors.aliyun.com/ubuntu/ focal main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ focal main restricted universe multiverse</span><br><span class="line"></span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ focal-security main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ focal-security main restricted universe multiverse</span><br><span class="line"></span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ focal-updates main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ focal-updates main restricted universe multiverse</span><br><span class="line"></span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ focal-proposed main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ focal-proposed main restricted universe multiverse</span><br><span class="line"></span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ focal-backports main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ focal-backports main restricted universe multiverse</span><br></pre></td></tr></tbody></table></figure>
 <p>保存，退出，然后更新缓存与升级。</p>
 <figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get upgrade</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="she-zhi-dai-li-yi-clash-wei-li"><a class="header-anchor" href="#设置代理（以-Clash-为例）">¶</a> 设置代理（以 Clash 为例）</h2>
+<h2 id="she-zhi-dai-li-yi-clash-wei-li"><a class="header-anchor" href="#设置代理（以-Clash-为例）"></a>设置代理（以 Clash 为例）</h2>
 <p>为了加速编译所需文件的下载，需要给 WSL 挂代理进行网络加速。</p>
 <p>WSL 不走主机端的代理，需要进行一番设置：</p>
 <p>主机开好 Clash，开启 <code>Allow LAN</code> 的选项，</p>
@@ -998,19 +910,19 @@ _   底线
 <p>输入：</p>
 <figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">unproxy</span><br></pre></td></tr></tbody></table></figure>
 <p>关闭代理。</p>
-<h2 id="she-zhi-wsl-zhong-bu-jia-zai-windows-de-path-nei-rong"><a class="header-anchor" href="#设置-WSL-中不加载-Windows-的-PATH-内容">¶</a> 设置 WSL 中不加载 Windows 的 PATH 内容</h2>
+<h2 id="she-zhi-wsl-zhong-bu-jia-zai-windows-de-path-nei-rong"><a class="header-anchor" href="#设置-WSL-中不加载-Windows-的-PATH-内容"></a>设置 WSL 中不加载 Windows 的 PATH 内容</h2>
 <p><strong>！！在 WSL 中，不进行此项设置会导致编译出错！！</strong></p>
 <figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">vim /etc/wsl.conf</span><br></pre></td></tr></tbody></table></figure>
 <p>打开后输入：</p>
 <figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">[interop]</span><br><span class="line">appendWindowsPath = <span class="literal">false</span></span><br></pre></td></tr></tbody></table></figure>
 <p>保存退出后<strong>重启</strong>即可。</p>
-<h2 id="an-zhuang-bian-yi-yi-lai"><a class="header-anchor" href="#安装编译依赖">¶</a> 安装编译依赖</h2>
+<h2 id="an-zhuang-bian-yi-yi-lai"><a class="header-anchor" href="#安装编译依赖"></a>安装编译依赖</h2>
 <figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get -y install build-essential asciidoc binutils bzip2 gawk gettext git libncurses5-dev libz-dev patch python3 python2.7 unzip zlib1g-dev lib32gcc1 libc6-dev-i386 subversion flex uglifyjs git-core gcc-multilib p7zip p7zip-full msmtp libssl-dev texinfo libglib2.0-dev xmlto qemu-utils upx libelf-dev autoconf automake libtool autopoint device-tree-compiler g++-multilib antlr3 gperf wget curl swig rsync</span><br></pre></td></tr></tbody></table></figure>
 <p>然后就可以开始编译了。</p>
 <h1 id="bian-yi">编译</h1>
 <p>参见 <a href="">OpenWrt/LEDE 的编译与 Mentohust 软件包的添加 —— 以斐讯 K2 为例</a></p>
 <p>OpenWrt/Lede 源码请务必 <code>Clone</code> 到 <code>~</code> 下再进行操作</p>
-<h2 id="huo-qu-bian-yi-de-gu-jian"><a class="header-anchor" href="#获取编译的固件">¶</a> 获取编译的固件</h2>
+<h2 id="huo-qu-bian-yi-de-gu-jian"><a class="header-anchor" href="#获取编译的固件"></a>获取编译的固件</h2>
 <p>在资源管理器地址栏输入 <code>\\wsl$</code> 即可访问 WSL 下的文件。以 x86_64 平台为例子，固件所在路径为：</p>
 <figure class="highlight plain"><table><tbody><tr><td class="code"><pre><span class="line">\\wsl$\WSL名称\home\用户名\lede\bin\targets\x86\64</span><br></pre></td></tr></tbody></table></figure>
 <h1 id="zhi-xie">致谢</h1>
@@ -1028,6 +940,94 @@ _   底线
       <tags>
         <tag>OpenWrt</tag>
         <tag>WSL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>配置 Typora &amp; PicGo 写 Hexo 博客</title>
+    <url>/posts/39aaddee.html</url>
+    <content><![CDATA[<h1 id="gong-ju-jie-shao">工具介绍</h1>
+<h2 id="you-ya-de-markdown-bian-ji-qi-typora"><a class="header-anchor" href="#优雅的Markdown编辑器-——-Typora"></a>优雅的 Markdown 编辑器 —— Typora</h2>
+<p><a href="https://www.typora.io/">官网</a></p>
+<p>简约、舒适、优雅，这是我对它的第一眼评价。</p>
+<p>完善的功能、所见即所得、自定义主题、拓展语法支持、良好的图片插入管理、数学支持、专注模式、打字机模式……</p>
+<p>以及免费 —— 这些都是我毫不犹豫下载安装它的原因。</p>
+<p>展现在我面前的它果然没有让我失望，漂亮的界面让我觉得原来的 VS Code 瞬间就不香了。</p>
+<p>当然，它的实力，还仅不限于此……</p>
+<a id="more"></a>
+<h2 id="xiao-qiao-de-tu-pian-shang-chuan-gong-ju-pic-go"><a class="header-anchor" href="#小巧的图片上传工具——PicGo"></a>小巧的图片上传工具 ——PicGo</h2>
+<p><a href="https://molunerfinn.com/PicGo/">官网</a></p>
+<p>这是一个开源的体积小巧，功能强大的图床工具。</p>
+<p>它支持自建图床和多个常用图床，可以方便地对上传了的进行管理，还能安装拓展插件，实现截图上传、加水印上传等功能。</p>
+<p>但更重要的是，Typora 支持通过它实现拖入到文章中的图片上传图床并替换掉文中图片地址</p>
+<p>Awsome！有了它，再也不用手动上传图床复制链接了！</p>
+<p>下面就来配置下二者的结合使用。</p>
+<h1 id="er-zhe-pei-zhi">二者配置</h1>
+<h2 id="pei-zhi-pic-go-de-shang-chuan-she-zhi"><a class="header-anchor" href="#配置PicGo的上传设置"></a>配置 PicGo 的上传设置</h2>
+<p>此处以 sm.ms 的注册图床为例，其他图床请参考<a href="https://picgo.github.io/PicGo-Doc/zh/guide/getting-started.html">官方文档</a></p>
+<ol>
+<li>
+<p><a href="http://xn--sm-5p3dp06f.ms">登录 sm.ms</a>，获取 API token，复制备用</p>
+<p><img data-src="https://i.loli.net/2020/03/21/wnxrfcZzPtvJk58.png" alt=""></p>
+</li>
+</ol>
+<img data-src="https://i.loli.net/2020/03/21/TYJIjPBk2lAHXgr.png" style="zoom: 80%;">
+<ol start="2">
+<li>
+<p>打开 PicGo，插件设置中输入 smms-user 并安装对应插件，</p>
+<img data-src="https://i.loli.net/2020/03/21/lk4dTXfQF1syWir.png" style="zoom:80%;">
+<p>安装完成后在图床设置里新出现的 <strong>SM.MS - 登录用户</strong>中输入刚才获得的 token，点击确定和设为默认图床</p>
+<img data-src="https://i.loli.net/2020/03/21/n9kpCUiR62EtjOV.png" style="zoom:80%;">
+</li>
+</ol>
+<p>此处 PicGo 配置完成</p>
+<h2 id="pei-zhi-typora"><a class="header-anchor" href="#配置Typora"></a>配置 Typora</h2>
+<p>快捷键 <code>ctrl+逗号</code>打开偏好设置，进入 ``图像` 选项进行如下设置：</p>
+<img data-src="https://i.loli.net/2020/03/21/JBxqTtkSZ59wL2y.png" style="zoom:80%;">
+<p>其中<code>上传服务设定</code>中 <code>PicGo路径</code>一栏请根据自身情况填写 PicGo 的安装路径。</p>
+<p>如果需要上传网络上复制的图片到自己的图床，请勾选<code>插入图片时…</code> 中的<code>对网络位置的图片应用上述规则</code>。</p>
+<p>设置完后点击<code>验证图片上传选项</code>进行测试，成功即设置完成。</p>
+<p>Typora 和 PicGo 里各自的功能就不再展示了，这里仅作二者结合使用的介绍，其他请自行探索！</p>
+]]></content>
+      <categories>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>图床</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>编译适用于 X86 的 MentoHUST</title>
+    <url>/posts/5ed2bcfa.html</url>
+    <content><![CDATA[<h1 id="zhun-bei-gong-zuo">准备工作</h1>
+<p>以下所以操作都基于 <code>/home</code> 进行，用户名为 <code>jim</code>。</p>
+<h2 id="an-zhuang-xiang-guan-yi-lai"><a class="header-anchor" href="#安装相关依赖"></a>安装相关依赖</h2>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">sudo apt install build-essential bison flex zlib1g-dev libncurses5-dev subversion quilt intltool ruby fastjar unzip gawk autogen autopoint ccache gettext libssl-dev xsltproc zip git</span><br></pre></td></tr></tbody></table></figure>
+<a id="more"></a>
+<h2 id="huo-qu-libpcab-yuan-ma"><a class="header-anchor" href="#获取libpcab源码"></a>获取 libpcab 源码</h2>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">wget https://www.tcpdump.org/release/libpcap-1.9.1.tar.gz -O libpcap.tar.gz</span><br><span class="line">tar -xzf libpcap.tar.gz</span><br><span class="line">mv libpcap-1.9.1 libpcap</span><br><span class="line">rm libpcap.tar.gz</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="huo-qu-mento-hust-yuan-ma"><a class="header-anchor" href="#获取MentoHUST源码"></a>获取 MentoHUST 源码</h2>
+<p>以 <a href="https://github.com/hyrathb">@hyrathb</a> 的 <a href="https://github.com/hyrathb/mentohust">MentoHUST</a> 为例：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/hyrathb/mentohust.git mentohust</span><br></pre></td></tr></tbody></table></figure>
+<h1 id="jin-xing-bian-yi">进行编译</h1>
+<h2 id="bian-yi-libpcab"><a class="header-anchor" href="#编译libpcab"></a>编译 libpcab</h2>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> libpcap</span><br><span class="line">./configure --prefix=/home --with-pcap=linux</span><br><span class="line">make</span><br></pre></td></tr></tbody></table></figure>
+<p><code>make</code> 部分，<strong>只要看到 <code>ranlib libpcap.a</code> 没有出错即可</strong>，不用理会 <code>libpcap.so</code> 是否出错。</p>
+<p>完成后，应能在 <code>/home/libpcap</code> 下看到 <code>libpcap.a</code>。</p>
+<h2 id="bian-yi-mento-hust"><a class="header-anchor" href="#编译MentoHUST"></a>编译 MentoHUST</h2>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> mentohust</span><br><span class="line">sh autogen.sh</span><br><span class="line">./configure --disable-encodepass --disable-notify --with-pcap=/home/jim/libpcap/libpcap.a</span><br><span class="line">make</span><br></pre></td></tr></tbody></table></figure>
+<p>执行成功后即可在 <code>/home/mentohust/src</code> 下获取到所需的 <code>mentohust</code> 二进制文件了。</p>
+<h1 id="can-kao-wen-zhang">参考文章</h1>
+<ul>
+<li><a href="https://github.com/KumaTea/MentoHUST-SYSU-Guide/blob/master/Guide.md">支持锐捷认证与 IPv6 的路由器配置指南：以 K2P 为例</a></li>
+<li><a href="https://blog.csdn.net/warriorpaw/article/details/7990226">交叉编译 mentohust 实现锐捷认证共享上网</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>MentoHUST</tag>
       </tags>
   </entry>
   <entry>
@@ -1076,7 +1076,7 @@ hexo d
 </code></pre>
 <p>稍等一会，应该就能访问到了</p>
 <h1 id="ji-ben-diao-zheng">基本调整</h1>
-<h2 id="设置备份"><a class="header-anchor" href="#设置备份">¶</a> 设置备份</h2>
+<h2 id="设置备份"><a class="header-anchor" href="#设置备份"></a>设置备份</h2>
 <p>安装插件 <code>hexo-git-backup</code> 把 hexo 文件备份到建好的私有库</p>
 <pre><code>npm install hexo-git-backup --save
 </code></pre>
@@ -1106,14 +1106,14 @@ repository:
 11、<code>db.json</code> 文件，不需要拷贝。</p>
 <p>引用自：<a href="https://www.jianshu.com/p/baab042849023">https://www.jianshu.com/p/baab042849023</a></p>
 </blockquote>
-<h3 id="备份操作"><a class="header-anchor" href="#备份操作">¶</a> 备份操作</h3>
+<h3 id="备份操作"><a class="header-anchor" href="#备份操作"></a>备份操作</h3>
 <pre><code>hexo backup
 </code></pre>
 <p>或者</p>
 <pre><code>hexo b
 </code></pre>
 <p>进行备份</p>
-<h3 id="还原操作"><a class="header-anchor" href="#还原操作">¶</a> 还原操作</h3>
+<h3 id="还原操作"><a class="header-anchor" href="#还原操作"></a>还原操作</h3>
 <ol>
 <li>
 <p>安装 git、node.js</p>
@@ -1126,7 +1126,7 @@ repository:
 <figure class="highlight plain"><table><tbody><tr><td class="code"><pre><span class="line">$ npm install hexo-cli -g</span><br><span class="line">$ npm install</span><br><span class="line">$ npm install hexo-deployer-git</span><br></pre></td></tr></tbody></table></figure>
 </li>
 </ol>
-<h3 id="排错指南"><a class="header-anchor" href="#排错指南">¶</a><strong> 排错指南</strong></h3>
+<h3 id="排错指南"><a class="header-anchor" href="#排错指南"></a><strong>排错指南</strong></h3>
 <ol>
 <li>尝试提权 /sudo</li>
 <li> 出现类似 </li>
@@ -1148,9 +1148,9 @@ Emitted 'error' event at:
 <blockquote>
 <p>参考  <a href="https://github.com/coneycode/hexo-git-backup/issues/27">备份报错 #27</a></p>
 </blockquote>
-<h2 id="设置分类，建立模板"><a class="header-anchor" href="#设置分类，建立模板">¶</a> 设置分类，建立模板</h2>
+<h2 id="设置分类，建立模板"><a class="header-anchor" href="#设置分类，建立模板"></a>设置分类，建立模板</h2>
 <p>略</p>
-<h2 id="更换hexo-renderer-markdown-it渲染器"><a class="header-anchor" href="#更换hexo-renderer-markdown-it渲染器">¶</a> 更换 <code>hexo-renderer-markdown-it</code> 渲染器</h2>
+<h2 id="更换hexo-renderer-markdown-it渲染器"><a class="header-anchor" href="#更换hexo-renderer-markdown-it渲染器"></a>更换 <code>hexo-renderer-markdown-it</code> 渲染器</h2>
 <pre><code>npm un hexo-renderer-marked --save
 npm i hexo-renderer-markdown-it --save
 </code></pre>
@@ -1229,8 +1229,8 @@ theme: next
 <blockquote>
 <p>官方文档：<a href="https://theme-next.org/docs/">https://theme-next.org/docs/</a></p>
 </blockquote>
-<h2 id="基本设置"><a class="header-anchor" href="#基本设置">¶</a> 基本设置</h2>
-<h3 id="切换风格"><a class="header-anchor" href="#切换风格">¶</a> 切换风格</h3>
+<h2 id="基本设置"><a class="header-anchor" href="#基本设置"></a>基本设置</h2>
+<h3 id="切换风格"><a class="header-anchor" href="#切换风格"></a>切换风格</h3>
 <p>官方提供了 Muse、Mist、Pisces、Gemini 四种布局风格，这里选择 Gemini</p>
 <pre><code># Schemes
 #scheme: Muse
@@ -1238,20 +1238,20 @@ theme: next
 #scheme: Pisces
 scheme: Gemini
 </code></pre>
-<h3 id="开启夜间模式适配"><a class="header-anchor" href="#开启夜间模式适配">¶</a> 开启夜间模式适配</h3>
+<h3 id="开启夜间模式适配"><a class="header-anchor" href="#开启夜间模式适配"></a>开启夜间模式适配</h3>
 <pre><code>darkmode: true
 </code></pre>
-<h3 id="切换语言"><a class="header-anchor" href="#切换语言">¶</a> 切换语言</h3>
+<h3 id="切换语言"><a class="header-anchor" href="#切换语言"></a>切换语言</h3>
 <pre><code>language: zh-CN
 </code></pre>
-<h3 id="设置站点图标"><a class="header-anchor" href="#设置站点图标">¶</a> 设置站点图标</h3>
+<h3 id="设置站点图标"><a class="header-anchor" href="#设置站点图标"></a>设置站点图标</h3>
 <pre><code>favicon:
 small: /images/favicon-16x16-next.png
 medium: /images/favicon-32x32-next.png
 apple_touch_icon: /images/apple-touch-icon-next.png
 safari_pinned_tab: /images/logo.svg
 </code></pre>
-<h3 id="备案展示"><a class="header-anchor" href="#备案展示">¶</a> 备案展示</h3>
+<h3 id="备案展示"><a class="header-anchor" href="#备案展示"></a>备案展示</h3>
 <pre><code># Beian ICP and gongan information for Chinese users. See: http://www.beian.miit.gov.cn, http://www.beian.gov.cn
 beian:
     enable: false
@@ -1263,7 +1263,7 @@ beian:
     # The icon for gongan beian. See: http://www.beian.gov.cn/portal/download
     gongan_icon_url:
 </code></pre>
-<h3 id="CC标识"><a class="header-anchor" href="#CC标识">¶</a>CC 标识</h3>
+<h3 id="CC标识"><a class="header-anchor" href="#CC标识"></a>CC 标识</h3>
 <p>这里我选择的是 by-nc-sa</p>
 <pre><code># Creative Commons 4.0 International License.
 # See: https://creativecommons.org/share-your-work/licensing-types-examples
@@ -1276,7 +1276,7 @@ sidebar: true
 post: true
 language: deed.zh
 </code></pre>
-<h3 id="设置菜单栏"><a class="header-anchor" href="#设置菜单栏">¶</a> 设置菜单栏</h3>
+<h3 id="设置菜单栏"><a class="header-anchor" href="#设置菜单栏"></a>设置菜单栏</h3>
 <pre><code># Usage: `Key: /link/ || icon`
 # Key is the name of menu item. If the translation for this item is available, the translated text will be loaded, otherwise the Key name will be used. Key is case-senstive.
 # Value before `||` delimiter is the target link, value after `||` delimiter is the name of Font Awesome icon.
@@ -1297,11 +1297,11 @@ menu_settings:
 icons: true
 badges: false
 </code></pre>
-<h2 id="设置侧边栏"><a class="header-anchor" href="#设置侧边栏">¶</a> 设置侧边栏</h2>
+<h2 id="设置侧边栏"><a class="header-anchor" href="#设置侧边栏"></a>设置侧边栏</h2>
 <pre><code># Sidebar Settings
 # See: https://theme-next.org/docs/theme-settings/sidebar
 </code></pre>
-<h3 id="侧边栏大小位置"><a class="header-anchor" href="#侧边栏大小位置">¶</a> 侧边栏大小位置</h3>
+<h3 id="侧边栏大小位置"><a class="header-anchor" href="#侧边栏大小位置"></a>侧边栏大小位置</h3>
 <pre><code>sidebar:
 # Sidebar Position.
 position: left
@@ -1319,7 +1319,7 @@ offset: 12
 # Enable sidebar on narrow view (only for Muse | Mist).
 onmobile: false
 </code></pre>
-<h3 id="头像"><a class="header-anchor" href="#头像">¶</a> 头像</h3>
+<h3 id="头像"><a class="header-anchor" href="#头像"></a>头像</h3>
 <pre><code># Sidebar Avatar
 avatar:
 # Replace the default image and set the url here.
@@ -1332,7 +1332,7 @@ rotated: false
 # Posts / Categories / Tags in sidebar.
 site_state: true
 </code></pre>
-<h3 id="友情链接"><a class="header-anchor" href="#友情链接">¶</a> 友情链接</h3>
+<h3 id="友情链接"><a class="header-anchor" href="#友情链接"></a>友情链接</h3>
 <pre><code># Social Links
 # Usage: `Key: permalink || icon`
 # Key is the link label showing to end users.
@@ -1368,7 +1368,7 @@ links:
 # Table of Contents in the Sidebar
 # Front-matter variable (unsupport wrap expand_all).
 </code></pre>
-<h3 id="TOC"><a class="header-anchor" href="#TOC">¶</a>TOC</h3>
+<h3 id="TOC"><a class="header-anchor" href="#TOC"></a>TOC</h3>
 <pre><code># Table of Contents in the Sidebar
 # Front-matter variable (unsupport wrap expand_all).
 toc:
@@ -1382,7 +1382,7 @@ expand_all: false
 # Maximum heading depth of generated toc.
 max_depth: 6
 </code></pre>
-<h3 id="即时交谈"><a class="header-anchor" href="#即时交谈">¶</a> 即时交谈</h3>
+<h3 id="即时交谈"><a class="header-anchor" href="#即时交谈"></a>即时交谈</h3>
 <pre><code># A button to open designated chat widget in sidebar.
 # Firstly, you need enable the chat service you want to activate its sidebar button.
 chat:
@@ -1392,7 +1392,7 @@ enable: false
 icon: comment # Icon name in Font Awesome, set false to disable icon.
 text: Chat # Button text, change it as you wish.
 </code></pre>
-<h2 id="帖子页面"><a class="header-anchor" href="#帖子页面">¶</a> 帖子页面</h2>
+<h2 id="帖子页面"><a class="header-anchor" href="#帖子页面"></a>帖子页面</h2>
 <pre><code># ---------------------------------------------------------------
 # Post Settings
 # See: https://theme-next.org/docs/theme-settings/posts
@@ -1406,7 +1406,7 @@ excerpt_description: true
 # If true, the read more button will be displayed in excerpt section.
 read_more_btn: true
 </code></pre>
-<h3 id="文章信息"><a class="header-anchor" href="#文章信息">¶</a> 文章信息</h3>
+<h3 id="文章信息"><a class="header-anchor" href="#文章信息"></a>文章信息</h3>
 <pre><code># Post meta display settings
 post_meta:
 item_text: true
@@ -1442,11 +1442,11 @@ separated_meta: true
 item_text_post: true
 item_text_total: false
 </code></pre>
-<h3 id="底部标签样式"><a class="header-anchor" href="#底部标签样式">¶</a> 底部标签样式</h3>
+<h3 id="底部标签样式"><a class="header-anchor" href="#底部标签样式"></a>底部标签样式</h3>
 <pre><code># Use icon instead of the symbol # to indicate the tag at the bottom of the post
 tag_icon: true
 </code></pre>
-<h3 id="打赏、文末信息"><a class="header-anchor" href="#打赏、文末信息">¶</a> 打赏、文末信息</h3>
+<h3 id="打赏、文末信息"><a class="header-anchor" href="#打赏、文末信息"></a>打赏、文末信息</h3>
 <pre><code># Reward (Donate)
 # Front-matter variable (unsupport animation).
 reward_settings:
@@ -1469,7 +1469,7 @@ follow_me:
 #WeChat: /images/wechat_channel.jpg || wechat
 #RSS: /atom.xml || rss
 </code></pre>
-<h3 id="相关主题推荐"><a class="header-anchor" href="#相关主题推荐">¶</a> 相关主题推荐</h3>
+<h3 id="相关主题推荐"><a class="header-anchor" href="#相关主题推荐"></a>相关主题推荐</h3>
 <p>安装 <code>hexo-related-popular-posts</code></p>
 <pre><code>npm install hexo-related-popular-posts
 </code></pre>
@@ -1487,7 +1487,7 @@ params:
     #isImage: false
     #isExcerpt: false
 </code></pre>
-<h3 id="标签页面"><a class="header-anchor" href="#标签页面">¶</a> 标签页面</h3>
+<h3 id="标签页面"><a class="header-anchor" href="#标签页面"></a>标签页面</h3>
 <p>先创建标签页面</p>
 <pre><code>hexo new page Tags
 </code></pre>
@@ -1509,7 +1509,7 @@ start: "#ccc" # Start color (hex, rgba, hsla or color keywords)
 end: "#111" # End color (hex, rgba, hsla or color keywords)
 amount: 200 # Amount of tags, change it if you have more than 200 tags
 </code></pre>
-<h3 id="分类页面"><a class="header-anchor" href="#分类页面">¶</a> 分类页面</h3>
+<h3 id="分类页面"><a class="header-anchor" href="#分类页面"></a>分类页面</h3>
 <p>同上</p>
 <pre><code>hexo new page Categories
 </code></pre>
@@ -1521,11 +1521,11 @@ type: categories
 comments: false
 ---
 </code></pre>
-<h3 id="404界面"><a class="header-anchor" href="#404界面">¶</a>404 界面</h3>
+<h3 id="404界面"><a class="header-anchor" href="#404界面"></a>404 界面</h3>
 <p>把 404.html 放在 /source/ 下，然后修改博客根目录的配置文件</p>
 <pre><code>skip_render: "404.html"
 </code></pre>
-<h3 id="谷歌日历-（未配置）"><a class="header-anchor" href="#谷歌日历-（未配置）">¶</a> 谷歌日历 （未配置）</h3>
+<h3 id="谷歌日历-（未配置）"><a class="header-anchor" href="#谷歌日历-（未配置）"></a>谷歌日历 （未配置）</h3>
 <pre><code># Google Calendar
 # Share your recent schedule to others via calendar page.
 calendar:
@@ -1538,15 +1538,15 @@ showDeleted: false
 singleEvents: true
 maxResults: 250
 </code></pre>
-<h3 id="安卓上chrome的沉浸颜色？（不是很明白）"><a class="header-anchor" href="#安卓上chrome的沉浸颜色？（不是很明白）">¶</a> 安卓上 chrome 的沉浸颜色？（不是很明白）</h3>
+<h3 id="安卓上chrome的沉浸颜色？（不是很明白）"><a class="header-anchor" href="#安卓上chrome的沉浸颜色？（不是很明白）"></a>安卓上 chrome 的沉浸颜色？（不是很明白）</h3>
 <pre><code># Android Chrome header panel color ($brand-bg / $headband-bg =&gt; $black-deep).
 android_chrome_color: "#222"
 </code></pre>
-<h3 id="自定义logo，在网站标题菜单栏上面的位置"><a class="header-anchor" href="#自定义logo，在网站标题菜单栏上面的位置">¶</a> 自定义 logo，在网站标题菜单栏上面的位置</h3>
+<h3 id="自定义logo，在网站标题菜单栏上面的位置"><a class="header-anchor" href="#自定义logo，在网站标题菜单栏上面的位置"></a>自定义 logo，在网站标题菜单栏上面的位置</h3>
 <pre><code># Custom Logo (Do not support scheme Mist)
 custom_logo: #/uploads/custom-logo.jpg
 </code></pre>
-<h3 id="代码块的风格"><a class="header-anchor" href="#代码块的风格">¶</a> 代码块的风格</h3>
+<h3 id="代码块的风格"><a class="header-anchor" href="#代码块的风格"></a>代码块的风格</h3>
 <p>配色方案预览：<a href="https://github.com/chriskempson/tomorrow-theme">https://github.com/chriskempson/tomorrow-theme</a></p>
 <pre><code>codeblock:
 # Code Highlight theme
@@ -1561,7 +1561,7 @@ copy_button:
     # Available values: default | flat | mac
     style: flat
 </code></pre>
-<h3 id="返回顶部样式"><a class="header-anchor" href="#返回顶部样式">¶</a> 返回顶部样式</h3>
+<h3 id="返回顶部样式"><a class="header-anchor" href="#返回顶部样式"></a>返回顶部样式</h3>
 <pre><code>back2top:
 enable: true
 # Back to top in sidebar.
@@ -1577,7 +1577,7 @@ position: top
 color: "#37c6c0"
 height: 3px
 </code></pre>
-<h3 id="阅读进度记忆、书签"><a class="header-anchor" href="#阅读进度记忆、书签">¶</a> 阅读进度记忆、书签</h3>
+<h3 id="阅读进度记忆、书签"><a class="header-anchor" href="#阅读进度记忆、书签"></a>阅读进度记忆、书签</h3>
 <pre><code># Bookmark Support
 bookmark:
 enable: true
@@ -1587,27 +1587,27 @@ color: "#222"
 # If manual, only save it by clicking the bookmark-icon.
 save: manual
 </code></pre>
-<h3 id="右上角来Github叉我啊图标"><a class="header-anchor" href="#右上角来Github叉我啊图标">¶</a> 右上角<s>来 Github 叉我啊</s>图标</h3>
+<h3 id="右上角来Github叉我啊图标"><a class="header-anchor" href="#右上角来Github叉我啊图标"></a>右上角<s>来 Github 叉我啊</s>图标</h3>
 <pre><code># `Follow me on GitHub` banner in the top-right corner.
 github_banner:
 enable: false
 permalink: https://github.com/yourname
 title: Follow me on GitHub
 </code></pre>
-<h3 id="字体设置"><a class="header-anchor" href="#字体设置">¶</a> 字体设置</h3>
+<h3 id="字体设置"><a class="header-anchor" href="#字体设置"></a>字体设置</h3>
 <p>详见 <a href="https://theme-next.org/docs/theme-settings/#Fonts-Customization">https://theme-next.org/docs/theme-settings/#Fonts-Customization</a><br>
 这里用的是默认，只添加了中科大的源，其他的就不展示了</p>
 <pre><code># Uri of fonts host, e.g. https://fonts.googleapis.com (Default).
 host: //fonts.lug.ustc.edu.cn
 </code></pre>
-<h3 id="SEO相关"><a class="header-anchor" href="#SEO相关">¶</a>SEO 相关</h3>
+<h3 id="SEO相关"><a class="header-anchor" href="#SEO相关"></a>SEO 相关</h3>
 <p>禁用百度移动页面转换</p>
 <pre><code># Disable Baidu transformation on mobile devices.
 disable_baidu_transformation: true
 </code></pre>
 <p>其他没有设置，略</p>
-<h3 id="高级设置"><a class="header-anchor" href="#高级设置">¶</a> 高级设置</h3>
-<h3 id="RSS订阅"><a class="header-anchor" href="#RSS订阅">¶</a>RSS 订阅</h3>
+<h3 id="高级设置"><a class="header-anchor" href="#高级设置"></a>高级设置</h3>
+<h3 id="RSS订阅"><a class="header-anchor" href="#RSS订阅"></a>RSS 订阅</h3>
 <pre><code>$ npm install hexo-generator-feed
 </code></pre>
 <p>然后在博客配置文件中添加：</p>
@@ -1625,7 +1625,7 @@ autodiscovery: true
 template:
 </code></pre>
 <p>参数参考文档：<a href="https://github.com/hexojs/hexo-generator-feed">https://github.com/hexojs/hexo-generator-feed</a></p>
-<h3 id="MathJax-数学公式渲染"><a class="header-anchor" href="#MathJax-数学公式渲染">¶</a>MathJax 数学公式渲染</h3>
+<h3 id="MathJax-数学公式渲染"><a class="header-anchor" href="#MathJax-数学公式渲染"></a>MathJax 数学公式渲染</h3>
 <p>参考：<a href="https://github.com/stevenjoezhang/hexo-filter-mathjax">https://github.com/stevenjoezhang/hexo-filter-mathjax</a></p>
 <pre><code>$ npm install hexo-filter-mathjax
 </code></pre>
@@ -1646,7 +1646,7 @@ eg:</li>
 </ol>
  <figure class="highlight plain"><table><tbody><tr><td class="code"><pre><span class="line">&lt;!-- This post will render the Math Equations --&gt;</span><br><span class="line"> ---</span><br><span class="line"> title: Will Render Math</span><br><span class="line"> mathjax: true   </span><br><span class="line"> ---</span><br></pre></td></tr></tbody></table></figure>
 </blockquote>
-<h3 id="pjax"><a class="header-anchor" href="#pjax">¶</a>pjax</h3>
+<h3 id="pjax"><a class="header-anchor" href="#pjax"></a>pjax</h3>
 <p>采用 CDN 方式安装<br>
 先修改</p>
 <pre><code>pjax: true
@@ -1656,7 +1656,7 @@ eg:</li>
 ...
 pjax: //cdn.jsdelivr.net/gh/theme-next/theme-next-pjax@0/pjax.min.js
 </code></pre>
-<h3 id="FancyBox"><a class="header-anchor" href="#FancyBox">¶</a>FancyBox</h3>
+<h3 id="FancyBox"><a class="header-anchor" href="#FancyBox"></a>FancyBox</h3>
 <p>同上，先</p>
 <pre><code>fancybox: true
 </code></pre>
@@ -1668,7 +1668,7 @@ fancybox: //cdn.jsdelivr.net/npm/fancybox@3/dist/js/jquery.fancybox.pack.js
 fancybox_css: //cdn.jsdelivr.net/npm/fancybox@3/dist/css/jquery.fancybox.min.css
 ...
 </code></pre>
-<h3 id="Lazyload-图片懒加载"><a class="header-anchor" href="#Lazyload-图片懒加载">¶</a>Lazyload 图片懒加载</h3>
+<h3 id="Lazyload-图片懒加载"><a class="header-anchor" href="#Lazyload-图片懒加载"></a>Lazyload 图片懒加载</h3>
 <p>同上，先</p>
 <pre><code>lazyload: true
 </code></pre>
@@ -1678,13 +1678,13 @@ fancybox_css: //cdn.jsdelivr.net/npm/fancybox@3/dist/css/jquery.fancybox.min.css
 lazyload: //cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js
 ...
 </code></pre>
-<h3 id="Pangu-Autospace-中英文自动空格分离-（未配置）"><a class="header-anchor" href="#Pangu-Autospace-中英文自动空格分离-（未配置）">¶</a>Pangu Autospace 中英文自动空格分离 （未配置）</h3>
+<h3 id="Pangu-Autospace-中英文自动空格分离-（未配置）"><a class="header-anchor" href="#Pangu-Autospace-中英文自动空格分离-（未配置）"></a>Pangu Autospace 中英文自动空格分离 （未配置）</h3>
 <p><a href="https://theme-next.org/docs/third-party-services/external-libraries#Pangu-Autospace">https://theme-next.org/docs/third-party-services/external-libraries#Pangu-Autospace</a></p>
-<h3 id="Quicklink-（与pajx冲突，未配置）"><a class="header-anchor" href="#Quicklink-（与pajx冲突，未配置）">¶</a>Quicklink （与 pajx 冲突，未配置）</h3>
+<h3 id="Quicklink-（与pajx冲突，未配置）"><a class="header-anchor" href="#Quicklink-（与pajx冲突，未配置）"></a>Quicklink （与 pajx 冲突，未配置）</h3>
 <p><a href="https://theme-next.org/docs/third-party-services/external-libraries#Quicklink">https://theme-next.org/docs/third-party-services/external-libraries#Quicklink</a></p>
-<h3 id="Animation-Effect-过度动画设置（未配置）"><a class="header-anchor" href="#Animation-Effect-过度动画设置（未配置）">¶</a>Animation Effect 过度动画设置（未配置）</h3>
+<h3 id="Animation-Effect-过度动画设置（未配置）"><a class="header-anchor" href="#Animation-Effect-过度动画设置（未配置）"></a>Animation Effect 过度动画设置（未配置）</h3>
 <p><a href="https://theme-next.org/docs/third-party-services/external-libraries#Animation-Effect">https://theme-next.org/docs/third-party-services/external-libraries#Animation-Effect</a></p>
-<h3 id="Progress-Bar-网页加载进度条动画"><a class="header-anchor" href="#Progress-Bar-网页加载进度条动画">¶</a>Progress Bar 网页加载进度条动画</h3>
+<h3 id="Progress-Bar-网页加载进度条动画"><a class="header-anchor" href="#Progress-Bar-网页加载进度条动画"></a>Progress Bar 网页加载进度条动画</h3>
 <p>同上，先</p>
 <pre><code>pace:
 enable: true
@@ -1699,18 +1699,18 @@ pace_css: //cdn.jsdelivr.net/npm/pace-js@1/themes/black/pace-theme-minimal.css
 <p>上方<code> pace_css</code> 中可以设置颜色（修改 black）<br>
 可选效果一览：<a href="https://github.hubspot.com/pace/docs/welcome/">https://github.hubspot.com/pace/docs/welcome/</a><br>
 可选颜色：<a href="https://www.jsdelivr.com/package/npm/pace-js?path=themes">https://www.jsdelivr.com/package/npm/pace-js?path=themes</a></p>
-<h3 id="Valine-评论系统"><a class="header-anchor" href="#Valine-评论系统">¶</a>Valine 评论系统</h3>
+<h3 id="Valine-评论系统"><a class="header-anchor" href="#Valine-评论系统"></a>Valine 评论系统</h3>
 <p>这里使用 <a href="https://valine.js.org/">Valine</a><br>
 先注册登录 <a href="https://leancloud.app/">Leanclub 国际站</a>（需要验证手机号），然后参考 https://theme-next.org/docs/third-party-services/comments#Valine-China</p>
 <blockquote>
 <p><em><strong>注意：</strong></em> 中国站需要实名验证，且网站似乎还要已备案才能用</p>
 </blockquote>
-<h3 id="LeanCloud-访问数据统计"><a class="header-anchor" href="#LeanCloud-访问数据统计">¶</a>LeanCloud 访问数据统计</h3>
+<h3 id="LeanCloud-访问数据统计"><a class="header-anchor" href="#LeanCloud-访问数据统计"></a>LeanCloud 访问数据统计</h3>
 <p><a href="https://github.com/theme-next/hexo-theme-next/blob/master/docs/zh-CN/LEANCLOUD-COUNTER-SECURITY.md">https://github.com/theme-next/hexo-theme-next/blob/master/docs/zh-CN/LEANCLOUD-COUNTER-SECURITY.md</a></p>
 <blockquote>
 <p><em><strong>注意：</strong></em> 涉及域名，更换域名时注意修改！</p>
 </blockquote>
-<h3 id="Local-Search-本地搜索"><a class="header-anchor" href="#Local-Search-本地搜索">¶</a>Local Search 本地搜索</h3>
+<h3 id="Local-Search-本地搜索"><a class="header-anchor" href="#Local-Search-本地搜索"></a>Local Search 本地搜索</h3>
 <pre><code>$ npm install hexo-generator-searchdb
 </code></pre>
 <p>然后编辑博客配置文件，加入</p>
@@ -1735,10 +1735,10 @@ unescape: false
 # Preload the search data when the pag
 preload: false
 </code></pre>
-<h3 id="特殊标签"><a class="header-anchor" href="#特殊标签">¶</a> 特殊标签</h3>
+<h3 id="特殊标签"><a class="header-anchor" href="#特殊标签"></a>特殊标签</h3>
 <p>使用文档：<a href="https://hexo.io/zh-cn/docs/tag-plugins.html">https://hexo.io/zh-cn/docs/tag-plugins.html</a><br>
 这里仅提供示例</p>
-<h4 id="引言"><a class="header-anchor" href="#引言">¶</a> 引言</h4>
+<h4 id="引言"><a class="header-anchor" href="#引言"></a>引言</h4>
 <blockquote class="blockquote-center">
 <p>Elegant in code, simple in core</p>
 
@@ -1747,15 +1747,15 @@ preload: false
 <footer><strong>Seth Godin</strong><cite><a href="http://sethgodin.typepad.com/seths_blog/2009/07/welcome-to-island-marketing.html">Welcome to Island Marketing</a></cite></footer></blockquote>
 <blockquote><p>Do not just seek happiness for yourself. Seek happiness for all. Through kindness. Through mercy.</p>
 <footer><strong>David Levithan</strong><cite>Wide Awake</cite></footer></blockquote>
-<h4 id="Note"><a class="header-anchor" href="#Note">¶</a>Note</h4>
+<h4 id="Note"><a class="header-anchor" href="#Note"></a>Note</h4>
 <p>文档：<a href="https://theme-next.org/docs/tag-plugins/note">https://theme-next.org/docs/tag-plugins/note</a></p>
-<div class="note "><h4 id="Header"><a class="header-anchor" href="#Header">¶</a>Header</h4>
+<div class="note "><h4 id="Header"><a class="header-anchor" href="#Header"></a>Header</h4>
 <p>(without define class style)</p>
 </div>
-<div class="note primary"><h4 id="Primary-Header"><a class="header-anchor" href="#Primary-Header">¶</a>Primary Header</h4>
+<div class="note primary"><h4 id="Primary-Header"><a class="header-anchor" href="#Primary-Header"></a>Primary Header</h4>
 <p><strong>Welcome</strong> to <a href="https://hexo.io">Hexo!</a></p>
 </div>
-<div class="note default"><h4 id="Lists-in-note"><a class="header-anchor" href="#Lists-in-note">¶</a>Lists in note</h4>
+<div class="note default"><h4 id="Lists-in-note"><a class="header-anchor" href="#Lists-in-note"></a>Lists in note</h4>
 <ul>
 <li>ul</li>
 <li>ul
@@ -1774,14 +1774,14 @@ preload: false
 <li>ol</li>
 </ol>
 </div>
-<h4 id="Tabs"><a class="header-anchor" href="#Tabs">¶</a>Tabs</h4>
+<h4 id="Tabs"><a class="header-anchor" href="#Tabs"></a>Tabs</h4>
 <p>文档：<a href="https://theme-next.org/docs/tag-plugins/tabs">https://theme-next.org/docs/tag-plugins/tabs</a><br>
 <s>我真的不懂啊</s></p>
 <div class="tabs" id="first-unique-name"><ul class="nav-tabs"><li class="tab active"><a href="#first-unique-name-1">First unique name 1</a></li><li class="tab"><a href="#first-unique-name-2">First unique name 2</a></li><li class="tab"><a href="#first-unique-name-3">First unique name 3</a></li></ul><div class="tab-content"><div class="tab-pane active" id="first-unique-name-1"><p><strong>This is Tab 1.</strong></p></div><div class="tab-pane" id="first-unique-name-2"><p><strong>This is Tab 2.</strong></p></div><div class="tab-pane" id="first-unique-name-3"><p><strong>This is Tab 3.</strong></p></div></div></div>
-<h4 id="PDF"><a class="header-anchor" href="#PDF">¶</a>PDF</h4>
+<h4 id="PDF"><a class="header-anchor" href="#PDF"></a>PDF</h4>
 <p>文档：<a href="https://theme-next.org/docs/tag-plugins/pdf">https://theme-next.org/docs/tag-plugins/pdf</a></p>
 <div class="pdf-container" data-target="/test.pdf" data-height="600px"></div>
-<h3 id="Mermaid-流程图"><a class="header-anchor" href="#Mermaid-流程图">¶</a>Mermaid 流程图</h3>
+<h3 id="Mermaid-流程图"><a class="header-anchor" href="#Mermaid-流程图"></a>Mermaid 流程图</h3>
 <p>文档：<a href="https://theme-next.org/docs/tag-plugins/mermaid">https://theme-next.org/docs/tag-plugins/mermaid</a></p>
 <p><s>其他官方文档有的就自己看去吧</s></p>
 ]]></content>
@@ -1810,7 +1810,7 @@ preload: false
 <li>WIN PE（这里使用 <a href="http://bbs.wuyou.net/forum.php?mod=viewthread&amp;tid=349965&amp;extra=page%3D1">chiannet 制作的 USBOS V3</a>）</li>
 </ol>
 <h1 id="zhi-zuo-guo-cheng">制作过程</h1>
-<h2 id="zhun-bei-zi-liao"><a class="header-anchor" href="#准备资料">¶</a> 准备资料</h2>
+<h2 id="zhun-bei-zi-liao"><a class="header-anchor" href="#准备资料"></a>准备资料</h2>
 <p>一个移动硬盘 / U 盘（固态 U 盘或者 WTG 认证 U 盘），用来安装</p>
 <p>另一个空白 U 盘，大小最好 4G 以上，用作装 Linux 的启动盘</p>
 <p>我整理的<a href="http://www.filedropper.com/200326wtg">资料包</a></p>
@@ -1823,7 +1823,7 @@ preload: false
 <p><a href="https://msfn.org/board/topic/149612-winntsetup-v40/">WinNTSetup</a> 安装 WTG 用</p>
 <p><a href="https://china.paragon-software.com/home-windows/extfs-for-windows-download">ExtFS for Windows</a> 在 windows 下读写 ext4 的分区，10 天免费试用，到期后限制向 Ext4 分区读写的性能。</p>
 <h1 id="an-zhuang-liu-cheng">安装流程</h1>
-<h2 id="chu-li-ying-pan-fen-qu-amp-an-zhuang-pe"><a class="header-anchor" href="#处理硬盘分区-安装PE">¶</a> 处理硬盘分区 &amp; 安装 PE</h2>
+<h2 id="chu-li-ying-pan-fen-qu-amp-an-zhuang-pe"><a class="header-anchor" href="#处理硬盘分区-安装PE"></a>处理硬盘分区 &amp; 安装 PE</h2>
 <ol>
 <li>连接移动硬盘，打开 MBROSTool，在<code>选项</code>中把<code>显示所有磁盘</code>打勾</li>
 </ol>
@@ -1861,7 +1861,7 @@ preload: false
 <blockquote>
 <p>删掉子盘 <code>/udm/pic/bubble.png</code> 可以关闭掉 MBR 引导时菜单的泡泡动画</p>
 </blockquote>
-<h2 id="wtg-an-zhuang"><a class="header-anchor" href="#WTG安装">¶</a>WTG 安装</h2>
+<h2 id="wtg-an-zhuang"><a class="header-anchor" href="#WTG安装"></a>WTG 安装</h2>
 <ol>
 <li>回到主界面，打开<code>高级</code> -<code>BootICE</code> 按下图操作</li>
 </ol>
@@ -1915,8 +1915,8 @@ preload: false
 挂载后软件界面右键该分区，菜单选择<code>快启处理</code>。生成完毕后，WTG 就算装好了。</p>
 <p><img data-src="https://i.loli.net/2020/03/22/7siFg6tXCfV3hWR.jpg" alt=""></p>
 <p><img data-src="https://i.loli.net/2020/03/22/TWyQAiCR69jhakY.jpg" alt=""></p>
-<h2 id="linux-de-an-zhuang-ubuntu-deepin-deng-debian-xi-fa-xing-ban"><a class="header-anchor" href="#Linux的安装（Ubuntu、Deepin等Debian系发行版）">¶</a>Linux 的安装（Ubuntu、Deepin 等 Debian 系发行版）</h2>
-<h3 id="an-zhuang-xi-tong-jing-xiang-yi-deepin-wei-li"><a class="header-anchor" href="#安装系统镜像（以Deepin为例）">¶</a> 安装系统镜像（以 Deepin 为例）</h3>
+<h2 id="linux-de-an-zhuang-ubuntu-deepin-deng-debian-xi-fa-xing-ban"><a class="header-anchor" href="#Linux的安装（Ubuntu、Deepin等Debian系发行版）"></a>Linux 的安装（Ubuntu、Deepin 等 Debian 系发行版）</h2>
+<h3 id="an-zhuang-xi-tong-jing-xiang-yi-deepin-wei-li"><a class="header-anchor" href="#安装系统镜像（以Deepin为例）"></a>安装系统镜像（以 Deepin 为例）</h3>
 <ol>
 <li>
 <p>保险起见，再备份一次 MOS</p>
@@ -1991,7 +1991,7 @@ preload: false
 </ul>
 </li>
 </ol>
-<h3 id="she-zhi-shen-du-yin-cang"><a class="header-anchor" href="#设置深度隐藏">¶</a> 设置深度隐藏</h3>
+<h3 id="she-zhi-shen-du-yin-cang"><a class="header-anchor" href="#设置深度隐藏"></a>设置深度隐藏</h3>
 <ol>
 <li>
 <p>重启电脑，用 MBR 或 UEFI 引导移动硬盘进入 UDm 菜单，然后尝试进入安装好的 Linux。</p>
@@ -2041,7 +2041,7 @@ preload: false
 </ul>
 </blockquote>
 <h1 id="hou-ji">后记</h1>
-<h2 id="sheng-ji-ubuntu-nei-he-hou-de-cao-zuo"><a class="header-anchor" href="#升级Ubuntu内核后的操作">¶</a> 升级 Ubuntu 内核后的操作</h2>
+<h2 id="sheng-ji-ubuntu-nei-he-hou-de-cao-zuo"><a class="header-anchor" href="#升级Ubuntu内核后的操作"></a>升级 Ubuntu 内核后的操作</h2>
 <p>先进行升级</p>
 <figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo upgrade</span><br></pre></td></tr></tbody></table></figure>
 <p>提示 linux 的内核有更新，可以在更新的时候记一下新内核的版本号</p>
@@ -2050,7 +2050,7 @@ preload: false
 <p>更新内核时如果没有留意版本号，可以打开 <code>/boot/grub/grub.cfg</code> 参照安装时的步骤找找</p>
 <p>知道新内核版本号后打开根目录下的 <code>menu.lst</code>、<code>menu0.lst</code> 以及 <code>/efi/mbrosefi_qk.menu.cfg</code>，把里面旧的版本号全部查找替换为新的版本号</p>
 <p>保存，重启查看效果</p>
-<h2 id="mei-hua-qi-dong-xiang"><a class="header-anchor" href="#美化启动项">¶</a> 美化启动项</h2>
+<h2 id="mei-hua-qi-dong-xiang"><a class="header-anchor" href="#美化启动项"></a>美化启动项</h2>
 <p>先读写挂载子盘（参考 安装流程 - 处理硬盘分区）</p>
 <p>这里只展示一些我作的修改，详细的美化指南请看工具内的补充帮助</p>
 <ul>
@@ -2062,7 +2062,7 @@ preload: false
 <p>这里我使用的是自行魔改了的 <a href="https://www.gnome-look.org/p/1200710/">Atomic GRUB Theme</a>，加入了原主题没有的 <code>udm.png</code>，修改 <code>reastar.png</code> 为 <code>reboot.png</code> 来让它奇怪的 grub 能够识别。资料包里会提供我自用的魔改主题</p>
 </li>
 </ul>
-<h2 id="vm-ware-jia-zai"><a class="header-anchor" href="#VMWare加载">¶</a>VMWare 加载</h2>
+<h2 id="vm-ware-jia-zai"><a class="header-anchor" href="#VMWare加载"></a>VMWare 加载</h2>
 <p><img data-src="https://i.loli.net/2020/03/26/aolm1Cr4jXwuyLh.png" alt=""></p>
 <p><img data-src="https://i.loli.net/2020/03/26/oqPdYNwQBDk6iWT.png" alt=""></p>
 <p><img data-src="https://i.loli.net/2020/03/26/yfeMnH9LXIgp5rB.png" alt=""></p>

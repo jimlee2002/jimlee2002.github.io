@@ -26,12 +26,12 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"jiml.ee","root":"/","images":"/images","scheme":"Gemini","version":"8.2.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-<meta name="description" content="前情提要 折腾了两天，我终于是实现在 Android 上使用 Tasker 向刚搭建好的个人动态系统发送内容了。 效果展示 这是一个在 Android 上向废话胶囊（b 言 b 语）发送内容的简单 Tasker 工程。 项目地址：https:&#x2F;&#x2F;github.com&#x2F;jimlee2002&#x2F;nonsense.fun_tasker">
+<meta name="description" content="前情提要 折腾了两天，我终于是实现在 Android 上使用 Tasker 向刚搭建好的个人动态系统发送内容了。 效果展示 这是一个在 Android 上向废话胶囊（b言b语）发送内容的简单 Tasker 工程。 项目地址：https:&#x2F;&#x2F;github.com&#x2F;jimlee2002&#x2F;nonsense.fun_tasker">
 <meta property="og:type" content="article">
 <meta property="og:title" content="博客折腾笔记④- 使用 Tasker 在 Android 上实现个人动态的发送">
 <meta property="og:url" content="https://jiml.ee/posts/4394c3fa.html">
 <meta property="og:site_name" content="Jim&#39;s Blog">
-<meta property="og:description" content="前情提要 折腾了两天，我终于是实现在 Android 上使用 Tasker 向刚搭建好的个人动态系统发送内容了。 效果展示 这是一个在 Android 上向废话胶囊（b 言 b 语）发送内容的简单 Tasker 工程。 项目地址：https:&#x2F;&#x2F;github.com&#x2F;jimlee2002&#x2F;nonsense.fun_tasker">
+<meta property="og:description" content="前情提要 折腾了两天，我终于是实现在 Android 上使用 Tasker 向刚搭建好的个人动态系统发送内容了。 效果展示 这是一个在 Android 上向废话胶囊（b言b语）发送内容的简单 Tasker 工程。 项目地址：https:&#x2F;&#x2F;github.com&#x2F;jimlee2002&#x2F;nonsense.fun_tasker">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://i.loli.net/2020/04/22/Hy7kwJL8FDr6I5O.png">
 <meta property="og:image" content="https://i.loli.net/2020/04/22/iaTO5gAQLjnufBZ.png">
@@ -113,6 +113,7 @@
   </style>
 </noscript>
 
+<link rel="alternate" href="/atom.xml" title="Jim's Blog" type="application/atom+xml">
 <style>mjx-container[jax="SVG"] {
   direction: ltr;
 }
@@ -230,8 +231,7 @@ mjx-container[display="true"] {
 mjx-container[display="true"] + br {
   display: none;
 }
-</style><link rel="alternate" href="/atom.xml" title="Jim's Blog" type="application/atom+xml">
-</head>
+</style></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
   <div class="headband"></div>
@@ -272,6 +272,7 @@ mjx-container[display="true"] + br {
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
         <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -328,7 +329,7 @@ mjx-container[display="true"] + br {
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#xiao-guo-zhan-shi"><span class="nav-number">1.</span> <span class="nav-text">效果展示</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#an-zhuang-pei-zhi"><span class="nav-number">2.</span> <span class="nav-text">安装配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B4%E6%8E%A5%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85%E5%B7%B2%E7%BB%8F%E5%AF%BC%E5%87%BA%E5%A5%BD%E7%9A%84apk%E6%96%87%E4%BB%B6"><span class="nav-number">2.1.</span> <span class="nav-text"> 直接下载安装已经导出好的 apk 文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%BC%E5%85%A5Tasker%E5%B7%A5%E7%A8%8B"><span class="nav-number">2.2.</span> <span class="nav-text"> 导入 Tasker 工程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#tasker-gong-cheng-shi-yong-fang-fa"><span class="nav-number">3.</span> <span class="nav-text">Tasker 工程使用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E8%BF%87-Tasker-Secondary-%E6%89%93%E5%BC%80"><span class="nav-number">3.1.</span> <span class="nav-text"> 通过 Tasker Secondary 打开</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E6%A1%8C%E9%9D%A2%E5%B0%8F%E5%B7%A5%E5%85%B7%E5%88%9B%E5%BB%BA%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F%E6%89%93%E5%BC%80"><span class="nav-number">3.2.</span> <span class="nav-text"> 通过桌面小工具创建快捷方式打开</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E8%A1%8C%E5%AF%BC%E5%87%BA%E4%B8%BAAPK%E5%AE%89%E8%A3%85"><span class="nav-number">3.3.</span> <span class="nav-text"> 自行导出为 APK 安装</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#hou-ji"><span class="nav-number">4.</span> <span class="nav-text">后记</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#zhi-xie"><span class="nav-number">5.</span> <span class="nav-text">致谢</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#xiao-guo-zhan-shi"><span class="nav-number">1.</span> <span class="nav-text">效果展示</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#an-zhuang-pei-zhi"><span class="nav-number">2.</span> <span class="nav-text">安装配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B4%E6%8E%A5%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85%E5%B7%B2%E7%BB%8F%E5%AF%BC%E5%87%BA%E5%A5%BD%E7%9A%84apk%E6%96%87%E4%BB%B6"><span class="nav-number">2.1.</span> <span class="nav-text">直接下载安装已经导出好的 apk 文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%BC%E5%85%A5Tasker%E5%B7%A5%E7%A8%8B"><span class="nav-number">2.2.</span> <span class="nav-text">导入 Tasker 工程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#tasker-gong-cheng-shi-yong-fang-fa"><span class="nav-number">3.</span> <span class="nav-text">Tasker 工程使用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E8%BF%87-Tasker-Secondary-%E6%89%93%E5%BC%80"><span class="nav-number">3.1.</span> <span class="nav-text">通过 Tasker Secondary 打开</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E6%A1%8C%E9%9D%A2%E5%B0%8F%E5%B7%A5%E5%85%B7%E5%88%9B%E5%BB%BA%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F%E6%89%93%E5%BC%80"><span class="nav-number">3.2.</span> <span class="nav-text">通过桌面小工具创建快捷方式打开</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E8%A1%8C%E5%AF%BC%E5%87%BA%E4%B8%BAAPK%E5%AE%89%E8%A3%85"><span class="nav-number">3.3.</span> <span class="nav-text">自行导出为 APK 安装</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#hou-ji"><span class="nav-number">4.</span> <span class="nav-text">后记</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#zhi-xie"><span class="nav-number">5.</span> <span class="nav-text">致谢</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -491,10 +492,10 @@ mjx-container[display="true"] + br {
 <img data-src="https://i.loli.net/2020/04/22/Hy7kwJL8FDr6I5O.png" style="zoom: 50%;">
 <a id="more"></a>
 <h1 id="an-zhuang-pei-zhi">安装配置</h1>
-<h2 id="直接下载安装已经导出好的apk文件"><a class="header-anchor" href="#直接下载安装已经导出好的apk文件">¶</a> 直接下载安装已经导出好的 <a target="_blank" rel="noopener" href="https://github.com/jimlee2002/nonsense.fun_tasker/releases">apk 文件</a></h2>
+<h2 id="直接下载安装已经导出好的apk文件"><a class="header-anchor" href="#直接下载安装已经导出好的apk文件"></a>直接下载安装已经导出好的 <a target="_blank" rel="noopener" href="https://github.com/jimlee2002/nonsense.fun_tasker/releases">apk 文件</a></h2>
 <p>应用使用插件 <code>Tasker App Factory</code> 导出。</p>
 <p>注意，该应用<strong>需要 root 权限</strong>。</p>
-<h2 id="导入Tasker工程"><a class="header-anchor" href="#导入Tasker工程">¶</a> 导入 Tasker 工程</h2>
+<h2 id="导入Tasker工程"><a class="header-anchor" href="#导入Tasker工程"></a>导入 Tasker 工程</h2>
 <p><strong>注意：部分手机可能需要 Root 权限才能使用，该工程默认开启<code>使用Root运行</code>，可以自行到<code>场景/Main/发送/按下</code>的第 6 个和第 8 个任务里关掉该选项</strong>。</p>
 <p><img data-src="https://i.loli.net/2020/04/22/iaTO5gAQLjnufBZ.png" style="zoom: 50%;"><img data-src="https://i.loli.net/2020/04/22/SIJivZ5L4Na9Cu3.png" style="zoom: 50%;"></p>
 <p><img data-src="https://i.loli.net/2020/04/24/c1R3x9HEzyQiTpN.png" style="zoom:50%;"><img data-src="https://i.loli.net/2020/04/22/7BoIjaJL9h6ilf1.png" style="zoom: 50%;"></p>
@@ -530,9 +531,9 @@ mjx-container[display="true"] + br {
 </ol>
 <p>这样就配置完成了，请试试看吧！</p>
 <h1 id="tasker-gong-cheng-shi-yong-fang-fa">Tasker 工程使用方法</h1>
-<h2 id="通过-Tasker-Secondary-打开"><a class="header-anchor" href="#通过-Tasker-Secondary-打开">¶</a> 通过 Tasker Secondary 打开</h2>
+<h2 id="通过-Tasker-Secondary-打开"><a class="header-anchor" href="#通过-Tasker-Secondary-打开"></a>通过 Tasker Secondary 打开</h2>
 <img data-src="https://i.loli.net/2020/04/22/Gju9BY64UsWlvTw.png" style="zoom: 50%;">
-<h2 id="通过桌面小工具创建快捷方式打开"><a class="header-anchor" href="#通过桌面小工具创建快捷方式打开">¶</a> 通过桌面小工具创建快捷方式打开</h2>
+<h2 id="通过桌面小工具创建快捷方式打开"><a class="header-anchor" href="#通过桌面小工具创建快捷方式打开"></a>通过桌面小工具创建快捷方式打开</h2>
 <ol>
 <li>
 <p>打开 Tasker，然后<strong>点击返回键</strong>回到主界面。</p>
@@ -544,7 +545,7 @@ mjx-container[display="true"] + br {
 <p>完成，现在你应该能看到快捷方式了。</p>
 </li>
 </ol>
-<h2 id="自行导出为APK安装"><a class="header-anchor" href="#自行导出为APK安装">¶</a> 自行导出为 APK 安装</h2>
+<h2 id="自行导出为APK安装"><a class="header-anchor" href="#自行导出为APK安装"></a>自行导出为 APK 安装</h2>
 <p>** 注意：你必须拥有手机的 Root 权限，并勾选<code>场景/Main/发送/按下</code>的第 6 个和第 8 个任务中的<code>使用Root运行</code>选项 **</p>
 <ol>
 <li>
@@ -582,16 +583,16 @@ mjx-container[display="true"] + br {
   <div class="popular-posts-header">相关文章</div>
   <ul class="popular-posts">
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\posts\3a4e373e.html" rel="bookmark">博客折腾笔记②-hexo 的优化</a></div>
+      <div class="popular-posts-title"><a href="\posts\3a4e373e.html" rel="bookmark">博客折腾笔记②-hexo的优化</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\posts\2b426e0a.html" rel="bookmark">博客折腾笔记③- 搭建个人动态页面 iM</a></div>
+      <div class="popular-posts-title"><a href="\posts\2b426e0a.html" rel="bookmark">博客折腾笔记③-搭建个人动态页面 iM</a></div>
     </li>
     <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="\posts\39aaddee.html" rel="bookmark">配置 Typora & PicGo 写 Hexo 博客</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\posts\c54c0f26.html" rel="bookmark">博客折腾笔记①-hexo 部署与自定义</a></div>
+      <div class="popular-posts-title"><a href="\posts\c54c0f26.html" rel="bookmark">博客折腾笔记①-hexo部署与自定义</a></div>
     </li>
   </ul>
 
@@ -674,7 +675,7 @@ mjx-container[display="true"] + br {
 
 
 <div class="copyright">
-  &copy; 2019 – 
+  &copy; 2018 – 
   <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>

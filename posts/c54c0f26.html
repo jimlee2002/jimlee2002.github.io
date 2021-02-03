@@ -26,12 +26,12 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"jiml.ee","root":"/","images":"/images","scheme":"Gemini","version":"8.2.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-<meta name="description" content="今天重新部署了一次 Hexo，记录一下过程。 方案：静态页面部署在 gitpage，hexo 文件备份到 github 私有库  注意： 博客配置文件：&#x2F;_config.yml （位于博客根目录下） 主题配置文件：&#x2F;themes&#x2F;ThemeName&#x2F;_config.yml （位于各主题文件夹下） 请注意区分二者  准备工作 github 上建一个 xxxx.github.io 的公开仓库和一个私有">
+<meta name="description" content="今天重新部署了一次Hexo，记录一下过程。 方案：静态页面部署在gitpage，hexo文件备份到github私有库  注意： 博客配置文件：&#x2F;_config.yml （位于博客根目录下） 主题配置文件：&#x2F;themes&#x2F;ThemeName&#x2F;_config.yml （位于各主题文件夹下） 请注意区分二者  准备工作 github上建一个xxxx.github.io的公开仓库和一个私有库 其中xxxx">
 <meta property="og:type" content="article">
 <meta property="og:title" content="博客折腾笔记①-hexo 部署与自定义">
 <meta property="og:url" content="https://jiml.ee/posts/c54c0f26.html">
 <meta property="og:site_name" content="Jim&#39;s Blog">
-<meta property="og:description" content="今天重新部署了一次 Hexo，记录一下过程。 方案：静态页面部署在 gitpage，hexo 文件备份到 github 私有库  注意： 博客配置文件：&#x2F;_config.yml （位于博客根目录下） 主题配置文件：&#x2F;themes&#x2F;ThemeName&#x2F;_config.yml （位于各主题文件夹下） 请注意区分二者  准备工作 github 上建一个 xxxx.github.io 的公开仓库和一个私有">
+<meta property="og:description" content="今天重新部署了一次Hexo，记录一下过程。 方案：静态页面部署在gitpage，hexo文件备份到github私有库  注意： 博客配置文件：&#x2F;_config.yml （位于博客根目录下） 主题配置文件：&#x2F;themes&#x2F;ThemeName&#x2F;_config.yml （位于各主题文件夹下） 请注意区分二者  准备工作 github上建一个xxxx.github.io的公开仓库和一个私有库 其中xxxx">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-03-19T12:00:30.000Z">
 <meta property="article:modified_time" content="2020-10-03T08:37:56.812Z">
@@ -93,6 +93,7 @@
   </style>
 </noscript>
 
+<link rel="alternate" href="/atom.xml" title="Jim's Blog" type="application/atom+xml">
 <style>mjx-container[jax="SVG"] {
   direction: ltr;
 }
@@ -210,8 +211,7 @@ mjx-container[display="true"] {
 mjx-container[display="true"] + br {
   display: none;
 }
-</style><link rel="alternate" href="/atom.xml" title="Jim's Blog" type="application/atom+xml">
-</head>
+</style></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
   <div class="headband"></div>
@@ -252,6 +252,7 @@ mjx-container[display="true"] + br {
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
         <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -308,7 +309,7 @@ mjx-container[display="true"] + br {
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#zhun-bei-gong-zuo"><span class="nav-number">1.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#chu-shi-hua-hexo"><span class="nav-number">2.</span> <span class="nav-text">初始化 hexo</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ji-ben-diao-zheng"><span class="nav-number">3.</span> <span class="nav-text">基本调整</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E5%A4%87%E4%BB%BD"><span class="nav-number">3.1.</span> <span class="nav-text"> 设置备份</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%87%E4%BB%BD%E6%93%8D%E4%BD%9C"><span class="nav-number">3.1.1.</span> <span class="nav-text"> 备份操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%98%E5%8E%9F%E6%93%8D%E4%BD%9C"><span class="nav-number">3.1.2.</span> <span class="nav-text"> 还原操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%92%E9%94%99%E6%8C%87%E5%8D%97"><span class="nav-number">3.1.3.</span> <span class="nav-text"> 排错指南</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E5%88%86%E7%B1%BB%EF%BC%8C%E5%BB%BA%E7%AB%8B%E6%A8%A1%E6%9D%BF"><span class="nav-number">3.2.</span> <span class="nav-text"> 设置分类，建立模板</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9B%B4%E6%8D%A2hexo-renderer-markdown-it%E6%B8%B2%E6%9F%93%E5%99%A8"><span class="nav-number">3.3.</span> <span class="nav-text"> 更换 hexo-renderer-markdown-it 渲染器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#zhu-ti-an-zhuang-pei-zhi"><span class="nav-number">4.</span> <span class="nav-text">主题安装配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE"><span class="nav-number">4.1.</span> <span class="nav-text"> 基本设置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%87%E6%8D%A2%E9%A3%8E%E6%A0%BC"><span class="nav-number">4.1.1.</span> <span class="nav-text"> 切换风格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E5%90%AF%E5%A4%9C%E9%97%B4%E6%A8%A1%E5%BC%8F%E9%80%82%E9%85%8D"><span class="nav-number">4.1.2.</span> <span class="nav-text"> 开启夜间模式适配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%87%E6%8D%A2%E8%AF%AD%E8%A8%80"><span class="nav-number">4.1.3.</span> <span class="nav-text"> 切换语言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E7%AB%99%E7%82%B9%E5%9B%BE%E6%A0%87"><span class="nav-number">4.1.4.</span> <span class="nav-text"> 设置站点图标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%87%E6%A1%88%E5%B1%95%E7%A4%BA"><span class="nav-number">4.1.5.</span> <span class="nav-text"> 备案展示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CC%E6%A0%87%E8%AF%86"><span class="nav-number">4.1.6.</span> <span class="nav-text">CC 标识</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E8%8F%9C%E5%8D%95%E6%A0%8F"><span class="nav-number">4.1.7.</span> <span class="nav-text"> 设置菜单栏</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E4%BE%A7%E8%BE%B9%E6%A0%8F"><span class="nav-number">4.2.</span> <span class="nav-text"> 设置侧边栏</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%A7%E8%BE%B9%E6%A0%8F%E5%A4%A7%E5%B0%8F%E4%BD%8D%E7%BD%AE"><span class="nav-number">4.2.1.</span> <span class="nav-text"> 侧边栏大小位置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%B4%E5%83%8F"><span class="nav-number">4.2.2.</span> <span class="nav-text"> 头像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8B%E6%83%85%E9%93%BE%E6%8E%A5"><span class="nav-number">4.2.3.</span> <span class="nav-text"> 友情链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TOC"><span class="nav-number">4.2.4.</span> <span class="nav-text">TOC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%B3%E6%97%B6%E4%BA%A4%E8%B0%88"><span class="nav-number">4.2.5.</span> <span class="nav-text"> 即时交谈</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%96%E5%AD%90%E9%A1%B5%E9%9D%A2"><span class="nav-number">4.3.</span> <span class="nav-text"> 帖子页面</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E7%AB%A0%E4%BF%A1%E6%81%AF"><span class="nav-number">4.3.1.</span> <span class="nav-text"> 文章信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%95%E9%83%A8%E6%A0%87%E7%AD%BE%E6%A0%B7%E5%BC%8F"><span class="nav-number">4.3.2.</span> <span class="nav-text"> 底部标签样式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%93%E8%B5%8F%E3%80%81%E6%96%87%E6%9C%AB%E4%BF%A1%E6%81%AF"><span class="nav-number">4.3.3.</span> <span class="nav-text"> 打赏、文末信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E4%B8%BB%E9%A2%98%E6%8E%A8%E8%8D%90"><span class="nav-number">4.3.4.</span> <span class="nav-text"> 相关主题推荐</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%87%E7%AD%BE%E9%A1%B5%E9%9D%A2"><span class="nav-number">4.3.5.</span> <span class="nav-text"> 标签页面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E7%B1%BB%E9%A1%B5%E9%9D%A2"><span class="nav-number">4.3.6.</span> <span class="nav-text"> 分类页面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#404%E7%95%8C%E9%9D%A2"><span class="nav-number">4.3.7.</span> <span class="nav-text">404 界面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B0%B7%E6%AD%8C%E6%97%A5%E5%8E%86-%EF%BC%88%E6%9C%AA%E9%85%8D%E7%BD%AE%EF%BC%89"><span class="nav-number">4.3.8.</span> <span class="nav-text"> 谷歌日历 （未配置）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E5%8D%93%E4%B8%8Achrome%E7%9A%84%E6%B2%89%E6%B5%B8%E9%A2%9C%E8%89%B2%EF%BC%9F%EF%BC%88%E4%B8%8D%E6%98%AF%E5%BE%88%E6%98%8E%E7%99%BD%EF%BC%89"><span class="nav-number">4.3.9.</span> <span class="nav-text"> 安卓上 chrome 的沉浸颜色？（不是很明白）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89logo%EF%BC%8C%E5%9C%A8%E7%BD%91%E7%AB%99%E6%A0%87%E9%A2%98%E8%8F%9C%E5%8D%95%E6%A0%8F%E4%B8%8A%E9%9D%A2%E7%9A%84%E4%BD%8D%E7%BD%AE"><span class="nav-number">4.3.10.</span> <span class="nav-text"> 自定义 logo，在网站标题菜单栏上面的位置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%9D%97%E7%9A%84%E9%A3%8E%E6%A0%BC"><span class="nav-number">4.3.11.</span> <span class="nav-text"> 代码块的风格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%94%E5%9B%9E%E9%A1%B6%E9%83%A8%E6%A0%B7%E5%BC%8F"><span class="nav-number">4.3.12.</span> <span class="nav-text"> 返回顶部样式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%98%85%E8%AF%BB%E8%BF%9B%E5%BA%A6%E8%AE%B0%E5%BF%86%E3%80%81%E4%B9%A6%E7%AD%BE"><span class="nav-number">4.3.13.</span> <span class="nav-text"> 阅读进度记忆、书签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%B3%E4%B8%8A%E8%A7%92%E6%9D%A5Github%E5%8F%89%E6%88%91%E5%95%8A%E5%9B%BE%E6%A0%87"><span class="nav-number">4.3.14.</span> <span class="nav-text"> 右上角来 Github 叉我啊图标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E4%BD%93%E8%AE%BE%E7%BD%AE"><span class="nav-number">4.3.15.</span> <span class="nav-text"> 字体设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SEO%E7%9B%B8%E5%85%B3"><span class="nav-number">4.3.16.</span> <span class="nav-text">SEO 相关</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%AB%98%E7%BA%A7%E8%AE%BE%E7%BD%AE"><span class="nav-number">4.3.17.</span> <span class="nav-text"> 高级设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RSS%E8%AE%A2%E9%98%85"><span class="nav-number">4.3.18.</span> <span class="nav-text">RSS 订阅</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MathJax-%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F%E6%B8%B2%E6%9F%93"><span class="nav-number">4.3.19.</span> <span class="nav-text">MathJax 数学公式渲染</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pjax"><span class="nav-number">4.3.20.</span> <span class="nav-text">pjax</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FancyBox"><span class="nav-number">4.3.21.</span> <span class="nav-text">FancyBox</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lazyload-%E5%9B%BE%E7%89%87%E6%87%92%E5%8A%A0%E8%BD%BD"><span class="nav-number">4.3.22.</span> <span class="nav-text">Lazyload 图片懒加载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pangu-Autospace-%E4%B8%AD%E8%8B%B1%E6%96%87%E8%87%AA%E5%8A%A8%E7%A9%BA%E6%A0%BC%E5%88%86%E7%A6%BB-%EF%BC%88%E6%9C%AA%E9%85%8D%E7%BD%AE%EF%BC%89"><span class="nav-number">4.3.23.</span> <span class="nav-text">Pangu Autospace 中英文自动空格分离 （未配置）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Quicklink-%EF%BC%88%E4%B8%8Epajx%E5%86%B2%E7%AA%81%EF%BC%8C%E6%9C%AA%E9%85%8D%E7%BD%AE%EF%BC%89"><span class="nav-number">4.3.24.</span> <span class="nav-text">Quicklink （与 pajx 冲突，未配置）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Animation-Effect-%E8%BF%87%E5%BA%A6%E5%8A%A8%E7%94%BB%E8%AE%BE%E7%BD%AE%EF%BC%88%E6%9C%AA%E9%85%8D%E7%BD%AE%EF%BC%89"><span class="nav-number">4.3.25.</span> <span class="nav-text">Animation Effect 过度动画设置（未配置）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Progress-Bar-%E7%BD%91%E9%A1%B5%E5%8A%A0%E8%BD%BD%E8%BF%9B%E5%BA%A6%E6%9D%A1%E5%8A%A8%E7%94%BB"><span class="nav-number">4.3.26.</span> <span class="nav-text">Progress Bar 网页加载进度条动画</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Valine-%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F"><span class="nav-number">4.3.27.</span> <span class="nav-text">Valine 评论系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LeanCloud-%E8%AE%BF%E9%97%AE%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1"><span class="nav-number">4.3.28.</span> <span class="nav-text">LeanCloud 访问数据统计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Local-Search-%E6%9C%AC%E5%9C%B0%E6%90%9C%E7%B4%A2"><span class="nav-number">4.3.29.</span> <span class="nav-text">Local Search 本地搜索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%B9%E6%AE%8A%E6%A0%87%E7%AD%BE"><span class="nav-number">4.3.30.</span> <span class="nav-text"> 特殊标签</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%95%E8%A8%80"><span class="nav-number">4.3.30.1.</span> <span class="nav-text"> 引言</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Note"><span class="nav-number">4.3.30.2.</span> <span class="nav-text">Note</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Header"><span class="nav-number">4.3.30.3.</span> <span class="nav-text">Header</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Primary-Header"><span class="nav-number">4.3.30.4.</span> <span class="nav-text">Primary Header</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Lists-in-note"><span class="nav-number">4.3.30.5.</span> <span class="nav-text">Lists in note</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Tabs"><span class="nav-number">4.3.30.6.</span> <span class="nav-text">Tabs</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PDF"><span class="nav-number">4.3.30.7.</span> <span class="nav-text">PDF</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mermaid-%E6%B5%81%E7%A8%8B%E5%9B%BE"><span class="nav-number">4.3.31.</span> <span class="nav-text">Mermaid 流程图</span></a></li></ol></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#zhun-bei-gong-zuo"><span class="nav-number">1.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#chu-shi-hua-hexo"><span class="nav-number">2.</span> <span class="nav-text">初始化 hexo</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ji-ben-diao-zheng"><span class="nav-number">3.</span> <span class="nav-text">基本调整</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E5%A4%87%E4%BB%BD"><span class="nav-number">3.1.</span> <span class="nav-text">设置备份</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%87%E4%BB%BD%E6%93%8D%E4%BD%9C"><span class="nav-number">3.1.1.</span> <span class="nav-text">备份操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%98%E5%8E%9F%E6%93%8D%E4%BD%9C"><span class="nav-number">3.1.2.</span> <span class="nav-text">还原操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%92%E9%94%99%E6%8C%87%E5%8D%97"><span class="nav-number">3.1.3.</span> <span class="nav-text">排错指南</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E5%88%86%E7%B1%BB%EF%BC%8C%E5%BB%BA%E7%AB%8B%E6%A8%A1%E6%9D%BF"><span class="nav-number">3.2.</span> <span class="nav-text">设置分类，建立模板</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9B%B4%E6%8D%A2hexo-renderer-markdown-it%E6%B8%B2%E6%9F%93%E5%99%A8"><span class="nav-number">3.3.</span> <span class="nav-text">更换 hexo-renderer-markdown-it 渲染器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#zhu-ti-an-zhuang-pei-zhi"><span class="nav-number">4.</span> <span class="nav-text">主题安装配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE"><span class="nav-number">4.1.</span> <span class="nav-text">基本设置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%87%E6%8D%A2%E9%A3%8E%E6%A0%BC"><span class="nav-number">4.1.1.</span> <span class="nav-text">切换风格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E5%90%AF%E5%A4%9C%E9%97%B4%E6%A8%A1%E5%BC%8F%E9%80%82%E9%85%8D"><span class="nav-number">4.1.2.</span> <span class="nav-text">开启夜间模式适配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%87%E6%8D%A2%E8%AF%AD%E8%A8%80"><span class="nav-number">4.1.3.</span> <span class="nav-text">切换语言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E7%AB%99%E7%82%B9%E5%9B%BE%E6%A0%87"><span class="nav-number">4.1.4.</span> <span class="nav-text">设置站点图标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%87%E6%A1%88%E5%B1%95%E7%A4%BA"><span class="nav-number">4.1.5.</span> <span class="nav-text">备案展示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CC%E6%A0%87%E8%AF%86"><span class="nav-number">4.1.6.</span> <span class="nav-text">CC 标识</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E8%8F%9C%E5%8D%95%E6%A0%8F"><span class="nav-number">4.1.7.</span> <span class="nav-text">设置菜单栏</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E4%BE%A7%E8%BE%B9%E6%A0%8F"><span class="nav-number">4.2.</span> <span class="nav-text">设置侧边栏</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%A7%E8%BE%B9%E6%A0%8F%E5%A4%A7%E5%B0%8F%E4%BD%8D%E7%BD%AE"><span class="nav-number">4.2.1.</span> <span class="nav-text">侧边栏大小位置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%B4%E5%83%8F"><span class="nav-number">4.2.2.</span> <span class="nav-text">头像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8B%E6%83%85%E9%93%BE%E6%8E%A5"><span class="nav-number">4.2.3.</span> <span class="nav-text">友情链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TOC"><span class="nav-number">4.2.4.</span> <span class="nav-text">TOC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%B3%E6%97%B6%E4%BA%A4%E8%B0%88"><span class="nav-number">4.2.5.</span> <span class="nav-text">即时交谈</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%96%E5%AD%90%E9%A1%B5%E9%9D%A2"><span class="nav-number">4.3.</span> <span class="nav-text">帖子页面</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E7%AB%A0%E4%BF%A1%E6%81%AF"><span class="nav-number">4.3.1.</span> <span class="nav-text">文章信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%95%E9%83%A8%E6%A0%87%E7%AD%BE%E6%A0%B7%E5%BC%8F"><span class="nav-number">4.3.2.</span> <span class="nav-text">底部标签样式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%93%E8%B5%8F%E3%80%81%E6%96%87%E6%9C%AB%E4%BF%A1%E6%81%AF"><span class="nav-number">4.3.3.</span> <span class="nav-text">打赏、文末信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E4%B8%BB%E9%A2%98%E6%8E%A8%E8%8D%90"><span class="nav-number">4.3.4.</span> <span class="nav-text">相关主题推荐</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%87%E7%AD%BE%E9%A1%B5%E9%9D%A2"><span class="nav-number">4.3.5.</span> <span class="nav-text">标签页面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E7%B1%BB%E9%A1%B5%E9%9D%A2"><span class="nav-number">4.3.6.</span> <span class="nav-text">分类页面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#404%E7%95%8C%E9%9D%A2"><span class="nav-number">4.3.7.</span> <span class="nav-text">404 界面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B0%B7%E6%AD%8C%E6%97%A5%E5%8E%86-%EF%BC%88%E6%9C%AA%E9%85%8D%E7%BD%AE%EF%BC%89"><span class="nav-number">4.3.8.</span> <span class="nav-text">谷歌日历 （未配置）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E5%8D%93%E4%B8%8Achrome%E7%9A%84%E6%B2%89%E6%B5%B8%E9%A2%9C%E8%89%B2%EF%BC%9F%EF%BC%88%E4%B8%8D%E6%98%AF%E5%BE%88%E6%98%8E%E7%99%BD%EF%BC%89"><span class="nav-number">4.3.9.</span> <span class="nav-text">安卓上 chrome 的沉浸颜色？（不是很明白）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89logo%EF%BC%8C%E5%9C%A8%E7%BD%91%E7%AB%99%E6%A0%87%E9%A2%98%E8%8F%9C%E5%8D%95%E6%A0%8F%E4%B8%8A%E9%9D%A2%E7%9A%84%E4%BD%8D%E7%BD%AE"><span class="nav-number">4.3.10.</span> <span class="nav-text">自定义 logo，在网站标题菜单栏上面的位置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%9D%97%E7%9A%84%E9%A3%8E%E6%A0%BC"><span class="nav-number">4.3.11.</span> <span class="nav-text">代码块的风格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%94%E5%9B%9E%E9%A1%B6%E9%83%A8%E6%A0%B7%E5%BC%8F"><span class="nav-number">4.3.12.</span> <span class="nav-text">返回顶部样式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%98%85%E8%AF%BB%E8%BF%9B%E5%BA%A6%E8%AE%B0%E5%BF%86%E3%80%81%E4%B9%A6%E7%AD%BE"><span class="nav-number">4.3.13.</span> <span class="nav-text">阅读进度记忆、书签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%B3%E4%B8%8A%E8%A7%92%E6%9D%A5Github%E5%8F%89%E6%88%91%E5%95%8A%E5%9B%BE%E6%A0%87"><span class="nav-number">4.3.14.</span> <span class="nav-text">右上角来 Github 叉我啊图标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E4%BD%93%E8%AE%BE%E7%BD%AE"><span class="nav-number">4.3.15.</span> <span class="nav-text">字体设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SEO%E7%9B%B8%E5%85%B3"><span class="nav-number">4.3.16.</span> <span class="nav-text">SEO 相关</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%AB%98%E7%BA%A7%E8%AE%BE%E7%BD%AE"><span class="nav-number">4.3.17.</span> <span class="nav-text">高级设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RSS%E8%AE%A2%E9%98%85"><span class="nav-number">4.3.18.</span> <span class="nav-text">RSS 订阅</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MathJax-%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F%E6%B8%B2%E6%9F%93"><span class="nav-number">4.3.19.</span> <span class="nav-text">MathJax 数学公式渲染</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pjax"><span class="nav-number">4.3.20.</span> <span class="nav-text">pjax</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FancyBox"><span class="nav-number">4.3.21.</span> <span class="nav-text">FancyBox</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lazyload-%E5%9B%BE%E7%89%87%E6%87%92%E5%8A%A0%E8%BD%BD"><span class="nav-number">4.3.22.</span> <span class="nav-text">Lazyload 图片懒加载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pangu-Autospace-%E4%B8%AD%E8%8B%B1%E6%96%87%E8%87%AA%E5%8A%A8%E7%A9%BA%E6%A0%BC%E5%88%86%E7%A6%BB-%EF%BC%88%E6%9C%AA%E9%85%8D%E7%BD%AE%EF%BC%89"><span class="nav-number">4.3.23.</span> <span class="nav-text">Pangu Autospace 中英文自动空格分离 （未配置）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Quicklink-%EF%BC%88%E4%B8%8Epajx%E5%86%B2%E7%AA%81%EF%BC%8C%E6%9C%AA%E9%85%8D%E7%BD%AE%EF%BC%89"><span class="nav-number">4.3.24.</span> <span class="nav-text">Quicklink （与 pajx 冲突，未配置）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Animation-Effect-%E8%BF%87%E5%BA%A6%E5%8A%A8%E7%94%BB%E8%AE%BE%E7%BD%AE%EF%BC%88%E6%9C%AA%E9%85%8D%E7%BD%AE%EF%BC%89"><span class="nav-number">4.3.25.</span> <span class="nav-text">Animation Effect 过度动画设置（未配置）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Progress-Bar-%E7%BD%91%E9%A1%B5%E5%8A%A0%E8%BD%BD%E8%BF%9B%E5%BA%A6%E6%9D%A1%E5%8A%A8%E7%94%BB"><span class="nav-number">4.3.26.</span> <span class="nav-text">Progress Bar 网页加载进度条动画</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Valine-%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F"><span class="nav-number">4.3.27.</span> <span class="nav-text">Valine 评论系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LeanCloud-%E8%AE%BF%E9%97%AE%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1"><span class="nav-number">4.3.28.</span> <span class="nav-text">LeanCloud 访问数据统计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Local-Search-%E6%9C%AC%E5%9C%B0%E6%90%9C%E7%B4%A2"><span class="nav-number">4.3.29.</span> <span class="nav-text">Local Search 本地搜索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%B9%E6%AE%8A%E6%A0%87%E7%AD%BE"><span class="nav-number">4.3.30.</span> <span class="nav-text">特殊标签</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%95%E8%A8%80"><span class="nav-number">4.3.30.1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Note"><span class="nav-number">4.3.30.2.</span> <span class="nav-text">Note</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Header"><span class="nav-number">4.3.30.3.</span> <span class="nav-text">Header</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Primary-Header"><span class="nav-number">4.3.30.4.</span> <span class="nav-text">Primary Header</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Lists-in-note"><span class="nav-number">4.3.30.5.</span> <span class="nav-text">Lists in note</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Tabs"><span class="nav-number">4.3.30.6.</span> <span class="nav-text">Tabs</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PDF"><span class="nav-number">4.3.30.7.</span> <span class="nav-text">PDF</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mermaid-%E6%B5%81%E7%A8%8B%E5%9B%BE"><span class="nav-number">4.3.31.</span> <span class="nav-text">Mermaid 流程图</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -452,7 +453,7 @@ mjx-container[display="true"] + br {
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>29 分钟</span>
+      <span>30 分钟</span>
     </span>
 </div>
 
@@ -506,7 +507,7 @@ hexo d
 </code></pre>
 <p>稍等一会，应该就能访问到了</p>
 <h1 id="ji-ben-diao-zheng">基本调整</h1>
-<h2 id="设置备份"><a class="header-anchor" href="#设置备份">¶</a> 设置备份</h2>
+<h2 id="设置备份"><a class="header-anchor" href="#设置备份"></a>设置备份</h2>
 <p>安装插件 <code>hexo-git-backup</code> 把 hexo 文件备份到建好的私有库</p>
 <pre><code>npm install hexo-git-backup --save
 </code></pre>
@@ -536,14 +537,14 @@ repository:
 11、<code>db.json</code> 文件，不需要拷贝。</p>
 <p>引用自：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/baab042849023">https://www.jianshu.com/p/baab042849023</a></p>
 </blockquote>
-<h3 id="备份操作"><a class="header-anchor" href="#备份操作">¶</a> 备份操作</h3>
+<h3 id="备份操作"><a class="header-anchor" href="#备份操作"></a>备份操作</h3>
 <pre><code>hexo backup
 </code></pre>
 <p>或者</p>
 <pre><code>hexo b
 </code></pre>
 <p>进行备份</p>
-<h3 id="还原操作"><a class="header-anchor" href="#还原操作">¶</a> 还原操作</h3>
+<h3 id="还原操作"><a class="header-anchor" href="#还原操作"></a>还原操作</h3>
 <ol>
 <li>
 <p>安装 git、node.js</p>
@@ -556,7 +557,7 @@ repository:
 <figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-cli -g</span><br><span class="line">$ npm install</span><br><span class="line">$ npm install hexo-deployer-git</span><br></pre></td></tr></tbody></table></figure>
 </li>
 </ol>
-<h3 id="排错指南"><a class="header-anchor" href="#排错指南">¶</a><strong> 排错指南</strong></h3>
+<h3 id="排错指南"><a class="header-anchor" href="#排错指南"></a><strong>排错指南</strong></h3>
 <ol>
 <li>尝试提权 /sudo</li>
 <li> 出现类似 </li>
@@ -578,9 +579,9 @@ Emitted 'error' event at:
 <blockquote>
 <p>参考  <a target="_blank" rel="noopener" href="https://github.com/coneycode/hexo-git-backup/issues/27">备份报错 #27</a></p>
 </blockquote>
-<h2 id="设置分类，建立模板"><a class="header-anchor" href="#设置分类，建立模板">¶</a> 设置分类，建立模板</h2>
+<h2 id="设置分类，建立模板"><a class="header-anchor" href="#设置分类，建立模板"></a>设置分类，建立模板</h2>
 <p>略</p>
-<h2 id="更换hexo-renderer-markdown-it渲染器"><a class="header-anchor" href="#更换hexo-renderer-markdown-it渲染器">¶</a> 更换 <code>hexo-renderer-markdown-it</code> 渲染器</h2>
+<h2 id="更换hexo-renderer-markdown-it渲染器"><a class="header-anchor" href="#更换hexo-renderer-markdown-it渲染器"></a>更换 <code>hexo-renderer-markdown-it</code> 渲染器</h2>
 <pre><code>npm un hexo-renderer-marked --save
 npm i hexo-renderer-markdown-it --save
 </code></pre>
@@ -659,8 +660,8 @@ theme: next
 <blockquote>
 <p>官方文档：<a target="_blank" rel="noopener" href="https://theme-next.org/docs/">https://theme-next.org/docs/</a></p>
 </blockquote>
-<h2 id="基本设置"><a class="header-anchor" href="#基本设置">¶</a> 基本设置</h2>
-<h3 id="切换风格"><a class="header-anchor" href="#切换风格">¶</a> 切换风格</h3>
+<h2 id="基本设置"><a class="header-anchor" href="#基本设置"></a>基本设置</h2>
+<h3 id="切换风格"><a class="header-anchor" href="#切换风格"></a>切换风格</h3>
 <p>官方提供了 Muse、Mist、Pisces、Gemini 四种布局风格，这里选择 Gemini</p>
 <pre><code># Schemes
 #scheme: Muse
@@ -668,20 +669,20 @@ theme: next
 #scheme: Pisces
 scheme: Gemini
 </code></pre>
-<h3 id="开启夜间模式适配"><a class="header-anchor" href="#开启夜间模式适配">¶</a> 开启夜间模式适配</h3>
+<h3 id="开启夜间模式适配"><a class="header-anchor" href="#开启夜间模式适配"></a>开启夜间模式适配</h3>
 <pre><code>darkmode: true
 </code></pre>
-<h3 id="切换语言"><a class="header-anchor" href="#切换语言">¶</a> 切换语言</h3>
+<h3 id="切换语言"><a class="header-anchor" href="#切换语言"></a>切换语言</h3>
 <pre><code>language: zh-CN
 </code></pre>
-<h3 id="设置站点图标"><a class="header-anchor" href="#设置站点图标">¶</a> 设置站点图标</h3>
+<h3 id="设置站点图标"><a class="header-anchor" href="#设置站点图标"></a>设置站点图标</h3>
 <pre><code>favicon:
 small: /images/favicon-16x16-next.png
 medium: /images/favicon-32x32-next.png
 apple_touch_icon: /images/apple-touch-icon-next.png
 safari_pinned_tab: /images/logo.svg
 </code></pre>
-<h3 id="备案展示"><a class="header-anchor" href="#备案展示">¶</a> 备案展示</h3>
+<h3 id="备案展示"><a class="header-anchor" href="#备案展示"></a>备案展示</h3>
 <pre><code># Beian ICP and gongan information for Chinese users. See: http://www.beian.miit.gov.cn, http://www.beian.gov.cn
 beian:
     enable: false
@@ -693,7 +694,7 @@ beian:
     # The icon for gongan beian. See: http://www.beian.gov.cn/portal/download
     gongan_icon_url:
 </code></pre>
-<h3 id="CC标识"><a class="header-anchor" href="#CC标识">¶</a>CC 标识</h3>
+<h3 id="CC标识"><a class="header-anchor" href="#CC标识"></a>CC 标识</h3>
 <p>这里我选择的是 by-nc-sa</p>
 <pre><code># Creative Commons 4.0 International License.
 # See: https://creativecommons.org/share-your-work/licensing-types-examples
@@ -706,7 +707,7 @@ sidebar: true
 post: true
 language: deed.zh
 </code></pre>
-<h3 id="设置菜单栏"><a class="header-anchor" href="#设置菜单栏">¶</a> 设置菜单栏</h3>
+<h3 id="设置菜单栏"><a class="header-anchor" href="#设置菜单栏"></a>设置菜单栏</h3>
 <pre><code># Usage: `Key: /link/ || icon`
 # Key is the name of menu item. If the translation for this item is available, the translated text will be loaded, otherwise the Key name will be used. Key is case-senstive.
 # Value before `||` delimiter is the target link, value after `||` delimiter is the name of Font Awesome icon.
@@ -727,11 +728,11 @@ menu_settings:
 icons: true
 badges: false
 </code></pre>
-<h2 id="设置侧边栏"><a class="header-anchor" href="#设置侧边栏">¶</a> 设置侧边栏</h2>
+<h2 id="设置侧边栏"><a class="header-anchor" href="#设置侧边栏"></a>设置侧边栏</h2>
 <pre><code># Sidebar Settings
 # See: https://theme-next.org/docs/theme-settings/sidebar
 </code></pre>
-<h3 id="侧边栏大小位置"><a class="header-anchor" href="#侧边栏大小位置">¶</a> 侧边栏大小位置</h3>
+<h3 id="侧边栏大小位置"><a class="header-anchor" href="#侧边栏大小位置"></a>侧边栏大小位置</h3>
 <pre><code>sidebar:
 # Sidebar Position.
 position: left
@@ -749,7 +750,7 @@ offset: 12
 # Enable sidebar on narrow view (only for Muse | Mist).
 onmobile: false
 </code></pre>
-<h3 id="头像"><a class="header-anchor" href="#头像">¶</a> 头像</h3>
+<h3 id="头像"><a class="header-anchor" href="#头像"></a>头像</h3>
 <pre><code># Sidebar Avatar
 avatar:
 # Replace the default image and set the url here.
@@ -762,7 +763,7 @@ rotated: false
 # Posts / Categories / Tags in sidebar.
 site_state: true
 </code></pre>
-<h3 id="友情链接"><a class="header-anchor" href="#友情链接">¶</a> 友情链接</h3>
+<h3 id="友情链接"><a class="header-anchor" href="#友情链接"></a>友情链接</h3>
 <pre><code># Social Links
 # Usage: `Key: permalink || icon`
 # Key is the link label showing to end users.
@@ -798,7 +799,7 @@ links:
 # Table of Contents in the Sidebar
 # Front-matter variable (unsupport wrap expand_all).
 </code></pre>
-<h3 id="TOC"><a class="header-anchor" href="#TOC">¶</a>TOC</h3>
+<h3 id="TOC"><a class="header-anchor" href="#TOC"></a>TOC</h3>
 <pre><code># Table of Contents in the Sidebar
 # Front-matter variable (unsupport wrap expand_all).
 toc:
@@ -812,7 +813,7 @@ expand_all: false
 # Maximum heading depth of generated toc.
 max_depth: 6
 </code></pre>
-<h3 id="即时交谈"><a class="header-anchor" href="#即时交谈">¶</a> 即时交谈</h3>
+<h3 id="即时交谈"><a class="header-anchor" href="#即时交谈"></a>即时交谈</h3>
 <pre><code># A button to open designated chat widget in sidebar.
 # Firstly, you need enable the chat service you want to activate its sidebar button.
 chat:
@@ -822,7 +823,7 @@ enable: false
 icon: comment # Icon name in Font Awesome, set false to disable icon.
 text: Chat # Button text, change it as you wish.
 </code></pre>
-<h2 id="帖子页面"><a class="header-anchor" href="#帖子页面">¶</a> 帖子页面</h2>
+<h2 id="帖子页面"><a class="header-anchor" href="#帖子页面"></a>帖子页面</h2>
 <pre><code># ---------------------------------------------------------------
 # Post Settings
 # See: https://theme-next.org/docs/theme-settings/posts
@@ -836,7 +837,7 @@ excerpt_description: true
 # If true, the read more button will be displayed in excerpt section.
 read_more_btn: true
 </code></pre>
-<h3 id="文章信息"><a class="header-anchor" href="#文章信息">¶</a> 文章信息</h3>
+<h3 id="文章信息"><a class="header-anchor" href="#文章信息"></a>文章信息</h3>
 <pre><code># Post meta display settings
 post_meta:
 item_text: true
@@ -872,11 +873,11 @@ separated_meta: true
 item_text_post: true
 item_text_total: false
 </code></pre>
-<h3 id="底部标签样式"><a class="header-anchor" href="#底部标签样式">¶</a> 底部标签样式</h3>
+<h3 id="底部标签样式"><a class="header-anchor" href="#底部标签样式"></a>底部标签样式</h3>
 <pre><code># Use icon instead of the symbol # to indicate the tag at the bottom of the post
 tag_icon: true
 </code></pre>
-<h3 id="打赏、文末信息"><a class="header-anchor" href="#打赏、文末信息">¶</a> 打赏、文末信息</h3>
+<h3 id="打赏、文末信息"><a class="header-anchor" href="#打赏、文末信息"></a>打赏、文末信息</h3>
 <pre><code># Reward (Donate)
 # Front-matter variable (unsupport animation).
 reward_settings:
@@ -899,7 +900,7 @@ follow_me:
 #WeChat: /images/wechat_channel.jpg || wechat
 #RSS: /atom.xml || rss
 </code></pre>
-<h3 id="相关主题推荐"><a class="header-anchor" href="#相关主题推荐">¶</a> 相关主题推荐</h3>
+<h3 id="相关主题推荐"><a class="header-anchor" href="#相关主题推荐"></a>相关主题推荐</h3>
 <p>安装 <code>hexo-related-popular-posts</code></p>
 <pre><code>npm install hexo-related-popular-posts
 </code></pre>
@@ -917,7 +918,7 @@ params:
     #isImage: false
     #isExcerpt: false
 </code></pre>
-<h3 id="标签页面"><a class="header-anchor" href="#标签页面">¶</a> 标签页面</h3>
+<h3 id="标签页面"><a class="header-anchor" href="#标签页面"></a>标签页面</h3>
 <p>先创建标签页面</p>
 <pre><code>hexo new page Tags
 </code></pre>
@@ -939,7 +940,7 @@ start: "#ccc" # Start color (hex, rgba, hsla or color keywords)
 end: "#111" # End color (hex, rgba, hsla or color keywords)
 amount: 200 # Amount of tags, change it if you have more than 200 tags
 </code></pre>
-<h3 id="分类页面"><a class="header-anchor" href="#分类页面">¶</a> 分类页面</h3>
+<h3 id="分类页面"><a class="header-anchor" href="#分类页面"></a>分类页面</h3>
 <p>同上</p>
 <pre><code>hexo new page Categories
 </code></pre>
@@ -951,11 +952,11 @@ type: categories
 comments: false
 ---
 </code></pre>
-<h3 id="404界面"><a class="header-anchor" href="#404界面">¶</a>404 界面</h3>
+<h3 id="404界面"><a class="header-anchor" href="#404界面"></a>404 界面</h3>
 <p>把 404.html 放在 /source/ 下，然后修改博客根目录的配置文件</p>
 <pre><code>skip_render: "404.html"
 </code></pre>
-<h3 id="谷歌日历-（未配置）"><a class="header-anchor" href="#谷歌日历-（未配置）">¶</a> 谷歌日历 （未配置）</h3>
+<h3 id="谷歌日历-（未配置）"><a class="header-anchor" href="#谷歌日历-（未配置）"></a>谷歌日历 （未配置）</h3>
 <pre><code># Google Calendar
 # Share your recent schedule to others via calendar page.
 calendar:
@@ -968,15 +969,15 @@ showDeleted: false
 singleEvents: true
 maxResults: 250
 </code></pre>
-<h3 id="安卓上chrome的沉浸颜色？（不是很明白）"><a class="header-anchor" href="#安卓上chrome的沉浸颜色？（不是很明白）">¶</a> 安卓上 chrome 的沉浸颜色？（不是很明白）</h3>
+<h3 id="安卓上chrome的沉浸颜色？（不是很明白）"><a class="header-anchor" href="#安卓上chrome的沉浸颜色？（不是很明白）"></a>安卓上 chrome 的沉浸颜色？（不是很明白）</h3>
 <pre><code># Android Chrome header panel color ($brand-bg / $headband-bg =&gt; $black-deep).
 android_chrome_color: "#222"
 </code></pre>
-<h3 id="自定义logo，在网站标题菜单栏上面的位置"><a class="header-anchor" href="#自定义logo，在网站标题菜单栏上面的位置">¶</a> 自定义 logo，在网站标题菜单栏上面的位置</h3>
+<h3 id="自定义logo，在网站标题菜单栏上面的位置"><a class="header-anchor" href="#自定义logo，在网站标题菜单栏上面的位置"></a>自定义 logo，在网站标题菜单栏上面的位置</h3>
 <pre><code># Custom Logo (Do not support scheme Mist)
 custom_logo: #/uploads/custom-logo.jpg
 </code></pre>
-<h3 id="代码块的风格"><a class="header-anchor" href="#代码块的风格">¶</a> 代码块的风格</h3>
+<h3 id="代码块的风格"><a class="header-anchor" href="#代码块的风格"></a>代码块的风格</h3>
 <p>配色方案预览：<a target="_blank" rel="noopener" href="https://github.com/chriskempson/tomorrow-theme">https://github.com/chriskempson/tomorrow-theme</a></p>
 <pre><code>codeblock:
 # Code Highlight theme
@@ -991,7 +992,7 @@ copy_button:
     # Available values: default | flat | mac
     style: flat
 </code></pre>
-<h3 id="返回顶部样式"><a class="header-anchor" href="#返回顶部样式">¶</a> 返回顶部样式</h3>
+<h3 id="返回顶部样式"><a class="header-anchor" href="#返回顶部样式"></a>返回顶部样式</h3>
 <pre><code>back2top:
 enable: true
 # Back to top in sidebar.
@@ -1007,7 +1008,7 @@ position: top
 color: "#37c6c0"
 height: 3px
 </code></pre>
-<h3 id="阅读进度记忆、书签"><a class="header-anchor" href="#阅读进度记忆、书签">¶</a> 阅读进度记忆、书签</h3>
+<h3 id="阅读进度记忆、书签"><a class="header-anchor" href="#阅读进度记忆、书签"></a>阅读进度记忆、书签</h3>
 <pre><code># Bookmark Support
 bookmark:
 enable: true
@@ -1017,27 +1018,27 @@ color: "#222"
 # If manual, only save it by clicking the bookmark-icon.
 save: manual
 </code></pre>
-<h3 id="右上角来Github叉我啊图标"><a class="header-anchor" href="#右上角来Github叉我啊图标">¶</a> 右上角<s>来 Github 叉我啊</s>图标</h3>
+<h3 id="右上角来Github叉我啊图标"><a class="header-anchor" href="#右上角来Github叉我啊图标"></a>右上角<s>来 Github 叉我啊</s>图标</h3>
 <pre><code># `Follow me on GitHub` banner in the top-right corner.
 github_banner:
 enable: false
 permalink: https://github.com/yourname
 title: Follow me on GitHub
 </code></pre>
-<h3 id="字体设置"><a class="header-anchor" href="#字体设置">¶</a> 字体设置</h3>
+<h3 id="字体设置"><a class="header-anchor" href="#字体设置"></a>字体设置</h3>
 <p>详见 <a target="_blank" rel="noopener" href="https://theme-next.org/docs/theme-settings/#Fonts-Customization">https://theme-next.org/docs/theme-settings/#Fonts-Customization</a><br>
 这里用的是默认，只添加了中科大的源，其他的就不展示了</p>
 <pre><code># Uri of fonts host, e.g. https://fonts.googleapis.com (Default).
 host: //fonts.lug.ustc.edu.cn
 </code></pre>
-<h3 id="SEO相关"><a class="header-anchor" href="#SEO相关">¶</a>SEO 相关</h3>
+<h3 id="SEO相关"><a class="header-anchor" href="#SEO相关"></a>SEO 相关</h3>
 <p>禁用百度移动页面转换</p>
 <pre><code># Disable Baidu transformation on mobile devices.
 disable_baidu_transformation: true
 </code></pre>
 <p>其他没有设置，略</p>
-<h3 id="高级设置"><a class="header-anchor" href="#高级设置">¶</a> 高级设置</h3>
-<h3 id="RSS订阅"><a class="header-anchor" href="#RSS订阅">¶</a>RSS 订阅</h3>
+<h3 id="高级设置"><a class="header-anchor" href="#高级设置"></a>高级设置</h3>
+<h3 id="RSS订阅"><a class="header-anchor" href="#RSS订阅"></a>RSS 订阅</h3>
 <pre><code>$ npm install hexo-generator-feed
 </code></pre>
 <p>然后在博客配置文件中添加：</p>
@@ -1055,7 +1056,7 @@ autodiscovery: true
 template:
 </code></pre>
 <p>参数参考文档：<a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo-generator-feed">https://github.com/hexojs/hexo-generator-feed</a></p>
-<h3 id="MathJax-数学公式渲染"><a class="header-anchor" href="#MathJax-数学公式渲染">¶</a>MathJax 数学公式渲染</h3>
+<h3 id="MathJax-数学公式渲染"><a class="header-anchor" href="#MathJax-数学公式渲染"></a>MathJax 数学公式渲染</h3>
 <p>参考：<a target="_blank" rel="noopener" href="https://github.com/stevenjoezhang/hexo-filter-mathjax">https://github.com/stevenjoezhang/hexo-filter-mathjax</a></p>
 <pre><code>$ npm install hexo-filter-mathjax
 </code></pre>
@@ -1076,7 +1077,7 @@ eg:</li>
 </ol>
  <figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- This post will render the Math Equations --&gt;</span><br><span class="line"> ---</span><br><span class="line"> title: Will Render Math</span><br><span class="line"> mathjax: true   </span><br><span class="line"> ---</span><br></pre></td></tr></tbody></table></figure>
 </blockquote>
-<h3 id="pjax"><a class="header-anchor" href="#pjax">¶</a>pjax</h3>
+<h3 id="pjax"><a class="header-anchor" href="#pjax"></a>pjax</h3>
 <p>采用 CDN 方式安装<br>
 先修改</p>
 <pre><code>pjax: true
@@ -1086,7 +1087,7 @@ eg:</li>
 ...
 pjax: //cdn.jsdelivr.net/gh/theme-next/theme-next-pjax@0/pjax.min.js
 </code></pre>
-<h3 id="FancyBox"><a class="header-anchor" href="#FancyBox">¶</a>FancyBox</h3>
+<h3 id="FancyBox"><a class="header-anchor" href="#FancyBox"></a>FancyBox</h3>
 <p>同上，先</p>
 <pre><code>fancybox: true
 </code></pre>
@@ -1098,7 +1099,7 @@ fancybox: //cdn.jsdelivr.net/npm/fancybox@3/dist/js/jquery.fancybox.pack.js
 fancybox_css: //cdn.jsdelivr.net/npm/fancybox@3/dist/css/jquery.fancybox.min.css
 ...
 </code></pre>
-<h3 id="Lazyload-图片懒加载"><a class="header-anchor" href="#Lazyload-图片懒加载">¶</a>Lazyload 图片懒加载</h3>
+<h3 id="Lazyload-图片懒加载"><a class="header-anchor" href="#Lazyload-图片懒加载"></a>Lazyload 图片懒加载</h3>
 <p>同上，先</p>
 <pre><code>lazyload: true
 </code></pre>
@@ -1108,13 +1109,13 @@ fancybox_css: //cdn.jsdelivr.net/npm/fancybox@3/dist/css/jquery.fancybox.min.css
 lazyload: //cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js
 ...
 </code></pre>
-<h3 id="Pangu-Autospace-中英文自动空格分离-（未配置）"><a class="header-anchor" href="#Pangu-Autospace-中英文自动空格分离-（未配置）">¶</a>Pangu Autospace 中英文自动空格分离 （未配置）</h3>
+<h3 id="Pangu-Autospace-中英文自动空格分离-（未配置）"><a class="header-anchor" href="#Pangu-Autospace-中英文自动空格分离-（未配置）"></a>Pangu Autospace 中英文自动空格分离 （未配置）</h3>
 <p><a target="_blank" rel="noopener" href="https://theme-next.org/docs/third-party-services/external-libraries#Pangu-Autospace">https://theme-next.org/docs/third-party-services/external-libraries#Pangu-Autospace</a></p>
-<h3 id="Quicklink-（与pajx冲突，未配置）"><a class="header-anchor" href="#Quicklink-（与pajx冲突，未配置）">¶</a>Quicklink （与 pajx 冲突，未配置）</h3>
+<h3 id="Quicklink-（与pajx冲突，未配置）"><a class="header-anchor" href="#Quicklink-（与pajx冲突，未配置）"></a>Quicklink （与 pajx 冲突，未配置）</h3>
 <p><a target="_blank" rel="noopener" href="https://theme-next.org/docs/third-party-services/external-libraries#Quicklink">https://theme-next.org/docs/third-party-services/external-libraries#Quicklink</a></p>
-<h3 id="Animation-Effect-过度动画设置（未配置）"><a class="header-anchor" href="#Animation-Effect-过度动画设置（未配置）">¶</a>Animation Effect 过度动画设置（未配置）</h3>
+<h3 id="Animation-Effect-过度动画设置（未配置）"><a class="header-anchor" href="#Animation-Effect-过度动画设置（未配置）"></a>Animation Effect 过度动画设置（未配置）</h3>
 <p><a target="_blank" rel="noopener" href="https://theme-next.org/docs/third-party-services/external-libraries#Animation-Effect">https://theme-next.org/docs/third-party-services/external-libraries#Animation-Effect</a></p>
-<h3 id="Progress-Bar-网页加载进度条动画"><a class="header-anchor" href="#Progress-Bar-网页加载进度条动画">¶</a>Progress Bar 网页加载进度条动画</h3>
+<h3 id="Progress-Bar-网页加载进度条动画"><a class="header-anchor" href="#Progress-Bar-网页加载进度条动画"></a>Progress Bar 网页加载进度条动画</h3>
 <p>同上，先</p>
 <pre><code>pace:
 enable: true
@@ -1129,18 +1130,18 @@ pace_css: //cdn.jsdelivr.net/npm/pace-js@1/themes/black/pace-theme-minimal.css
 <p>上方<code> pace_css</code> 中可以设置颜色（修改 black）<br>
 可选效果一览：<a target="_blank" rel="noopener" href="https://github.hubspot.com/pace/docs/welcome/">https://github.hubspot.com/pace/docs/welcome/</a><br>
 可选颜色：<a target="_blank" rel="noopener" href="https://www.jsdelivr.com/package/npm/pace-js?path=themes">https://www.jsdelivr.com/package/npm/pace-js?path=themes</a></p>
-<h3 id="Valine-评论系统"><a class="header-anchor" href="#Valine-评论系统">¶</a>Valine 评论系统</h3>
+<h3 id="Valine-评论系统"><a class="header-anchor" href="#Valine-评论系统"></a>Valine 评论系统</h3>
 <p>这里使用 <a target="_blank" rel="noopener" href="https://valine.js.org/">Valine</a><br>
 先注册登录 <a target="_blank" rel="noopener" href="https://leancloud.app/">Leanclub 国际站</a>（需要验证手机号），然后参考 https://theme-next.org/docs/third-party-services/comments#Valine-China</p>
 <blockquote>
 <p><em><strong>注意：</strong></em> 中国站需要实名验证，且网站似乎还要已备案才能用</p>
 </blockquote>
-<h3 id="LeanCloud-访问数据统计"><a class="header-anchor" href="#LeanCloud-访问数据统计">¶</a>LeanCloud 访问数据统计</h3>
+<h3 id="LeanCloud-访问数据统计"><a class="header-anchor" href="#LeanCloud-访问数据统计"></a>LeanCloud 访问数据统计</h3>
 <p><a target="_blank" rel="noopener" href="https://github.com/theme-next/hexo-theme-next/blob/master/docs/zh-CN/LEANCLOUD-COUNTER-SECURITY.md">https://github.com/theme-next/hexo-theme-next/blob/master/docs/zh-CN/LEANCLOUD-COUNTER-SECURITY.md</a></p>
 <blockquote>
 <p><em><strong>注意：</strong></em> 涉及域名，更换域名时注意修改！</p>
 </blockquote>
-<h3 id="Local-Search-本地搜索"><a class="header-anchor" href="#Local-Search-本地搜索">¶</a>Local Search 本地搜索</h3>
+<h3 id="Local-Search-本地搜索"><a class="header-anchor" href="#Local-Search-本地搜索"></a>Local Search 本地搜索</h3>
 <pre><code>$ npm install hexo-generator-searchdb
 </code></pre>
 <p>然后编辑博客配置文件，加入</p>
@@ -1165,10 +1166,10 @@ unescape: false
 # Preload the search data when the pag
 preload: false
 </code></pre>
-<h3 id="特殊标签"><a class="header-anchor" href="#特殊标签">¶</a> 特殊标签</h3>
+<h3 id="特殊标签"><a class="header-anchor" href="#特殊标签"></a>特殊标签</h3>
 <p>使用文档：<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/tag-plugins.html">https://hexo.io/zh-cn/docs/tag-plugins.html</a><br>
 这里仅提供示例</p>
-<h4 id="引言"><a class="header-anchor" href="#引言">¶</a> 引言</h4>
+<h4 id="引言"><a class="header-anchor" href="#引言"></a>引言</h4>
 <blockquote class="blockquote-center">
 <p>Elegant in code, simple in core</p>
 
@@ -1177,15 +1178,15 @@ preload: false
 <footer><strong>Seth Godin</strong><cite><a target="_blank" rel="noopener" href="http://sethgodin.typepad.com/seths_blog/2009/07/welcome-to-island-marketing.html">Welcome to Island Marketing</a></cite></footer></blockquote>
 <blockquote><p>Do not just seek happiness for yourself. Seek happiness for all. Through kindness. Through mercy.</p>
 <footer><strong>David Levithan</strong><cite>Wide Awake</cite></footer></blockquote>
-<h4 id="Note"><a class="header-anchor" href="#Note">¶</a>Note</h4>
+<h4 id="Note"><a class="header-anchor" href="#Note"></a>Note</h4>
 <p>文档：<a target="_blank" rel="noopener" href="https://theme-next.org/docs/tag-plugins/note">https://theme-next.org/docs/tag-plugins/note</a></p>
-<div class="note "><h4 id="Header"><a class="header-anchor" href="#Header">¶</a>Header</h4>
+<div class="note "><h4 id="Header"><a class="header-anchor" href="#Header"></a>Header</h4>
 <p>(without define class style)</p>
 </div>
-<div class="note primary"><h4 id="Primary-Header"><a class="header-anchor" href="#Primary-Header">¶</a>Primary Header</h4>
+<div class="note primary"><h4 id="Primary-Header"><a class="header-anchor" href="#Primary-Header"></a>Primary Header</h4>
 <p><strong>Welcome</strong> to <a target="_blank" rel="noopener" href="https://hexo.io">Hexo!</a></p>
 </div>
-<div class="note default"><h4 id="Lists-in-note"><a class="header-anchor" href="#Lists-in-note">¶</a>Lists in note</h4>
+<div class="note default"><h4 id="Lists-in-note"><a class="header-anchor" href="#Lists-in-note"></a>Lists in note</h4>
 <ul>
 <li>ul</li>
 <li>ul
@@ -1204,14 +1205,14 @@ preload: false
 <li>ol</li>
 </ol>
 </div>
-<h4 id="Tabs"><a class="header-anchor" href="#Tabs">¶</a>Tabs</h4>
+<h4 id="Tabs"><a class="header-anchor" href="#Tabs"></a>Tabs</h4>
 <p>文档：<a target="_blank" rel="noopener" href="https://theme-next.org/docs/tag-plugins/tabs">https://theme-next.org/docs/tag-plugins/tabs</a><br>
 <s>我真的不懂啊</s></p>
 <div class="tabs" id="first-unique-name"><ul class="nav-tabs"><li class="tab active"><a href="#first-unique-name-1">First unique name 1</a></li><li class="tab"><a href="#first-unique-name-2">First unique name 2</a></li><li class="tab"><a href="#first-unique-name-3">First unique name 3</a></li></ul><div class="tab-content"><div class="tab-pane active" id="first-unique-name-1"><p><strong>This is Tab 1.</strong></p></div><div class="tab-pane" id="first-unique-name-2"><p><strong>This is Tab 2.</strong></p></div><div class="tab-pane" id="first-unique-name-3"><p><strong>This is Tab 3.</strong></p></div></div></div>
-<h4 id="PDF"><a class="header-anchor" href="#PDF">¶</a>PDF</h4>
+<h4 id="PDF"><a class="header-anchor" href="#PDF"></a>PDF</h4>
 <p>文档：<a target="_blank" rel="noopener" href="https://theme-next.org/docs/tag-plugins/pdf">https://theme-next.org/docs/tag-plugins/pdf</a></p>
 <div class="pdf-container" data-target="/test.pdf" data-height="600px"></div>
-<h3 id="Mermaid-流程图"><a class="header-anchor" href="#Mermaid-流程图">¶</a>Mermaid 流程图</h3>
+<h3 id="Mermaid-流程图"><a class="header-anchor" href="#Mermaid-流程图"></a>Mermaid 流程图</h3>
 <p>文档：<a target="_blank" rel="noopener" href="https://theme-next.org/docs/tag-plugins/mermaid">https://theme-next.org/docs/tag-plugins/mermaid</a></p>
 <p><s>其他官方文档有的就自己看去吧</s></p>
 
@@ -1224,16 +1225,16 @@ preload: false
   <div class="popular-posts-header">相关文章</div>
   <ul class="popular-posts">
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\posts\3a4e373e.html" rel="bookmark">博客折腾笔记②-hexo 的优化</a></div>
+      <div class="popular-posts-title"><a href="\posts\3a4e373e.html" rel="bookmark">博客折腾笔记②-hexo的优化</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\posts\2b426e0a.html" rel="bookmark">博客折腾笔记③- 搭建个人动态页面 iM</a></div>
+      <div class="popular-posts-title"><a href="\posts\2b426e0a.html" rel="bookmark">博客折腾笔记③-搭建个人动态页面 iM</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\posts\4394c3fa.html" rel="bookmark">博客折腾笔记④-使用 Tasker 在 Android 上实现个人动态的发送</a></div>
     </li>
     <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="\posts\39aaddee.html" rel="bookmark">配置 Typora & PicGo 写 Hexo 博客</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\posts\4394c3fa.html" rel="bookmark">博客折腾笔记④- 使用 Tasker 在 Android 上实现个人动态的发送</a></div>
     </li>
   </ul>
 
@@ -1314,7 +1315,7 @@ preload: false
 
 
 <div class="copyright">
-  &copy; 2019 – 
+  &copy; 2018 – 
   <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>

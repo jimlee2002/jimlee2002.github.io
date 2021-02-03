@@ -26,12 +26,12 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"jiml.ee","root":"/","images":"/images","scheme":"Gemini","version":"8.2.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-<meta name="description" content="工具介绍 ¶ 优雅的 Markdown 编辑器 —— Typora 官网 简约、舒适、优雅，这是我对它的第一眼评价。 完善的功能、所见即所得、自定义主题、拓展语法支持、良好的图片插入管理、数学支持、专注模式、打字机模式…… 以及免费 —— 这些都是我毫不犹豫下载安装它的原因。 展现在我面前的它果然没有让我失望，漂亮的界面让我觉得原来的 VS Code 瞬间就不香了。 当然，它的实力，还仅不限于此…">
+<meta name="description" content="工具介绍 优雅的Markdown编辑器 —— Typora 官网 简约、舒适、优雅，这是我对它的第一眼评价。 完善的功能、所见即所得、自定义主题、拓展语法支持、良好的图片插入管理、数学支持、专注模式、打字机模式…… 以及免费——这些都是我毫不犹豫下载安装它的原因。 展现在我面前的它果然没有让我失望，漂亮的界面让我觉得原来的 VS Code 瞬间就不香了。 当然，它的实力，还仅不限于此……">
 <meta property="og:type" content="article">
 <meta property="og:title" content="配置 Typora &amp; PicGo 写 Hexo 博客">
 <meta property="og:url" content="https://jiml.ee/posts/39aaddee.html">
 <meta property="og:site_name" content="Jim&#39;s Blog">
-<meta property="og:description" content="工具介绍 ¶ 优雅的 Markdown 编辑器 —— Typora 官网 简约、舒适、优雅，这是我对它的第一眼评价。 完善的功能、所见即所得、自定义主题、拓展语法支持、良好的图片插入管理、数学支持、专注模式、打字机模式…… 以及免费 —— 这些都是我毫不犹豫下载安装它的原因。 展现在我面前的它果然没有让我失望，漂亮的界面让我觉得原来的 VS Code 瞬间就不香了。 当然，它的实力，还仅不限于此…">
+<meta property="og:description" content="工具介绍 优雅的Markdown编辑器 —— Typora 官网 简约、舒适、优雅，这是我对它的第一眼评价。 完善的功能、所见即所得、自定义主题、拓展语法支持、良好的图片插入管理、数学支持、专注模式、打字机模式…… 以及免费——这些都是我毫不犹豫下载安装它的原因。 展现在我面前的它果然没有让我失望，漂亮的界面让我觉得原来的 VS Code 瞬间就不香了。 当然，它的实力，还仅不限于此……">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://i.loli.net/2020/03/21/wnxrfcZzPtvJk58.png">
 <meta property="og:image" content="https://i.loli.net/2020/03/21/TYJIjPBk2lAHXgr.png">
@@ -142,6 +142,7 @@
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
         <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -198,7 +199,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#gong-ju-jie-shao"><span class="nav-number">1.</span> <span class="nav-text">工具介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#you-ya-de-markdown-bian-ji-qi-typora"><span class="nav-number">1.1.</span> <span class="nav-text"> 优雅的 Markdown 编辑器 —— Typora</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#xiao-qiao-de-tu-pian-shang-chuan-gong-ju-pic-go"><span class="nav-number">1.2.</span> <span class="nav-text"> 小巧的图片上传工具 ——PicGo</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#er-zhe-pei-zhi"><span class="nav-number">2.</span> <span class="nav-text">二者配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#pei-zhi-pic-go-de-shang-chuan-she-zhi"><span class="nav-number">2.1.</span> <span class="nav-text"> 配置 PicGo 的上传设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pei-zhi-typora"><span class="nav-number">2.2.</span> <span class="nav-text"> 配置 Typora</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#gong-ju-jie-shao"><span class="nav-number">1.</span> <span class="nav-text">工具介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#you-ya-de-markdown-bian-ji-qi-typora"><span class="nav-number">1.1.</span> <span class="nav-text">优雅的 Markdown 编辑器 —— Typora</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#xiao-qiao-de-tu-pian-shang-chuan-gong-ju-pic-go"><span class="nav-number">1.2.</span> <span class="nav-text">小巧的图片上传工具 ——PicGo</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#er-zhe-pei-zhi"><span class="nav-number">2.</span> <span class="nav-text">二者配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#pei-zhi-pic-go-de-shang-chuan-she-zhi"><span class="nav-number">2.1.</span> <span class="nav-text">配置 PicGo 的上传设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pei-zhi-typora"><span class="nav-number">2.2.</span> <span class="nav-text">配置 Typora</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -335,7 +336,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>726</span>
+      <span>722</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -354,7 +355,7 @@
     
     <div class="post-body" itemprop="articleBody">
         <h1 id="gong-ju-jie-shao">工具介绍</h1>
-<h2 id="you-ya-de-markdown-bian-ji-qi-typora"><a class="header-anchor" href="#优雅的Markdown编辑器-——-Typora">¶</a> 优雅的 Markdown 编辑器 —— Typora</h2>
+<h2 id="you-ya-de-markdown-bian-ji-qi-typora"><a class="header-anchor" href="#优雅的Markdown编辑器-——-Typora"></a>优雅的 Markdown 编辑器 —— Typora</h2>
 <p><a target="_blank" rel="noopener" href="https://www.typora.io/">官网</a></p>
 <p>简约、舒适、优雅，这是我对它的第一眼评价。</p>
 <p>完善的功能、所见即所得、自定义主题、拓展语法支持、良好的图片插入管理、数学支持、专注模式、打字机模式……</p>
@@ -362,7 +363,7 @@
 <p>展现在我面前的它果然没有让我失望，漂亮的界面让我觉得原来的 VS Code 瞬间就不香了。</p>
 <p>当然，它的实力，还仅不限于此……</p>
 <a id="more"></a>
-<h2 id="xiao-qiao-de-tu-pian-shang-chuan-gong-ju-pic-go"><a class="header-anchor" href="#小巧的图片上传工具——PicGo">¶</a> 小巧的图片上传工具 ——PicGo</h2>
+<h2 id="xiao-qiao-de-tu-pian-shang-chuan-gong-ju-pic-go"><a class="header-anchor" href="#小巧的图片上传工具——PicGo"></a>小巧的图片上传工具 ——PicGo</h2>
 <p><a target="_blank" rel="noopener" href="https://molunerfinn.com/PicGo/">官网</a></p>
 <p>这是一个开源的体积小巧，功能强大的图床工具。</p>
 <p>它支持自建图床和多个常用图床，可以方便地对上传了的进行管理，还能安装拓展插件，实现截图上传、加水印上传等功能。</p>
@@ -370,7 +371,7 @@
 <p>Awsome！有了它，再也不用手动上传图床复制链接了！</p>
 <p>下面就来配置下二者的结合使用。</p>
 <h1 id="er-zhe-pei-zhi">二者配置</h1>
-<h2 id="pei-zhi-pic-go-de-shang-chuan-she-zhi"><a class="header-anchor" href="#配置PicGo的上传设置">¶</a> 配置 PicGo 的上传设置</h2>
+<h2 id="pei-zhi-pic-go-de-shang-chuan-she-zhi"><a class="header-anchor" href="#配置PicGo的上传设置"></a>配置 PicGo 的上传设置</h2>
 <p>此处以 sm.ms 的注册图床为例，其他图床请参考<a target="_blank" rel="noopener" href="https://picgo.github.io/PicGo-Doc/zh/guide/getting-started.html">官方文档</a></p>
 <ol>
 <li>
@@ -388,7 +389,7 @@
 </li>
 </ol>
 <p>此处 PicGo 配置完成</p>
-<h2 id="pei-zhi-typora"><a class="header-anchor" href="#配置Typora">¶</a> 配置 Typora</h2>
+<h2 id="pei-zhi-typora"><a class="header-anchor" href="#配置Typora"></a>配置 Typora</h2>
 <p>快捷键 <code>ctrl+逗号</code>打开偏好设置，进入 ``图像` 选项进行如下设置：</p>
 <img data-src="https://i.loli.net/2020/03/21/JBxqTtkSZ59wL2y.png" style="zoom:80%;">
 <p>其中<code>上传服务设定</code>中 <code>PicGo路径</code>一栏请根据自身情况填写 PicGo 的安装路径。</p>
@@ -405,16 +406,16 @@
   <div class="popular-posts-header">相关文章</div>
   <ul class="popular-posts">
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\posts\3a4e373e.html" rel="bookmark">博客折腾笔记②-hexo 的优化</a></div>
+      <div class="popular-posts-title"><a href="\posts\3a4e373e.html" rel="bookmark">博客折腾笔记②-hexo的优化</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\posts\2b426e0a.html" rel="bookmark">博客折腾笔记③- 搭建个人动态页面 iM</a></div>
+      <div class="popular-posts-title"><a href="\posts\2b426e0a.html" rel="bookmark">博客折腾笔记③-搭建个人动态页面 iM</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\posts\4394c3fa.html" rel="bookmark">博客折腾笔记④- 使用 Tasker 在 Android 上实现个人动态的发送</a></div>
+      <div class="popular-posts-title"><a href="\posts\4394c3fa.html" rel="bookmark">博客折腾笔记④-使用 Tasker 在 Android 上实现个人动态的发送</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\posts\c54c0f26.html" rel="bookmark">博客折腾笔记①-hexo 部署与自定义</a></div>
+      <div class="popular-posts-title"><a href="\posts\c54c0f26.html" rel="bookmark">博客折腾笔记①-hexo部署与自定义</a></div>
     </li>
   </ul>
 
@@ -496,7 +497,7 @@
 
 
 <div class="copyright">
-  &copy; 2019 – 
+  &copy; 2018 – 
   <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>

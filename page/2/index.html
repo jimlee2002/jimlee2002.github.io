@@ -89,6 +89,7 @@
   </style>
 </noscript>
 
+<link rel="alternate" href="/atom.xml" title="Jim's Blog" type="application/atom+xml">
 <style>mjx-container[jax="SVG"] {
   direction: ltr;
 }
@@ -206,8 +207,7 @@ mjx-container[display="true"] {
 mjx-container[display="true"] + br {
   display: none;
 }
-</style><link rel="alternate" href="/atom.xml" title="Jim's Blog" type="application/atom+xml">
-</head>
+</style></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
   <div class="headband"></div>
@@ -248,6 +248,7 @@ mjx-container[display="true"] + br {
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
         <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -446,7 +447,7 @@ mjx-container[display="true"] + br {
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>29 分钟</span>
+      <span>30 分钟</span>
     </span>
 </div>
 
@@ -457,8 +458,8 @@ mjx-container[display="true"] + br {
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>今天重新部署了一次 Hexo，记录一下过程。<br>
-方案：静态页面部署在 gitpage，hexo 文件备份到 github 私有库</p>
+          <p>今天重新部署了一次Hexo，记录一下过程。<br>
+方案：静态页面部署在gitpage，hexo文件备份到github私有库</p>
 <blockquote>
 <p><em><strong>注意：</strong></em><br>
 <strong>博客配置文件</strong>：<code>/_config.yml</code> （位于博客根目录下）<br>
@@ -466,11 +467,11 @@ mjx-container[display="true"] + br {
 请注意区分二者</p>
 </blockquote>
 <h1 id="zhun-bei-gong-zuo">准备工作</h1>
-<p>github 上建一个 xxxx.github.io 的公开仓库和一个私有库<br>
-其中 xxxx 是你的 github 用户名，xxxx.github.io 是博客域名</p>
-<p><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/">hexo 官网</a><br>
-下载安装 <a target="_blank" rel="noopener" href="http://nodejs.org/">Node.js</a>、<a target="_blank" rel="noopener" href="http://git-scm.com/">Git</a>  ，git 配置好信息<br>
-然后 Cmd/Powershell 执行</p>
+<p>github上建一个xxxx.github.io的公开仓库和一个私有库<br>
+其中xxxx是你的github用户名，xxxx.github.io是博客域名</p>
+<p><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/">hexo官网</a><br>
+下载安装<a target="_blank" rel="noopener" href="http://nodejs.org/">Node.js</a>、<a target="_blank" rel="noopener" href="http://git-scm.com/">Git</a>  ，git配置好信息<br>
+然后Cmd/Powershell执行</p>
 <pre><code>npm install -g hexo-cli
 </code></pre>
           <!--noindex-->
@@ -564,7 +565,7 @@ mjx-container[display="true"] + br {
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>3.6k</span>
+      <span>3.7k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -582,17 +583,17 @@ mjx-container[display="true"] + br {
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="biao-ti"><a class="header-anchor" href="#标题">¶</a> 标题</h2>
+          <h2 id="biao-ti" id="标题"><a class="header-anchor" href="#标题"></a>标题</h2>
 <p>两种语法，分别为类 Setext 和类 atx 形式。</p>
-<h3 id="lei-setext-shi"><a class="header-anchor" href="#类-Setext-式">¶</a> 类 Setext 式</h3>
-<p>利用 <code>=</code> 和 <code>-</code>：</p>
+<h3 id="lei-setext-shi" id="类-Setext-式"><a class="header-anchor" href="#类-Setext-式"></a>类 Setext 式</h3>
+<p>利用<code>=</code>和<code>-</code>：</p>
 <pre><code>标题
 =====
 标题
 -----
 </code></pre>
-<h3 id="lei-atx-shi"><a class="header-anchor" href="#类-atx-式">¶</a> 类 atx 式</h3>
-<p>在行首插入 1 到 6 个<code>#</code>, 对应到标题 1 到 6 阶。</p>
+<h3 id="lei-atx-shi" id="类-atx-式"><a class="header-anchor" href="#类-atx-式"></a>类 atx 式</h3>
+<p>在行首插入 1 到 6 个<code>#</code>,对应到标题 1 到 6 阶。</p>
 <pre><code># 标题
 ## 标题
 ### 标题
@@ -668,7 +669,7 @@ mjx-container[display="true"] + br {
 
 
 <div class="copyright">
-  &copy; 2019 – 
+  &copy; 2018 – 
   <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>

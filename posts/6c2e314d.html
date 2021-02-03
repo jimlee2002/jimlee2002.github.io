@@ -26,12 +26,12 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"jiml.ee","root":"/","images":"/images","scheme":"Gemini","version":"8.2.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-<meta name="description" content="¶ 标题 两种语法，分别为类 Setext 和类 atx 形式。 ¶ 类 Setext 式 利用 &#x3D; 和 -： 标题 &#x3D;&#x3D;&#x3D;&#x3D;&#x3D; 标题 -----  ¶ 类 atx 式 在行首插入 1 到 6 个#, 对应到标题 1 到 6 阶。 # 标题 ## 标题 ### 标题 #### 标题 ##### 标题 ###### 标题  也可以 # 标题 # ## 标题 ## ### 标题 ###     注意：">
+<meta name="description" content="标题 两种语法，分别为类 Setext 和类 atx 形式。 类 Setext 式 利用&#x3D;和-： 标题 &#x3D;&#x3D;&#x3D;&#x3D;&#x3D; 标题 -----  类 atx 式 在行首插入 1 到 6 个#,对应到标题 1 到 6 阶。 # 标题 ## 标题 ### 标题 #### 标题 ##### 标题 ###### 标题  也可以 # 标题 # ## 标题 ## ### 标题 ###     注意： 不要忘记#与标题文">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Markdown 语法学习笔记①">
 <meta property="og:url" content="https://jiml.ee/posts/6c2e314d.html">
 <meta property="og:site_name" content="Jim&#39;s Blog">
-<meta property="og:description" content="¶ 标题 两种语法，分别为类 Setext 和类 atx 形式。 ¶ 类 Setext 式 利用 &#x3D; 和 -： 标题 &#x3D;&#x3D;&#x3D;&#x3D;&#x3D; 标题 -----  ¶ 类 atx 式 在行首插入 1 到 6 个#, 对应到标题 1 到 6 阶。 # 标题 ## 标题 ### 标题 #### 标题 ##### 标题 ###### 标题  也可以 # 标题 # ## 标题 ## ### 标题 ###     注意：">
+<meta property="og:description" content="标题 两种语法，分别为类 Setext 和类 atx 形式。 类 Setext 式 利用&#x3D;和-： 标题 &#x3D;&#x3D;&#x3D;&#x3D;&#x3D; 标题 -----  类 atx 式 在行首插入 1 到 6 个#,对应到标题 1 到 6 阶。 # 标题 ## 标题 ### 标题 #### 标题 ##### 标题 ###### 标题  也可以 # 标题 # ## 标题 ## ### 标题 ###     注意： 不要忘记#与标题文">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://i.loli.net/2021/02/03/EBOnPQvCUc46b3i.jpg">
 <meta property="article:published_time" content="2018-01-07T07:10:39.000Z">
@@ -137,6 +137,7 @@
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
         <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -193,7 +194,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#biao-ti"><span class="nav-number">1.</span> <span class="nav-text"> 标题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#lei-setext-shi"><span class="nav-number">1.1.</span> <span class="nav-text"> 类 Setext 式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lei-atx-shi"><span class="nav-number">1.2.</span> <span class="nav-text"> 类 atx 式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#qu-kuai-yin-yong"><span class="nav-number">2.</span> <span class="nav-text"> 区块引用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lie-biao"><span class="nav-number">3.</span> <span class="nav-text"> 列表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#you-xu-lie-biao"><span class="nav-number">3.1.</span> <span class="nav-text"> 有序列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#wu-xu-lie-biao"><span class="nav-number">3.2.</span> <span class="nav-text"> 无序列表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dai-ma-qu-kuai"><span class="nav-number">4.</span> <span class="nav-text"> 代码区块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fen-ge-xian"><span class="nav-number">5.</span> <span class="nav-text"> 分隔线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lian-jie-cha-ru"><span class="nav-number">6.</span> <span class="nav-text"> 链接插入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#xing-nei-shi"><span class="nav-number">6.1.</span> <span class="nav-text"> 行内式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#can-kao-shi"><span class="nav-number">6.2.</span> <span class="nav-text"> 参考式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#wen-zi-chu-li"><span class="nav-number">7.</span> <span class="nav-text"> 文字处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#xie-ti"><span class="nav-number">7.1.</span> <span class="nav-text"> 斜体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jia-cu"><span class="nav-number">7.2.</span> <span class="nav-text"> 加粗</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cu-xie-ti"><span class="nav-number">7.3.</span> <span class="nav-text"> 粗斜体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#shan-chu-xian"><span class="nav-number">7.4.</span> <span class="nav-text"> 删除线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#zhu-jiao"><span class="nav-number">7.5.</span> <span class="nav-text"> 注脚</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dai-ma-biao-ji"><span class="nav-number">7.6.</span> <span class="nav-text"> 代码标记</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tu-pian-cha-ru"><span class="nav-number">8.</span> <span class="nav-text"> 图片插入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#xing-nei-shi-1"><span class="nav-number">8.1.</span> <span class="nav-text"> 行内式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#can-kao-shi-1"><span class="nav-number">8.2.</span> <span class="nav-text"> 参考式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nei-rong-mu-lu-toc"><span class="nav-number">9.</span> <span class="nav-text"> 内容目录（TOC）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#biao-ge"><span class="nav-number">10.</span> <span class="nav-text"> 表格</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dai-ban-shi-xiang-ji-todo-lie-biao"><span class="nav-number">11.</span> <span class="nav-text"> 待办事项及 TODO 列表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zi-dong-lian-jie"><span class="nav-number">12.</span> <span class="nav-text"> 自动链接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fan-xie-gang-yong-fa"><span class="nav-number">13.</span> <span class="nav-text"> 反斜杠用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#html-jian-rong-xing"><span class="nav-number">14.</span> <span class="nav-text">HTML 兼容性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#wen-zhang-guo-chang-zhe-die-hexo-yong"><span class="nav-number">15.</span> <span class="nav-text"> 文章过长折叠 （hexo 用）</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#biao-ti"><span class="nav-number">1.</span> <span class="nav-text">标题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#lei-setext-shi"><span class="nav-number">1.1.</span> <span class="nav-text">类 Setext 式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lei-atx-shi"><span class="nav-number">1.2.</span> <span class="nav-text">类 atx 式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#qu-kuai-yin-yong"><span class="nav-number">2.</span> <span class="nav-text">区块引用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lie-biao"><span class="nav-number">3.</span> <span class="nav-text">列表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#you-xu-lie-biao"><span class="nav-number">3.1.</span> <span class="nav-text">有序列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#wu-xu-lie-biao"><span class="nav-number">3.2.</span> <span class="nav-text">无序列表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dai-ma-qu-kuai"><span class="nav-number">4.</span> <span class="nav-text">代码区块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fen-ge-xian"><span class="nav-number">5.</span> <span class="nav-text">分隔线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lian-jie-cha-ru"><span class="nav-number">6.</span> <span class="nav-text">链接插入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#xing-nei-shi"><span class="nav-number">6.1.</span> <span class="nav-text">行内式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#can-kao-shi"><span class="nav-number">6.2.</span> <span class="nav-text">参考式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#wen-zi-chu-li"><span class="nav-number">7.</span> <span class="nav-text">文字处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#xie-ti"><span class="nav-number">7.1.</span> <span class="nav-text">斜体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jia-cu"><span class="nav-number">7.2.</span> <span class="nav-text">加粗</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cu-xie-ti"><span class="nav-number">7.3.</span> <span class="nav-text">粗斜体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#shan-chu-xian"><span class="nav-number">7.4.</span> <span class="nav-text">删除线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#zhu-jiao"><span class="nav-number">7.5.</span> <span class="nav-text">注脚</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dai-ma-biao-ji"><span class="nav-number">7.6.</span> <span class="nav-text">代码标记</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tu-pian-cha-ru"><span class="nav-number">8.</span> <span class="nav-text">图片插入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#xing-nei-shi-1"><span class="nav-number">8.1.</span> <span class="nav-text">行内式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#can-kao-shi-1"><span class="nav-number">8.2.</span> <span class="nav-text">参考式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nei-rong-mu-lu-toc"><span class="nav-number">9.</span> <span class="nav-text">内容目录（TOC）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#biao-ge"><span class="nav-number">10.</span> <span class="nav-text">表格</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dai-ban-shi-xiang-ji-todo-lie-biao"><span class="nav-number">11.</span> <span class="nav-text">待办事项及 TODO 列表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zi-dong-lian-jie"><span class="nav-number">12.</span> <span class="nav-text">自动链接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fan-xie-gang-yong-fa"><span class="nav-number">13.</span> <span class="nav-text">反斜杠用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#html-jian-rong-xing"><span class="nav-number">14.</span> <span class="nav-text">HTML 兼容性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#wen-zhang-guo-chang-zhe-die-hexo-yong"><span class="nav-number">15.</span> <span class="nav-text">文章过长折叠 （hexo 用）</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -330,7 +331,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>3.6k</span>
+      <span>3.7k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -348,16 +349,16 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h2 id="biao-ti"><a class="header-anchor" href="#标题">¶</a> 标题</h2>
+        <h2 id="biao-ti"><a class="header-anchor" href="#标题"></a>标题</h2>
 <p>两种语法，分别为类 Setext 和类 atx 形式。</p>
-<h3 id="lei-setext-shi"><a class="header-anchor" href="#类-Setext-式">¶</a> 类 Setext 式</h3>
+<h3 id="lei-setext-shi"><a class="header-anchor" href="#类-Setext-式"></a>类 Setext 式</h3>
 <p>利用 <code>=</code> 和 <code>-</code>：</p>
 <pre><code>标题
 =====
 标题
 -----
 </code></pre>
-<h3 id="lei-atx-shi"><a class="header-anchor" href="#类-atx-式">¶</a> 类 atx 式</h3>
+<h3 id="lei-atx-shi"><a class="header-anchor" href="#类-atx-式"></a>类 atx 式</h3>
 <p>在行首插入 1 到 6 个<code>#</code>, 对应到标题 1 到 6 阶。</p>
 <pre><code># 标题
 ## 标题
@@ -376,7 +377,7 @@
 错误示范：<code>##标题</code></p>
 </blockquote>
 <a id="more"></a>
-<h2 id="qu-kuai-yin-yong"><a class="header-anchor" href="#区块引用">¶</a> 区块引用</h2>
+<h2 id="qu-kuai-yin-yong"><a class="header-anchor" href="#区块引用"></a>区块引用</h2>
 <p>使用 <code>&gt;</code></p>
 <pre><code>&gt; 一些文字
 </code></pre>
@@ -395,7 +396,7 @@
 &gt; 
 &gt;     return shell_exec("echo $input | $markdown_script");
 </code></pre>
-<h2 id="lie-biao"><a class="header-anchor" href="#列表">¶</a> 列表</h2>
+<h2 id="lie-biao"><a class="header-anchor" href="#列表"></a>列表</h2>
 <p>分为有序列表与无序列表。<br>
 如果列表项目间用空行分开，那么中间内容将不会被列表项包括在内。</p>
 <pre><code>* 列表项
@@ -410,13 +411,13 @@
 <pre><code>* 列表项
         &lt;codehere&gt;
 </code></pre>
-<h3 id="you-xu-lie-biao"><a class="header-anchor" href="#有序列表">¶</a> 有序列表</h3>
+<h3 id="you-xu-lie-biao"><a class="header-anchor" href="#有序列表"></a>有序列表</h3>
 <p>使用 <code>*</code>,<code>+</code> 和 <code>-</code> 标记</p>
 <pre><code>* 列表项
 + 列表项
 - 列表项
 </code></pre>
-<h3 id="wu-xu-lie-biao"><a class="header-anchor" href="#无序列表">¶</a> 无序列表</h3>
+<h3 id="wu-xu-lie-biao"><a class="header-anchor" href="#无序列表"></a>无序列表</h3>
 <p>使用<strong>数字加英文句点<code>.</code> 的方式</strong></p>
 <pre><code>1. 列表项
 2. 列表项
@@ -431,14 +432,14 @@
 eg:<code>1986\. What a great season.</code></li>
 </ol>
 </blockquote>
-<h2 id="dai-ma-qu-kuai"><a class="header-anchor" href="#代码区块">¶</a> 代码区块</h2>
+<h2 id="dai-ma-qu-kuai"><a class="header-anchor" href="#代码区块"></a>代码区块</h2>
 <p>只需简单地缩进一格（或四个空格）即可</p>
 <p>这是文字</p>
 <pre><code>这是代码
 </code></pre>
 <p>一个代码区块会一直持续到没有缩进的那一行（或是文件结尾）。</p>
 <p>同时，在代码区块中，一般的 Markdown 语法不会被转换。</p>
-<h2 id="fen-ge-xian"><a class="header-anchor" href="#分隔线">¶</a> 分隔线</h2>
+<h2 id="fen-ge-xian"><a class="header-anchor" href="#分隔线"></a>分隔线</h2>
 <p>使用三个以上的 <code>*</code>、<code>-</code>、<code>_</code>来建立一个分隔线，可以在星号或是减号中间插入空格，但注意行内不能有其他东西</p>
 <pre><code>文字
 ***
@@ -455,16 +456,16 @@ ___
 文字
 * * *
 </code></pre>
-<h2 id="lian-jie-cha-ru"><a class="header-anchor" href="#链接插入">¶</a> 链接插入</h2>
+<h2 id="lian-jie-cha-ru"><a class="header-anchor" href="#链接插入"></a>链接插入</h2>
 <p>Markdown 支持两种形式的链接语法： 行内式和参考式两种形式。<br>
 不管是哪一种，链接文字都是用 <code>[]</code> 来标记。</p>
-<h3 id="xing-nei-shi"><a class="header-anchor" href="#行内式">¶</a> 行内式</h3>
+<h3 id="xing-nei-shi"><a class="header-anchor" href="#行内式"></a>行内式</h3>
 <p>使用方括号 <code>[]</code> 括住所需加链接的文字，并在后面以圆括号 <code>()</code> 形式插入链接（可以是相对路径）。<br>
 如需加入链接描述 (链接的 title 文字) 只需在圆括号中的链接后以 <code>""</code> 包起文字即可。</p>
 <pre><code>这是一个[链接](https://xsllen.tk)
 这是一个有名字的[链接](https://xsllen.tk "Jim's Blog")
 </code></pre>
-<h3 id="can-kao-shi"><a class="header-anchor" href="#参考式">¶</a> 参考式</h3>
+<h3 id="can-kao-shi"><a class="header-anchor" href="#参考式"></a>参考式</h3>
 <p>使用方括号 <code>[]</code> 括住所需加链接的文字，并在后面再接上一个方括号 <code>[]</code> 进行用于辨识链接的标记。<br>
 你也可以选择性地在两个方括号中间加上一个空格。</p>
 <pre><code>这是一个[链接][1]
@@ -510,25 +511,25 @@ ___
 [yahoo]:  http://search.yahoo.com/  "Yahoo Search"
 [msn]:    http://search.msn.com/    "MSN Search"
 </code></pre>
-<h2 id="wen-zi-chu-li"><a class="header-anchor" href="#文字处理">¶</a> 文字处理</h2>
-<h3 id="xie-ti"><a class="header-anchor" href="#斜体">¶</a> 斜体</h3>
+<h2 id="wen-zi-chu-li"><a class="header-anchor" href="#文字处理"></a>文字处理</h2>
+<h3 id="xie-ti"><a class="header-anchor" href="#斜体"></a>斜体</h3>
 <p>使用一个 <code>*</code> 或<code>_</code>符号将文字包围起来。</p>
 <pre><code>*斜体文字*
 _斜体文字_
 </code></pre>
-<h3 id="jia-cu"><a class="header-anchor" href="#加粗">¶</a> 加粗</h3>
+<h3 id="jia-cu"><a class="header-anchor" href="#加粗"></a>加粗</h3>
 <p>使用两个 <code>*</code> 或<code>_</code>符号将文字包围起来。</p>
 <pre><code>**加粗文字**
 __加粗文字__
 </code></pre>
-<h3 id="cu-xie-ti"><a class="header-anchor" href="#粗斜体">¶</a> 粗斜体</h3>
+<h3 id="cu-xie-ti"><a class="header-anchor" href="#粗斜体"></a>粗斜体</h3>
 <p>使用三个 <code>*</code> 或<code>_</code>符号将文字包围起来。</p>
 <pre><code>***粗斜体文字***
 </code></pre>
-<h3 id="shan-chu-xian"><a class="header-anchor" href="#删除线">¶</a> 删除线</h3>
+<h3 id="shan-chu-xian"><a class="header-anchor" href="#删除线"></a>删除线</h3>
 <p>使用两个 <code>~</code> 符号将文字包围起来。<br>
 <s>带删除线的文字</s></p>
-<h3 id="zhu-jiao"><a class="header-anchor" href="#注脚">¶</a> 注脚</h3>
+<h3 id="zhu-jiao"><a class="header-anchor" href="#注脚"></a>注脚</h3>
 <p>使用 <code>[^keyword]</code> 表示注脚，并在文本的任意地方对该注脚定义（类似与参考式）<br>
 示例：</p>
 <pre><code>这里有一个注脚[^footnote]。
@@ -539,7 +540,7 @@ __加粗文字__
 <blockquote>
 <p><strong>注意：</strong> 使用什么符号开启标签，就要用什么符号结束。</p>
 </blockquote>
-<h3 id="dai-ma-biao-ji"><a class="header-anchor" href="#代码标记">¶</a> 代码标记</h3>
+<h3 id="dai-ma-biao-ji"><a class="header-anchor" href="#代码标记"></a>代码标记</h3>
 <p>使用反引号 <code>`</code> 将代码文字包起.</p>
 <pre><code>`&lt;code&gt;code here!&lt;/code&gt;`
 </code></pre>
@@ -560,9 +561,9 @@ __加粗文字__
 <li>在代码区段内，&amp; 和方括号都会被<strong>自动地转成 HTML 实体</strong>。</li>
 </ul>
 </blockquote>
-<h2 id="tu-pian-cha-ru"><a class="header-anchor" href="#图片插入">¶</a> 图片插入</h2>
+<h2 id="tu-pian-cha-ru"><a class="header-anchor" href="#图片插入"></a>图片插入</h2>
 <p>与链接插入类似，同样包括两种方式： 行内式与参考式。</p>
-<h3 id="xing-nei-shi-1"><a class="header-anchor" href="#行内式-2">¶</a> 行内式</h3>
+<h3 id="xing-nei-shi-1"><a class="header-anchor" href="#行内式-2"></a>行内式</h3>
 <p>使用 <code>![alt text](图片网址)</code><br>
 还可以加上图片描述（title 文字）<br>
 <code>![alt text](图片网址 "描述文字")</code><br>
@@ -570,7 +571,7 @@ __加粗文字__
 <pre><code>![alt text](https://i.loli.net/2021/02/03/EBOnPQvCUc46b3i.jpg ":)")
 </code></pre>
 <p>效果：<img data-src="https://i.loli.net/2021/02/03/EBOnPQvCUc46b3i.jpg" alt="alt text" title=":)"></p>
-<h3 id="can-kao-shi-1"><a class="header-anchor" href="#参考式-2">¶</a> 参考式</h3>
+<h3 id="can-kao-shi-1"><a class="header-anchor" href="#参考式-2"></a>参考式</h3>
 <p>使用 <code>![alt text][id]</code><br>
 「id」是图片参考的名称，图片参考的定义方式则和连结参考一样：</p>
 <pre><code>[id]: 图片路径 "描述文字"
@@ -578,12 +579,12 @@ __加粗文字__
 <blockquote>
 <p><strong>注意：</strong> 到目前为止， Markdown 还没有办法指定图片的宽高，需要的话可使用普通的 <strong><code>&lt;img&gt;</code></strong> 标签</p>
 </blockquote>
-<h2 id="nei-rong-mu-lu-toc"><a class="header-anchor" href="#内容目录（TOC）">¶</a> 内容目录（TOC）</h2>
+<h2 id="nei-rong-mu-lu-toc"><a class="header-anchor" href="#内容目录（TOC）"></a>内容目录（TOC）</h2>
 <p><s>（emmmmmm，对于 hexo 来说没什么卵用……）</s><br>
 在段落中填写 <code>[TOC]</code> 以显示全文内容的目录结构。</p>
 <p>效果：<br>
 [TOC]</p>
-<h2 id="biao-ge"><a class="header-anchor" href="#表格">¶</a> 表格</h2>
+<h2 id="biao-ge"><a class="header-anchor" href="#表格"></a>表格</h2>
 <p>示例：</p>
 <figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">| 项目        | 价格   |  数量  |</span><br><span class="line">| --------   | -----:  | :----:  |</span><br><span class="line">| 计算机     | \$1600 |   5     |</span><br><span class="line">| 手机        |   \$12   |   12   |</span><br><span class="line">| 管线        |    \$1    |  234  |</span><br></pre></td></tr></tbody></table></figure>
 <p>效果：</p>
@@ -613,7 +614,7 @@ __加粗文字__
 </tr>
 </tbody>
 </table>
-<h2 id="dai-ban-shi-xiang-ji-todo-lie-biao"><a class="header-anchor" href="#待办事项及TODO列表">¶</a> 待办事项及 TODO 列表</h2>
+<h2 id="dai-ban-shi-xiang-ji-todo-lie-biao"><a class="header-anchor" href="#待办事项及TODO列表"></a>待办事项及 TODO 列表</h2>
 <p>使用带有 <code>- [ ]</code>（未完成） 或 <code>- [x]</code>（已完成）项的列表语法撰写一个待办事宜列表，并且支持子列表嵌套以及混用 Markdown 语法。<br>
 示例：</p>
 <pre><code>- [ ] 写一个个人主页
@@ -622,9 +623,9 @@ __加粗文字__
 <p>效果：</p>
 <ul>
 <li><input type="checkbox" id="checkbox0"><label for="checkbox0">写一个个人主页</label></li>
-<li><input type="checkbox" id="checkbox1" checked="true"><label for="checkbox1">写一个 Maekdown 学习笔记 </label></li>
+<li><input type="checkbox" id="checkbox1" checked="true"><label for="checkbox1">写一个 Maekdown 学习笔记</label></li>
 </ul>
-<h2 id="zi-dong-lian-jie"><a class="header-anchor" href="#自动链接">¶</a> 自动链接</h2>
+<h2 id="zi-dong-lian-jie"><a class="header-anchor" href="#自动链接"></a>自动链接</h2>
 <p>Markdown 支持以比较简短的自动链接形式来处理网址和电子邮件信箱，只需用方括号括起即可，Markdown 就会自动把它转成链接。</p>
 <pre><code>&lt;http://example.com/&gt;
 &lt;address@example.com&gt;
@@ -632,7 +633,7 @@ __加粗文字__
 <p>效果：<br>
 <a target="_blank" rel="noopener" href="http://example.com/">http://example.com/</a><br>
 <a href="mailto:address@example.com">address@example.com</a></p>
-<h2 id="fan-xie-gang-yong-fa"><a class="header-anchor" href="#反斜杠用法">¶</a> 反斜杠用法</h2>
+<h2 id="fan-xie-gang-yong-fa"><a class="header-anchor" href="#反斜杠用法"></a>反斜杠用法</h2>
 <p>Markdown 可以利用反斜杠来插入一些在语法中有其它意义的符号，例如：如果你想要用星号加在文字旁边的方式来做出强调效果（但不用 <code>&lt;em&gt;</code> 标签），你可以在星号的前面加上反斜杠：</p>
 <pre><code>\*literal asterisks\*
 </code></pre>
@@ -650,13 +651,13 @@ _   底线
 .   英文句点
 !   惊叹号
 </code></pre>
-<h2 id="html-jian-rong-xing"><a class="header-anchor" href="#HTML兼容性">¶</a>HTML 兼容性</h2>
+<h2 id="html-jian-rong-xing"><a class="header-anchor" href="#HTML兼容性"></a>HTML 兼容性</h2>
 <ol>
 <li>Markdown 文档内可任意使用 html 语句。<br>
 （你想在 Markdown 文档里码 HTML 也没问题的 233）</li>
 <li>Markdown 文档会对特殊字符自动转换，如 <code>&lt;</code> 和 <code>&amp;</code>。</li>
 </ol>
-<h2 id="wen-zhang-guo-chang-zhe-die-hexo-yong"><a class="header-anchor" href="#文章过长折叠-（hexo用）">¶</a> 文章过长折叠 （hexo 用）</h2>
+<h2 id="wen-zhang-guo-chang-zhe-die-hexo-yong"><a class="header-anchor" href="#文章过长折叠-（hexo用）"></a>文章过长折叠 （hexo 用）</h2>
 <p>使用 <code>&lt;!--more--&gt;</code></p>
 <blockquote>
 <p><strong>注意：</strong> <em>hexo-renderer-markdown-it</em> 不支持</p>
@@ -750,7 +751,7 @@ _   底线
 
 
 <div class="copyright">
-  &copy; 2019 – 
+  &copy; 2018 – 
   <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
