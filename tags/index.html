@@ -135,6 +135,7 @@
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
         <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+        <li class="menu-item menu-item-留言"><a href="/guestbook/" rel="section"><i class="fa fa-book fa-fw"></i>留言</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -206,20 +207,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-count">13</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -280,10 +281,10 @@
       
       <div class="post-body"><div class="tag-cloud">
   <div class="tag-cloud-title">
-    目前共计 10 个标签
+    目前共计 12 个标签
   </div>
   <div class="tag-cloud-tags">
-    <a href="/tags/Android/" style="font-size: 12px;" class="tag-cloud-0">Android</a> <a href="/tags/Markdown/" style="font-size: 12px;" class="tag-cloud-0">Markdown</a> <a href="/tags/MentoHUST/" style="font-size: 18px;" class="tag-cloud-3">MentoHUST</a> <a href="/tags/OpenWrt/" style="font-size: 24px;" class="tag-cloud-7">OpenWrt</a> <a href="/tags/Tasker/" style="font-size: 12px;" class="tag-cloud-0">Tasker</a> <a href="/tags/WSL/" style="font-size: 12px;" class="tag-cloud-0">WSL</a> <a href="/tags/WTG/" style="font-size: 12px;" class="tag-cloud-0">WTG</a> <a href="/tags/hexo/" style="font-size: 30px;" class="tag-cloud-10">hexo</a> <a href="/tags/%E5%9B%BE%E5%BA%8A/" style="font-size: 12px;" class="tag-cloud-0">图床</a> <a href="/tags/%E7%A7%BB%E5%8A%A8%E7%A1%AC%E7%9B%98/" style="font-size: 12px;" class="tag-cloud-0">移动硬盘</a>
+    <a href="/tags/Android/" style="font-size: 12px;" class="tag-cloud-0">Android</a> <a href="/tags/Linux/" style="font-size: 12px;" class="tag-cloud-0">Linux</a> <a href="/tags/Markdown/" style="font-size: 12px;" class="tag-cloud-0">Markdown</a> <a href="/tags/MentoHUST/" style="font-size: 21px;" class="tag-cloud-5">MentoHUST</a> <a href="/tags/OpenWrt/" style="font-size: 25.5px;" class="tag-cloud-8">OpenWrt</a> <a href="/tags/Tasker/" style="font-size: 12px;" class="tag-cloud-0">Tasker</a> <a href="/tags/WSL/" style="font-size: 16.5px;" class="tag-cloud-3">WSL</a> <a href="/tags/WTG/" style="font-size: 12px;" class="tag-cloud-0">WTG</a> <a href="/tags/hexo/" style="font-size: 30px;" class="tag-cloud-10">hexo</a> <a href="/tags/%E5%9B%BE%E5%BA%8A/" style="font-size: 12px;" class="tag-cloud-0">图床</a> <a href="/tags/%E7%A7%BB%E5%8A%A8%E7%A1%AC%E7%9B%98/" style="font-size: 12px;" class="tag-cloud-0">移动硬盘</a> <a href="/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" style="font-size: 25.5px;" class="tag-cloud-8">路由器</a>
   </div>
 </div>
 
@@ -534,6 +535,16 @@ if (document.querySelectorAll('.mermaid').length) {
 
     <div class="pjax">
 
+  <script src="https://cdn.jsdelivr.net/npm/quicklink@2.0.0/dist/quicklink.umd.js"></script>
+  <script>
+      window.addEventListener('load', () => {
+      quicklink.listen({
+        timeout : 3000,
+        priority: true,
+        ignores : [uri => uri.includes('#'),uri => uri === 'https://jiml.ee/tags/',]
+      });
+      });
+  </script>
 <script>
 NexT.utils.loadComments('#twikoo-comments', () => {
   NexT.utils.getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js', () => {

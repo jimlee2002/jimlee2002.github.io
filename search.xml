@@ -48,7 +48,7 @@
 <p><strong>文章信息头 &gt; <code>_config.yml</code> (站点根目录下的) &gt; 默认配置</strong></p>
 ]]></content>
       <categories>
-        <category>笔记</category>
+        <category>折腾笔记</category>
       </categories>
       <tags>
         <tag>hexo</tag>
@@ -104,7 +104,62 @@
 </ul>
 ]]></content>
       <categories>
-        <category>笔记</category>
+        <category>折腾笔记</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>博客折腾笔记⑤- 修整、更新与展望</title>
+    <url>/posts/b1b3bd39.html</url>
+    <content><![CDATA[<p>真的好久没打理博客了。虽然偶尔也会在摸鱼的日子里想着 “稍微试着往那个吃灰的博客上写点东西吧”，但很快又把写博客这事给忘记了。终于在最近，我又提起了写博客的兴致，趁着刚好有空，着手把博客更新修整了一番。</p>
+<a id="more"></a>
+<h1 id="bo-ke-de-geng-xin-xiu-zheng">博客的更新修整</h1>
+<h2 id="bang-ding-yu-ming"><a class="header-anchor" href="#绑定域名"></a>绑定域名</h2>
+<p>这次折腾，干的第一件事就是给博客绑了个域名。</p>
+<p>一开始打算的是在腾讯云或者阿里云上随便注册一个便宜域名的，偶然发现还有一个契合我名字的创意域名 <code>jiml.ee</code> 可以注册。网上搜了一圈，<code>.ee</code> 后缀比较冷门，国内只有一个没听说过的注册商提供注册。价格虽然比腾讯云上的便宜域名贵些，但价格还可以接受。尽管<code>.ee</code> 现在没办法备案，作为 ccTLD 也有许多不稳定因素，但自己实在是太喜欢这个域名了，最后咬咬牙还是注册了 <code>jiml.ee</code> 这个域名。</p>
+<p>注册完域名，我把它挂到了 DnsPod 上解析。考虑到 Github Pages 在国内的访问并不理想，一开始打算托管到之前就用过的 Netlify 上绑域名。但实际体验下来，Netlify 目前在国内的打开速度实在不比 Github Pages 快多少，于是在一波寻找后，转用与 Netlify 相似，但国内访问更快的 Vercel 部署托管。虽然国内访问速度仍然谈不上多快，但已经比 Github Pages 上好上不少了。等以后经济充裕了，再考虑托管到国内的对象储存或者用七牛 / 又拍加速，弄个双线部署吧。</p>
+<h2 id="geng-xin-hexo-he-nex-t"><a class="header-anchor" href="#更新-Hexo-和-NexT"></a>更新 Hexo 和 NexT</h2>
+<p>许久不见，Hexo 的版本号已经来到了 5.0+，NexT 也已经更到了 8.2.1。</p>
+<p>5.0 的 Hexo 引入了独立的主题配置文件，新版本的 NexT 也提供了 <code>npm</code> 的安装方式，这比原来用 <code>git</code> 安装要方便可靠多了，备份好旧有主题配置后果断用 <code>npm</code> 重装 NexT。</p>
+<p>之后就是对着最新的主题配置文件合并原有主题设置了。在重新配置主题的过程中，还顺带启用了 Pangu 和 Quicklink。</p>
+<h2 id="qian-yi-ping-lun-xi-tong-zhi-twikoo"><a class="header-anchor" href="#迁移评论系统至-Twikoo"></a>迁移评论系统至 Twikoo</h2>
+<p>了解到旧有评论系统 Valine 存在的安全问题，把博客的评论系统迁移到了 <a href="https://twikoo.js.org/">Twikoo</a> 上，在引入 Akismet 反垃圾服务的同时配置了博客评论的邮件提醒。</p>
+<h2 id="xin-de-cha-jian"><a class="header-anchor" href="#新的插件"></a>新的插件</h2>
+<ul>
+<li><code>hexo-excerpt</code>：从 v7.6.0 开始 NexT 移除了主题自带的文章摘要折叠。参照指南，安装这个插件实现自动折叠功能。</li>
+<li><code>markdown-it-named-headings</code>：解决 <code>hexo-renderer-markdown-it</code> 在 NexT 上 TOC 显示异常的问题。</li>
+<li>更新 <code>hexo-blog-encrypt</code>：现在可以设置加密特定标签的页面了。</li>
+</ul>
+<h2 id="yi-chu-ge-ren-dong-tai-jie-mian-i-m"><a class="header-anchor" href="#移除个人动态界面-iM"></a>移除个人动态界面 iM</h2>
+<p>尽管先前我在安卓上设法制作了一个发送动态的 Tasker 工程，但由于其使用上仍存在各种不便与问题，我逐渐地不再使用它记录个人动态了。</p>
+<p>如果你对制作一个个人动态页面感兴趣，不妨试试这些项目：</p>
+<ul>
+<li>
+<p><a href="https://bb.js.org/">BBtalk 中文文档</a></p>
+</li>
+<li>
+<p><a href="https://artitalk.js.org/">Artitalk.js</a></p>
+</li>
+</ul>
+<blockquote>
+<p>现在，我主要使用 <a href="flomo.app">浮墨笔记 Flomo</a> 记录每天的琐碎想法。首先，它更隐秘，只有自己可见；同时，它基于 PWA，在各个平台只需浏览器就能方便的发送内容，还能通过微信公众号随时发送想法；在内容上，它支持插入图片、插入列表、简单地加粗或添加下划线，同时能够加入标签，通过标签组织管理起自己的所思所想…… 这些闪光点是我选择它的原因 —— 它真的完美满足了目前的我对自我记录的所有需求。<br>
+最重要的是，上面的这些功能都是免费的！付费开通会员后，你还能享受每日回顾、随机漫步、API、数据导出等附加功能。如果你对它感兴趣，不妨通过我的<a href="https://flomoapp.com/register2/?MzIwMjA">邀请链接</a>试试看！</p>
+</blockquote>
+<h2 id="xin-zeng-ye-mian"><a class="header-anchor" href="#新增页面"></a>新增页面</h2>
+<p>既然都挂了域名了，博客也自然得正式点了。</p>
+<ul>
+<li><strong><a href="/about">关于</a></strong>：作为个人站点，一个简短的自我介绍还是要有的。😆</li>
+<li><strong><a href="/guestbook">留言</a></strong>：有什么想说的，欢迎在这里留言！🍻</li>
+</ul>
+<h1 id="zhan-wang">展望</h1>
+<p>过去的一年里经历了太多太多。回顾我跌宕起伏的 2020，愈发觉得自己需要进行更多的记录与写作。在新的一年里，我打算好好地在博客上写些东西，内容也不会再局限于先前简单的折腾笔记，从今往后还会发自己的作品、一些思考见解，以及更生活化的个人记录。</p>
+<p>无论如何，不能再让折腾了这么久的博客吃灰了，希望新的一年里我不会再咕咕咕下去吧！</p>
+<p>你好，2021！你好，<a href="jiml.ee">jiml.ee</a>！</p>
+]]></content>
+      <categories>
+        <category>折腾笔记</category>
       </categories>
       <tags>
         <tag>hexo</tag>
@@ -330,11 +385,7 @@ __加粗文字__
 <h3 id="xing-nei-shi-1"><a class="header-anchor" href="#行内式-2"></a>行内式</h3>
 <p>使用 <code>![alt text](图片网址)</code><br>
 还可以加上图片描述（title 文字）<br>
-<code>![alt text](图片网址 "描述文字")</code><br>
-示例：</p>
-<pre><code>![alt text](https://i.loli.net/2021/02/03/EBOnPQvCUc46b3i.jpg ":)")
-</code></pre>
-<p>效果：<img data-src="https://i.loli.net/2021/02/03/EBOnPQvCUc46b3i.jpg" alt="alt text" title=":)"></p>
+<code>![alt text](图片网址 "描述文字")</code></p>
 <h3 id="can-kao-shi-1"><a class="header-anchor" href="#参考式-2"></a>参考式</h3>
 <p>使用 <code>![alt text][id]</code><br>
 「id」是图片参考的名称，图片参考的定义方式则和连结参考一样：</p>
@@ -344,8 +395,7 @@ __加粗文字__
 <p><strong>注意：</strong> 到目前为止， Markdown 还没有办法指定图片的宽高，需要的话可使用普通的 <strong><code>&lt;img&gt;</code></strong> 标签</p>
 </blockquote>
 <h2 id="nei-rong-mu-lu-toc"><a class="header-anchor" href="#内容目录（TOC）"></a>内容目录（TOC）</h2>
-<p><s>（emmmmmm，对于 hexo 来说没什么卵用……）</s><br>
-在段落中填写 <code>[TOC]</code> 以显示全文内容的目录结构。</p>
+<p>在段落中填写 <code>[TOC]</code> 以显示全文内容的目录结构。</p>
 <p>效果：<br>
 [TOC]</p>
 <h2 id="biao-ge"><a class="header-anchor" href="#表格"></a>表格</h2>
@@ -423,9 +473,6 @@ _   底线
 </ol>
 <h2 id="wen-zhang-guo-chang-zhe-die-hexo-yong"><a class="header-anchor" href="#文章过长折叠-（hexo用）"></a>文章过长折叠 （hexo 用）</h2>
 <p>使用 <code>&lt;!--more--&gt;</code></p>
-<blockquote>
-<p><strong>注意：</strong> <em>hexo-renderer-markdown-it</em> 不支持</p>
-</blockquote>
 <hr class="footnotes-sep">
 <section class="footnotes">
 <ol class="footnotes-list">
@@ -435,7 +482,7 @@ _   底线
 </section>
 ]]></content>
       <categories>
-        <category>笔记</category>
+        <category>学习笔记</category>
       </categories>
       <tags>
         <tag>Markdown</tag>
@@ -529,45 +576,13 @@ _   底线
 </ul>
 ]]></content>
       <categories>
-        <category>笔记</category>
+        <category>折腾笔记</category>
       </categories>
       <tags>
         <tag>OpenWrt</tag>
         <tag>MentoHUST</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>编译适用于 X86 的 MentoHUST</title>
-    <url>/posts/5ed2bcfa.html</url>
-    <content><![CDATA[<h1 id="zhun-bei-gong-zuo">准备工作</h1>
-<p>以下所以操作都基于 <code>/home</code> 进行，用户名为 <code>jim</code>。</p>
-<h2 id="an-zhuang-xiang-guan-yi-lai"><a class="header-anchor" href="#安装相关依赖"></a>安装相关依赖</h2>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">sudo apt install build-essential bison flex zlib1g-dev libncurses5-dev subversion quilt intltool ruby fastjar unzip gawk autogen autopoint ccache gettext libssl-dev xsltproc zip git</span><br></pre></td></tr></tbody></table></figure>
-<a id="more"></a>
-<h2 id="huo-qu-libpcab-yuan-ma"><a class="header-anchor" href="#获取libpcab源码"></a>获取 libpcab 源码</h2>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">wget https://www.tcpdump.org/release/libpcap-1.9.1.tar.gz -O libpcap.tar.gz</span><br><span class="line">tar -xzf libpcap.tar.gz</span><br><span class="line">mv libpcap-1.9.1 libpcap</span><br><span class="line">rm libpcap.tar.gz</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="huo-qu-mento-hust-yuan-ma"><a class="header-anchor" href="#获取MentoHUST源码"></a>获取 MentoHUST 源码</h2>
-<p>以 <a href="https://github.com/hyrathb">@hyrathb</a> 的 <a href="https://github.com/hyrathb/mentohust">MentoHUST</a> 为例：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/hyrathb/mentohust.git mentohust</span><br></pre></td></tr></tbody></table></figure>
-<h1 id="jin-xing-bian-yi">进行编译</h1>
-<h2 id="bian-yi-libpcab"><a class="header-anchor" href="#编译libpcab"></a>编译 libpcab</h2>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> libpcap</span><br><span class="line">./configure --prefix=/home --with-pcap=linux</span><br><span class="line">make</span><br></pre></td></tr></tbody></table></figure>
-<p><code>make</code> 部分，<strong>只要看到 <code>ranlib libpcap.a</code> 没有出错即可</strong>，不用理会 <code>libpcap.so</code> 是否出错。</p>
-<p>完成后，应能在 <code>/home/libpcap</code> 下看到 <code>libpcap.a</code>。</p>
-<h2 id="bian-yi-mento-hust"><a class="header-anchor" href="#编译MentoHUST"></a>编译 MentoHUST</h2>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> mentohust</span><br><span class="line">sh autogen.sh</span><br><span class="line">./configure --disable-encodepass --disable-notify --with-pcap=/home/jim/libpcap/libpcap.a</span><br><span class="line">make</span><br></pre></td></tr></tbody></table></figure>
-<p>执行成功后即可在 <code>/home/mentohust/src</code> 下获取到所需的 <code>mentohust</code> 二进制文件了。</p>
-<h1 id="can-kao-wen-zhang">参考文章</h1>
-<ul>
-<li><a href="https://github.com/KumaTea/MentoHUST-SYSU-Guide/blob/master/Guide.md">支持锐捷认证与 IPv6 的路由器配置指南：以 K2P 为例</a></li>
-<li><a href="https://blog.csdn.net/warriorpaw/article/details/7990226">交叉编译 mentohust 实现锐捷认证共享上网</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>笔记</category>
-      </categories>
-      <tags>
-        <tag>MentoHUST</tag>
+        <tag>路由器</tag>
+        <tag>WSL</tag>
       </tags>
   </entry>
   <entry>
@@ -599,7 +614,7 @@ _   底线
 <ol>
 <li>
 <p>在 <code>/etc/init.d/</code> 下新建文件 <code>mentohust</code>，打开编辑，复制以下代码：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh /etc/rc.common</span></span><br><span class="line"><span class="comment"># Example script</span></span><br><span class="line"><span class="comment"># Copyright (C) 2007 OpenWrt.org</span></span><br><span class="line"> </span><br><span class="line">START=99</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="title">start</span></span>() {        </span><br><span class="line">        <span class="built_in">echo</span> start</span><br><span class="line">        /etc/mentohust</span><br><span class="line">} </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">stop</span></span>() {        </span><br><span class="line">     	<span class="built_in">echo</span> start</span><br><span class="line">        /etc/mentohust -k</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight shell"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">   #</span><span class="bash">!/bin/sh /etc/rc.common</span></span><br><span class="line"><span class="meta">   #</span><span class="bash"> Example script</span></span><br><span class="line"><span class="meta">   #</span><span class="bash"> Copyright (C) 2007 OpenWrt.org</span></span><br><span class="line"> </span><br><span class="line">   START=99</span><br><span class="line"><span class="meta">#</span><span class="bash">STOP=15</span></span><br><span class="line">    </span><br><span class="line">   start() {        </span><br><span class="line">           echo start</span><br><span class="line">           /etc/mentohust</span><br><span class="line">   } </span><br><span class="line"></span><br><span class="line">   stop() {        </span><br><span class="line">        echo start</span><br><span class="line">           /etc/mentohust -k</span><br><span class="line">   }</span><br></pre></td></tr></tbody></table></figure>
 <p>保存后退出。</p>
 <p>你也可以在主机上预先创建好这一文件，在主机保存后使用 WinSCP 上传至路由器 <code>/etc/init.d/</code> 下</p>
 </li>
@@ -615,11 +630,203 @@ _   底线
 <p>自此，路由器将会在每次开机时自动运行 MentoHUST 以进行认证。</p>
 ]]></content>
       <categories>
-        <category>笔记</category>
+        <category>折腾笔记</category>
       </categories>
       <tags>
         <tag>OpenWrt</tag>
         <tag>MentoHUST</tag>
+        <tag>路由器</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>编译适用于 X86 的 MentoHUST</title>
+    <url>/posts/5ed2bcfa.html</url>
+    <content><![CDATA[<h1 id="zhun-bei-gong-zuo">准备工作</h1>
+<p>以下所以操作都基于 <code>/home</code> 进行，用户名为 <code>jim</code>。</p>
+<h2 id="an-zhuang-xiang-guan-yi-lai"><a class="header-anchor" href="#安装相关依赖"></a>安装相关依赖</h2>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">sudo apt install build-essential bison flex zlib1g-dev libncurses5-dev subversion quilt intltool ruby fastjar unzip gawk autogen autopoint ccache gettext libssl-dev xsltproc zip git</span><br></pre></td></tr></tbody></table></figure>
+<a id="more"></a>
+<h2 id="huo-qu-libpcab-yuan-ma"><a class="header-anchor" href="#获取libpcab源码"></a>获取 libpcab 源码</h2>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">wget https://www.tcpdump.org/release/libpcap-1.9.1.tar.gz -O libpcap.tar.gz</span><br><span class="line">tar -xzf libpcap.tar.gz</span><br><span class="line">mv libpcap-1.9.1 libpcap</span><br><span class="line">rm libpcap.tar.gz</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="huo-qu-mento-hust-yuan-ma"><a class="header-anchor" href="#获取MentoHUST源码"></a>获取 MentoHUST 源码</h2>
+<p>以 <a href="https://github.com/hyrathb">@hyrathb</a> 的 <a href="https://github.com/hyrathb/mentohust">MentoHUST</a> 为例：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/hyrathb/mentohust.git mentohust</span><br></pre></td></tr></tbody></table></figure>
+<h1 id="jin-xing-bian-yi">进行编译</h1>
+<h2 id="bian-yi-libpcab"><a class="header-anchor" href="#编译libpcab"></a>编译 libpcab</h2>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> libpcap</span><br><span class="line">./configure --prefix=/home --with-pcap=linux</span><br><span class="line">make</span><br></pre></td></tr></tbody></table></figure>
+<p><code>make</code> 部分，<strong>只要看到 <code>ranlib libpcap.a</code> 没有出错即可</strong>，不用理会 <code>libpcap.so</code> 是否出错。</p>
+<p>完成后，应能在 <code>/home/libpcap</code> 下看到 <code>libpcap.a</code>。</p>
+<h2 id="bian-yi-mento-hust"><a class="header-anchor" href="#编译MentoHUST"></a>编译 MentoHUST</h2>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> mentohust</span><br><span class="line">sh autogen.sh</span><br><span class="line">./configure --disable-encodepass --disable-notify --with-pcap=/home/jim/libpcap/libpcap.a</span><br><span class="line">make</span><br></pre></td></tr></tbody></table></figure>
+<p>执行成功后即可在 <code>/home/mentohust/src</code> 下获取到所需的 <code>mentohust</code> 二进制文件了。</p>
+<h1 id="can-kao-wen-zhang">参考文章</h1>
+<ul>
+<li><a href="https://github.com/KumaTea/MentoHUST-SYSU-Guide/blob/master/Guide.md">支持锐捷认证与 IPv6 的路由器配置指南：以 K2P 为例</a></li>
+<li><a href="https://blog.csdn.net/warriorpaw/article/details/7990226">交叉编译 mentohust 实现锐捷认证共享上网</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>折腾笔记</category>
+      </categories>
+      <tags>
+        <tag>MentoHUST</tag>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>博客折腾笔记④- 使用 Tasker 在 Android 上实现个人动态的发送</title>
+    <url>/posts/4394c3fa.html</url>
+    <content><![CDATA[<p><a href="https://jimlee2002.github.io/posts/2b426e0a.html">前情提要</a></p>
+<p>折腾了两天，我终于是实现在 Android 上使用 Tasker 向刚搭建好的个人动态系统发送内容了。</p>
+<h1 id="xiao-guo-zhan-shi">效果展示</h1>
+<p>这是一个在 Android 上向<a href="https://github.com/daibor/nonsense.fun">废话胶囊（b 言 b 语）</a>发送内容的简单 Tasker 工程。</p>
+<p>项目地址：<a href="https://github.com/jimlee2002/nonsense.fun_tasker">https://github.com/jimlee2002/nonsense.fun_tasker</a></p>
+<img data-src="https://i.loli.net/2020/04/22/Hy7kwJL8FDr6I5O.png" style="zoom: 50%;">
+<a id="more"></a>
+<h1 id="an-zhuang-pei-zhi">安装配置</h1>
+<h2 id="直接下载安装已经导出好的apk文件"><a class="header-anchor" href="#直接下载安装已经导出好的apk文件"></a>直接下载安装已经导出好的 <a href="https://github.com/jimlee2002/nonsense.fun_tasker/releases">apk 文件</a></h2>
+<p>应用使用插件 <code>Tasker App Factory</code> 导出。</p>
+<p>注意，该应用<strong>需要 root 权限</strong>。</p>
+<h2 id="导入Tasker工程"><a class="header-anchor" href="#导入Tasker工程"></a>导入 Tasker 工程</h2>
+<p><strong>注意：部分手机可能需要 Root 权限才能使用，该工程默认开启<code>使用Root运行</code>，可以自行到<code>场景/Main/发送/按下</code>的第 6 个和第 8 个任务里关掉该选项</strong>。</p>
+<p><img data-src="https://i.loli.net/2020/04/22/iaTO5gAQLjnufBZ.png" style="zoom: 50%;"><img data-src="https://i.loli.net/2020/04/22/SIJivZ5L4Na9Cu3.png" style="zoom: 50%;"></p>
+<p><img data-src="https://i.loli.net/2020/04/24/c1R3x9HEzyQiTpN.png" style="zoom:50%;"><img data-src="https://i.loli.net/2020/04/22/7BoIjaJL9h6ilf1.png" style="zoom: 50%;"></p>
+<hr>
+<ol>
+<li>
+<p><a href="https://github.com/jimlee2002/nonsense.fun_tasker/releases">下载</a><code>bb.prj.xml</code>，存入到手机任意你找得到的位置。</p>
+</li>
+<li>
+<p>下载安装 Tasker。</p>
+</li>
+<li>
+<p>进入主界面长按左下角的按钮，点击<code>导入项目</code>，在打开的界面中找到并打开刚才存入的 <code>bb.prj.xml。</code></p>
+<p><img data-src="https://i.loli.net/2020/04/22/mpwnk2ZWvMc6uSU.png" style="zoom: 50%;"><img data-src="https://i.loli.net/2020/04/22/3Zc2KIWVfBzhiDM.png" style="zoom: 50%;"></p>
+<blockquote>
+<p>提示：点击右下角的手机按钮可以快速回到内部储存空间目录</p>
+</blockquote>
+</li>
+<li>
+<p>完成后回到主界面，点击应用栏里图标长得和 Tasker 很像的 <code>Tasker Secondary</code>，打开界面。</p>
+<p><img data-src="https://i.loli.net/2020/04/22/Gju9BY64UsWlvTw.png" style="zoom: 50%;"><img data-src="https://i.loli.net/2020/04/22/Hy7kwJL8FDr6I5O.png" style="zoom: 50%;"></p>
+</li>
+<li>
+<p><strong>长按</strong>发送按钮，打开设置页面进行必要设置。</p>
+<img data-src="https://i.loli.net/2020/04/22/YM5CJ6vb4OIdemy.png" style="zoom: 50%;">
+<p><strong>Title：</strong> 这里是发送界面顶端的文字，请随意修改。</p>
+<p><strong>AppID、MasterKey：</strong> 网页打开 LeanCloud，在你的项目里点击<code>设置/应用Keys</code>，复制对应的密钥分别填入。</p>
+<p><img data-src="https://i.loli.net/2020/04/20/Kaxt5GOo3LRgMmy.png" alt=""></p>
+<p><strong>className：</strong> 一般是 <code>content</code>，只要你是按照<a href="https://sspai.com/post/60024">少数派的指南</a>来做的话。</p>
+<p><strong>–insecure：</strong> 是否在脚本命令末尾加上 <code>--insecue</code>。参数默认关闭，如果无法发送可以尝试打开这个选项试试。</p>
+<p><strong>完成后点击确认返回</strong>。</p>
+</li>
+</ol>
+<p>这样就配置完成了，请试试看吧！</p>
+<h1 id="tasker-gong-cheng-shi-yong-fang-fa">Tasker 工程使用方法</h1>
+<h2 id="通过-Tasker-Secondary-打开"><a class="header-anchor" href="#通过-Tasker-Secondary-打开"></a>通过 Tasker Secondary 打开</h2>
+<img data-src="https://i.loli.net/2020/04/22/Gju9BY64UsWlvTw.png" style="zoom: 50%;">
+<h2 id="通过桌面小工具创建快捷方式打开"><a class="header-anchor" href="#通过桌面小工具创建快捷方式打开"></a>通过桌面小工具创建快捷方式打开</h2>
+<ol>
+<li>
+<p>打开 Tasker，然后<strong>点击返回键</strong>回到主界面。</p>
+</li>
+<li>
+<p>在桌面上新建 Tasker 的桌面小部件 "任务"，在打开的界面选择 <code>Show UI</code>,</p>
+<p>在界面下方选择图标，然后点击左上角返回桌面。</p>
+<p><img data-src="https://i.loli.net/2020/04/22/QWRPd7IKmV3oXYj.png" style="zoom: 50%;"><img data-src="https://i.loli.net/2020/04/22/t5dlHRyUgDM7aKX.png" style="zoom: 50%;"></p>
+<p>完成，现在你应该能看到快捷方式了。</p>
+</li>
+</ol>
+<h2 id="自行导出为APK安装"><a class="header-anchor" href="#自行导出为APK安装"></a>自行导出为 APK 安装</h2>
+<p>** 注意：你必须拥有手机的 Root 权限，并勾选<code>场景/Main/发送/按下</code>的第 6 个和第 8 个任务中的<code>使用Root运行</code>选项 **</p>
+<ol>
+<li>
+<p>Google Play 安装 <code>Tasker App Factory</code>。</p>
+</li>
+<li>
+<p>打开 Tasker，主界面左下方长按选择已经导入的项目，然后选择<code>导出\作为应用。</code></p>
+<img data-src="https://i.loli.net/2020/04/22/peARXFgoinvOJzx.png" style="zoom: 50%;">
+<blockquote>
+<p>提示：你可以通过点击<code>更名</code>重命名工程名称来修改应用名。</p>
+</blockquote>
+<img data-src="https://i.loli.net/2020/04/22/TZzLONjeHJviCp5.png" style="zoom:50%;">
+</li>
+<li>
+<p>根据提示输入包名和版本号。</p>
+<img data-src="https://i.loli.net/2020/04/22/Q7nXMpqxhB5o8a3.png" style="zoom: 50%;">
+</li>
+<li>
+<p>点击左上角返回，Tasker 会将项目以 APK 格式导出到<code>内部储存/Tasker/factory/kids</code> 并安装。</p>
+</li>
+</ol>
+<h1 id="hou-ji">后记</h1>
+<p>界面如果有问题可以自行在 Tasker 的<code>场景</code>中修改。</p>
+<p>个人能力有限，做的比较粗糙，还请不吝赐教！</p>
+<h1 id="zhi-xie">致谢</h1>
+<p>感谢 <a href="https://github.com/daibor">daibor</a> 制作了这么棒的<a href="https://github.com/daibor/nonsense.fun">项目。</a></p>
+<p>感谢少数派的 @SoSo 在评论下分享的方法启发了这个工程。</p>
+]]></content>
+      <categories>
+        <category>折腾笔记</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>Tasker</tag>
+        <tag>Android</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>配置 Typora &amp; PicGo 写 Hexo 博客</title>
+    <url>/posts/39aaddee.html</url>
+    <content><![CDATA[<h1 id="gong-ju-jie-shao">工具介绍</h1>
+<h2 id="you-ya-de-markdown-bian-ji-qi-typora"><a class="header-anchor" href="#优雅的Markdown编辑器-——-Typora"></a>优雅的 Markdown 编辑器 —— Typora</h2>
+<p><a href="https://www.typora.io/">官网</a></p>
+<p>简约、舒适、优雅，这是我对它的第一眼评价。</p>
+<p>完善的功能、所见即所得、自定义主题、拓展语法支持、良好的图片插入管理、数学支持、专注模式、打字机模式……</p>
+<p>以及免费 —— 这些都是我毫不犹豫下载安装它的原因。</p>
+<p>展现在我面前的它果然没有让我失望，漂亮的界面让我觉得原来的 VS Code 瞬间就不香了。</p>
+<p>当然，它的实力，还仅不限于此……</p>
+<a id="more"></a>
+<h2 id="xiao-qiao-de-tu-pian-shang-chuan-gong-ju-pic-go"><a class="header-anchor" href="#小巧的图片上传工具——PicGo"></a>小巧的图片上传工具 ——PicGo</h2>
+<p><a href="https://molunerfinn.com/PicGo/">官网</a></p>
+<p>这是一个开源的体积小巧，功能强大的图床工具。</p>
+<p>它支持自建图床和多个常用图床，可以方便地对上传了的进行管理，还能安装拓展插件，实现截图上传、加水印上传等功能。</p>
+<p>但更重要的是，Typora 支持通过它实现拖入到文章中的图片上传图床并替换掉文中图片地址</p>
+<p>Awsome！有了它，再也不用手动上传图床复制链接了！</p>
+<p>下面就来配置下二者的结合使用。</p>
+<h1 id="er-zhe-pei-zhi">二者配置</h1>
+<h2 id="pei-zhi-pic-go-de-shang-chuan-she-zhi"><a class="header-anchor" href="#配置PicGo的上传设置"></a>配置 PicGo 的上传设置</h2>
+<p>此处以 sm.ms 的注册图床为例，其他图床请参考<a href="https://picgo.github.io/PicGo-Doc/zh/guide/getting-started.html">官方文档</a></p>
+<ol>
+<li>
+<p><a href="http://xn--sm-5p3dp06f.ms">登录 sm.ms</a>，获取 API token，复制备用</p>
+<p><img data-src="https://i.loli.net/2020/03/21/wnxrfcZzPtvJk58.png" alt=""></p>
+</li>
+</ol>
+<img data-src="https://i.loli.net/2020/03/21/TYJIjPBk2lAHXgr.png" style="zoom: 80%;">
+<ol start="2">
+<li>
+<p>打开 PicGo，插件设置中输入 smms-user 并安装对应插件，</p>
+<img data-src="https://i.loli.net/2020/03/21/lk4dTXfQF1syWir.png" style="zoom:80%;">
+<p>安装完成后在图床设置里新出现的 <strong>SM.MS - 登录用户</strong>中输入刚才获得的 token，点击确定和设为默认图床</p>
+<img data-src="https://i.loli.net/2020/03/21/n9kpCUiR62EtjOV.png" style="zoom:80%;">
+</li>
+</ol>
+<p>此处 PicGo 配置完成</p>
+<h2 id="pei-zhi-typora"><a class="header-anchor" href="#配置Typora"></a>配置 Typora</h2>
+<p>快捷键 <code>ctrl+逗号</code>打开偏好设置，进入 ``图像` 选项进行如下设置：</p>
+<img data-src="https://i.loli.net/2020/03/21/JBxqTtkSZ59wL2y.png" style="zoom:80%;">
+<p>其中<code>上传服务设定</code>中 <code>PicGo路径</code>一栏请根据自身情况填写 PicGo 的安装路径。</p>
+<p>如果需要上传网络上复制的图片到自己的图床，请勾选<code>插入图片时…</code> 中的<code>对网络位置的图片应用上述规则</code>。</p>
+<p>设置完后点击<code>验证图片上传选项</code>进行测试，成功即设置完成。</p>
+<p>Typora 和 PicGo 里各自的功能就不再展示了，这里仅作二者结合使用的介绍，其他请自行探索！</p>
+]]></content>
+      <categories>
+        <category>折腾笔记</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>图床</tag>
       </tags>
   </entry>
   <entry>
@@ -793,166 +1000,11 @@ _   底线
 </blockquote>
 ]]></content>
       <categories>
-        <category>笔记</category>
+        <category>折腾笔记</category>
       </categories>
       <tags>
         <tag>OpenWrt</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>配置 Typora &amp; PicGo 写 Hexo 博客</title>
-    <url>/posts/39aaddee.html</url>
-    <content><![CDATA[<h1 id="gong-ju-jie-shao">工具介绍</h1>
-<h2 id="you-ya-de-markdown-bian-ji-qi-typora"><a class="header-anchor" href="#优雅的Markdown编辑器-——-Typora"></a>优雅的 Markdown 编辑器 —— Typora</h2>
-<p><a href="https://www.typora.io/">官网</a></p>
-<p>简约、舒适、优雅，这是我对它的第一眼评价。</p>
-<p>完善的功能、所见即所得、自定义主题、拓展语法支持、良好的图片插入管理、数学支持、专注模式、打字机模式……</p>
-<p>以及免费 —— 这些都是我毫不犹豫下载安装它的原因。</p>
-<p>展现在我面前的它果然没有让我失望，漂亮的界面让我觉得原来的 VS Code 瞬间就不香了。</p>
-<p>当然，它的实力，还仅不限于此……</p>
-<a id="more"></a>
-<h2 id="xiao-qiao-de-tu-pian-shang-chuan-gong-ju-pic-go"><a class="header-anchor" href="#小巧的图片上传工具——PicGo"></a>小巧的图片上传工具 ——PicGo</h2>
-<p><a href="https://molunerfinn.com/PicGo/">官网</a></p>
-<p>这是一个开源的体积小巧，功能强大的图床工具。</p>
-<p>它支持自建图床和多个常用图床，可以方便地对上传了的进行管理，还能安装拓展插件，实现截图上传、加水印上传等功能。</p>
-<p>但更重要的是，Typora 支持通过它实现拖入到文章中的图片上传图床并替换掉文中图片地址</p>
-<p>Awsome！有了它，再也不用手动上传图床复制链接了！</p>
-<p>下面就来配置下二者的结合使用。</p>
-<h1 id="er-zhe-pei-zhi">二者配置</h1>
-<h2 id="pei-zhi-pic-go-de-shang-chuan-she-zhi"><a class="header-anchor" href="#配置PicGo的上传设置"></a>配置 PicGo 的上传设置</h2>
-<p>此处以 sm.ms 的注册图床为例，其他图床请参考<a href="https://picgo.github.io/PicGo-Doc/zh/guide/getting-started.html">官方文档</a></p>
-<ol>
-<li>
-<p><a href="http://xn--sm-5p3dp06f.ms">登录 sm.ms</a>，获取 API token，复制备用</p>
-<p><img data-src="https://i.loli.net/2020/03/21/wnxrfcZzPtvJk58.png" alt=""></p>
-</li>
-</ol>
-<img data-src="https://i.loli.net/2020/03/21/TYJIjPBk2lAHXgr.png" style="zoom: 80%;">
-<ol start="2">
-<li>
-<p>打开 PicGo，插件设置中输入 smms-user 并安装对应插件，</p>
-<img data-src="https://i.loli.net/2020/03/21/lk4dTXfQF1syWir.png" style="zoom:80%;">
-<p>安装完成后在图床设置里新出现的 <strong>SM.MS - 登录用户</strong>中输入刚才获得的 token，点击确定和设为默认图床</p>
-<img data-src="https://i.loli.net/2020/03/21/n9kpCUiR62EtjOV.png" style="zoom:80%;">
-</li>
-</ol>
-<p>此处 PicGo 配置完成</p>
-<h2 id="pei-zhi-typora"><a class="header-anchor" href="#配置Typora"></a>配置 Typora</h2>
-<p>快捷键 <code>ctrl+逗号</code>打开偏好设置，进入 ``图像` 选项进行如下设置：</p>
-<img data-src="https://i.loli.net/2020/03/21/JBxqTtkSZ59wL2y.png" style="zoom:80%;">
-<p>其中<code>上传服务设定</code>中 <code>PicGo路径</code>一栏请根据自身情况填写 PicGo 的安装路径。</p>
-<p>如果需要上传网络上复制的图片到自己的图床，请勾选<code>插入图片时…</code> 中的<code>对网络位置的图片应用上述规则</code>。</p>
-<p>设置完后点击<code>验证图片上传选项</code>进行测试，成功即设置完成。</p>
-<p>Typora 和 PicGo 里各自的功能就不再展示了，这里仅作二者结合使用的介绍，其他请自行探索！</p>
-]]></content>
-      <categories>
-        <category>笔记</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-        <tag>图床</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>博客折腾笔记④- 使用 Tasker 在 Android 上实现个人动态的发送</title>
-    <url>/posts/4394c3fa.html</url>
-    <content><![CDATA[<p><a href="https://jimlee2002.github.io/posts/2b426e0a.html">前情提要</a></p>
-<p>折腾了两天，我终于是实现在 Android 上使用 Tasker 向刚搭建好的个人动态系统发送内容了。</p>
-<h1 id="xiao-guo-zhan-shi">效果展示</h1>
-<p>这是一个在 Android 上向<a href="https://github.com/daibor/nonsense.fun">废话胶囊（b 言 b 语）</a>发送内容的简单 Tasker 工程。</p>
-<p>项目地址：<a href="https://github.com/jimlee2002/nonsense.fun_tasker">https://github.com/jimlee2002/nonsense.fun_tasker</a></p>
-<img data-src="https://i.loli.net/2020/04/22/Hy7kwJL8FDr6I5O.png" style="zoom: 50%;">
-<a id="more"></a>
-<h1 id="an-zhuang-pei-zhi">安装配置</h1>
-<h2 id="直接下载安装已经导出好的apk文件"><a class="header-anchor" href="#直接下载安装已经导出好的apk文件"></a>直接下载安装已经导出好的 <a href="https://github.com/jimlee2002/nonsense.fun_tasker/releases">apk 文件</a></h2>
-<p>应用使用插件 <code>Tasker App Factory</code> 导出。</p>
-<p>注意，该应用<strong>需要 root 权限</strong>。</p>
-<h2 id="导入Tasker工程"><a class="header-anchor" href="#导入Tasker工程"></a>导入 Tasker 工程</h2>
-<p><strong>注意：部分手机可能需要 Root 权限才能使用，该工程默认开启<code>使用Root运行</code>，可以自行到<code>场景/Main/发送/按下</code>的第 6 个和第 8 个任务里关掉该选项</strong>。</p>
-<p><img data-src="https://i.loli.net/2020/04/22/iaTO5gAQLjnufBZ.png" style="zoom: 50%;"><img data-src="https://i.loli.net/2020/04/22/SIJivZ5L4Na9Cu3.png" style="zoom: 50%;"></p>
-<p><img data-src="https://i.loli.net/2020/04/24/c1R3x9HEzyQiTpN.png" style="zoom:50%;"><img data-src="https://i.loli.net/2020/04/22/7BoIjaJL9h6ilf1.png" style="zoom: 50%;"></p>
-<hr>
-<ol>
-<li>
-<p><a href="https://github.com/jimlee2002/nonsense.fun_tasker/releases">下载</a><code>bb.prj.xml</code>，存入到手机任意你找得到的位置。</p>
-</li>
-<li>
-<p>下载安装 Tasker。</p>
-</li>
-<li>
-<p>进入主界面长按左下角的按钮，点击<code>导入项目</code>，在打开的界面中找到并打开刚才存入的 <code>bb.prj.xml。</code></p>
-<p><img data-src="https://i.loli.net/2020/04/22/mpwnk2ZWvMc6uSU.png" style="zoom: 50%;"><img data-src="https://i.loli.net/2020/04/22/3Zc2KIWVfBzhiDM.png" style="zoom: 50%;"></p>
-<blockquote>
-<p>提示：点击右下角的手机按钮可以快速回到内部储存空间目录</p>
-</blockquote>
-</li>
-<li>
-<p>完成后回到主界面，点击应用栏里图标长得和 Tasker 很像的 <code>Tasker Secondary</code>，打开界面。</p>
-<p><img data-src="https://i.loli.net/2020/04/22/Gju9BY64UsWlvTw.png" style="zoom: 50%;"><img data-src="https://i.loli.net/2020/04/22/Hy7kwJL8FDr6I5O.png" style="zoom: 50%;"></p>
-</li>
-<li>
-<p><strong>长按</strong>发送按钮，打开设置页面进行必要设置。</p>
-<img data-src="https://i.loli.net/2020/04/22/YM5CJ6vb4OIdemy.png" style="zoom: 50%;">
-<p><strong>Title：</strong> 这里是发送界面顶端的文字，请随意修改。</p>
-<p><strong>AppID、MasterKey：</strong> 网页打开 LeanCloud，在你的项目里点击<code>设置/应用Keys</code>，复制对应的密钥分别填入。</p>
-<p><img data-src="https://i.loli.net/2020/04/20/Kaxt5GOo3LRgMmy.png" alt=""></p>
-<p><strong>className：</strong> 一般是 <code>content</code>，只要你是按照<a href="https://sspai.com/post/60024">少数派的指南</a>来做的话。</p>
-<p><strong>–insecure：</strong> 是否在脚本命令末尾加上 <code>--insecue</code>。参数默认关闭，如果无法发送可以尝试打开这个选项试试。</p>
-<p><strong>完成后点击确认返回</strong>。</p>
-</li>
-</ol>
-<p>这样就配置完成了，请试试看吧！</p>
-<h1 id="tasker-gong-cheng-shi-yong-fang-fa">Tasker 工程使用方法</h1>
-<h2 id="通过-Tasker-Secondary-打开"><a class="header-anchor" href="#通过-Tasker-Secondary-打开"></a>通过 Tasker Secondary 打开</h2>
-<img data-src="https://i.loli.net/2020/04/22/Gju9BY64UsWlvTw.png" style="zoom: 50%;">
-<h2 id="通过桌面小工具创建快捷方式打开"><a class="header-anchor" href="#通过桌面小工具创建快捷方式打开"></a>通过桌面小工具创建快捷方式打开</h2>
-<ol>
-<li>
-<p>打开 Tasker，然后<strong>点击返回键</strong>回到主界面。</p>
-</li>
-<li>
-<p>在桌面上新建 Tasker 的桌面小部件 "任务"，在打开的界面选择 <code>Show UI</code>,</p>
-<p>在界面下方选择图标，然后点击左上角返回桌面。</p>
-<p><img data-src="https://i.loli.net/2020/04/22/QWRPd7IKmV3oXYj.png" style="zoom: 50%;"><img data-src="https://i.loli.net/2020/04/22/t5dlHRyUgDM7aKX.png" style="zoom: 50%;"></p>
-<p>完成，现在你应该能看到快捷方式了。</p>
-</li>
-</ol>
-<h2 id="自行导出为APK安装"><a class="header-anchor" href="#自行导出为APK安装"></a>自行导出为 APK 安装</h2>
-<p>** 注意：你必须拥有手机的 Root 权限，并勾选<code>场景/Main/发送/按下</code>的第 6 个和第 8 个任务中的<code>使用Root运行</code>选项 **</p>
-<ol>
-<li>
-<p>Google Play 安装 <code>Tasker App Factory</code>。</p>
-</li>
-<li>
-<p>打开 Tasker，主界面左下方长按选择已经导入的项目，然后选择<code>导出\作为应用。</code></p>
-<img data-src="https://i.loli.net/2020/04/22/peARXFgoinvOJzx.png" style="zoom: 50%;">
-<blockquote>
-<p>提示：你可以通过点击<code>更名</code>重命名工程名称来修改应用名。</p>
-</blockquote>
-<img data-src="https://i.loli.net/2020/04/22/TZzLONjeHJviCp5.png" style="zoom:50%;">
-</li>
-<li>
-<p>根据提示输入包名和版本号。</p>
-<img data-src="https://i.loli.net/2020/04/22/Q7nXMpqxhB5o8a3.png" style="zoom: 50%;">
-</li>
-<li>
-<p>点击左上角返回，Tasker 会将项目以 APK 格式导出到<code>内部储存/Tasker/factory/kids</code> 并安装。</p>
-</li>
-</ol>
-<h1 id="hou-ji">后记</h1>
-<p>界面如果有问题可以自行在 Tasker 的<code>场景</code>中修改。</p>
-<p>个人能力有限，做的比较粗糙，还请不吝赐教！</p>
-<h1 id="zhi-xie">致谢</h1>
-<p>感谢 <a href="https://github.com/daibor">daibor</a> 制作了这么棒的<a href="https://github.com/daibor/nonsense.fun">项目。</a></p>
-<p>感谢少数派的 @SoSo 在评论下分享的方法启发了这个工程。</p>
-]]></content>
-      <categories>
-        <category>笔记</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-        <tag>Tasker</tag>
-        <tag>Android</tag>
+        <tag>路由器</tag>
       </tags>
   </entry>
   <entry>
@@ -1023,10 +1075,11 @@ _   底线
 </blockquote>
 ]]></content>
       <categories>
-        <category>笔记</category>
+        <category>折腾笔记</category>
       </categories>
       <tags>
         <tag>OpenWrt</tag>
+        <tag>路由器</tag>
         <tag>WSL</tag>
       </tags>
   </entry>
@@ -1786,7 +1839,7 @@ preload: false
 <p><s>其他官方文档有的就自己看去吧</s></p>
 ]]></content>
       <categories>
-        <category>笔记</category>
+        <category>折腾笔记</category>
       </categories>
       <tags>
         <tag>hexo</tag>
@@ -2082,7 +2135,7 @@ preload: false
 </blockquote>
 ]]></content>
       <categories>
-        <category>笔记</category>
+        <category>折腾笔记</category>
       </categories>
       <tags>
         <tag>WTG</tag>
